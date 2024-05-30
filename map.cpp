@@ -4,8 +4,8 @@
 
 class Map {
     public:
-        void setMatrix ();
-        void setMap ();
+        void readMatrix ();
+        void readUnorderedMap ();
         bool checkAdjacent ();
 
     private:
