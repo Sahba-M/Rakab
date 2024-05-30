@@ -34,22 +34,27 @@ class Map {
             input.open("map.txt") ;
             if (!input.is_open()) 
                 std::cerr << "Unable to open file !" << std::endl ;
-            int key ;
-            std::string value ;
+            std::string key ;
+            int value ;
 
             while (input)
             {
-                if ( input >> key >> value )
+                if ( input >> value >> key )
                 {
                     provinceMap[key] = value ;
                 }
             }
             input.close();
         }
-        bool checkAdjacent ();
+        // bool checkAdjacent ( const std::string & p1 , const std::string & p2 )
+        // {
+        //     int index1 = provinceMap[p1];
+        //     int index2 = provinceMap[p2];
+        //     return adjacencyMatrix[index1][index2] == 1;
+        // }
 
     private:
         std::vector < std::vector <int> > adjancencyMatrix ;
-        std::unordered_map < int , std::string > provinceMap ;
+        std::unordered_map < std::string , int > provinceMap ;
 
 };
