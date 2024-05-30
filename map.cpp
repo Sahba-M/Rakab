@@ -28,11 +28,28 @@ class Map {
             }
             input.close();  
         }
-        void readUnorderedMap ();
+        void readUnorderedMap ()
+        {
+            std::ifstream input ; 
+            input.open("map.txt") ;
+            if (!input.is_open()) 
+                std::cerr << "Unable to open file !" << std::endl ;
+            int key ;
+            std::string value ;
+
+            while (input)
+            {
+                if ( input >> key >> value )
+                {
+                    provinceMap[key] = value ;
+                }
+            }
+            input.close();
+        }
         bool checkAdjacent ();
 
     private:
         std::vector < std::vector <int> > adjancencyMatrix ;
-        std::unordered_map < std::string , int > provinceMap ;
+        std::unordered_map < int , std::string > provinceMap ;
 
 };
