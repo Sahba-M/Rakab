@@ -23,7 +23,7 @@ class Map {
                 }
                 if (!row.empty()) 
                 {
-                adjancencyMatrix.push_back(row);
+                adjacencyMatrix.push_back(row);
                 }
             }
             input.close();  
@@ -46,15 +46,15 @@ class Map {
             }
             input.close();
         }
-        // bool checkAdjacent ( const std::string & p1 , const std::string & p2 )
-        // {
-        //     int index1 = provinceMap[p1];
-        //     int index2 = provinceMap[p2];
-        //     return adjacencyMatrix[index1][index2] == 1;
-        // }
+        bool checkAdjacent ( const std::string & p1 , const std::string & p2 )
+        {
+            int index1 = provinceMap[p1];
+            int index2 = provinceMap[p2];
+            return adjacencyMatrix[index1][index2] == 1;
+        }
 
     private:
-        std::vector < std::vector <int> > adjancencyMatrix ;
+        std::vector < std::vector <int> > adjacencyMatrix ;
         std::unordered_map < std::string , int > provinceMap ;
 
 };
