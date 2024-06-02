@@ -4,15 +4,16 @@
 #define PURPLE_H
 
 
-class PurpleCard : public Card{
+class PurpleCard : public Card {
 
     public:
-    PurpleCard ( std::string name , int priority , int score );
+    PurpleCard ( std::string name );
+    void setName(std::string name);
     // virtual void use();
 
     private:
-    std::string name;
-    int priority;
+    std::string name ;
+    int priority ;
 
 };
 

@@ -2,8 +2,11 @@
 
 #include "purple.h"
 
-PurpleCard::PurpleCard ( std::string name , int priority , int score ) : Card(score)
+PurpleCard::PurpleCard ( std::string name )
 {
-    this->name = name ;
-    this->priority = priority ;
+    setName(name);
+}
+void PurpleCard::setName(std::string name)
+{
+    this->name=name;
 }
