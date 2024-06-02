@@ -5,8 +5,3 @@
 8 5
 8 6
 8 10
-16 scarecrow
-6 drummer
-3 princes
-3 winter
-3 spring
