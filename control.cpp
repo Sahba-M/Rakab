@@ -14,13 +14,14 @@ void Control::setCards()
     cardInput.open("yellowCard.txt");
     if (!cardInput.is_open())
     {
-        std::cerr << " Can Not Open The File! " << std::endl ;
+        std::cerr << " Can Not Open The File! ** " << std::endl ;
     }
     int cardNumber;
     int yellowCardType;
-    while (cardInput)
+    while (!cardInput.eof())
     {
         cardInput >> cardNumber >> yellowCardType ;
+        std::cout << cardNumber << std::endl ;
         YellowCard ycard(yellowCardType);
         for (int i = 0 ; i < cardNumber ; i++)
         {
@@ -29,15 +30,16 @@ void Control::setCards()
     }
     cardInput.close();
 
-    cardInput.open("purpleard.txt");
+    cardInput.open("purpleCard.txt");
     if (!cardInput.is_open())
     {
-        std::cerr << " Can Not Open The File! " << std::endl ;
+        std::cerr << " Can Not Open The File! ## " << std::endl ;
     }
     std::string purpleCardType ;
-    while (cardInput)
+    while (!cardInput.eof())
     {
         cardInput >> cardNumber >> purpleCardType ;
+        std::cout << cardNumber << std::endl;
         PurpleCard pcard(purpleCardType);
         for (int i = 0 ; i < cardNumber ; i++)
         {
@@ -45,5 +47,7 @@ void Control::setCards()
         }
         
     }
-    
+    cardInput.close();
+
+    std::cout << cards.size() ;
 }
