@@ -6,28 +6,44 @@
 #include "purple.h"
 #include "yellow.h"
 
+Control::Control() {}
 
-Control::Control(){}
-
-void Control::setCards ()
+void Control::setCards()
 {
-    std::ifstream cardInput ;
-    cardInput.open("cards.txt");
-    if ( !cardInput.is_open() )
+    std::ifstream cardInput;
+    cardInput.open("yellowCard.txt");
+    if (!cardInput.is_open())
     {
         std::cerr << " Can Not Open The File! " << std::endl ;
     }
-    int cardNumber ;
-    int cardType ;
-
+    int cardNumber;
+    int yellowCardType;
     while (cardInput)
     {
-        cardInput >> cardNumber >> cardType ;
-        YellowCard ycard(cardType) ;
-        for ( int i=0 ; i < cardNumber ; i++ )
+        cardInput >> cardNumber >> yellowCardType ;
+        YellowCard ycard(yellowCardType);
+        for (int i = 0 ; i < cardNumber ; i++)
         {
             cards.push_back(ycard);
         }
+    }
+    cardInput.close();
+
+    cardInput.open("purpleard.txt");
+    if (!cardInput.is_open())
+    {
+        std::cerr << " Can Not Open The File! " << std::endl ;
+    }
+    std::string purpleCardType ;
+    while (cardInput)
+    {
+        cardInput >> cardNumber >> purpleCardType ;
+        PurpleCard pcard(purpleCardType);
+        for (int i = 0 ; i < cardNumber ; i++)
+        {
+            cards.push_back(pcard);
+        }
+        
     }
     
 }
