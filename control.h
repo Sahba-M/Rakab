@@ -9,8 +9,6 @@ class Control {
         void setCards();
     private:
         std::vector<Card> cards;
-        int numberOfY1;
-        int numberOfYOther;
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 #include "control.h"
 #include "card.h"
@@ -6,38 +7,27 @@
 #include "yellow.h"
 
 
-Control::Control() 
-{ 
-    numberOfY1 = 10; 
-    numberOfYOther = 8;
-}
+Control::Control(){}
 
-void Control::setCards()
+void Control::setCards ()
 {
-
-    YellowCard y1card(1);
-    YellowCard y2card(2);
-    YellowCard y3card(3);
-    YellowCard y4card(4);
-    YellowCard y5card(5);
-    YellowCard y6card(6);
-    YellowCard y10card(10);
-
-
-    for (int i = 0; i < numberOfY1; i++)
+    std::ifstream cardInput ;
+    cardInput.open("cards.txt");
+    if ( !cardInput.is_open() )
     {
-        cards.push_back(y1card);
+        std::cerr << " Can Not Open The File! " << std::endl ;
     }
+    int cardNumber ;
+    int cardType ;
 
-    for ( int i = 0 ; i < numberOfYOther ; i++ )
+    while (cardInput)
     {
-        cards.push_back(y2card);
-        cards.push_back(y3card);
-        cards.push_back(y4card);
-        cards.push_back(y5card);
-        cards.push_back(y6card);
-        cards.push_back(y10card);
+        cardInput >> cardNumber >> cardType ;
+        YellowCard ycard(cardType) ;
+        for ( int i=0 ; i < cardNumber ; i++ )
+        {
+            cards.push_back(ycard);
+        }
     }
-    std::cout << cards.size();
-
+    
 }
