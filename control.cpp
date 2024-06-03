@@ -16,7 +16,7 @@ int Control::getPlayerNumber()
 {
     return playerNumber;
 }
-int Control:: controlNumber()
+void Control:: controlNumber()
 {
     int counter = 0;
     while (counter < 3 || counter > 6)
@@ -26,6 +26,7 @@ int Control:: controlNumber()
         std::cin >> counter;
     }
     setPlayerNumber(counter);
+    getPlayerNumber();
 }
 void Control::setCards()
 {

@@ -9,7 +9,7 @@ class Control {
         void setCards();
         void setPlayerNumber(int playerNumber);
         int getPlayerNumber();
-        int controlNumber();
+        void controlNumber();
 
     private:
         std::vector<Card> cards;
