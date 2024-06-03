@@ -1,5 +1,10 @@
 #include <iostream>
+#include "control.h"
 
-int main(){
+int main()
+{
+    Control control ;
+    control.setCards();
+
     return 0;
 }

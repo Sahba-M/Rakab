@@ -6,7 +6,7 @@
     setAge( age );
     setName( name );
     setColor( color );
-  }
+  } 
   void Player::setName ( std::string name )
   {
       this->name = name ;

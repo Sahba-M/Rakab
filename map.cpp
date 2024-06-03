@@ -1,60 +1,49 @@
-#include <iostream>
-#include <unordered_map>
-#include <vector>
-#include <fstream>
+#include "map.h"
 
-class Map
+void Map::readMatrix ()
 {
-public:
-    void readMatrix()
+    std::ifstream input ("matrix.txt") ; 
+    if (!input.is_open()) 
+        std::cerr << " Unable to open file ! " << std::endl ;
+    int number;
+    while (input.eof()) 
     {
-        std::ifstream input("matrix");
-        if (!input.is_open())
-            std::cerr << "Unable to open file !" << std::endl;
-        int number;
-        while (input)
+        std::vector <int> row;
+        for ( int i = 0 ; i < 3 ; i++ ) 
         {
-            std::vector<int> row;
-            for (int i = 0; i < 3; i++)
+            if ( input >> number )   
             {
-                if (input >> number)
-                {
-                    row.push_back(number);
-                }
-            }
-            if (!row.empty())
-            {
-                adjacencyMatrix.push_back(row);
+            row.push_back(number);
             }
         }
-        input.close();
-    }
-    void readUnorderedMap()
-    {
-        std::ifstream input;
-        input.open("map.txt");
-        if (!input.is_open())
-            std::cerr << "Unable to open file !" << std::endl;
-        std::string key;
-        int value;
-
-        while (input)
+        if (!row.empty()) 
         {
-            if (input >> value >> key)
-            {
-                provinceMap[key] = value;
-            }
+        adjacencyMatrix.push_back(row);
         }
-        input.close();
     }
-    bool checkAdjacent(const std::string &p1, const std::string &p2)
+    input.close();  
+}
+void Map::readUnorderedMap ()
+{
+    std::ifstream input ; 
+    input.open("map.txt") ;
+    if (!input.is_open()) 
+        std::cerr << "Unable to open file !" << std::endl ;
+        
+    std::string key ;
+    int value ;
+    while (input)
     {
-        int index1 = provinceMap[p1];
-        int index2 = provinceMap[p2];
-        return adjacencyMatrix[index1][index2] == 1;
+        if ( input >> value >> key )
+        {
+            provinceMap[key] = value ;
+        }
     }
-
-private:
-    std::vector<std::vector<int>> adjacencyMatrix;
-    std::unordered_map<std::string, int> provinceMap;
-};
+    input.close();
+}
+bool Map::checkAdjacent ( const std::string & p1 , const std::string & p2 )
+{
+    int index1 = provinceMap[p1];
+    int index2 = provinceMap[p2];
+    return adjacencyMatrix[index1][index2] == 1;
+}

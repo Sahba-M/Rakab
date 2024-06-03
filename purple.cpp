@@ -8,5 +8,5 @@ PurpleCard::PurpleCard ( std::string name )
 }
 void PurpleCard::setName(std::string name)
 {
-    this->name=name;
+    this->name = name;
 }
