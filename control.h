@@ -7,8 +7,13 @@ class Control {
     public:
         Control(); 
         void setCards();
+        void setPlayerNumber(int playerNumber);
+        int getPlayerNumber();
+        int controlNumber();
+
     private:
         std::vector<Card> cards;
+        int playerNumber;
 };
 
 #endif

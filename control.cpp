@@ -8,6 +8,25 @@
 
 Control::Control() {}
 
+void Control::setPlayerNumber(int playerNumber) 
+{
+    this->playerNumber = playerNumber;
+}
+int Control::getPlayerNumber()
+{
+    return playerNumber;
+}
+int Control:: controlNumber()
+{
+    int counter = 0;
+    while (counter < 3 || counter > 6)
+    {
+        system("cls");
+        std::cout << " Enter Number Of Your Player :";
+        std::cin >> counter;
+    }
+    setPlayerNumber(counter);
+}
 void Control::setCards()
 {
     std::ifstream cardInput;
