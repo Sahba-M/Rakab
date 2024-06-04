@@ -22,7 +22,7 @@ void Control:: controlNumber()
     while (counter < 3 || counter > 6)
     {
         system("cls");
-        std::cout << " Enter Number Of Your Player :";
+        std::cout << " Enter Number Of Your Player : ( Please Enter number between 3_6 )";
         std::cin >> counter;
     }
     setPlayerNumber(counter);
