@@ -8,7 +8,6 @@ class PurpleCard : public Card {
 
     public:
     PurpleCard ( std::string name );
-    void setName(std::string name);
     // virtual void use();
 
     private:
