@@ -9,7 +9,7 @@ void Map::readMatrix ()
     while (input.eof()) 
     {
         std::vector <int> row;
-        for ( int i = 0 ; i < 3 ; i++ ) 
+        for ( int i = 0 ; i < 14 ; i++ ) 
         {
             if ( input >> number )   
             {
@@ -32,7 +32,7 @@ void Map::readUnorderedMap ()
         
     std::string key ;
     int value ;
-    while (input)
+    while (input.eof())
     {
         if ( input >> value >> key )
         {
