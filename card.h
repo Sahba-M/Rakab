@@ -12,6 +12,7 @@ class Card {
     void setScore(int score);
     void setName(std::string name);
     int getScore();
+    std::string getName();
     // virtual void use() = 0 ;
 
     private:
