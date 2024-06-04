@@ -1,7 +1,12 @@
+
 #include <iostream>
 #include <fstream>
-#include <algorithm>
 #include <random>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
 
 #include "control.h"
 #include "card.h"
@@ -14,11 +19,11 @@ void Control::setPlayerNumber(int playerNumber)
 {
     this->playerNumber = playerNumber;
 }
-int Control::getPlayerNumber()
+int  Control::getPlayerNumber()
 {
     return playerNumber;
 }
-void Control:: controlNumber()
+void Control::controlNumber()
 {
     int counter = 0;
     while (counter < 3 || counter > 6)
@@ -75,9 +80,39 @@ void Control::shuffleCards()
     std::shuffle(cards.begin(), cards.end(), generator);
 }
 void Control::showCards()
+
 {
     for ( int i = 0 ; i < cards.size() ; i++ )
     {
         std::cout << cards[i].getName() << std::endl ;
     }
+}
+void Control::youngestPlayer()
+{
+    std::string name;
+    int age;
+
+    std::vector <std::string> namePlayer;
+    std::vector <int> agePlayer;
+    std::vector <int> youngestIndices;
+
+    for (int i = 0; i < playerNumber; i++)
+    {
+        std::cin >> name >> age;
+        namePlayer.push_back(name);
+        agePlayer.push_back(age);
+    }
+
+    int minAge = *min_element(agePlayer.begin(), agePlayer.end());
+
+    for (int i = 0; i < agePlayer.size(); i++) {
+        if (agePlayer[i] == minAge) {
+            youngestIndices.push_back(i);
+        }
+    }
+
+    srand(time(0));
+    int randomIndex = youngestIndices[rand() % youngestIndices.size()];
+    std::cout << "The youngest person is: " << namePlayer[randomIndex] << std::endl;
+
 }
