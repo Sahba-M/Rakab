@@ -16,10 +16,12 @@ class Control {
         void controlNumber();
         void shuffleCards();
         void showCards();
-        void Control::youngestPlayer();
+        void youngestPlayer();
+        void getInfo();
 
     private:
         std::vector<Card> cards;
+        std::vector<Player> players;
         int playerNumber;
 };
 

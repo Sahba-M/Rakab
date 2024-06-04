@@ -116,3 +116,19 @@ void Control::youngestPlayer()
     std::cout << "The youngest person is: " << namePlayer[randomIndex] << std::endl;
 
 }
+void Control::getInfo()
+{
+    int age ;
+    std::string name ;
+    std::string color ;
+    for ( int i = 0 ; i < playerNumber ; i++ )
+    {
+        std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : " ;
+        std::cin >> name ;
+        std::cout << '\n' << " Enter Your Age : " ;
+        std::cin >> age ;
+        std::cout << '\n' << " Enter Your Color : " ;
+        std::cin >> color ;
+        players.push_back (Player( age , name , color ));
+    }
+}
