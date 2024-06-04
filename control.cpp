@@ -39,7 +39,7 @@ void Control::setCards()
         std::cerr << " Can Not Open The File! " << std::endl;
     }
     int cardNumber;
-    int yellowCardType;
+    std::string yellowCardType;
     while (!cardInput.eof())
     {
         cardInput >> cardNumber >> yellowCardType;
@@ -73,4 +73,11 @@ void Control::shuffleCards()
     std::random_device randomDevice ;
     std::mt19937 generator(randomDevice());
     std::shuffle(cards.begin(), cards.end(), generator);
+}
+void Control::showCards()
+{
+    for ( int i = 0 ; i < cards.size() ; i++ )
+    {
+        std::cout << cards[i].getName() << std::endl ;
+    }
 }
