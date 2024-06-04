@@ -26,10 +26,12 @@ int  Control::getPlayerNumber()
 void Control::controlNumber()
 {
     int counter = 0;
+    std::cout << " Enter Number Of Your Player : " ;
+    std::cin >> counter;
     while (counter < 3 || counter > 6)
     {
         system("cls");
-        std::cout << " Enter Number Of Your Player : ( Please Enter number between 3_6 )";
+        std::cout << " Enter Number Of Your Player : ( ERROR: Please Enter number between 3_6 ) : " ;
         std::cin >> counter;
     }
     setPlayerNumber(counter);
@@ -124,11 +126,11 @@ void Control::getInformation()
     for ( int i = 0 ; i < playerNumber ; i++ )
     {
         std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : " ;
-        std::cin >> name ;
-        std::cout << '\n' << " Enter Your Age : " ;
-        std::cin >> age ;
-        std::cout << '\n' << " Enter Your Color : " ;
-        std::cin >> color ;
+        std::cin  >> name ;
+        std::cout << " Enter Your Age : " ;
+        std::cin  >> age ;
+        std::cout << " Enter Your Color : " ;
+        std::cin  >> color ;
         players.push_back (Player( age , name , color ));
     }
 }
