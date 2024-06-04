@@ -1,3 +1,8 @@
+#include <string>
+
 #include "yellow.h"
 
-YellowCard::YellowCard ( int num ) : Card (num){} 
+YellowCard::YellowCard ( std::string name ) : Card (name)
+{
+    setScore ( stoi (name) );
+} 

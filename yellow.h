@@ -5,7 +5,7 @@
 
 class YellowCard : public Card {
     public:
-    YellowCard( int num );
+    YellowCard( std::string name );
     // virtual void use ();
 
     private:
