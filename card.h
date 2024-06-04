@@ -7,14 +7,16 @@
 class Card {
 
     public:
-    Card( int score );
+    Card( std::string name , int score = 0 );
     Card();
     void setScore(int score);
+    void setName(std::string name);
     int getScore();
     // virtual void use() = 0 ;
 
     private:
     int score;
+    std::string name;
 };
 
 #endif 

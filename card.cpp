@@ -1,9 +1,10 @@
 
 #include "card.h"
 
-Card::Card ( int score )
+Card::Card ( std::string name , int score )
 {
-    this->score = score ;
+    setScore( score );
+    setName( name );
 }
 Card::Card(){}
 

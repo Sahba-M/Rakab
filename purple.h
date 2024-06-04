@@ -12,7 +12,6 @@ class PurpleCard : public Card {
     // virtual void use();
 
     private:
-    std::string name ;
     int priority ;
 
 };
