@@ -16,7 +16,7 @@ class Control {
         void controlNumber();
         void shuffleCards();
         void showCards();
-        void youngestPlayer();
+        Player youngestPlayer();
         void getInformation();
 
     private:

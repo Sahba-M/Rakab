@@ -89,33 +89,29 @@ void Control::showCards()
         std::cout << cards[i].getName() << std::endl ;
     }
 }
-void Control::youngestPlayer()
+Player Control::youngestPlayer()
 {
-    std::string name;
-    int age;
-
-    std::vector <std::string> namePlayer;
-    std::vector <int> agePlayer;
+    // std::vector <std::string> namePlayer;
+    std::vector <int> playersAge;
     std::vector <int> youngestIndices;
 
-    for (int i = 0; i < playerNumber; i++)
+    for ( int i = 0 ; i < playerNumber ; i++ )
     {
-        std::cin >> name >> age;
-        namePlayer.push_back(name);
-        agePlayer.push_back(age);
+        playersAge.push_back( players[i].getAge() );
     }
 
-    int minAge = *min_element(agePlayer.begin(), agePlayer.end());
+    int minAge = *min_element(playersAge.begin(), playersAge.end());
 
-    for (int i = 0; i < agePlayer.size(); i++) {
-        if (agePlayer[i] == minAge) {
+    for (int i = 0 ; i < playersAge.size() ; i++) {
+        if (playersAge[i] == minAge) {
             youngestIndices.push_back(i);
         }
     }
 
     srand(time(0));
     int randomIndex = youngestIndices[rand() % youngestIndices.size()];
-    std::cout << "The youngest person is: " << namePlayer[randomIndex] << std::endl;
+    // std::cout << "The youngest person is: " << players[randomIndex].getName() << std::endl;
+    return players[randomIndex]; 
 
 }
 void Control::getInformation()
@@ -131,6 +127,7 @@ void Control::getInformation()
         std::cin  >> age ;
         std::cout << " Enter Your Color : " ;
         std::cin  >> color ;
+        std::cout << "-----------------------\n" ;
         players.push_back (Player( age , name , color ));
     }
 }
