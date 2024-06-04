@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <algorithm>
+#include <random>
 
 #include "control.h"
 #include "card.h"
@@ -65,4 +67,10 @@ void Control::setCards()
         }
     }
     cardInput.close();
+}
+void Control::shuffleCards()
+{
+    std::random_device randomDevice ;
+    std::mt19937 generator(randomDevice());
+    std::shuffle(cards.begin(), cards.end(), generator);
 }

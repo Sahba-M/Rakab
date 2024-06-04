@@ -10,6 +10,7 @@ class Control {
         void setPlayerNumber(int playerNumber);
         int getPlayerNumber();
         void controlNumber();
+        void shuffleCards();
 
     private:
         std::vector<Card> cards;
