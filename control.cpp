@@ -116,7 +116,7 @@ void Control::youngestPlayer()
     std::cout << "The youngest person is: " << namePlayer[randomIndex] << std::endl;
 
 }
-void Control::getInfo()
+void Control::getInformation()
 {
     int age ;
     std::string name ;

@@ -17,7 +17,7 @@ class Control {
         void shuffleCards();
         void showCards();
         void youngestPlayer();
-        void getInfo();
+        void getInformation();
 
     private:
         std::vector<Card> cards;
