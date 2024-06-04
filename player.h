@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "player.h"
+
 class Player {
     public:
         Player();
@@ -10,10 +12,12 @@ class Player {
         int getAge() const ;
         std::string getName() const ;
         std::string getColor() const ;
+        void addCard ( Card card );
 
     private:
         int age ;
         std::string name ;
         std::string color ;
+        std::vector<Card> hand ;
 
 };
