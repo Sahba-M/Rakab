@@ -43,3 +43,7 @@ void Player::showHandCards ()
         std::cout << hand[i].getName() << " " ;
     }
 }
+void Player::addProvinces( std::string province )
+{
+    capturedProvinces.push_back(province);
+}

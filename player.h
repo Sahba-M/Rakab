@@ -15,11 +15,13 @@ class Player {
         std::string getColor() const ;
         void addCard ( Card card );
         void showHandCards ();
+        void addProvinces( std::string province );
 
     private:
         int age ;
         std::string name ;
         std::string color ;
         std::vector<Card> hand ;
+        std::vector<std::string> capturedProvinces;
 
 };
