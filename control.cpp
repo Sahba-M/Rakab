@@ -133,12 +133,11 @@ void Control::getInformation()
         players.push_back(Player(age, name, color));
     }
 }
-void Control::distributeCards(int cardsPerPlayer)
+void Control::distributeCards()
 {
     for (Player &player : players)
     {
         std::cout << " I Want To Give The Cards To  _"<< player.getName() << "_  Please Give him/her The System";
-        std::cin.ignore();
         for (int i = 0; i < player.getCardsEachPlayer(); i++)
         {
             if (!cards.empty())
@@ -147,6 +146,7 @@ void Control::distributeCards(int cardsPerPlayer)
                 cards.pop_back();
             }
         }
+        std::cin.ignore();
         player.showHandCards();
         std::cin.ignore();
         system("cls");
@@ -212,6 +212,7 @@ std::string Control::chosenProvince(Player &player)
             found = false;
         }
     } while (!found);
+    return " ";
 }
 
 // void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {

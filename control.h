@@ -18,7 +18,7 @@ class Control {
         void showCards();
         Player youngestPlayer();
         void getInformation();
-        void distributeCards (int cardsPerPlayer);
+        void distributeCards ();
         void showPlayersHand();
         std::string chosenProvince(Player &player);
         void readProvinces();

@@ -9,8 +9,9 @@ int main()
     control.controlNumber();
     control.getInformation();
     // std::cout << control.youngestPlayer().getName();
-    control.distributeCards(10);
-    control.showPlayersHand();
+    control.distributeCards();
+    //control.showPlayersHand();
+
 
     return 0;
 }
