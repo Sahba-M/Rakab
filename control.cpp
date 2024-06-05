@@ -131,3 +131,17 @@ void Control::getInformation()
         players.push_back (Player( age , name , color ));
     }
 }
+void Control::distributeCards (int cardsPerPlayer)
+{
+    for (int i = 0 ; i < cardsPerPlayer ; i++ ) 
+    {
+        for (Player & player : players) 
+        {
+            if (!cards.empty()) 
+            {
+                player.addCard(cards.back());
+                cards.pop_back();
+            }
+        }
+    }
+}

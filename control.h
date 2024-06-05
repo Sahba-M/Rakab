@@ -11,13 +11,14 @@ class Control {
     public:
         Control(); 
         void setCards();
-        void setPlayerNumber(int playerNumber);
+        void setPlayerNumber (int playerNumber);
         int  getPlayerNumber();
         void controlNumber();
         void shuffleCards();
         void showCards();
         Player youngestPlayer();
         void getInformation();
+        void distributeCards (int cardsPerPlayer);
 
     private:
         std::vector<Card> cards;
