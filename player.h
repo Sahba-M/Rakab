@@ -13,6 +13,7 @@ class Player {
         std::string getName() const ;
         std::string getColor() const ;
         void addCard ( Card card );
+        void showHandCards ();
 
     private:
         int age ;

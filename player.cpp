@@ -36,3 +36,10 @@ void Player::addCard ( Card card )
 {
     hand.push_back( card );
 }
+void Player::showHandCards ()
+{
+    for ( int i = 0 ; i < hand.size() ; i++ )
+    {
+        std::cout << hand[i].getName() << " " ;
+    }
+}
