@@ -156,12 +156,6 @@ void Control::showPlayersHand()
         std::cout << "\n-----------------------\n";
     }
 }
-std::string Control::chosenProvince(Player &player)
-{
-    std::string province;
-    std::cout << " Enter Your Chosen Province To War : ";
-    std::cin >> province;
-}
 void Control::readProvinces()
 {
     std::string province;
@@ -179,4 +173,19 @@ void Control::readProvinces()
         inputProvinces >> province;
         provinces.push_back(province);
     }
+}
+void Control::showUncaptured()
+{
+   for (int i = 0; i < provinces.size(); i++)
+   {
+     std::cout << provinces[i] <<"  ";
+   }
+   
+}
+
+std::string Control::chosenProvince(Player &player)
+{
+    std::string province;
+    std::cout << " Enter Your Chosen Province To War : ";
+    std::cin >> province;
 }

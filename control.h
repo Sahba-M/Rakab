@@ -22,6 +22,7 @@ class Control {
         void showPlayersHand();
         std::string chosenProvince(Player &player);
         void readProvinces();
+        void showUncaptured();
 
     private:
         std::vector<Card> cards;
