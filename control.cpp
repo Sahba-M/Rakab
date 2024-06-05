@@ -135,9 +135,11 @@ void Control::getInformation()
 }
 void Control::distributeCards()
 {
+    std::cin.ignore();
     for (Player &player : players)
     {
-        std::cout << " I Want To Give The Cards To  _"<< player.getName() << "_  Please Give him/her The System";
+
+        std::cout << " I Want To Give The Cards To  _" << player.getName() << "_  Please Give Him/Her The System \n";
         for (int i = 0; i < player.getCardsEachPlayer(); i++)
         {
             if (!cards.empty())
@@ -146,8 +148,10 @@ void Control::distributeCards()
                 cards.pop_back();
             }
         }
+
         std::cin.ignore();
         player.showHandCards();
+
         std::cin.ignore();
         system("cls");
     }
@@ -223,5 +227,5 @@ std::string Control::chosenProvince(Player &player)
 //         result[(i + 1) % n] = players[(startingIndex + i) % n];
 //     }
 
-//     players = result;  
+//     players = result;
 // }
