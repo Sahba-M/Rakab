@@ -190,7 +190,8 @@ std::string Control::chosenProvince(Player &player)
     showUncaptured();
     do
     {
-        std::cout << "\n\n Enter Your Chosen Province To War : ";
+        system("cls");
+        std::cout << "\n\n " << player.getName() << " Enter Your Chosen Province To War : ";
         std::cin >> province;
 
         auto elementFound = std::find(provinces.begin(), provinces.end(), province);
@@ -207,3 +208,14 @@ std::string Control::chosenProvince(Player &player)
         }
     } while (!found);
 }
+
+// void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {
+//     int n = players.size();
+//     std::vector<int> result(n);
+
+//     for (int i = 0; i < n; i++) {
+//         result[(i + 1) % n] = players[(startingIndex + i) % n];
+//     }
+
+//     players = result;  
+// }

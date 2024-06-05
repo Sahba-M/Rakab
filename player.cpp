@@ -55,3 +55,7 @@ void Player::showProvinces()
     }
     
 }
+int Player::getCardsEachPlayer()
+{
+    return (10 + capturedProvinces.size());
+}
