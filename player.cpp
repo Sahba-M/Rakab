@@ -79,3 +79,12 @@ void Player::useCard ( Card card )
         }
     } while (!found);
 }
+void Player::showUsedCards()
+{
+    std::cout << getName() << " : ";
+    for ( int i = 0 ; i < usedCards.size() ; i++ )
+    {
+        std::cout << usedCards[i].getName() << " - ";
+    }
+    std::cout << std::endl;
+}

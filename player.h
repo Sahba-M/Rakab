@@ -12,10 +12,11 @@ class Player {
         void setColor ( std::string color );
         int getAge() const ;
         void addCard ( Card card );
-        void showHandCards ();
+        void showHandCards();
         void addProvinces( std::string province );
         void showProvinces();
         void useCard ( Card card );
+        void showUsedCards();
         int getCardsEachPlayer();
         std::string getName() const ;
         std::string getColor() const ;
