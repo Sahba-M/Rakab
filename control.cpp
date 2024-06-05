@@ -145,3 +145,12 @@ void Control::distributeCards (int cardsPerPlayer)
         }
     }
 }
+void Control::showPlayersHand()
+{
+    for (int i = 0 ; i < players.size() ; i++ )
+    {
+        std::cout << " Player " << i + 1 << " : " << '\n' ;
+        players[i].showHandCards();
+        std::cout << "\n-----------------------\n" ;
+    }
+}

@@ -19,6 +19,7 @@ class Control {
         Player youngestPlayer();
         void getInformation();
         void distributeCards (int cardsPerPlayer);
+        void showPlayersHand();
 
     private:
         std::vector<Card> cards;
