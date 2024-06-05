@@ -23,6 +23,7 @@ class Control {
         std::string chosenProvince(Player &player);
         void readProvinces();
         void showUncaptured();
+        void test();
 
     private:
         std::vector<Card> cards;

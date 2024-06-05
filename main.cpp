@@ -11,7 +11,7 @@ int main()
     // std::cout << control.youngestPlayer().getName();
     control.distributeCards();
     //control.showPlayersHand();
-
+    control.test();
 
     return 0;
 }

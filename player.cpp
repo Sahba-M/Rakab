@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "player.h"
 #include "card.h"
 
@@ -71,6 +73,7 @@ void Player::useCard ( Card card )
             hand.erase(elementFound);
             found = true;
             usedCards.push_back(card);
+            return ;
         }
         else
         {

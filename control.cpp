@@ -218,7 +218,20 @@ std::string Control::chosenProvince(Player &player)
     } while (!found);
     return " ";
 } 
-
+void Control::test()
+{
+    std::string temp ;
+    for ( Player & player : players )
+    {
+        std::cout << " Chosse Card : \n" ;
+        player.showHandCards();
+        std::cin >> temp ;
+        Card c(temp);
+        player.useCard(c);
+        std::cout << '\n';
+        player.showUsedCards();
+    }
+}
 // void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {
 //     int n = players.size();
 //     std::vector<int> result(n);
