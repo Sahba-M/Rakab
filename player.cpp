@@ -47,3 +47,11 @@ void Player::addProvinces( std::string province )
 {
     capturedProvinces.push_back(province);
 }
+void Player::showProvinces()
+{
+    for (int i = 0; i < capturedProvinces.size(); i++)
+    {
+        std::cout << capturedProvinces[i] << " ";
+    }
+    
+}

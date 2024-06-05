@@ -16,6 +16,7 @@ class Player {
         void addCard ( Card card );
         void showHandCards ();
         void addProvinces( std::string province );
+        void showProvinces();
 
     private:
         int age ;
