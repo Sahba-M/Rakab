@@ -32,7 +32,7 @@ void Map::readUnorderedMap ()
         
     std::string key ;
     int value ;
-    while (input.eof())
+    while (!input.eof())
     {
         if ( input >> value >> key )
         {

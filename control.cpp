@@ -167,7 +167,7 @@ void Control::readProvinces()
     {
         std::cerr << " Can Not Open File... " << std::endl;
     }
-    while (inputProvinces.eof())
+    while (!inputProvinces.eof())
     {
         inputProvinces.ignore();
         inputProvinces >> province;
@@ -176,16 +176,33 @@ void Control::readProvinces()
 }
 void Control::showUncaptured()
 {
-   for (int i = 0; i < provinces.size(); i++)
-   {
-     std::cout << provinces[i] <<"  ";
-   }
-   
+    for (int i = 0; i < provinces.size(); i++)
+    {
+        std::cout << provinces[i] << "  ";
+    }
 }
-
 std::string Control::chosenProvince(Player &player)
 {
+    bool found = false;
     std::string province;
-    std::cout << " Enter Your Chosen Province To War : ";
-    std::cin >> province;
+    std::cout << "\n Unoccupied Provinces Include : \n ";
+    showUncaptured();
+    do
+    {
+        std::cout << "\n\n Enter Your Chosen Province To War : ";
+        std::cin >> province;
+
+        auto elementFound = std::find(provinces.begin(), provinces.end(), province);
+        if (elementFound != provinces.end())
+        {
+            provinces.erase(elementFound);
+            found = true;
+            return province;
+        }
+        else
+        {
+            std::cout <<" ERROR: Please Enter Your Desired Province Again : " << std::endl;
+            found = false;
+        }
+    } while (!found);
 }
