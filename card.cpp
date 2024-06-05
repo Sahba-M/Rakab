@@ -24,4 +24,8 @@ std::string Card::getName()
 {
     return name ;
 }
+bool operator== (const Card & other)
+{
+    return this->name == other.name;
+}
 

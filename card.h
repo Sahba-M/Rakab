@@ -13,6 +13,7 @@ class Card {
     void setName(std::string name);
     int getScore();
     std::string getName();
+    bool operator== (const Card & other);
     // virtual void use() = 0 ;
 
     private:
