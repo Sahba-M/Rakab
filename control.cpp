@@ -135,9 +135,11 @@ void Control::getInformation()
 }
 void Control::distributeCards(int cardsPerPlayer)
 {
-    for (int i = 0; i < cardsPerPlayer; i++)
+    for (Player &player : players)
     {
-        for (Player &player : players)
+        std::cout << " I Want To Give The Cards To  _"<< player.getName() << "_  Please Give him/her The System";
+        std::cin.ignore();
+        for (int i = 0; i < player.getCardsEachPlayer(); i++)
         {
             if (!cards.empty())
             {
@@ -145,6 +147,9 @@ void Control::distributeCards(int cardsPerPlayer)
                 cards.pop_back();
             }
         }
+        player.showHandCards();
+        std::cin.ignore();
+        system("cls");
     }
 }
 void Control::showPlayersHand()
