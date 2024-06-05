@@ -223,8 +223,9 @@ void Control::test()
     std::string temp ;
     for ( Player & player : players )
     {
-        std::cout << " Chosse Card : \n" ;
+        std::cout << player.getName() << " Please Choose Card : \n" ;
         player.showHandCards();
+        std::cout << '\n' << " Your Choose : ";
         std::cin >> temp ;
         Card c(temp);
         player.useCard(c);

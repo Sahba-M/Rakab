@@ -64,23 +64,25 @@ int Player::getCardsEachPlayer()
 }
 void Player::useCard ( Card card )
 {
-    bool found = false;
-    do 
+    // static bool found = true;
+
+    // if (!found)
+    // {
+    //     std::cout << " ERROR: Please Enter Valid Name For Card : " << std::endl;
+    //     std::cin >> card;
+    //     found = true;
+    // }
+
+    auto elementFound = std::find(hand.begin(), hand.end(), card);
+    if (elementFound != hand.end())
     {
-        auto elementFound = std::find(hand.begin(), hand.end(), card);
-        if (elementFound != hand.end())
-        {
-            hand.erase(elementFound);
-            found = true;
-            usedCards.push_back(card);
-            return ;
-        }
-        else
-        {
-            std::cout << " ERROR: Please Enter Valid Name For Card : " << std::endl;
-            found = false;
-        }
-    } while (!found);
+        hand.erase(elementFound);
+        usedCards.push_back(card);
+    }
+    // else 
+    // {
+    //     found = false;
+    // }
 }
 void Player::showUsedCards()
 {
