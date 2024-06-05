@@ -15,23 +15,23 @@
 
 Control::Control() {}
 
-void Control::setPlayerNumber(int playerNumber) 
+void Control::setPlayerNumber(int playerNumber)
 {
     this->playerNumber = playerNumber;
 }
-int  Control::getPlayerNumber()
+int Control::getPlayerNumber()
 {
     return playerNumber;
 }
 void Control::controlNumber()
 {
     int counter = 0;
-    std::cout << " Enter Number Of Your Player : " ;
+    std::cout << " Enter Number Of Your Player : ";
     std::cin >> counter;
     while (counter < 3 || counter > 6)
     {
         system("cls");
-        std::cout << " Enter Number Of Your Player : ( ERROR: Please Enter number between 3_6 ) : " ;
+        std::cout << " Enter Number Of Your Player : ( ERROR: Please Enter number between 3_6 ) : ";
         std::cin >> counter;
     }
     setPlayerNumber(counter);
@@ -77,33 +77,35 @@ void Control::setCards()
 }
 void Control::shuffleCards()
 {
-    std::random_device randomDevice ;
+    std::random_device randomDevice;
     std::mt19937 generator(randomDevice());
     std::shuffle(cards.begin(), cards.end(), generator);
 }
 void Control::showCards()
 
 {
-    for ( int i = 0 ; i < cards.size() ; i++ )
+    for (int i = 0; i < cards.size(); i++)
     {
-        std::cout << cards[i].getName() << std::endl ;
+        std::cout << cards[i].getName() << std::endl;
     }
 }
 Player Control::youngestPlayer()
 {
     // std::vector <std::string> namePlayer;
-    std::vector <int> playersAge;
-    std::vector <int> youngestIndices;
+    std::vector<int> playersAge;
+    std::vector<int> youngestIndices;
 
-    for ( int i = 0 ; i < playerNumber ; i++ )
+    for (int i = 0; i < playerNumber; i++)
     {
-        playersAge.push_back( players[i].getAge() );
+        playersAge.push_back(players[i].getAge());
     }
 
     int minAge = *min_element(playersAge.begin(), playersAge.end());
 
-    for (int i = 0 ; i < playersAge.size() ; i++) {
-        if (playersAge[i] == minAge) {
+    for (int i = 0; i < playersAge.size(); i++)
+    {
+        if (playersAge[i] == minAge)
+        {
             youngestIndices.push_back(i);
         }
     }
@@ -111,33 +113,33 @@ Player Control::youngestPlayer()
     srand(time(0));
     int randomIndex = youngestIndices[rand() % youngestIndices.size()];
     // std::cout << "The youngest person is: " << players[randomIndex].getName() << std::endl;
-    return players[randomIndex]; 
-
+    return players[randomIndex];
 }
 void Control::getInformation()
 {
-    int age ;
-    std::string name ;
-    std::string color ;
-    for ( int i = 0 ; i < playerNumber ; i++ )
+    int age;
+    std::string name;
+    std::string color;
+    for (int i = 0; i < playerNumber; i++)
     {
-        std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : " ;
-        std::cin  >> name ;
-        std::cout << " Enter Your Age : " ;
-        std::cin  >> age ;
-        std::cout << " Enter Your Color : " ;
-        std::cin  >> color ;
-        std::cout << "-----------------------\n" ;
-        players.push_back (Player( age , name , color ));
+        std::cout << " Player " << i + 1 << " : " << '\n'
+                  << " Enter Your Name : ";
+        std::cin >> name;
+        std::cout << " Enter Your Age : ";
+        std::cin >> age;
+        std::cout << " Enter Your Color : ";
+        std::cin >> color;
+        std::cout << "-----------------------\n";
+        players.push_back(Player(age, name, color));
     }
 }
-void Control::distributeCards (int cardsPerPlayer)
+void Control::distributeCards(int cardsPerPlayer)
 {
-    for (int i = 0 ; i < cardsPerPlayer ; i++ ) 
+    for (int i = 0; i < cardsPerPlayer; i++)
     {
-        for (Player & player : players) 
+        for (Player &player : players)
         {
-            if (!cards.empty()) 
+            if (!cards.empty())
             {
                 player.addCard(cards.back());
                 cards.pop_back();
@@ -147,10 +149,34 @@ void Control::distributeCards (int cardsPerPlayer)
 }
 void Control::showPlayersHand()
 {
-    for (int i = 0 ; i < players.size() ; i++ )
+    for (int i = 0; i < players.size(); i++)
     {
-        std::cout << " Player " << i + 1 << " : " << '\n' ;
+        std::cout << " Player " << i + 1 << " : " << '\n';
         players[i].showHandCards();
-        std::cout << "\n-----------------------\n" ;
+        std::cout << "\n-----------------------\n";
+    }
+}
+std::string Control::chosenProvince(Player &player)
+{
+    std::string province;
+    std::cout << " Enter Your Chosen Province To War : ";
+    std::cin >> province;
+}
+void Control::readProvinces()
+{
+    std::string province;
+
+    std::ifstream inputProvinces;
+    inputProvinces.open("map.txt");
+
+    if (!inputProvinces.is_open())
+    {
+        std::cerr << " Can Not Open File... " << std::endl;
+    }
+    while (inputProvinces.eof())
+    {
+        inputProvinces.ignore();
+        inputProvinces >> province;
+        provinces.push_back(province);
     }
 }

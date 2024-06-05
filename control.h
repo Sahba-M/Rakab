@@ -20,10 +20,13 @@ class Control {
         void getInformation();
         void distributeCards (int cardsPerPlayer);
         void showPlayersHand();
+        std::string chosenProvince(Player &player);
+        void readProvinces();
 
     private:
         std::vector<Card> cards;
         std::vector<Player> players;
+        std::vector<std::string> provinces;
         int playerNumber;
 };
 
