@@ -173,6 +173,7 @@ void Control::readProvinces()
         inputProvinces >> province;
         provinces.push_back(province);
     }
+    inputProvinces.close();
 }
 void Control::showUncaptured()
 {
@@ -185,7 +186,7 @@ std::string Control::chosenProvince(Player &player)
 {
     bool found = false;
     std::string province;
-    std::cout << "\n Unoccupied Provinces Include : \n ";
+    std::cout << "\n Unoccupied Provinces Include : ";
     showUncaptured();
     do
     {
@@ -201,7 +202,7 @@ std::string Control::chosenProvince(Player &player)
         }
         else
         {
-            std::cout <<" ERROR: Please Enter Your Desired Province Again : " << std::endl;
+            std::cout << " ERROR: Please Enter Your Desired Province Again : " << std::endl;
             found = false;
         }
     } while (!found);
