@@ -60,3 +60,22 @@ int Player::getCardsEachPlayer()
 {
     return (10 + capturedProvinces.size());
 }
+void Player::useCard ( Card card )
+{
+    bool found = false;
+    do 
+    {
+        auto elementFound = std::find(hand.begin(), hand.end(), card);
+        if (elementFound != hand.end())
+        {
+            hand.erase(elementFound);
+            found = true;
+            usedCards.push_back(card);
+        }
+        else
+        {
+            std::cout << " ERROR: Please Enter Valid Name For Card : " << std::endl;
+            found = false;
+        }
+    } while (!found);
+}

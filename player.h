@@ -15,6 +15,7 @@ class Player {
         void showHandCards ();
         void addProvinces( std::string province );
         void showProvinces();
+        void useCard ( Card card );
         int getCardsEachPlayer();
         std::string getName() const ;
         std::string getColor() const ;
@@ -24,6 +25,7 @@ class Player {
         std::string name ;
         std::string color ;
         std::vector<Card> hand ;
+        std::vector<Card> usedCards ;
         std::vector<std::string> capturedProvinces;
         int cardsEachPlayer;
         int power;

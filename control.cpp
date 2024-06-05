@@ -217,7 +217,7 @@ std::string Control::chosenProvince(Player &player)
         }
     } while (!found);
     return " ";
-}
+} 
 
 // void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {
 //     int n = players.size();
