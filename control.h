@@ -12,6 +12,7 @@ class Control {
         Control(); 
         void setCards();
         void setPlayerNumber (int playerNumber);
+        void setColor();
         int  getPlayerNumber();
         void controlNumber();
         void shuffleCards();
@@ -30,7 +31,8 @@ class Control {
         std::vector<Card> cards;
         std::vector<Player> players;
         std::vector<std::string> provinces;
-        std::vector<std::string> colors;
+        std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
+
         int playerNumber;
 };
 

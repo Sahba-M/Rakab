@@ -19,6 +19,10 @@ void Control::setPlayerNumber(int playerNumber)
 {
     this->playerNumber = playerNumber;
 }
+void Control::setColor()
+{
+   this-> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
+}
 int Control::getPlayerNumber()
 {
     return playerNumber;
@@ -118,11 +122,9 @@ Player Control::youngestPlayer()
 std::string Control::controlColors()
 {
     bool found = true;
-    colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
     std::string chooseColor;
     do
     {
-        // system("cls");
         std::cout << "\n ";
         for (int i = 0; i < colors.size(); i++)
         {
@@ -134,13 +136,12 @@ std::string Control::controlColors()
         std::cin >> chooseColor;
 
         auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
+
         if (elementFound != colors.end())
         {
-
             colors.erase(elementFound);
             found = true;
-            for (int i = 0; i < colors.size(); i++)
-                std::cout << colors[i] << " ~ ";
+
             return chooseColor;
         }
         else
@@ -158,11 +159,12 @@ void Control::getInformation()
     std::string color;
     for (int i = 0; i < playerNumber; i++)
     {
-        std::cout << " Player " << i + 1 << " : " << '\n'
-                  << " Enter Your Name : ";
+        std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
+                 
         std::cin >> name;
         std::cout << " Enter Your Age : ";
         std::cin >> age;
+       // setColor();
         color = controlColors();
         std::cout << "-----------------------\n";
         players.push_back(Player(age, name, color));
@@ -269,6 +271,7 @@ void Control::test()
         player.showUsedCards();
     }
 }
+
 // void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {
 //     int n = players.size();
 //     std::vector<int> result(n);
