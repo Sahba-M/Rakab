@@ -257,19 +257,25 @@ std::string Control::chosenProvince(Player &player)
 }
 void Control::test()
 {
-    std::string temp;
-    for (Player &player : players)
+
+    for (size_t i = 0; i < players.size(); i++)
     {
-        std::cout << player.getName() << " Please Choose Card : \n";
-        player.showHandCards();
-        std::cout << '\n'
-                  << " Your Choose : ";
-        // std::cin >> temp;
-        // Card c(temp);
-        player.selectCard();
-        std::cout << '\n';
-        player.showUsedCards();
+        selectMove(players[i]);
     }
+    
+    // std::string temp;
+    // for (Player &player : players)
+    // {
+    //     std::cout << player.getName() << " Please Choose Card : \n";
+    //     player.showHandCards();
+    //     std::cout << '\n'
+    //               << " Your Choose : ";
+    //     // std::cin >> temp;
+    //     // Card c(temp);
+    //     player.selectCard();
+    //     std::cout << '\n';
+    //     player.showUsedCards();
+    // }
 }
 
 void Control::selectMove(Player & player)
@@ -290,7 +296,6 @@ void Control::selectMove(Player & player)
          std::cout << " ERROR : Invalid Move... ";
          selectMove(player);
       }
-    
 }
 // void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {
 //     int n = players.size();

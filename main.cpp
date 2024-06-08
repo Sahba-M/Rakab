@@ -12,6 +12,7 @@ int main()
     control.distributeCards();
     //control.showPlayersHand();
     control.test();
+    
 
     return 0;
 }
