@@ -266,12 +266,32 @@ void Control::test()
                   << " Your Choose : ";
         // std::cin >> temp;
         // Card c(temp);
-        player.useCard();
+        player.selectCard();
         std::cout << '\n';
         player.showUsedCards();
     }
 }
 
+void Control::selectMove(Player & player)
+{
+    std::string move;
+      system("cls");
+      std::cout << player.getName() << " Please Choose Your Movement ( pass / card ): "; 
+      std::cin >> move;
+      if (move == "pass")
+      {
+        /* code */
+      } else if(move == "card")
+      {
+           player.showHandCards();
+           player.selectCard();
+      } else
+      {
+         std::cout << " ERROR : Invalid Move... ";
+         selectMove(player);
+      }
+    
+}
 // void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {
 //     int n = players.size();
 //     std::vector<int> result(n);

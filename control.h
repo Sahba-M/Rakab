@@ -26,6 +26,7 @@ class Control {
         void readProvinces();
         void showUncaptured();
         void test();
+        void selectMove(Player & player);
 
     private:
         std::vector<Card> cards;

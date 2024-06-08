@@ -70,7 +70,7 @@ int Player::getCardsEachPlayer()
 {
     return (10 + capturedProvinces.size());
 }
-void Player::useCard ()
+void Player::selectCard ()
 {
     Card card;
     bool found = true;
