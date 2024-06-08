@@ -115,10 +115,9 @@ Player Control::youngestPlayer()
     // std::cout << "The youngest person is: " << players[randomIndex].getName() << std::endl;
     return players[randomIndex];
 }
-
 std::string Control::controlColors()
 {
-    bool found = false;
+    bool found = true;
     colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
     std::string chooseColor;
     do
@@ -129,14 +128,19 @@ std::string Control::controlColors()
         {
             std::cout << colors[i] << " ~ ";
         }
-        std::cout << std::endl << " Enter Your Chosen Color: ";
+        if (found == true)
+            std::cout << std::endl
+                      << " Enter Your Chosen Color: ";
         std::cin >> chooseColor;
 
         auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
         if (elementFound != colors.end())
         {
-            found = true;
+
             colors.erase(elementFound);
+            found = true;
+            for (int i = 0; i < colors.size(); i++)
+                std::cout << colors[i] << " ~ ";
             return chooseColor;
         }
         else
@@ -258,9 +262,9 @@ void Control::test()
         player.showHandCards();
         std::cout << '\n'
                   << " Your Choose : ";
-        std::cin >> temp;
-        Card c(temp);
-        player.useCard(c);
+        // std::cin >> temp;
+        // Card c(temp);
+        player.useCard();
         std::cout << '\n';
         player.showUsedCards();
     }

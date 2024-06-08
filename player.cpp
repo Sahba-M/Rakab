@@ -70,27 +70,31 @@ int Player::getCardsEachPlayer()
 {
     return (10 + capturedProvinces.size());
 }
-void Player::useCard ( Card card )
+void Player::useCard ()
 {
-    // static bool found = true;
-
-    // if (!found)
-    // {
-    //     std::cout << " ERROR: Please Enter Valid Name For Card : " << std::endl;
-    //     std::cin >> card;
-    //     found = true;
-    // }
-
-    auto elementFound = std::find(hand.begin(), hand.end(), card);
-    if (elementFound != hand.end())
+    Card card;
+    bool found = true;
+    do
     {
-        hand.erase(elementFound);
-        usedCards.push_back(card);
-    }
-    // else 
-    // {
-    //     found = false;
-    // }
+        // system("cls");
+        if ( found == true )
+            std::cout  << " Enter Your Chosen Card: ";
+        std::cin >> card;
+
+        auto elementFound = std::find(hand.begin(), hand.end(), card);
+        if (elementFound != hand.end())
+        {
+            found = true;
+            hand.erase(elementFound);
+            usedCards.push_back(card);
+        }
+        
+        else
+        {
+            std::cout << " ERROR: Please Enter Valid Card: " << std::endl;
+            found = false;
+        }
+    } while (!found);
 }
 void Player::showUsedCards()
 {

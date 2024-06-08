@@ -15,7 +15,7 @@ class Player {
         void showHandCards();
         void addProvinces( std::string province );
         void showProvinces();
-        void useCard ( Card card );
+        void useCard ();
         void showUsedCards();
         int getCardsEachPlayer();
         std::string getName() const ;
