@@ -115,6 +115,38 @@ Player Control::youngestPlayer()
     // std::cout << "The youngest person is: " << players[randomIndex].getName() << std::endl;
     return players[randomIndex];
 }
+
+std::string Control::controlColors()
+{
+    bool found = false;
+    colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
+    std::string chooseColor;
+    do
+    {
+        // system("cls");
+        std::cout << "\n ";
+        for (int i = 0; i < colors.size(); i++)
+        {
+            std::cout << colors[i] << " ~ ";
+        }
+        std::cout << std::endl << " Enter Your Chosen Color: ";
+        std::cin >> chooseColor;
+
+        auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
+        if (elementFound != colors.end())
+        {
+            found = true;
+            colors.erase(elementFound);
+            return chooseColor;
+        }
+        else
+        {
+            std::cout << " \n ERROR: Please Enter Your Color Again : " << std::endl;
+            found = false;
+        }
+    } while (!found);
+    return " ";
+}
 void Control::getInformation()
 {
     int age;
@@ -127,8 +159,7 @@ void Control::getInformation()
         std::cin >> name;
         std::cout << " Enter Your Age : ";
         std::cin >> age;
-        std::cout << " Enter Your Color : ";
-        std::cin >> color;
+        color = controlColors();
         std::cout << "-----------------------\n";
         players.push_back(Player(age, name, color));
     }
@@ -217,16 +248,17 @@ std::string Control::chosenProvince(Player &player)
         }
     } while (!found);
     return " ";
-} 
+}
 void Control::test()
 {
-    std::string temp ;
-    for ( Player & player : players )
+    std::string temp;
+    for (Player &player : players)
     {
-        std::cout << player.getName() << " Please Choose Card : \n" ;
+        std::cout << player.getName() << " Please Choose Card : \n";
         player.showHandCards();
-        std::cout << '\n' << " Your Choose : ";
-        std::cin >> temp ;
+        std::cout << '\n'
+                  << " Your Choose : ";
+        std::cin >> temp;
         Card c(temp);
         player.useCard(c);
         std::cout << '\n';

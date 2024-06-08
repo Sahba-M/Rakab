@@ -18,6 +18,7 @@ class Control {
         void showCards();
         Player youngestPlayer();
         void getInformation();
+        std::string controlColors();
         void distributeCards ();
         void showPlayersHand();
         std::string chosenProvince(Player &player);
@@ -29,6 +30,7 @@ class Control {
         std::vector<Card> cards;
         std::vector<Player> players;
         std::vector<std::string> provinces;
+        std::vector<std::string> colors;
         int playerNumber;
 };
 
