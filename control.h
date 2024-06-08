@@ -27,6 +27,7 @@ class Control {
         void showUncaptured();
         void test();
         void selectMove(Player & player);
+        void showPlayGroung();
 
     private:
         std::vector<Card> cards;

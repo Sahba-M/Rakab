@@ -169,6 +169,7 @@ void Control::getInformation()
         std::cout << "-----------------------\n";
         players.push_back(Player(age, name, color));
     }
+    system("cls");
 }
 void Control::distributeCards()
 {
@@ -296,6 +297,14 @@ void Control::selectMove(Player & player)
          std::cout << " ERROR : Invalid Move... ";
          selectMove(player);
       }
+}
+void Control::showPlayGroung()
+{
+    for (int i = 0; i < players.size(); i++)
+    {
+        players[i].showUsedCards();
+    }
+    
 }
 // void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {
 //     int n = players.size();
