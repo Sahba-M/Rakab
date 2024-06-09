@@ -205,23 +205,20 @@ void Control::showPlayersHand()
 }
 void Control::readProvinces()
 {
-    std::string province;
-
+    std::string province , ignore;
     std::ifstream inputProvinces;
     inputProvinces.open("map.txt");
+    setProvinceNumber(14);
 
     if (!inputProvinces.is_open())
     {
         std::cerr << " Can Not Open File... " << std::endl;
     }
-    while (!inputProvinces.eof())
+    for ( int i = 0 ; i < getProvinceNumber() ; i++ )
     {
-        for ( int i = 0 ; i < 14 ; i++ )
-        {
-            inputProvinces.ignore();
-            inputProvinces >> province;
-            provinces.push_back(province);
-        }
+        inputProvinces >> ignore;
+        inputProvinces >> province;
+        provinces.push_back(province);
     }
     inputProvinces.close();
 }
@@ -262,8 +259,7 @@ std::string Control::chosenProvince(Player &player)
 void Control::test()
 {
 
-
-    selectWarPlace(players[0]);
+    std::cout << selectWarPlace(players[0]);
     // for (size_t i = 0; i < players.size(); i++)
     // {
     //     selectMove(players[i]);
@@ -323,6 +319,7 @@ std::string Control::selectWarPlace (Player & player)
         {
             std::cout << provinces[i] << " ~ ";
         }
+        std::cout << std::endl;
         if (found == true)
             std::cout << player.getName() << std::endl << " Enter Your Chosen Province: ";
         std::cin >> chooseProvince ;
@@ -347,7 +344,7 @@ void Control::setProvinceNumber(int provinceNumber)
 {
     this -> provinceNumber = provinceNumber;
 }
-int Control::getPlayerNumber()
+int Control::getProvinceNumber()
 {
     return provinceNumber;
 }

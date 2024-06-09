@@ -30,7 +30,7 @@ class Control {
         void showPlayGroung();
         std::string selectWarPlace (Player & player);
         void setProvinceNumber(int provinceNumber);
-        int getPlayerNumber();
+        int getProvinceNumber();
         
 
     private:
