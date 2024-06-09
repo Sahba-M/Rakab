@@ -141,8 +141,8 @@ std::string Control::controlColors()
         {
             colors.erase(elementFound);
             found = true;
-
-            return chooseColor;
+            break;
+            
         }
         else
         {
@@ -150,7 +150,7 @@ std::string Control::controlColors()
             found = false;
         }
     } while (!found);
-    return " ";
+    return chooseColor;
 }
 void Control::getInformation()
 {
@@ -246,7 +246,7 @@ std::string Control::chosenProvince(Player &player)
         {
             provinces.erase(elementFound);
             found = true;
-            return province;
+            break;
         }
         else
         {
@@ -254,7 +254,7 @@ std::string Control::chosenProvince(Player &player)
             found = false;
         }
     } while (!found);
-    return " ";
+    return province;
 }
 void Control::test()
 {
@@ -294,7 +294,14 @@ void Control::selectMove(Player & player)
       {
            player.showHandCards();
            player.selectCard();
-      } else
+      } else if (move == "help")
+      {
+        //......
+      }else if (move == "help")
+      {
+        
+      }
+      else
       {
          std::cout << " ERROR : Invalid Move... ";
          selectMove(player);
