@@ -28,6 +28,10 @@ class Control {
         void test();
         void selectMove(Player & player);
         void showPlayGroung();
+        std::string selectWarPlace (Player & player);
+        void setProvinceNumber(int provinceNumber);
+        int getPlayerNumber();
+        
 
     private:
         std::vector<Card> cards;
@@ -36,6 +40,7 @@ class Control {
         std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
 
         int playerNumber;
+        int provinceNumber;
 };
 
 #endif

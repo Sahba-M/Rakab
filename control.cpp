@@ -216,9 +216,12 @@ void Control::readProvinces()
     }
     while (!inputProvinces.eof())
     {
-        inputProvinces.ignore();
-        inputProvinces >> province;
-        provinces.push_back(province);
+        for ( int i = 0 ; i < 14 ; i++ )
+        {
+            inputProvinces.ignore();
+            inputProvinces >> province;
+            provinces.push_back(province);
+        }
     }
     inputProvinces.close();
 }
@@ -259,10 +262,14 @@ std::string Control::chosenProvince(Player &player)
 void Control::test()
 {
 
-    for (size_t i = 0; i < players.size(); i++)
-    {
-        selectMove(players[i]);
-    }
+
+    selectWarPlace(players[0]);
+    // for (size_t i = 0; i < players.size(); i++)
+    // {
+    //     selectMove(players[i]);
+    // }
+
+
     
     // std::string temp;
     // for (Player &player : players)
@@ -278,7 +285,6 @@ void Control::test()
     //     player.showUsedCards();
     // }
 }
-
 void Control::selectMove(Player & player)
 {
     std::string move;
@@ -305,6 +311,45 @@ void Control::showPlayGroung()
         players[i].showUsedCards();
     }
     
+}
+std::string Control::selectWarPlace (Player & player)
+{
+    bool found = true;
+    std::string chooseProvince;
+    do
+    {
+        std::cout << "\n ";
+        for (int i = 0; i < provinces.size(); i++)
+        {
+            std::cout << provinces[i] << " ~ ";
+        }
+        if (found == true)
+            std::cout << player.getName() << std::endl << " Enter Your Chosen Province: ";
+        std::cin >> chooseProvince ;
+
+        auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
+
+        if (elementFound != provinces.end())
+        {
+            provinces.erase(elementFound);
+            found = true;
+            break;
+        }
+        else
+        {
+            std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
+            found = false;
+        }
+    } while (!found);
+    return chooseProvince;
+}
+void Control::setProvinceNumber(int provinceNumber)
+{
+    this -> provinceNumber = provinceNumber;
+}
+int Control::getPlayerNumber()
+{
+    return provinceNumber;
 }
 // void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {
 //     int n = players.size();
