@@ -148,5 +148,8 @@ bool Player::isFind ( std::shared_ptr<Card> Ycard )
             return true ;
         }
         else 
+        {
+            
             return false ;
+        }
 }
