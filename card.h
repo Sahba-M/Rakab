@@ -10,6 +10,7 @@ class Card {
     public:
     Card( std::string name , int score = 0 );
     Card();
+    virtual ~Card();
     void setScore(int score);
     void setName(std::string name);
     int getScore();

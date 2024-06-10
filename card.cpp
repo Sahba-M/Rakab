@@ -7,11 +7,13 @@ Card::Card ( std::string name , int score )
     setName( name );
 }
 Card::Card(){}
+Card::~Card() = default;
 
 void Card:: setScore(int score)
 {
     this->score = score;
 }
+
 int Card:: getScore()
 {
     return score;
@@ -34,3 +36,4 @@ std::istream & operator>> ( std::istream & input , Card & card )
     card.setName(card.name);
     return input ;
 }
+
