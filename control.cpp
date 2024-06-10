@@ -54,7 +54,6 @@ void Control::setCards()
     while (!cardInput.eof())
     {
         cardInput >> cardNumber >> yellowCardType;
-        // YellowCard ycard(yellowCardType);
         for (int i = 0; i < cardNumber; i++)
         {
             cards.push_back(std::make_shared<YellowCard>(yellowCardType));
@@ -71,7 +70,6 @@ void Control::setCards()
     while (!cardInput.eof())
     {
         cardInput >> cardNumber >> purpleCardType;
-       // PurpleCard pcard(purpleCardType);
         for (int i = 0; i < cardNumber; i++)
         {
             cards.push_back(std::make_shared<PurpleCard>(purpleCardType));
@@ -258,14 +256,19 @@ std::string Control::chosenProvince(Player &player)
 }
 void Control::test()
 {
-
-    std::cout << selectWarPlace(players[0]);
-    // for (size_t i = 0; i < players.size(); i++)
-    // {
-    //     selectMove(players[i]);
-    // }
-
-
+    selectWarPlace(players[0]);
+    system("cls");
+    for (int i = 0 ; i < 10 ; i++)
+    {
+        for ( Player & player : players )
+        {
+            showPlayGround();
+            std::cout << " The War Is Over " << warPlace << '\n' ;
+            selectMove(player);
+            player.showUsedCards();
+            system("cls");
+        }
+    }
     
     // std::string temp;
     // for (Player &player : players)
@@ -284,38 +287,43 @@ void Control::test()
 void Control::selectMove(Player & player)
 {
     std::string move;
-      system("cls");
-      std::cout << player.getName() << " Please Choose Your Movement ( pass / card ): "; 
-      std::cin >> move;
-      if (move == "pass")
-      {
-        /* code */
-      } else if(move == "card")
-      {
-           player.showHandCards();
-           player.selectCard();
-      } else if (move == "help")
-      {
-        //......
-      }else if (move == "help")
-      {
-        
-      }
-      else
-      {
-         std::cout << " ERROR : Invalid Move... ";
-         selectMove(player);
-      }
+    // system("cls");
+    // std::cin.ignore();
+    std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card ): "; 
+    // player.showHandCards();
+    std::cin >> move;
+    if (move == "pass")
+    {
+      /* code */
+    } else if(move == "card")
+    {
+        std::cout << " " ;
+        player.showHandCards();
+        player.selectCard();
+    } else if (move == "help")
+    {
+      //......
+    } else if (move == "help")
+    {
+      
+    }
+    else
+    {
+       std::cout << " ERROR : Invalid Move... ";
+       selectMove(player);
+    }
 }
-void Control::showPlayGroung()
+void Control::showPlayGround()
 {
+    std::cout << "---------------------\n" ;
     for (int i = 0; i < players.size(); i++)
     {
         players[i].showUsedCards();
     }
+    std::cout << "---------------------\n" ;
     
 }
-std::string Control::selectWarPlace (Player & player)
+void Control::selectWarPlace (Player & player)
 {
     bool found = true;
     std::string chooseProvince;
@@ -328,7 +336,7 @@ std::string Control::selectWarPlace (Player & player)
         }
         std::cout << std::endl;
         if (found == true)
-            std::cout << player.getName() << std::endl << " Enter Your Chosen Province: ";
+            std::cout << " " << player.getName() << " Enter Your Chosen Province: ";
         std::cin >> chooseProvince ;
 
         auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
@@ -345,7 +353,7 @@ std::string Control::selectWarPlace (Player & player)
             found = false;
         }
     } while (!found);
-    return chooseProvince;
+    warPlace = chooseProvince;
 }
 void Control::setProvinceNumber(int provinceNumber)
 {

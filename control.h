@@ -28,8 +28,8 @@ class Control {
         void showUncaptured();
         void test();
         void selectMove(Player & player);
-        void showPlayGroung();
-        std::string selectWarPlace (Player & player);
+        void showPlayGround();
+        void selectWarPlace (Player & player);
         void setProvinceNumber(int provinceNumber);
         int getProvinceNumber();
         
@@ -42,6 +42,7 @@ class Control {
 
         int playerNumber;
         int provinceNumber;
+        std::string warPlace;
 };
 
 #endif

@@ -3,6 +3,17 @@
 
 #include "player.h"
 #include "card.h"
+#include "purple.h"
+#include "yellow.h"
+
+
+struct SharedPtrCompare {
+    template <class T, class U>
+    bool operator() ( const std::shared_ptr <T> & lhs , const std::shared_ptr <U> & rhs ) const 
+    {
+        return *lhs == *rhs;
+    }
+};
 
 Player::Player(){};
 Player::Player ( int age , std::string name , std::string color ) 
@@ -24,8 +35,6 @@ void Player::setAge ( int age )
     {
         age = 0;
     }
-    
-    
 }
 void Player::setColor ( std::string color )
 {
@@ -71,9 +80,11 @@ int Player::getCardsEachPlayer()
 {
     return (10 + capturedProvinces.size());
 }
-void Player::selectCard ()
+void Player::selectCard()
 {
-    std::shared_ptr<Card> card;
+
+
+    std::shared_ptr <Card> card;
     std::string tempName;
     bool found = true;
     do
@@ -82,15 +93,18 @@ void Player::selectCard ()
         if ( found == true )
             std::cout  << " Enter Your Chosen Card: ";
         std::cin >> tempName;
-        card->setName(tempName);
-        auto elementFound = std::find(hand.begin(), hand.end(), card);
+        if ( tempName.length() > 2 )
+            card = std::make_shared <PurpleCard> (tempName);
+        else if ( tempName.length() <= 2)
+            card = std::make_shared <YellowCard> (tempName);
+        auto elementFound = std::find_if(hand.begin(), hand.end(), [ & card ]( const std::shared_ptr <Card> & c ) { return *c == *card ; });
+
         if (elementFound != hand.end())
         {
             found = true;
             hand.erase(elementFound);
             usedCards.push_back(card);
         }
-        
         else
         {
             std::cout << " ERROR: Please Enter Valid Card: " << std::endl;
@@ -101,9 +115,12 @@ void Player::selectCard ()
 void Player::showUsedCards()
 {
     std::cout << getName() << " : ";
-    for ( int i = 0 ; i < usedCards.size() ; i++ )
+    if ( usedCards.size() > 0 )
     {
-        std::cout << usedCards[i]->getName() << " - ";
-    }
+        for ( int i = 0 ; i < usedCards.size() ; i++ )
+        {
+            std::cout << usedCards[i]->getName() << " - ";
+        }
+    } 
     std::cout << std::endl;
 }
