@@ -54,10 +54,10 @@ void Control::setCards()
     while (!cardInput.eof())
     {
         cardInput >> cardNumber >> yellowCardType;
-        YellowCard ycard(yellowCardType);
+        // YellowCard ycard(yellowCardType);
         for (int i = 0; i < cardNumber; i++)
         {
-            cards.push_back(ycard);
+            cards.push_back(std::make_shared<YellowCard>(yellowCardType));
         }
     }
     cardInput.close();
@@ -71,10 +71,10 @@ void Control::setCards()
     while (!cardInput.eof())
     {
         cardInput >> cardNumber >> purpleCardType;
-        PurpleCard pcard(purpleCardType);
+       // PurpleCard pcard(purpleCardType);
         for (int i = 0; i < cardNumber; i++)
         {
-            cards.push_back(pcard);
+            cards.push_back(std::make_shared<PurpleCard>(purpleCardType));
         }
     }
     cardInput.close();
@@ -90,12 +90,12 @@ void Control::showCards()
 {
     for (int i = 0; i < cards.size(); i++)
     {
-        std::cout << cards[i].getName() << std::endl;
+        std::cout << cards[i]->getName() << std::endl;
     }
 }
 Player Control::youngestPlayer()
 {
-    // std::vector <std::string> namePlayer;
+   
     std::vector<int> playersAge;
     std::vector<int> youngestIndices;
 

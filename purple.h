@@ -9,6 +9,7 @@ class PurpleCard : public Card {
     public:
     PurpleCard ( std::string name );
     // virtual void use();
+    // std::string displayName();
 
     private:
     int priority ;

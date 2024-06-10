@@ -36,4 +36,6 @@ std::istream & operator>> ( std::istream & input , Card & card )
     card.setName(card.name);
     return input ;
 }
+// std::string Card::displayName(){}
+
 

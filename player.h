@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <memory>
 
 #include "card.h"
 
@@ -11,7 +12,7 @@ class Player {
         void setAge ( int age );
         void setColor ( std::string color );
         int getAge() const ;
-        void addCard ( Card card );
+        void addCard (  std::shared_ptr<Card> card );
         void showHandCards();
         void addProvinces( std::string province );
         void showProvinces();
@@ -25,8 +26,8 @@ class Player {
         int age ;
         std::string name ;
         std::string color ;
-        std::vector<Card> hand ;
-        std::vector<Card> usedCards ;
+        std::vector<std::shared_ptr<Card>> hand ;
+        std::vector<std::shared_ptr<Card>> usedCards ;
         std::vector<std::string> capturedProvinces;
         int cardsEachPlayer;
         int power;

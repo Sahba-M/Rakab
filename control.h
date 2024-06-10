@@ -1,4 +1,5 @@
 #include<vector>
+#include <memory>
 
 #include "card.h"
 #include "player.h"
@@ -34,7 +35,7 @@ class Control {
         
 
     private:
-        std::vector<Card> cards;
+        std::vector<std::shared_ptr<Card>> cards;
         std::vector<Player> players;
         std::vector<std::string> provinces;
         std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};

@@ -11,6 +11,7 @@ class Card {
     Card( std::string name , int score = 0 );
     Card();
     virtual ~Card();
+    // virtual std::string displayName() = 0;
     void setScore(int score);
     void setName(std::string name);
     int getScore();

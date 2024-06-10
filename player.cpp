@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <memory>
 
 #include "player.h"
 #include "card.h"
@@ -42,7 +43,7 @@ std::string Player::getColor() const
 {
     return color ;
 }
-void Player::addCard ( Card card )
+void Player::addCard ( std::shared_ptr<Card> card )
 {
     hand.push_back( card );
 }
@@ -50,7 +51,7 @@ void Player::showHandCards ()
 {
     for ( int i = 0 ; i < hand.size() ; i++ )
     {
-        std::cout << hand[i].getName() << " --- " ;
+        std::cout << hand[i]->getName() << " --- " ;
     }
     std::cout << std::endl;
 }
@@ -72,15 +73,16 @@ int Player::getCardsEachPlayer()
 }
 void Player::selectCard ()
 {
-    Card card;
+    std::shared_ptr<Card> card;
+    std::string tempName;
     bool found = true;
     do
     {
         // system("cls");
         if ( found == true )
             std::cout  << " Enter Your Chosen Card: ";
-        std::cin >> card;
-
+        std::cin >> tempName;
+        card->setName(tempName);
         auto elementFound = std::find(hand.begin(), hand.end(), card);
         if (elementFound != hand.end())
         {
@@ -101,7 +103,7 @@ void Player::showUsedCards()
     std::cout << getName() << " : ";
     for ( int i = 0 ; i < usedCards.size() ; i++ )
     {
-        std::cout << usedCards[i].getName() << " - ";
+        std::cout << usedCards[i]->getName() << " - ";
     }
     std::cout << std::endl;
 }
