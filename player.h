@@ -4,6 +4,9 @@
 
 #include "card.h"
 
+#ifndef PLAYER_H
+#define PLAYER_H
+
 class Player {
     public:
         Player();
@@ -37,3 +40,4 @@ class Player {
         int power;
 
 };
+#endif  

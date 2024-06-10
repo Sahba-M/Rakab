@@ -5,7 +5,6 @@
 
 
 class Card {
-    friend std::istream & operator>> (std::istream & , Card &);
 
     public:
     Card( std::string name , int score = 0 );

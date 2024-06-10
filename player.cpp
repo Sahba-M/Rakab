@@ -82,8 +82,6 @@ int Player::getCardsEachPlayer()
 }
 void Player::selectCard()
 {
-
-
     std::shared_ptr <Card> card;
     std::string tempName;
     bool found = true;
