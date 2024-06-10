@@ -22,6 +22,7 @@ class Player {
         std::string getName() const ;
         std::string getColor() const ;
         void showYcard();
+        bool isFind ( std::shared_ptr<Card> Ycard );
 
     private:
         int age ;

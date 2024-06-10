@@ -138,3 +138,15 @@ void Player::showYcard()
         std::cout << usedYcard->getName() <<" --- ";
      }
 } 
+bool Player::isFind ( std::shared_ptr<Card> Ycard )
+{
+    auto elementFound = std::find(yellowCard.begin(), yellowCard.end(), Ycard);
+        if (elementFound != yellowCard.end())
+        {
+            hand.push_back(Ycard);
+            yellowCard.erase(elementFound);
+            return true ;
+        }
+        else 
+            return false ;
+}
