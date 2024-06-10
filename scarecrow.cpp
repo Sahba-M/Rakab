@@ -9,7 +9,7 @@ void ScarecrowCard::useCard(Player &player)
    bool found = false;
     std::string selectYcard;
     std::cout << "\n Which Card Do You Want To Remove? : ";
-    showUncaptured();
+    player.showYcard();
     do
     {
         system("cls");
