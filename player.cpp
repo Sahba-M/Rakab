@@ -131,15 +131,19 @@ void Player::showUsedCards()
     } 
     std::cout << std::endl;
 }
-void Player::showYcard()
+void Player::recognizeYellow()
 {
-   for (const auto&  usedCard : usedCards) 
+  for (const auto&  usedCard : usedCards) 
    { 
          if (std::dynamic_pointer_cast<YellowCard>(usedCard)) 
          {
              yellowCards.push_back(usedCard);
          }
    }
+}
+void Player::showYcard()
+{
+     recognizeYellow();
      for (const auto &  usedYcard : yellowCards) 
      {
         std::cout << usedYcard->getName() <<" --- ";

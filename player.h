@@ -29,6 +29,7 @@ class Player {
         std::vector<std::shared_ptr<Card>> getYcards();
         void setScorePlayer ( int scorePlayer );
         int  getScorePlayer();
+        void recognizeYellow();
 
 
     private:
