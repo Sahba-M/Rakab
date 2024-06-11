@@ -82,14 +82,7 @@ void Control::shuffleCards()
     std::mt19937 generator(randomDevice());//random number generator (seed)
     std::shuffle(cards.begin(), cards.end(), generator);
 }
-void Control::showCards()
 
-{
-    for (int i = 0; i < cards.size(); i++)
-    {
-        std::cout << cards[i]->getName() << std::endl;
-    }
-}
 Player Control::youngestPlayer()
 {
 
@@ -116,7 +109,7 @@ Player Control::youngestPlayer()
     // std::cout << "The youngest person is: " << players[randomIndex].getName() << std::endl;
     return players[randomIndex];
 }
-void control::showColors()
+void Control::showColors()
 {
     std::cout << "\n ";
     for (int i = 0; i < colors.size(); i++)
@@ -194,15 +187,7 @@ void Control::distributeCards()
         system("cls");
     }
 }
-void Control::showPlayersHand() //for each player
-{
-    for (int i = 0; i < players.size(); i++)
-    {
-        std::cout << " Player " << i + 1 << " : " << '\n';
-        players[i].showHandCards();
-        std::cout << "\n-----------------------\n";
-    }
-}
+
 void Control::readProvinces()
 {
     std::string province , ignore;
@@ -229,33 +214,7 @@ void Control::showUncaptured()
         std::cout << provinces[i] << "  ";
     }
 }
-std::string Control::chosenProvince(Player & player)
-{
-    bool found = false;
-    std::string province;
-    std::cout << "\n Unoccupied Provinces Include : ";
-    showUncaptured();
-    do
-    {
-        system("cls");
-        std::cout << "\n\n " << player.getName() << " Enter Your Chosen Province To War : ";
-        std::cin >> province;
 
-        auto elementFound = std::find(provinces.begin(), provinces.end(), province);
-        if (elementFound != provinces.end())
-        {
-            provinces.erase(elementFound);
-            found = true;
-            break;
-        }
-        else
-        {
-            std::cout << " ERROR: Please Enter Your Desired Province Again : " << std::endl;
-            found = false;
-        }
-    } while (!found);
-    return province;
-}
 void Control::test()
 {
     selectWarPlace(players[0]);

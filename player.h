@@ -33,11 +33,11 @@ class Player {
         std::string color ;
         std::vector<std::shared_ptr<Card>> hand ; //cards in hand
         std::vector<std::shared_ptr<Card>> usedCards ; //Cards on the floor
-        std::vector<std::shared_ptr<Card>> yellowCard;
+        std::vector<std::shared_ptr<Card>> yellowCards;
         std::vector<std::string> capturedProvinces;
 
         int cardsEachPlayer;
-        int power;
+        int scorePlayer;
 
 };
 #endif  

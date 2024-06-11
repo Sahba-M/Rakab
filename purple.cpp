@@ -7,3 +7,4 @@ PurpleCard::PurpleCard ( std::string name )
 {
     setName(name);
 }
+
