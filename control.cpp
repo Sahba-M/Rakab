@@ -19,10 +19,7 @@ void Control::setPlayerNumber(int playerNumber)
 {
     this->playerNumber = playerNumber;
 }
-void Control::setColor()
-{
-   this-> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
-}
+
 int Control::getPlayerNumber()
 {
     return playerNumber;
@@ -39,9 +36,8 @@ void Control::controlNumber()
         std::cin >> counter;
     }
     setPlayerNumber(counter);
-    getPlayerNumber();
 }
-void Control::setCards()
+void Control::setCards() //read cards
 {
     std::ifstream cardInput;
     cardInput.open("yellowCard.txt");
@@ -79,8 +75,8 @@ void Control::setCards()
 }
 void Control::shuffleCards()
 {
-    std::random_device randomDevice;
-    std::mt19937 generator(randomDevice());
+    std::random_device randomDevice; //A class for generating random numbers
+    std::mt19937 generator(randomDevice());//random number generator (seed)
     std::shuffle(cards.begin(), cards.end(), generator);
 }
 void Control::showCards()
@@ -93,7 +89,7 @@ void Control::showCards()
 }
 Player Control::youngestPlayer()
 {
-   
+
     std::vector<int> playersAge;
     std::vector<int> youngestIndices;
 
@@ -117,20 +113,24 @@ Player Control::youngestPlayer()
     // std::cout << "The youngest person is: " << players[randomIndex].getName() << std::endl;
     return players[randomIndex];
 }
+void control::showColors()
+{
+    std::cout << "\n ";
+    for (int i = 0; i < colors.size(); i++)
+        {
+            std::cout << colors[i] << " ~ ";
+        }
+}
 std::string Control::controlColors()
 {
     bool found = true;
     std::string chooseColor;
     do
     {
-        std::cout << "\n ";
-        for (int i = 0; i < colors.size(); i++)
-        {
-            std::cout << colors[i] << " ~ ";
-        }
+        showColors();
         if (found == true)
-            std::cout << std::endl
-                      << " Enter Your Chosen Color: ";
+            std::cout << std::endl << " Enter Your Chosen Color: ";
+                      
         std::cin >> chooseColor;
 
         auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
@@ -139,8 +139,7 @@ std::string Control::controlColors()
         {
             colors.erase(elementFound);
             found = true;
-            break;
-            
+            break; 
         }
         else
         {
@@ -160,9 +159,10 @@ void Control::getInformation()
         std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
                  
         std::cin >> name;
+
         std::cout << " Enter Your Age : ";
         std::cin >> age;
-       // setColor();
+
         color = controlColors();
         std::cout << "-----------------------\n";
         players.push_back(Player(age, name, color));
@@ -174,13 +174,12 @@ void Control::distributeCards()
     std::cin.ignore();
     for (Player &player : players)
     {
-
         std::cout << " I Want To Give The Cards To  _" << player.getName() << "_  Please Give Him/Her The System \n";
         for (int i = 0; i < player.getCardsEachPlayer(); i++)
         {
             if (!cards.empty())
             {
-                player.addCard(cards.back());
+                player.addCard(cards.back());//It is added to the hand
                 cards.pop_back();
             }
         }
@@ -192,7 +191,7 @@ void Control::distributeCards()
         system("cls");
     }
 }
-void Control::showPlayersHand()
+void Control::showPlayersHand() //for each player
 {
     for (int i = 0; i < players.size(); i++)
     {
@@ -287,14 +286,13 @@ void Control::test()
 void Control::selectMove(Player & player)
 {
     std::string move;
-    // system("cls");
-    // std::cin.ignore();
     std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card ): "; 
-    // player.showHandCards();
     std::cin >> move;
+
     if (move == "pass")
     {
       /* code */
+      
     } else if(move == "card")
     {
         std::cout << " " ;
