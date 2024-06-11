@@ -1,3 +1,4 @@
+#include <iostream>
 #include <algorithm>
 #include <memory>
 
@@ -76,13 +77,14 @@ void Player::showProvinces()
     }
     
 }
-int Player::getCardsEachPlayer()
+int Player::getCardsEachPlayer()//The number of cards to be dealt
 {
     return (10 + capturedProvinces.size());
 }
 void Player::selectCard()
 {
     std::shared_ptr <Card> card;
+    std::string *tempNamePtr = nullptr;
     std::string tempName;
     bool found = true;
     do
@@ -91,10 +93,12 @@ void Player::selectCard()
         if ( found == true )
             std::cout  << " Enter Your Chosen Card: ";
         std::cin >> tempName;
-        if ( tempName.length() > 2 )
+        tempNamePtr = &tempName;
+        
+        if ( std::dynamic_pointer_cast <YellowCard>(tempName))
+             card = std::make_shared <YellowCard> (tempName);
+        else
             card = std::make_shared <PurpleCard> (tempName);
-        else if ( tempName.length() <= 2)
-            card = std::make_shared <YellowCard> (tempName);
         auto elementFound = std::find_if(hand.begin(), hand.end(), [ & card ]( const std::shared_ptr <Card> & c ) { return *c == *card ; });
 
         if (elementFound != hand.end())
@@ -136,7 +140,7 @@ void Player::showYcard()
         std::cout << usedYcard->getName() <<" --- ";
      }
 } 
-bool Player::isFind ( std::shared_ptr<Card> Ycard )
+bool Player::isFind ( std::shared_ptr<Card> Ycard )//for finding yellow card
 {
     auto elementFound = std::find(yellowCard.begin(), yellowCard.end(), Ycard);
         if (elementFound != yellowCard.end())
@@ -147,7 +151,6 @@ bool Player::isFind ( std::shared_ptr<Card> Ycard )
         }
         else 
         {
-            
             return false ;
         }
 }
