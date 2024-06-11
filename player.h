@@ -26,6 +26,10 @@ class Player {
         int  getCardsEachPlayer(); //For the number of cards during distribution
         void showYcard();
         bool isFind ( std::shared_ptr<Card> Ycard ); //Find the yellow card
+        std::vector<std::shared_ptr<Card>> getYcards();
+        void setScorePlayer ( int scorePlayer );
+        int  getScorePlayer();
+
 
     private:
         int age ;

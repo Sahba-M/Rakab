@@ -152,11 +152,22 @@ bool Player::isFind ( std::shared_ptr<Card> Ycard )//for finding yellow card
         {
             hand.push_back(Ycard);
             usedCards.erase(elementFound);
-            // showYcard();
             return true ;
         }
         else 
         {
             return false ;
         }
+}
+std::vector<std::shared_ptr<Card>> Player::getYcards()
+{
+    return yellowCards ;
+}
+void Player::setScorePlayer ( int scorePlayer )
+{
+    this -> scorePlayer = scorePlayer ;
+}
+int Player::getScorePlayer()
+{
+    return scorePlayer ;
 }
