@@ -332,3 +332,7 @@ int Control::getProvinceNumber()
 
 //     players = result;
 // }
+std::vector<Player> Control::getPlayers()
+{
+    return players;
+}

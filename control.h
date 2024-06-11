@@ -32,6 +32,7 @@ class Control {
         void selectWarPlace (Player & player);
         void setProvinceNumber(int provinceNumber);
         int  getProvinceNumber();
+        std::vector<Player> getPlayers();
         
 
     private:
