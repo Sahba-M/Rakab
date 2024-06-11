@@ -33,6 +33,7 @@ class Control {
         void setProvinceNumber(int provinceNumber);
         int  getProvinceNumber();
         std::vector<Player> getPlayers();
+        void guideGame();
         
 
     private:

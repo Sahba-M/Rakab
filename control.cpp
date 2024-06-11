@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <random>
 #include <vector>
@@ -247,7 +248,7 @@ void Control::test()
 void Control::selectMove(Player & player)
 {
     std::string move;
-    std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card ): "; 
+    std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help): "; 
     std::cin >> move;
 
     if (move == "pass")
@@ -261,11 +262,10 @@ void Control::selectMove(Player & player)
         player.selectCard();
     } else if (move == "help")
     {
-      //......
-    } else if (move == "help")
-    {
-      
-    }
+      guideGame();
+      //std::cin.get();
+      sleep(10);
+    } 
     else
     {
        std::cout << " ERROR : Invalid Move... ";
@@ -335,4 +335,25 @@ int Control::getProvinceNumber()
 std::vector<Player> Control::getPlayers()
 {
     return players;
+}
+void Control::guideGame()
+{
+    std::ifstream inputGuide;
+    std::string explanation;
+    if (!inputGuide.is_open())
+    {
+        std::cerr << " Can Not Open File... " << std::endl;
+    }
+    inputGuide.open("guide.txt");
+    system("cls");
+    std::cout << " ------------------------------------------------- \n" << std::setw(13) << " << HELP PAGE >> \n\n"; 
+    while (std::getline(inputGuide,explanation))
+    {
+       std::cout << explanation << std::endl;
+    }
+    std::cout << " \n\n ------------------------------------------------- \n"; 
+    inputGuide.close();
+    
+    
+    
 }
