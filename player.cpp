@@ -6,6 +6,7 @@
 #include "card.h"
 #include "purple.h"
 #include "yellow.h"
+#include "scarecrow.h"
 
 
 struct SharedPtrCompare {
@@ -100,7 +101,11 @@ void Player::selectCard()
         else
             card = std::make_shared <PurpleCard> (tempName);
         auto elementFound = std::find_if(hand.begin(), hand.end(), [ & card ]( const std::shared_ptr <Card> & c ) { return *c == *card ; });
-
+        if ( tempName == "scarecrow" )
+        {
+            ScarecrowCard scarecrow ;
+            scarecrow.useCard(*this);
+        }
         if (elementFound != hand.end())
         {
             found = true;
@@ -128,25 +133,26 @@ void Player::showUsedCards()
 }
 void Player::showYcard()
 {
-   for (const auto&  usedCard: usedCards) 
+   for (const auto&  usedCard : usedCards) 
    { 
          if (std::dynamic_pointer_cast<YellowCard>(usedCard)) 
          {
-             yellowCard.push_back(usedCard);
+             yellowCards.push_back(usedCard);
          }
    }
-     for (const auto&  usedYcard: yellowCard) 
+     for (const auto &  usedYcard : yellowCards) 
      {
         std::cout << usedYcard->getName() <<" --- ";
      }
 } 
 bool Player::isFind ( std::shared_ptr<Card> Ycard )//for finding yellow card
 {
-    auto elementFound = std::find(yellowCard.begin(), yellowCard.end(), Ycard);
-        if (elementFound != yellowCard.end())
+    auto elementFound = std::find_if(yellowCards.begin(), yellowCards.end(), [Ycard](const std::shared_ptr<Card> & card) { return *card == *Ycard; });
+        if (elementFound != yellowCards.end())
         {
             hand.push_back(Ycard);
-            yellowCard.erase(elementFound);
+            usedCards.erase(elementFound);
+            // showYcard();
             return true ;
         }
         else 

@@ -1,17 +1,16 @@
 #include "purple.h"
 
+#ifndef SCARECROW_H
+#define SCARECROW_H
 
 class ScarecrowCard : public PurpleCard {
 
     public:
-     virtual void useCard(Player &player) override;
-
-     
-
-
-    
-
+        ScarecrowCard ();
+        virtual void useCard(Player &player) override;
 
     private:
 
 };
+
+#endif
