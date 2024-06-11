@@ -7,6 +7,9 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
+#include <unistd.h>
+#include <chrono>
+#include <thread>
 
 #include "control.h"
 #include "card.h"
@@ -227,7 +230,7 @@ void Control::showUncaptured()
         std::cout << provinces[i] << "  ";
     }
 }
-std::string Control::chosenProvince(Player &player)
+std::string Control::chosenProvince(Player & player)
 {
     bool found = false;
     std::string province;
@@ -265,7 +268,6 @@ void Control::test()
             showPlayGround();
             std::cout << " The War Is Over " << warPlace << '\n' ;
             selectMove(player);
-            player.showUsedCards();
             system("cls");
         }
     }

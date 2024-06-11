@@ -7,8 +7,8 @@
 class Princes :public PurpleCard
 {
     public:
-        virtual void setPriority() override;
-        void setPower();
+    virtual void setPriority() override;
+    void setPower();
 
 
     private:

@@ -34,7 +34,7 @@ class Player {
         std::vector<std::shared_ptr<Card>> hand ;
         std::vector<std::shared_ptr<Card>> usedCards ;
         std::vector<std::string> capturedProvinces;
-        std::vector<std::shared_ptr<Card>> yellowCard;
+        std::vector<std::shared_ptr<Card>> yellowCards;
 
         int cardsEachPlayer;
         int power;
