@@ -13,7 +13,6 @@ class Control {
         Control(); 
         void setCards();
         void setPlayerNumber (int playerNumber);
-        void setColor();
         int  getPlayerNumber();
         void controlNumber();
         void shuffleCards();
@@ -21,6 +20,7 @@ class Control {
         Player youngestPlayer();
         void getInformation();
         std::string controlColors();
+        void showColors();
         void distributeCards ();
         void showPlayersHand();
         std::string chosenProvince(Player &player);
@@ -31,7 +31,7 @@ class Control {
         void showPlayGround();
         void selectWarPlace (Player & player);
         void setProvinceNumber(int provinceNumber);
-        int getProvinceNumber();
+        int  getProvinceNumber();
         
 
     private:

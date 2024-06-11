@@ -28,7 +28,7 @@ void Map::readUnorderedMap ()
     std::ifstream input ; 
     input.open("map.txt") ;
     if (!input.is_open()) 
-        std::cerr << "Unable to open file !" << std::endl ;
+        std::cerr << " Unable to open file !" << std::endl ;
         
     std::string key ;
     int value ;

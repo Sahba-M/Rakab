@@ -14,27 +14,27 @@ class Player {
         void setName ( std::string name );
         void setAge ( int age );
         void setColor ( std::string color );
-        int getAge() const ;
+        std::string getName() const ;
+        std::string getColor() const ;
+        int  getAge() const ;
         void addCard (  std::shared_ptr<Card> card );
         void showHandCards();
         void addProvinces( std::string province );
         void showProvinces();
         void selectCard ();
         void showUsedCards();
-        int getCardsEachPlayer();
-        std::string getName() const ;
-        std::string getColor() const ;
+        int  getCardsEachPlayer(); //For the number of cards during distribution
         void showYcard();
-        bool isFind ( std::shared_ptr<Card> Ycard );
+        bool isFind ( std::shared_ptr<Card> Ycard ); //Find the yellow card
 
     private:
         int age ;
         std::string name ;
         std::string color ;
-        std::vector<std::shared_ptr<Card>> hand ;
-        std::vector<std::shared_ptr<Card>> usedCards ;
-        std::vector<std::string> capturedProvinces;
+        std::vector<std::shared_ptr<Card>> hand ; //cards in hand
+        std::vector<std::shared_ptr<Card>> usedCards ; //Cards on the floor
         std::vector<std::shared_ptr<Card>> yellowCard;
+        std::vector<std::string> capturedProvinces;
 
         int cardsEachPlayer;
         int power;

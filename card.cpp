@@ -29,12 +29,6 @@ bool Card::operator== (const Card & other)
 {
     return this->name == other.name ;
 }
-// std::istream & operator>> ( std::istream & input , Card & card )
-// {
-//     input >> card.name ;
-//     card.setName(card.name);
-//     return input ;
-// }
-// std::string Card::displayName(){}
+
 
 
