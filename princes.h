@@ -4,7 +4,7 @@
 
 
 
-class Princes :public PurpleCard
+class PrincesCard :public PurpleCard
 {
     public:
     virtual void setPriority() override;

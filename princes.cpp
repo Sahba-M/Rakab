@@ -3,11 +3,11 @@
 #include "princes.h"
 
 
-void Princes::setPriority() 
+void PrincesCard::setPriority() 
 {
    priority = 5;
 }
-void Princes::useCard ( std::vector <Player> players, int numPlayer ) 
+void PrincesCard::useCard ( std::vector <Player> players, int numPlayer ) 
 {
   players[numPlayer].setScorePlayer(players[numPlayer].getScorePlayer() + 10);
 }
