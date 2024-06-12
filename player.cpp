@@ -202,3 +202,14 @@ int Player::maxYcards()
     auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end());
     return (*maxElement);   
 }
+bool Player::hasDrummer()
+{
+    std::shared_ptr<Card> card = std::make_shared<PurpleCard>("drummer");
+    auto elementFound = std::find ( usedCards.begin(), usedCards.end(), card );
+    if ( elementFound != usedCards.end() )
+    {
+        return true ;
+    }
+    else
+        return false ;
+}

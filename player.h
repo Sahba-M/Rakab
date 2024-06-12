@@ -42,6 +42,7 @@ class Player {
         std::vector<std::shared_ptr<Card>> usedCards ; //Cards on the floor
         std::vector<std::shared_ptr<Card>> yellowCards;
         std::vector<std::string> capturedProvinces;
+        bool hasDrummer();
 
         int cardsEachPlayer;
         int scorePlayer;
