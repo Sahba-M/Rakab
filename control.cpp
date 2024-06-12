@@ -265,8 +265,6 @@ void Control::selectMove(Player & player)
     } else if (move == "help")
     {
       guideGame();
-      //std::cin.get();
-      //sleep(10);
       choice = getch() ;
       system("cls");
       showPlayGround();

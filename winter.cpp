@@ -8,9 +8,9 @@ void Winter::setPriority()
    priority = 2;
 }
 
-void Winter::useCard ( Player & player )
+void Winter::useCard ( std::vector <Player> players, int numPlayer = 0  )
  {
-    std::vector<std::shared_ptr<Card>> Ycards = player.getYcards();
+    std::vector<std::shared_ptr<Card>> Ycards = players[numPlayer].getYcards();
     int scores = Ycards.size();  
-    player.setScorePlayer(scores);
+    players[numPlayer].setScorePlayer(scores);
  }

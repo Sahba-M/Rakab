@@ -7,10 +7,10 @@ void SpringCard::setPriority()
 {
     priority = 4;
 }
-void SpringCard::useCard ( Player & player ) 
+void SpringCard::useCard ( std::vector <Player> players, int numPlayer = 0  ) 
 {
     std::vector<int> scores ;
-    std::vector<std::shared_ptr<Card>> Ycards = player.getYcards();
+    std::vector<std::shared_ptr<Card>> Ycards = players[numPlayer].getYcards();
 
      for ( auto & card : Ycards )
     {

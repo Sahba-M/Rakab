@@ -5,16 +5,16 @@
 #include"scarecrow.h"
 
 ScarecrowCard::ScarecrowCard (){}
-void ScarecrowCard::useCard ( Player & player )
+void ScarecrowCard::useCard ( std::vector <Player> players, int numPlayer = 0  )
 {
     bool found = false;
     std::string selectYcard;
-    player.showYcard();
+    players[numPlayer].showYcard();
     // system("cls");
-    std::cout << "\n" << player.getName() << " Which Card Do You Want To Remove? : ";
+    std::cout << "\n" << players[numPlayer].getName() << " Which Card Do You Want To Remove? : ";
     std::cin >> selectYcard;
     std::shared_ptr<Card> card = std::make_shared<YellowCard>(selectYcard);
-    while (!player.isFind(card))
+    while (!players[numPlayer].isFind(card))
     {
         std::cout << " Enter Valid Card : " ;
         std::cin >> selectYcard;
