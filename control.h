@@ -44,7 +44,7 @@ class Control {
         int playerNumber;
         int provinceNumber;
         std::string warPlace;
-        std::string season = NULL;
+        std::string season;
 };
 
 #endif

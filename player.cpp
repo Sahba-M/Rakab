@@ -82,7 +82,7 @@ int Player::getCardsEachPlayer()//The number of cards to be dealt
 {
     return (10 + capturedProvinces.size());
 }
-std::string Player::selectCard()
+void Player::selectCard()
 {
     std::shared_ptr <Card> card;
     
@@ -106,7 +106,7 @@ std::string Player::selectCard()
             scarecrow.useThisCard(*this);
         }
         else if ( tempName == "spring" || tempName == "winter" )
-            return tempName ;
+            setSeason(tempName);
         if (elementFound != hand.end())
         {
             found = true;
@@ -119,7 +119,15 @@ std::string Player::selectCard()
             found = false;
         }
     } while (!found);
-    return NULL ;
+   
+}
+void Player::setSeason(std::string season)
+{
+    this->season = season;
+}
+std::string Player:: getSeason()
+{
+    return season;
 }
 void Player::showUsedCards()
 {

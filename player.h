@@ -21,7 +21,7 @@ class Player {
         void showHandCards();
         void addProvinces( std::string province );
         void showProvinces();
-        std::string selectCard ();
+        void selectCard ();
         void showUsedCards();
         int  getCardsEachPlayer(); //For the number of cards during distribution
         void showYcard();
@@ -31,6 +31,8 @@ class Player {
         int  getScorePlayer();
         void recognizeYellow();
         int maxYcards();
+        void setSeason(std::string season);
+        std::string getSeason();
 
     private:
         int age ;
@@ -43,6 +45,7 @@ class Player {
 
         int cardsEachPlayer;
         int scorePlayer;
+        std::string season;
 
 
 };

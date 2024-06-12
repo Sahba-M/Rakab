@@ -261,7 +261,8 @@ void Control::selectMove(Player & player)
     {
         std::cout << " " ;
         player.showHandCards();
-        setSeason (player.selectCard());
+        player.selectCard();
+        setSeason (player.getSeason());
     } else if (move == "help")
     {
       guideGame();
