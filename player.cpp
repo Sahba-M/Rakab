@@ -101,9 +101,16 @@ void Player::selectCard()
             card = std::make_shared <PurpleCard> (tempName);
         auto elementFound = std::find_if(hand.begin(), hand.end(), [ & card ]( const std::shared_ptr <Card> & c ) { return *c == *card ; });
         if ( tempName == "scarecrow" )
-        {
-            ScarecrowCard scarecrow ;
-            scarecrow.useThisCard(*this);
+        { 
+            if (yellowCards.size() == 0)
+            {
+                found = false;    
+            } else
+            {
+                ScarecrowCard scarecrow ;
+                scarecrow.useThisCard(*this);
+            }
+            
         }
         else if ( tempName == "spring" || tempName == "winter" )
             setSeason(tempName);
