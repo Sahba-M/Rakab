@@ -25,7 +25,7 @@ class Control {
         void readProvinces();
         void showUncaptured();
         void test();
-        void selectMove(Player & player);
+        void selectMove(Player & player,int index);
         void showPlayGround();
         void selectWarPlace (Player & player);
         void setProvinceNumber(int provinceNumber);
@@ -38,6 +38,8 @@ class Control {
     private:
         std::vector<std::shared_ptr<Card>> cards;
         std::vector<Player> players;
+        std::vector<Player> tempPlayers = players;
+
         std::vector<std::string> provinces;
         std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
 

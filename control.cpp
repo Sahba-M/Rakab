@@ -221,15 +221,16 @@ void Control::showUncaptured()
 
 void Control::test()
 {
+    Player player;
     selectWarPlace(players[0]);
     system("cls");
     for (int i = 0 ; i < 10 ; i++)
     {
-        for ( Player & player : players )
+        for ( int j = 0; j < getPlayerNumber(); j++)
         {
             showPlayGround();
             std::cout << " The War Is Over " << warPlace << '\n' ;
-            selectMove(player);
+            selectMove(player,j);
             system("cls");
         }
     }
@@ -248,7 +249,7 @@ void Control::test()
     //     player.showUsedCards();
     // }
 }
-void Control::selectMove(Player & player)
+void Control::selectMove(Player & player, int index)
 {
     std::string move;
     char choice;
@@ -256,9 +257,17 @@ void Control::selectMove(Player & player)
     std::cin >> move;
 
     if (move == "pass")
-    {
-      /* code */
-      
+    { 
+        for (int i = 0; i < tempPlayers.size(); i++)
+        {
+           if (i == index)
+           {
+            tempPlayers.erase(tempPlayers.begin() + i);
+           }
+           
+        }
+        
+        
     } else if(move == "card")
     {
         std::cout << " " ;
@@ -271,12 +280,12 @@ void Control::selectMove(Player & player)
       choice = getch() ;
       system("cls");
       showPlayGround();
-      selectMove(player);
+      selectMove(player,index);
     } 
     else
     {
        std::cout << " ERROR : Invalid Move... ";
-       selectMove(player);
+       selectMove(player,index);
     }
 }
 void Control::showPlayGround()
