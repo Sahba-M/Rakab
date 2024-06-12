@@ -21,7 +21,7 @@ class Player {
         void showHandCards();
         void addProvinces( std::string province );
         void showProvinces();
-        void selectCard ();
+        std::string selectCard ();
         void showUsedCards();
         int  getCardsEachPlayer(); //For the number of cards during distribution
         void showYcard();
@@ -43,6 +43,7 @@ class Player {
 
         int cardsEachPlayer;
         int scorePlayer;
+
 
 };
 #endif  

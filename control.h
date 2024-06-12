@@ -21,7 +21,7 @@ class Control {
         void getInformation();
         std::string controlColors();
         void showColors();
-        void distributeCards ();
+        void distributeCards();
         void readProvinces();
         void showUncaptured();
         void test();
@@ -32,7 +32,8 @@ class Control {
         int  getProvinceNumber();
         std::vector<Player> getPlayers();
         void guideGame();
-        
+        void cardAction();
+        void setSeason( std::string season );
 
     private:
         std::vector<std::shared_ptr<Card>> cards;
@@ -43,6 +44,7 @@ class Control {
         int playerNumber;
         int provinceNumber;
         std::string warPlace;
+        std::string season = NULL;
 };
 
 #endif

@@ -82,7 +82,7 @@ int Player::getCardsEachPlayer()//The number of cards to be dealt
 {
     return (10 + capturedProvinces.size());
 }
-void Player::selectCard()
+std::string Player::selectCard()
 {
     std::shared_ptr <Card> card;
     
@@ -105,6 +105,8 @@ void Player::selectCard()
             ScarecrowCard scarecrow ;
             scarecrow.useThisCard(*this);
         }
+        else if ( tempName == "spring" || tempName == "winter" )
+            controlSeason (tempName);
         if (elementFound != hand.end())
         {
             found = true;

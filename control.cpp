@@ -24,7 +24,6 @@ void Control::setPlayerNumber(int playerNumber)
 {
     this->playerNumber = playerNumber;
 }
-
 int Control::getPlayerNumber()
 {
     return playerNumber;
@@ -84,7 +83,6 @@ void Control::shuffleCards()
     std::mt19937 generator(randomDevice());//random number generator (seed)
     std::shuffle(cards.begin(), cards.end(), generator);
 }
-
 Player Control::youngestPlayer()
 {
 
@@ -189,7 +187,6 @@ void Control::distributeCards()
         system("cls");
     }
 }
-
 void Control::readProvinces()
 {
     std::string province , ignore;
@@ -261,7 +258,7 @@ void Control::selectMove(Player & player)
     {
         std::cout << " " ;
         player.showHandCards();
-        player.selectCard();
+        setSeason (player.selectCard());
     } else if (move == "help")
     {
       guideGame();
@@ -356,8 +353,16 @@ void Control::guideGame()
        std::cout << explanation << std::endl;
     }
     std::cout << " \n\n ------------------------------------------------- \n"; 
-    inputGuide.close();
-    
-    
-    
+    inputGuide.close();  
+}
+void Control::cardAction()
+{
+
+    // winter -- drummer -- spring -- princes 
+    // if ( season == "winter" )
+
+}
+void Control::setSeason ( std::string season )
+{
+    this->season = season;
 }
