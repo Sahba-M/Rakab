@@ -30,8 +30,7 @@ class Player {
         void setScorePlayer ( int scorePlayer );
         int  getScorePlayer();
         void recognizeYellow();
-        int maxYcard();
-
+        int maxYcards();
 
     private:
         int age ;

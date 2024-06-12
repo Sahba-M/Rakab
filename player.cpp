@@ -174,7 +174,7 @@ int Player::getScorePlayer()
 {
     return scorePlayer ;
 }
-int Player::maxYcard()
+int Player::maxYcards()
 {    
     std::vector<int> yellowIntegers;
     for (auto card: yellowCards)
@@ -182,8 +182,5 @@ int Player::maxYcard()
         yellowIntegers.push_back(stoi(card->getName()));
     }
     auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end());
-    return (*maxElement);
-    
-    
-    
+    return (*maxElement);   
 }
