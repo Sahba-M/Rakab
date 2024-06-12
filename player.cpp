@@ -1,12 +1,14 @@
 #include <iostream>
 #include <algorithm>
 #include <memory>
+#include <typeinfo>
 
 #include "player.h"
 #include "card.h"
 #include "purple.h"
 #include "yellow.h"
 #include "scarecrow.h"
+#include "princes.h"
 
 
 struct SharedPtrCompare {
@@ -215,9 +217,24 @@ bool Player::hasDrummer()
 }
 bool Player::hasPrinces()
 {
-
+   std::shared_ptr<Card> card = std::make_shared<PurpleCard>("princes");
+   auto elemenFound = std::find (usedCards.begin(), usedCards.end(), card );
+   if ( elemenFound != usedCards.end())
+   {
+     return true;
+   } else
+        return false;
 }
 int Player::numberOfPrinces()
 {
+    int counter = 0;
     
+    for( auto card : usedCards)
+    {
+       if (typeid(*card) == typeid(PrincesCard))
+       {
+        counter++;
+       }
+    }
+    return counter;  
 }

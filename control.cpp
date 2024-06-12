@@ -366,6 +366,7 @@ void Control::cardAction()
     WinterCard winter ;
     SpringCard spring ;
     DrummerCard drummer ;
+    PrincesCard prince ;
     // winter -- drummer -- spring -- princes 
     if ( season == "winter" )
         winter.useCard(players , -1);
@@ -381,7 +382,13 @@ void Control::cardAction()
 
     for ( int i = 0 ; i < playerNumber ; i++ )
     {
-
+        if(players[i].hasPrinces())
+          {
+             for (int j = 0; j < players[i].numberOfPrinces(); j++)
+                 {
+                        prince.useCard(players , i);
+                 }
+         } 
     }
 
 }
