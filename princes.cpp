@@ -7,7 +7,7 @@ void Princes::setPriority()
 {
    priority = 5;
 }
-void Princes::setPower()
+void useCard ( std::vector <Player> players, int numPlayer ) 
 {
-    power = 10;
+  players[numPlayer].setScorePlayer(players[numPlayer].getScorePlayer() + 10);
 }

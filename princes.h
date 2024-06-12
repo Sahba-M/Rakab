@@ -8,8 +8,8 @@ class Princes :public PurpleCard
 {
     public:
     virtual void setPriority() override;
-    void setPower();
-
+    virtual void useCard ( std::vector <Player> players, int numPlayer ) override;
+    
 
     private:
         int power;
