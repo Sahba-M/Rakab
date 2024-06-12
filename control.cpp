@@ -17,6 +17,9 @@
 #include "card.h"
 #include "purple.h"
 #include "yellow.h"
+#include "winter.h"
+#include "spring.h"
+#include "drummer.h"
 
 Control::Control() {}
 
@@ -357,12 +360,16 @@ void Control::guideGame()
 }
 void Control::cardAction()
 {
-
+    WinterCard winter ;
+    SpringCard spring ;
     // winter -- drummer -- spring -- princes 
-    // if ( season == "winter" )
+    if ( season == "winter" )
+        winter.useCard(players , -1);
+    else if ( season == "spring" )
+        spring.useCard(players , -1);
 
 }
 void Control::setSeason ( std::string season )
 {
-    this->season = season;
+    this -> season = season ;
 }

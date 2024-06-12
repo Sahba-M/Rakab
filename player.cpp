@@ -106,7 +106,7 @@ std::string Player::selectCard()
             scarecrow.useThisCard(*this);
         }
         else if ( tempName == "spring" || tempName == "winter" )
-            controlSeason (tempName);
+            return tempName ;
         if (elementFound != hand.end())
         {
             found = true;
@@ -119,6 +119,7 @@ std::string Player::selectCard()
             found = false;
         }
     } while (!found);
+    return NULL ;
 }
 void Player::showUsedCards()
 {

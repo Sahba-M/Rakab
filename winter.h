@@ -2,7 +2,7 @@
 
 #include "purple.h"
 
-class Winter:public PurpleCard
+class WinterCard : public PurpleCard
 {
   public:
    virtual void setPriority() override;
