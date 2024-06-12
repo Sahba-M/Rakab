@@ -19,7 +19,7 @@ void DrummerCard::useCard ( std::vector <Player> players, int numPlayer )
     {
         sum += num ;
     }
-    players[numPlayer].setScorePlayer(sum);
+    players[numPlayer].setScorePlayer(sum*2);
 }
 
 

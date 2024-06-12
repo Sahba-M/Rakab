@@ -33,6 +33,9 @@ class Player {
         int maxYcards();
         void setSeason(std::string season);
         std::string getSeason();
+        bool hasDrummer();
+        bool hasPrinces();
+        int numberOfPrinces();
 
     private:
         int age ;
@@ -42,7 +45,6 @@ class Player {
         std::vector<std::shared_ptr<Card>> usedCards ; //Cards on the floor
         std::vector<std::shared_ptr<Card>> yellowCards;
         std::vector<std::string> capturedProvinces;
-        bool hasDrummer();
 
         int cardsEachPlayer;
         int scorePlayer;

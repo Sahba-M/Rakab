@@ -213,3 +213,11 @@ bool Player::hasDrummer()
     else
         return false ;
 }
+bool Player::hasPrinces()
+{
+
+}
+int Player::numberOfPrinces()
+{
+    
+}

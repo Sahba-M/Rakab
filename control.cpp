@@ -20,6 +20,8 @@
 #include "winter.h"
 #include "spring.h"
 #include "drummer.h"
+#include "princes.h"
+#include "player.h"
 
 Control::Control() {}
 
@@ -250,7 +252,7 @@ void Control::selectMove(Player & player)
 {
     std::string move;
     char choice;
-    std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help): "; 
+    std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): "; 
     std::cin >> move;
 
     if (move == "pass")
@@ -363,11 +365,24 @@ void Control::cardAction()
 {
     WinterCard winter ;
     SpringCard spring ;
+    DrummerCard drummer ;
     // winter -- drummer -- spring -- princes 
     if ( season == "winter" )
         winter.useCard(players , -1);
-    else if ( season == "spring" )
+    
+    for ( int i = 0 ; i < playerNumber ; i++ )
+    {
+        if ( players[i].hasDrummer() )
+        drummer.useCard ( players , i );
+    }
+
+    if ( season == "spring" )
         spring.useCard(players , -1);
+
+    for ( int i = 0 ; i < playerNumber ; i++ )
+    {
+
+    }
 
 }
 void Control::setSeason ( std::string season )
