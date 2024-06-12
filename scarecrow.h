@@ -7,7 +7,7 @@ class ScarecrowCard : public PurpleCard {
 
     public:
         ScarecrowCard ();
-        virtual void useCard(std::vector <Player> players, int numPlayer = 0 ) override;
+        void useThisCard ( Player & player );
 
     private:
 

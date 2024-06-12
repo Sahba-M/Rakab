@@ -90,7 +90,6 @@ void Player::selectCard()
     bool found = true;
     do
     {
-        // system("cls");
         if ( found == true )
             std::cout  << " Enter Your Chosen Card: ";
         std::cin >> tempName;
@@ -104,7 +103,7 @@ void Player::selectCard()
         if ( tempName == "scarecrow" )
         {
             ScarecrowCard scarecrow ;
-            scarecrow.useCard(*this);
+            scarecrow.useThisCard(*this);
         }
         if (elementFound != hand.end())
         {

@@ -22,8 +22,6 @@ class Control {
         std::string controlColors();
         void showColors();
         void distributeCards ();
-        void showPlayersHand();
-        std::string chosenProvince(Player &player);
         void readProvinces();
         void showUncaptured();
         void test();
