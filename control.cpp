@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <chrono>
 #include <thread>
+#include <conio.h>
 
 #include "control.h"
 #include "card.h"
@@ -248,6 +249,7 @@ void Control::test()
 void Control::selectMove(Player & player)
 {
     std::string move;
+    char choice;
     std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help): "; 
     std::cin >> move;
 
@@ -264,7 +266,11 @@ void Control::selectMove(Player & player)
     {
       guideGame();
       //std::cin.get();
-      sleep(10);
+      //sleep(10);
+      choice = getch() ;
+      system("cls");
+      showPlayGround();
+      selectMove(player);
     } 
     else
     {
