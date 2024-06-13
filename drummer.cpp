@@ -6,7 +6,7 @@
 
 DrummerCard::DrummerCard(){}
 
-void DrummerCard::useCard ( std::vector <Player> players, int numPlayer )
+void DrummerCard::useCard ( std::vector <Player> & players, int numPlayer )
 {
     int sum = 0 ;
     std::vector<int> scores ;
