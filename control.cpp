@@ -25,7 +25,6 @@
 #include "player.h"
 
 Control::Control() {}
-
 void Control::setPlayerNumber(int playerNumber)
 {
     this->playerNumber = playerNumber;
@@ -219,8 +218,7 @@ void Control::showUncaptured()
         std::cout << provinces[i] << "  ";
     }
 }
-
-void Control::test()
+void Control::setWar()
 {
     Player player;
     selectWarPlace(youngestPlayer());
@@ -235,7 +233,8 @@ void Control::test()
             system("cls");
         }
     }
-    std::cout << "END WAR" ;
+    cardAction();
+    std::cout << winEachWar().getName() << " WINS! " ;
     
     // std::string temp;
     // for (Player &player : players)
@@ -362,7 +361,7 @@ int Control::getProvinceNumber()
 
 //     players = result;
 // }
-Player & Control:: winEachWar()
+Player Control::winEachWar()
 {
     int max = 0;
     std::vector <Player> winPlayers;
@@ -374,11 +373,21 @@ Player & Control:: winEachWar()
     {
        if ( max == players[j].getScorePlayer() )
        {
-        winPlayers.push_back(players[j]);
+            winPlayers.push_back(players[j]);
        }
-       
+    }
+
+    for (int i = 0 ; i < winPlayers.size() ; i++)
+    {
+        std::cout << players[i].getScorePlayer() << " ";
     }
     
+
+    if ( winPlayers.size() == 1 )
+    {
+        return winPlayers[1];
+    }
+    // else //setwar again
 }
 std::vector<Player> Control::getPlayers()
 {
@@ -443,6 +452,12 @@ void Control:: showPurpleCard()
 }
 void Control::cardAction()
 {
+
+    for ( int i = 0 ; i < playerNumber ; i++ )
+    {
+        players[i].yellowInScore();
+    }
+
     WinterCard winter ;
     SpringCard spring ;
     DrummerCard drummer ;
@@ -463,12 +478,12 @@ void Control::cardAction()
     for ( int i = 0 ; i < playerNumber ; i++ )
     {
         if(players[i].hasPrinces())
-          {
-             for (int j = 0; j < players[i].numberOfPrinces(); j++)
-                 {
-                        prince.useCard(players , i);
-                 }
-         } 
+        {
+            for (int j = 0; j < players[i].numberOfPrinces(); j++)
+            {
+                prince.useCard(players , i);
+            }
+        } 
     }
 
 }

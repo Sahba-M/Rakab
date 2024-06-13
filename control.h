@@ -24,7 +24,7 @@ class Control {
         void distributeCards();
         void readProvinces();
         void showUncaptured();
-        void test();
+        void setWar();
         void selectMove(Player & player,int index);
         void showPlayGround();
         void selectWarPlace (Player & player);
@@ -37,7 +37,7 @@ class Control {
         void setSeason( std::string season );
         void showPurpleCard();
         bool endEachWar();
-        Player & winEachWar();
+        Player winEachWar();
 
     private:
         std::vector<std::shared_ptr<Card>> cards;

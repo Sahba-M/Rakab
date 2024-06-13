@@ -12,7 +12,7 @@ int main()
     control.distributeCards();
     //control.showPlayersHand();
     control.readProvinces();
-    control.test();
+    control.setWar();
     
 
     return 0;
