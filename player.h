@@ -40,6 +40,7 @@ class Player {
         void setPass( bool pass );
         bool getPass();
         bool hasYelloCard();
+        void yellowInScore();
 
     private:
         int age ;

@@ -19,7 +19,7 @@ struct SharedPtrCompare {
     }
 };
 
-Player::Player(){};
+Player::Player(){ scorePlayer = 0 ; };
 Player::Player ( int age , std::string name , std::string color ) 
 {
   setAge( age );
@@ -262,4 +262,14 @@ void Player::setPass( bool pass )
 bool Player::getPass()
 {
     return pass;
+}
+void Player::yellowInScore()
+{
+    int sum = 0 ;
+    recognizeYellow();
+    for (auto card : yellowCards)
+    {
+        sum += stoi(card->getName());
+    }
+    scorePlayer = sum ;
 }
