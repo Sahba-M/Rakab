@@ -362,6 +362,24 @@ int Control::getProvinceNumber()
 
 //     players = result;
 // }
+Player & Control:: winEachWar()
+{
+    int max = 0;
+    std::vector <Player> winPlayers;
+    for( auto player : players )
+    {
+         max = player.getScorePlayer() > max ? player.getScorePlayer() : max ;
+    }
+    for (int j = 0; j < getPlayerNumber(); j++)
+    {
+       if ( max == players[j].getScorePlayer() )
+       {
+        winPlayers.push_back(players[j]);
+       }
+       
+    }
+    
+}
 std::vector<Player> Control::getPlayers()
 {
     return players;
