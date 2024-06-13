@@ -356,11 +356,6 @@ Player Control::winEachWar()
             winPlayers.push_back(players[j]);
         }
     }
-
-    for (int i = 0; i < winPlayers.size(); i++)
-    {
-        std::cout << players[i].getScorePlayer() << " ";
-    }
     if (winPlayers.size() == 1)
     {
         return winPlayers[0];
@@ -450,7 +445,9 @@ void Control::cardAction()
     for (int i = 0; i <  getPlayerNumber(); i++)
     {
         if (players[i].hasDrummer())
+        {
             drummer.useCard(players, i);
+        }
     }
 
     if (season == "spring")
@@ -458,7 +455,6 @@ void Control::cardAction()
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
-        sleep(5);
         if (players[i].hasPrinces())
         {
             for (int j = 0; j < players[i].numberOfPrinces(); j++)

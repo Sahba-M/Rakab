@@ -8,6 +8,7 @@ DrummerCard::DrummerCard(){}
 
 void DrummerCard::useCard ( std::vector <Player> & players, int numPlayer )
 {
+   
     int sum = 0 ;
     std::vector<int> scores = players[numPlayer].ycardsToInt();
     for ( auto & num : scores )
@@ -15,6 +16,7 @@ void DrummerCard::useCard ( std::vector <Player> & players, int numPlayer )
         sum += num ;
     }
     players[numPlayer].setScorePlayer(sum*2);
+   
 }
 
 
