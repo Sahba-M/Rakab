@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <memory>
 #include <typeinfo>
+#include <unistd.h>
 
 #include "player.h"
 #include "card.h"

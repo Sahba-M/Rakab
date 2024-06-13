@@ -447,7 +447,7 @@ void Control::cardAction()
     if (season == "winter")
         winter.useCard(players, -1);
 
-    for (int i = 0; i < playerNumber; i++)
+    for (int i = 0; i <  getPlayerNumber(); i++)
     {
         if (players[i].hasDrummer())
             drummer.useCard(players, i);
@@ -456,8 +456,10 @@ void Control::cardAction()
     if (season == "spring")
         spring.useCard(players, -1);
 
-    for (int i = 0; i < playerNumber; i++)
+    for (int i = 0; i < getPlayerNumber(); i++)
     {
+        std::cout << "**************************";
+        sleep(5);
         if (players[i].hasPrinces())
         {
             for (int j = 0; j < players[i].numberOfPrinces(); j++)
