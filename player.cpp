@@ -161,6 +161,18 @@ void Player::recognizeYellow()
            }
      }
 }
+bool Player::hasYelloCard()
+{
+    for(const auto & card : hand)
+    {
+        if (std::dynamic_pointer_cast<YellowCard>(card))
+        {
+            return false;
+        } 
+    }
+    return true;
+}
+
 void Player::showYcard()
 {
     //  recognizeYellow();

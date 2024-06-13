@@ -39,6 +39,7 @@ class Player {
         int getHandSize();
         void setPass( bool pass );
         bool getPass();
+        bool hasYelloCard();
 
     private:
         int age ;
