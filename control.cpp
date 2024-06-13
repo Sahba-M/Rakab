@@ -277,13 +277,15 @@ void Control::selectMove(Player & player, int index)
         setSeason (player.getSeason());
     } else if (move == "help")
     {
-        std::string selectionoose; 
         system("cls");
-        std::cout << " 1. Game  Guide -----> Enter The Only Help. (help) \n\n";
-        std::cout << " 2. Cards Guide -----> Enter Help Along With The Name Of A Card. (help name)\n\n";
+        int selection; 
+        std::cout << " 1. Game  Guide \n";
+        std::cout << " 2. Cards Guide \n\n";
         std::cout << " YOUR CHOICE: ";
-        std::getline(std::cin , selectionoose);
-        if (selectionoose == "help")
+        //std::getline(std::cin , selection);
+        //std::cin >> selection;
+        std::cin >> selection;
+        if (selection == 1)
         {
             guideGame();
             choice = getch() ;
@@ -373,11 +375,11 @@ void Control::guideGame()
 {
     std::ifstream inputGuide;
     std::string explanation;
+    inputGuide.open("guide.txt");
     if (!inputGuide.is_open())
     {
         std::cerr << " Can Not Open File... " << std::endl;
     }
-    inputGuide.open("guide.txt");
     system("cls");
     std::cout << " ------------------------------------------------- \n" << std::setw(13) << " << HELP PAGE >> \n\n"; 
     while (std::getline(inputGuide,explanation))
@@ -393,24 +395,24 @@ void Control::guideCards()
     std::string cardName, cardDescription, requestedCard;
     std::unordered_map <std::string , std::string> card;
 
+    inputGuides.open("cardGuide.txt");
     if (!inputGuides.is_open())
     {
-        std::cerr << " Can Not Open File... " << std::endl;
+        std::cerr << " Can Not Open File... \n" << std::endl;
     }
-    inputGuides.open("cardGuide.txt");
     while (inputGuides >> cardName >> std::ws && std::getline(inputGuides,cardDescription))
     {
         card[cardName] = cardDescription;
     }
     inputGuides.close();
-    system("cls");
+   
     showPurpleCard();
     std::cout << "\n Please Enter The Name Of The Card You Want: ";
     std::cin >> requestedCard;
 
-    if (card.find(cardDescription) != card.end())
+    if (card.find(requestedCard) != card.end())
     {
-        std::cout << requestedCard << " : " << card[cardDescription] << std::endl;
+        std::cout <<  "\n --------> " << card[requestedCard] << std::endl;
     } else
     {
         std::cout << " Card Not Found! " << std::endl;
@@ -419,12 +421,12 @@ void Control::guideCards()
 void Control:: showPurpleCard()
 {
     std::vector<std::string> purpleCards = {"Scarecrow", "Drummer", "Princes", "Winter", "Spring"};
-    std::cout << " -------------------------------------- \n ";
+    std::cout << "\n ------------------------------------------- \n ";
     for(auto card : purpleCards)
     {
         std::cout << card << "  ";
     }
-    std::cout << " -------------------------------------- \n ";
+    std::cout << "\n ------------------------------------------- \n\n ";
 }
 void Control::cardAction()
 {
