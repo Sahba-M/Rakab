@@ -16,8 +16,8 @@ class Control {
         int  getPlayerNumber();
         void controlNumber();
         void shuffleCards();
-        void showCards();
-        Player youngestPlayer();
+        // void showCards();
+        Player & youngestPlayer();
         void getInformation();
         std::string controlColors();
         void showColors();

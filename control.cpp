@@ -89,7 +89,7 @@ void Control::shuffleCards()
     std::mt19937 generator(randomDevice());//random number generator (seed)
     std::shuffle(cards.begin(), cards.end(), generator);
 }
-Player Control::youngestPlayer()
+Player & Control::youngestPlayer()
 {
 
     std::vector<int> playersAge;
@@ -223,7 +223,7 @@ void Control::showUncaptured()
 void Control::test()
 {
     Player player;
-    selectWarPlace(players[0]);
+    selectWarPlace(youngestPlayer());
     system("cls");
     while (!endEachWar())
     {
@@ -235,6 +235,7 @@ void Control::test()
             system("cls");
         }
     }
+    std::cout << "END WAR" ;
     
     // std::string temp;
     // for (Player &player : players)
