@@ -237,20 +237,6 @@ void Control::setWar()
     }
     cardAction();
     std::cout << winEachWar().getName() << " WINS! ";
-
-    // std::string temp;
-    // for (Player &player : players)
-    // {
-    //     std::cout << player.getName() << " Please Choose Card : \n";
-    //     player.showHandCards();
-    //     std::cout << '\n'
-    //               << " Your Choose : ";
-    //     // std::cin >> temp;
-    //     // Card c(temp);
-    //     player.selectCard();
-    //     std::cout << '\n';
-    //     player.showUsedCards();
-    // }
 }
 void Control::selectMove(Player &player, int index)
 {
@@ -259,14 +245,13 @@ void Control::selectMove(Player &player, int index)
     char choice;
     if (move[index] != "pass" && player.getHandSize() != 0)
     {
-        std::cout << " ";
-        player.showHandCards();
         std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): ";
         std::cin >> move[index];
 
         if (move[index] == "card")
         {
             std::cout << " ";
+            player.showHandCards();
             player.recognizeYellow();
             player.selectCard();
             setSeason(player.getSeason()); 

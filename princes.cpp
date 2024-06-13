@@ -5,7 +5,7 @@
 
 void PrincesCard::setPriority() 
 {
-   priority = 5;
+  priority = 5;
 }
 void PrincesCard::useCard ( std::vector <Player> players, int numPlayer ) 
 {
