@@ -172,7 +172,6 @@ bool Player::hasYelloCard()
     }
     return true;
 }
-
 void Player::showYcard()
 {
     //  recognizeYellow();
@@ -271,5 +270,6 @@ void Player::yellowInScore()
     {
         sum += stoi(card->getName());
     }
-    scorePlayer = sum ;
+    setScorePlayer(sum);
+    std::cout << getScorePlayer() << "***"; 
 }

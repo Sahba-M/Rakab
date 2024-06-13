@@ -46,7 +46,7 @@ void Control::controlNumber()
     }
     setPlayerNumber(counter);
 }
-void Control::setCards() //read cards
+void Control::setCards() // read cards
 {
     std::ifstream cardInput;
     cardInput.open("yellowCard.txt");
@@ -84,11 +84,11 @@ void Control::setCards() //read cards
 }
 void Control::shuffleCards()
 {
-    std::random_device randomDevice; //A class for generating random numbers
-    std::mt19937 generator(randomDevice());//random number generator (seed)
+    std::random_device randomDevice;        // A class for generating random numbers
+    std::mt19937 generator(randomDevice()); // random number generator (seed)
     std::shuffle(cards.begin(), cards.end(), generator);
 }
-Player & Control::youngestPlayer()
+Player &Control::youngestPlayer()
 {
 
     std::vector<int> playersAge;
@@ -118,9 +118,9 @@ void Control::showColors()
 {
     std::cout << "\n ";
     for (int i = 0; i < colors.size(); i++)
-        {
-            std::cout << colors[i] << " ~ ";
-        }
+    {
+        std::cout << colors[i] << " ~ ";
+    }
 }
 std::string Control::controlColors()
 {
@@ -130,8 +130,9 @@ std::string Control::controlColors()
     {
         showColors();
         if (found == true)
-            std::cout << std::endl << " Enter Your Chosen Color: ";
-                      
+            std::cout << std::endl
+                      << " Enter Your Chosen Color: ";
+
         std::cin >> chooseColor;
 
         auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
@@ -140,7 +141,7 @@ std::string Control::controlColors()
         {
             colors.erase(elementFound);
             found = true;
-            break; 
+            break;
         }
         else
         {
@@ -157,8 +158,9 @@ void Control::getInformation()
     std::string color;
     for (int i = 0; i < playerNumber; i++)
     {
-        std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
-                 
+        std::cout << " Player " << i + 1 << " : " << '\n'
+                  << " Enter Your Name : ";
+
         std::cin >> name;
 
         std::cout << " Enter Your Age : ";
@@ -180,7 +182,7 @@ void Control::distributeCards()
         {
             if (!cards.empty())
             {
-                player.addCard(cards.back());//It is added to the hand
+                player.addCard(cards.back()); // It is added to the hand
                 cards.pop_back();
             }
         }
@@ -194,7 +196,7 @@ void Control::distributeCards()
 }
 void Control::readProvinces()
 {
-    std::string province , ignore;
+    std::string province, ignore;
     std::ifstream inputProvinces;
     inputProvinces.open("map.txt");
     setProvinceNumber(14);
@@ -203,7 +205,7 @@ void Control::readProvinces()
     {
         std::cerr << " Can Not Open File... " << std::endl;
     }
-    for ( int i = 0 ; i < getProvinceNumber() ; i++ )
+    for (int i = 0; i < getProvinceNumber(); i++)
     {
         inputProvinces >> ignore;
         inputProvinces >> province;
@@ -225,17 +227,17 @@ void Control::setWar()
     system("cls");
     while (!endEachWar())
     {
-        for ( int j = 0; j < getPlayerNumber(); j++)
+        for (int j = 0; j < getPlayerNumber(); j++)
         {
             showPlayGround();
-            std::cout << " The War Is Over " << warPlace << '\n' ;
-            selectMove(players[j],j);
+            std::cout << " The War Is Over " << warPlace << '\n';
+            selectMove(players[j], j);
             system("cls");
         }
     }
     cardAction();
-    std::cout << winEachWar().getName() << " WINS! " ;
-    
+    std::cout << winEachWar().getName() << " WINS! ";
+
     // std::string temp;
     // for (Player &player : players)
     // {
@@ -250,28 +252,29 @@ void Control::setWar()
     //     player.showUsedCards();
     // }
 }
-void Control::selectMove ( Player & player , int index )
+void Control::selectMove(Player &player, int index)
 {
-    // std::string move[];
-    move.resize(playerNumber , "temp");
+
+    move.resize(playerNumber, "temp");
     char choice;
-    if ( move[index] != "pass" && player.getHandSize() != 0 )
+    if (move[index] != "pass" && player.getHandSize() != 0)
     {
-        std::cout << " " ;
+        std::cout << " ";
         player.showHandCards();
         std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): ";
         std::cin >> move[index];
 
-        if(move[index] == "card")
+        if (move[index] == "card")
         {
-            std::cout << " " ;
+            std::cout << " ";
             player.recognizeYellow();
             player.selectCard();
-            setSeason (player.getSeason());
-        } else if (move[index] == "help")
+            setSeason(player.getSeason()); 
+        }
+        else if (move[index] == "help")
         {
             system("cls");
-            int selection; 
+            int selection;
             std::cout << " 1. Game  Guide \n";
             std::cout << " 2. Cards Guide \n\n";
             std::cout << " YOUR CHOICE: ";
@@ -279,39 +282,41 @@ void Control::selectMove ( Player & player , int index )
             if (selection == 1)
             {
                 guideGame();
-                choice = getch() ;
+                choice = getch();
                 system("cls");
                 showPlayGround();
-                selectMove(player,index);
-            } else if(selection == 2)
+                selectMove(player, index);
+            }
+            else if (selection == 2)
             {
                 guideCards();
-                choice = getch() ;
+                choice = getch();
                 system("cls");
                 showPlayGround();
-                selectMove(player,index);
+                selectMove(player, index);
             }
-        } else
+        }
+        else
         {
             std::cout << " ERROR : Invalid Move... ";
-            selectMove(player,index);
+            selectMove(player, index);
         }
-    } else 
+    }
+    else
     {
         player.setPass(true);
     }
 }
 void Control::showPlayGround()
 {
-    std::cout << "---------------------\n" ;
+    std::cout << "---------------------\n";
     for (int i = 0; i < players.size(); i++)
     {
         players[i].showUsedCards();
     }
-    std::cout << "---------------------\n" ;
-    
+    std::cout << "---------------------\n";
 }
-void Control::selectWarPlace (Player & player)
+void Control::selectWarPlace(Player &player)
 {
     bool found = true;
     std::string chooseProvince;
@@ -325,7 +330,7 @@ void Control::selectWarPlace (Player & player)
         std::cout << std::endl;
         if (found == true)
             std::cout << " " << player.getName() << " Enter Your Chosen Province: ";
-        std::cin >> chooseProvince ;
+        std::cin >> chooseProvince;
 
         auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
 
@@ -345,47 +350,35 @@ void Control::selectWarPlace (Player & player)
 }
 void Control::setProvinceNumber(int provinceNumber)
 {
-    this -> provinceNumber = provinceNumber;
+    this->provinceNumber = provinceNumber;
 }
 int Control::getProvinceNumber()
 {
     return provinceNumber;
 }
-// void getPlayersInClockwiseOrder(std::vector<int>& players, int startingIndex) {
-//     int n = players.size();
-//     std::vector<int> result(n);
-
-//     for (int i = 0; i < n; i++) {
-//         result[(i + 1) % n] = players[(startingIndex + i) % n];
-//     }
-
-//     players = result;
-// }
 Player Control::winEachWar()
 {
     int max = 0;
-    std::vector <Player> winPlayers;
-    for( auto player : players )
+    std::vector<Player> winPlayers;
+    for (auto player : players)
     {
-         max = player.getScorePlayer() > max ? player.getScorePlayer() : max ;
+        max = player.getScorePlayer() > max ? player.getScorePlayer() : max;
     }
     for (int j = 0; j < getPlayerNumber(); j++)
     {
-       if ( max == players[j].getScorePlayer() )
-       {
+        if (max == players[j].getScorePlayer())
+        {
             winPlayers.push_back(players[j]);
-       }
+        }
     }
 
-    for (int i = 0 ; i < winPlayers.size() ; i++)
+    for (int i = 0; i < winPlayers.size(); i++)
     {
         std::cout << players[i].getScorePlayer() << " ";
     }
-    
-
-    if ( winPlayers.size() == 1 )
+    if (winPlayers.size() == 1)
     {
-        return winPlayers[1];
+        return winPlayers[0];
     }
     // else //setwar again
 }
@@ -403,48 +396,51 @@ void Control::guideGame()
         std::cerr << " Can Not Open File... " << std::endl;
     }
     system("cls");
-    std::cout << " ------------------------------------------------- \n" << std::setw(13) << " << HELP PAGE >> \n\n"; 
-    while (std::getline(inputGuide,explanation))
+    std::cout << " ------------------------------------------------- \n"
+              << std::setw(13) << " << HELP PAGE >> \n\n";
+    while (std::getline(inputGuide, explanation))
     {
-       std::cout << explanation << std::endl;
+        std::cout << explanation << std::endl;
     }
-    std::cout << " \n\n ------------------------------------------------- \n"; 
-    inputGuide.close();  
+    std::cout << " \n\n ------------------------------------------------- \n";
+    inputGuide.close();
 }
 void Control::guideCards()
 {
     std::ifstream inputGuides;
     std::string cardName, cardDescription, requestedCard;
-    std::unordered_map <std::string , std::string> card;
+    std::unordered_map<std::string, std::string> card;
 
     inputGuides.open("cardGuide.txt");
     if (!inputGuides.is_open())
     {
-        std::cerr << " Can Not Open File... \n" << std::endl;
+        std::cerr << " Can Not Open File... \n"
+                  << std::endl;
     }
-    while (inputGuides >> cardName >> std::ws && std::getline(inputGuides,cardDescription))
+    while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
     {
         card[cardName] = cardDescription;
     }
     inputGuides.close();
-   
+
     showPurpleCard();
     std::cout << "\n Please Enter The Name Of The Card You Want: ";
     std::cin >> requestedCard;
 
     if (card.find(requestedCard) != card.end())
     {
-        std::cout <<  "\n ------> " << card[requestedCard] << " <------ " << std::endl;
-    } else
+        std::cout << "\n ------> " << card[requestedCard] << " <------ " << std::endl;
+    }
+    else
     {
         std::cout << " Card Not Found! " << std::endl;
     }
 }
-void Control:: showPurpleCard()
+void Control::showPurpleCard()
 {
     std::vector<std::string> purpleCards = {"Scarecrow", "Drummer", "Princes", "Winter", "Spring"};
     std::cout << "\n ------------------------------------------- \n ";
-    for(auto card : purpleCards)
+    for (auto card : purpleCards)
     {
         std::cout << card << "  ";
     }
@@ -458,53 +454,52 @@ void Control::cardAction()
         players[i].yellowInScore();
     }
 
-    WinterCard winter ;
-    SpringCard spring ;
-    DrummerCard drummer ;
-    PrincesCard prince ;
-    // winter -- drummer -- spring -- princes 
-    if ( season == "winter" )
-        winter.useCard(players , -1);
-    
-    for ( int i = 0 ; i < playerNumber ; i++ )
+    WinterCard winter;
+    SpringCard spring;
+    DrummerCard drummer;
+    PrincesCard prince;
+    // winter -- drummer -- spring -- princes
+    if (season == "winter")
+        winter.useCard(players, -1);
+
+    for (int i = 0; i < playerNumber; i++)
     {
-        if ( players[i].hasDrummer() )
-        drummer.useCard ( players , i );
+        if (players[i].hasDrummer())
+            drummer.useCard(players, i);
     }
 
-    if ( season == "spring" )
-        spring.useCard(players , -1);
+    if (season == "spring")
+        spring.useCard(players, -1);
 
-    for ( int i = 0 ; i < playerNumber ; i++ )
+    for (int i = 0; i < playerNumber; i++)
     {
-        if(players[i].hasPrinces())
+        if (players[i].hasPrinces())
         {
             for (int j = 0; j < players[i].numberOfPrinces(); j++)
             {
-                prince.useCard(players , i);
+                prince.useCard(players, i);
             }
-        } 
+        }
     }
-
 }
-void Control::setSeason ( std::string season )
+void Control::setSeason(std::string season)
 {
-    this -> season = season ;
+    this->season = season;
 }
 bool Control::endEachWar()
 {
-    bool flag = false ;
-    for ( auto player : players )
+    bool flag = false;
+    for (auto player : players)
     {
-        if ( player.getPass() == true )
+        if (player.getPass() == true)
         {
-            flag = true ;
+            flag = true;
         }
-        else 
+        else
         {
-            flag = false ;
+            flag = false;
             break;
         }
     }
-    return flag ;
+    return flag;
 }

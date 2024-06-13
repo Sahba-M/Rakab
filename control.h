@@ -37,7 +37,7 @@ class Control {
         void setSeason( std::string season );
         void showPurpleCard();
         bool endEachWar();
-        Player winEachWar();
+        Player  winEachWar();
 
     private:
         std::vector<std::shared_ptr<Card>> cards;
