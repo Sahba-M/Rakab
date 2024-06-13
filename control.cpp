@@ -225,7 +225,7 @@ void Control::test()
     Player player;
     selectWarPlace(players[0]);
     system("cls");
-    for (int i = 0 ; i < 10 ; i++)
+    while (!endEachWar())
     {
         for ( int j = 0; j < getPlayerNumber(); j++)
         {
@@ -291,12 +291,14 @@ void Control::selectMove ( Player & player , int index )
                 showPlayGround();
                 selectMove(player,index);
             }
-        } 
-        else
+        } else
         {
             std::cout << " ERROR : Invalid Move... ";
             selectMove(player,index);
         }
+    } else 
+    {
+        player.setPass(true);
     }
 }
 void Control::showPlayGround()
@@ -454,4 +456,21 @@ void Control::cardAction()
 void Control::setSeason ( std::string season )
 {
     this -> season = season ;
+}
+bool Control::endEachWar()
+{
+    bool flag = false ;
+    for ( auto player : players )
+    {
+        if ( player.getPass() == true )
+        {
+            flag = true ;
+        }
+        else 
+        {
+            flag = false ;
+            break;
+        }
+    }
+    return flag ;
 }
