@@ -87,7 +87,7 @@ int Player::getCardsEachPlayer()//The number of cards to be dealt
 void Player::selectCard()
 {
     std::shared_ptr <Card> card;
-    
+    // recognizeYellow();
     std::string tempName;
     bool found = true;
     do
@@ -98,7 +98,7 @@ void Player::selectCard()
        
         
         if ( tempName.length() <= 2)
-             card = std::make_shared <YellowCard> (tempName);
+            card = std::make_shared <YellowCard> (tempName);
         else
             card = std::make_shared <PurpleCard> (tempName);
         auto elementFound = std::find_if(hand.begin(), hand.end(), [ & card ]( const std::shared_ptr <Card> & c ) { return *c == *card ; });
@@ -106,7 +106,7 @@ void Player::selectCard()
         { 
             if (yellowCards.size() == 0)
             {
-                found = false;    
+                found = false; 
             } else
             {
                 ScarecrowCard scarecrow ;
@@ -152,17 +152,18 @@ void Player::showUsedCards()
 }
 void Player::recognizeYellow()
 {
-  for (const auto&  usedCard : usedCards) 
-   { 
-         if (std::dynamic_pointer_cast<YellowCard>(usedCard)) 
-         {
-             yellowCards.push_back(usedCard);
-         }
-   }
+    yellowCards.resize(0);
+    for (const auto &  usedCard : usedCards) 
+     { 
+           if (std::dynamic_pointer_cast<YellowCard>(usedCard)) 
+           {
+              yellowCards.push_back(usedCard);
+           }
+     }
 }
 void Player::showYcard()
 {
-     recognizeYellow();
+    //  recognizeYellow();
      for (const auto &  usedYcard : yellowCards) 
      {
         std::cout << usedYcard->getName() <<" --- ";
@@ -174,7 +175,7 @@ bool Player::isFind ( std::shared_ptr<Card> Ycard )//for finding yellow card
         if (elementFound != yellowCards.end())
         {
             hand.push_back(Ycard);
-            usedCards.erase(elementFound);
+            usedCards.erase(std::remove(usedCards.begin(), usedCards.end(), *elementFound), usedCards.end());
             return true ;
         }
         else 
@@ -237,4 +238,8 @@ int Player::numberOfPrinces()
        }
     }
     return counter;  
+}
+int Player::getHandSize()
+{
+    return hand.size();
 }

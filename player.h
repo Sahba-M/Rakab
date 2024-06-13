@@ -36,6 +36,7 @@ class Player {
         bool hasDrummer();
         bool hasPrinces();
         int numberOfPrinces();
+        int getHandSize();
 
     private:
         int age ;

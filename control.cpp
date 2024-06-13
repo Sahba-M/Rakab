@@ -255,15 +255,17 @@ void Control::selectMove ( Player & player , int index )
     // std::string move[];
     move.resize(playerNumber , "temp");
     char choice;
-    if ( move[index] != "pass" )
+    if ( move[index] != "pass" && player.getHandSize() != 0 )
     {
-        std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): "; 
+        std::cout << " " ;
+        player.showHandCards();
+        std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): ";
         std::cin >> move[index];
 
         if(move[index] == "card")
         {
             std::cout << " " ;
-            player.showHandCards();
+            player.recognizeYellow();
             player.selectCard();
             setSeason (player.getSeason());
         } else if (move[index] == "help")
@@ -273,8 +275,6 @@ void Control::selectMove ( Player & player , int index )
             std::cout << " 1. Game  Guide \n";
             std::cout << " 2. Cards Guide \n\n";
             std::cout << " YOUR CHOICE: ";
-            //std::getline(std::cin , selection);
-            //std::cin >> selection;
             std::cin >> selection;
             if (selection == 1)
             {
