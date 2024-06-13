@@ -32,8 +32,10 @@ class Control {
         int  getProvinceNumber();
         std::vector<Player> getPlayers();
         void guideGame();
+        void guideCards();
         void cardAction();
         void setSeason( std::string season );
+        void showPurpleCard();
 
     private:
         std::vector<std::shared_ptr<Card>> cards;
