@@ -37,6 +37,8 @@ class Player {
         bool hasPrinces();
         int numberOfPrinces();
         int getHandSize();
+        void setPass( bool pass );
+        bool getPass();
 
     private:
         int age ;
@@ -50,6 +52,7 @@ class Player {
         int cardsEachPlayer;
         int scorePlayer;
         std::string season;
+        bool pass = false;
 
 
 };

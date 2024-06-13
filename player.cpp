@@ -243,3 +243,11 @@ int Player::getHandSize()
 {
     return hand.size();
 }
+void Player::setPass( bool pass )
+{
+    this -> pass = pass;
+}
+bool Player::getPass()
+{
+    return pass;
+}
