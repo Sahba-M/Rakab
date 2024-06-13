@@ -292,7 +292,7 @@ void Control::selectMove(Player & player, int index)
             system("cls");
             showPlayGround();
             selectMove(player,index);
-        } else
+        } else if(selection == 2)
         {
             guideCards();
             choice = getch() ;
