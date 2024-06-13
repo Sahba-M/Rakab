@@ -53,7 +53,7 @@ class Player {
 
         int cardsEachPlayer;
         int scorePlayer;
-        std::string season;
+        std::string season = "deafult";
         bool pass = false;
 
 

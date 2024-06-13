@@ -240,7 +240,6 @@ void Control::setWar()
 }
 void Control::selectMove(Player &player, int index)
 {
-
     move.resize(playerNumber, "temp");
     char choice;
     if (move[index] != "pass" && player.getHandSize() != 0)
@@ -351,16 +350,17 @@ Player Control::winEachWar()
     }
     for (int j = 0; j < getPlayerNumber(); j++)
     {
+        std::cout << players[j].getScorePlayer() << ",,,";
         if (max == players[j].getScorePlayer())
         {
             winPlayers.push_back(players[j]);
         }
     }
 
-    for (int i = 0; i < winPlayers.size(); i++)
-    {
-        std::cout << players[i].getScorePlayer() << " ";
-    }
+    // for (int i = 0; i < winPlayers.size(); i++)
+    // {
+    //     std::cout << players[i].getScorePlayer() << " ";
+    // }
     if (winPlayers.size() == 1)
     {
         return winPlayers[0];
