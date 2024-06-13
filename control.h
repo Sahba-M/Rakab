@@ -40,7 +40,7 @@ class Control {
     private:
         std::vector<std::shared_ptr<Card>> cards;
         std::vector<Player> players;
-        std::vector<Player> tempPlayers = players;
+        std::vector<std::string> move;
 
         std::vector<std::string> provinces;
         std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};

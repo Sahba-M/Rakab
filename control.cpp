@@ -231,7 +231,7 @@ void Control::test()
         {
             showPlayGround();
             std::cout << " The War Is Over " << warPlace << '\n' ;
-            selectMove(player,j);
+            selectMove(players[j],j);
             system("cls");
         }
     }
@@ -250,61 +250,53 @@ void Control::test()
     //     player.showUsedCards();
     // }
 }
-void Control::selectMove(Player & player, int index)
+void Control::selectMove ( Player & player , int index )
 {
-    std::string move;
+    // std::string move[];
+    move.resize(playerNumber , "temp");
     char choice;
-    std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): "; 
-    std::cin >> move;
+    if ( move[index] != "pass" )
+    {
+        std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): "; 
+        std::cin >> move[index];
 
-    if (move == "pass")
-    { 
-        for (int i = 0; i < tempPlayers.size(); i++)
+        if(move[index] == "card")
         {
-           if (i == index)
-           {
-            tempPlayers.erase(tempPlayers.begin() + i);
-           }
-           
-        }
-        
-        
-    } else if(move == "card")
-    {
-        std::cout << " " ;
-        player.showHandCards();
-        player.selectCard();
-        setSeason (player.getSeason());
-    } else if (move == "help")
-    {
-        system("cls");
-        int selection; 
-        std::cout << " 1. Game  Guide \n";
-        std::cout << " 2. Cards Guide \n\n";
-        std::cout << " YOUR CHOICE: ";
-        //std::getline(std::cin , selection);
-        //std::cin >> selection;
-        std::cin >> selection;
-        if (selection == 1)
+            std::cout << " " ;
+            player.showHandCards();
+            player.selectCard();
+            setSeason (player.getSeason());
+        } else if (move[index] == "help")
         {
-            guideGame();
-            choice = getch() ;
             system("cls");
-            showPlayGround();
-            selectMove(player,index);
-        } else if(selection == 2)
+            int selection; 
+            std::cout << " 1. Game  Guide \n";
+            std::cout << " 2. Cards Guide \n\n";
+            std::cout << " YOUR CHOICE: ";
+            //std::getline(std::cin , selection);
+            //std::cin >> selection;
+            std::cin >> selection;
+            if (selection == 1)
+            {
+                guideGame();
+                choice = getch() ;
+                system("cls");
+                showPlayGround();
+                selectMove(player,index);
+            } else if(selection == 2)
+            {
+                guideCards();
+                choice = getch() ;
+                system("cls");
+                showPlayGround();
+                selectMove(player,index);
+            }
+        } 
+        else
         {
-            guideCards();
-            choice = getch() ;
-            system("cls");
-            showPlayGround();
+            std::cout << " ERROR : Invalid Move... ";
             selectMove(player,index);
         }
-    } 
-    else
-    {
-       std::cout << " ERROR : Invalid Move... ";
-       selectMove(player,index);
     }
 }
 void Control::showPlayGround()
