@@ -41,7 +41,6 @@ class Player {
         bool getPass();
         bool hasYellowCard();
         void yellowInScore();
-        std::vector<int> ycardsToInt();
 
     private:
         int age ;

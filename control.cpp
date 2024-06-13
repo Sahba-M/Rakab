@@ -365,7 +365,10 @@ Player Control::winEachWar()
     {
         return winPlayers[0];
     }
-    // else //setwar again
+    else
+    {
+        return players[0];
+    } //setwar again
 }
 std::vector<Player> Control::getPlayers()
 {
@@ -458,7 +461,6 @@ void Control::cardAction()
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
-        sleep(5);
         if (players[i].hasPrinces())
         {
             for (int j = 0; j < players[i].numberOfPrinces(); j++)

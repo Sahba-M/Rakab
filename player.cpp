@@ -220,7 +220,8 @@ int Player::maxYcards()
 bool Player::hasDrummer()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("drummer");
-    auto elementFound = std::find ( usedCards.begin(), usedCards.end(), card );
+    auto elementFound = std::find_if(usedCards.begin(), usedCards.end(),
+    [ & card ]( const std::shared_ptr <Card> & ptr ) { return SharedPtrCompare()( ptr , card ); });
     if ( elementFound != usedCards.end() )
     {
         return true ;
@@ -274,13 +275,4 @@ void Player::yellowInScore()
     }
     setScorePlayer(sum);
     // std::cout << getScorePlayer() << "***"; 
-}
-std::vector<int> Player::ycardsToInt()
-{
-    std::vector <int> Ycards ;
-    for ( int i = 0 ; i < yellowCards.size() ; i++ )
-    {
-        Ycards.push_back(stoi( yellowCards[i]->getName()));
-    }
-    return Ycards;
 }
