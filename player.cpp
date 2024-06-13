@@ -231,26 +231,34 @@ bool Player::hasDrummer()
 bool Player::hasPrinces()
 {
    std::shared_ptr<Card> card = std::make_shared<PurpleCard>("princes");
-   auto elemenFound = std::find (usedCards.begin(), usedCards.end(), card );
+   auto elemenFound = std::find_if(usedCards.begin(), usedCards.end(),
+   [ & card ]( const std::shared_ptr <Card> & ptr ) { return SharedPtrCompare()( ptr , card ); });
    if ( elemenFound != usedCards.end())
    {
+   
      return true;
    } else
+   { 
+    
         return false;
+   }
 }
 int Player::numberOfPrinces()
 {
-    int counter = 0;
+  int counter = 0;
     
     for( auto card : usedCards)
     {
-       if (typeid(*card) == typeid(PrincesCard))
+       if ( std::dynamic_pointer_cast<PrincesCard>(card) != nullptr )
        {
         counter++;
        }
     }
-    return counter;  
+    return counter; 
+  
+     
 }
+
 int Player::getHandSize()
 {
     return hand.size();
