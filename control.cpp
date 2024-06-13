@@ -412,7 +412,7 @@ void Control::guideCards()
 
     if (card.find(requestedCard) != card.end())
     {
-        std::cout <<  "\n --------> " << card[requestedCard] << std::endl;
+        std::cout <<  "\n ------> " << card[requestedCard] << " <------ " << std::endl;
     } else
     {
         std::cout << " Card Not Found! " << std::endl;
