@@ -10,5 +10,4 @@ void PrincesCard::setPriority()
 void PrincesCard::useCard ( std::vector <Player> & players, int numPlayer ) 
 {
   players[numPlayer].setScorePlayer(players[numPlayer].getScorePlayer() + 10);
-  std::cout << players[numPlayer].getScorePlayer()<< "#################";
 }

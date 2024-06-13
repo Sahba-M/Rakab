@@ -458,7 +458,6 @@ void Control::cardAction()
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
-        std::cout << "**************************";
         sleep(5);
         if (players[i].hasPrinces())
         {

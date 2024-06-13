@@ -162,9 +162,9 @@ void Player::recognizeYellow()
            }
      }
 }
-bool Player::hasYelloCard()
+bool Player::hasYellowCard()
 {
-    for(const auto & card : hand)
+    for (const auto & card : hand)
     {
         if (std::dynamic_pointer_cast<YellowCard>(card))
         {
@@ -235,11 +235,9 @@ bool Player::hasPrinces()
    [ & card ]( const std::shared_ptr <Card> & ptr ) { return SharedPtrCompare()( ptr , card ); });
    if ( elemenFound != usedCards.end())
    {
-   
-     return true;
+        return true;
    } else
    { 
-    
         return false;
    }
 }
@@ -247,18 +245,13 @@ int Player::numberOfPrinces()
 {
   int counter = 0;
     
-    for( auto card : usedCards)
+    for ( auto card : usedCards )
     {
-       if ( std::dynamic_pointer_cast<PrincesCard>(card) != nullptr )
-       {
-        counter++;
-       }
+        if (card->getName() == "princes")
+            counter++;
     }
-    return counter; 
-  
-     
+    return counter;    
 }
-
 int Player::getHandSize()
 {
     return hand.size();
@@ -280,5 +273,14 @@ void Player::yellowInScore()
         sum += stoi(card->getName());
     }
     setScorePlayer(sum);
-    std::cout << getScorePlayer() << "***"; 
+    // std::cout << getScorePlayer() << "***"; 
+}
+std::vector<int> Player::ycardsToInt()
+{
+    std::vector <int> Ycards ;
+    for ( int i = 0 ; i < yellowCards.size() ; i++ )
+    {
+        Ycards.push_back(stoi( yellowCards[i]->getName()));
+    }
+    return Ycards;
 }

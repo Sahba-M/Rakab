@@ -39,8 +39,9 @@ class Player {
         int getHandSize();
         void setPass( bool pass );
         bool getPass();
-        bool hasYelloCard();
+        bool hasYellowCard();
         void yellowInScore();
+        std::vector<int> ycardsToInt();
 
     private:
         int age ;
