@@ -222,7 +222,7 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
-    Player player;
+    // Player player;
     selectWarPlace(getDeterminer());
     std::cout << DeterminerOfWar.getName() << std::endl;
     int startIndex = findPlayerIndex(DeterminerOfWar);
@@ -230,15 +230,8 @@ void Control::setWar()
     system("cls");
     while (!endEachWar())
     {
-        // 4 = 0 1 2 3 .... 
-        // starter -> 2
-        // i = 2 ... i < 4 + 4 - 2 = 2 * 4 - 2 
-
-
-
         for ( int i = 0 ; i < getPlayerNumber()  ; i++ )
         {
-
             showPlayGround();
             std::cout << " The War Is Over " << warPlace << '\n';
             selectMove(players[currentIndex], currentIndex);
@@ -251,19 +244,16 @@ void Control::setWar()
     {
         std::cout << winner.getName() << " WINS! ";
         winner.addProvinces(warPlace);
+        auto elementFound = std::find(provinces.begin(), provinces.end(), warPlace);
+        if (elementFound != provinces.end())
+            provinces.erase(elementFound);
         setDeterminer(winner);
     }
     else 
     {
         std::cout << " This War Has No Winners!!! ";
-
+        setDeterminer(players[playersIndices.back()]);
     }
-}
-void Control::run()
-{
-    setDeterminer( youngestPlayer());
-    //selectWarPlace(getDeterminer());
-    setWar();
 }
 void Control::setDeterminer ( Player & Determiner)
 {
@@ -328,6 +318,8 @@ void Control::selectMove(Player & player, int index)
     }
     else
     {
+        playersIndices.push_back(index);
+        std::cout << index << " player\n";
         player.setPass(true);
     }
 }
@@ -360,7 +352,7 @@ void Control::selectWarPlace(Player &player)
 
         if (elementFound != provinces.end())
         {
-            provinces.erase(elementFound);
+            // provinces.erase(elementFound);
             found = true;
             break;
         }
@@ -496,12 +488,8 @@ void Control::cardAction()
         }
     }
 
-
     if (season == "spring")
         spring.useCard(players, -1);
-
-    for ( int i = 0 ; i < playerNumber; i++ )
-        std::cout << "\nafter spring score:" << players[i].getScorePlayer() << "~";
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
@@ -535,7 +523,7 @@ bool Control::endEachWar()
     }
     return flag;
 }
-void Control::endGame()
+bool Control::endGame()
 {
     std::vector<Player> gamePlayers;
     for( auto player : players)
@@ -550,6 +538,11 @@ void Control::endGame()
     {
         std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER... \n ";
     }
+
+    if ( gamePlayers.size() != 0 )
+        return true;
+    else 
+        return false;
     
 }
 int Control::findPlayerIndex ( const Player & player ) 
@@ -561,6 +554,15 @@ int Control::findPlayerIndex ( const Player & player )
         }
     }
     return -1; // player not found
+}
+void Control::run()
+{
+    setDeterminer( youngestPlayer());
+    //selectWarPlace(getDeterminer());
+    while (!endGame())
+    {
+        setWar();
+    }
 }
 
 

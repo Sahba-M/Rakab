@@ -38,7 +38,7 @@ class Control {
         void showPurpleCard();
         bool endEachWar();
         bool winEachWar();
-        void endGame();
+        bool endGame();
         void run();
         void setDeterminer( Player & Determiner);
         Player & getDeterminer();
@@ -49,6 +49,7 @@ class Control {
         std::vector<std::shared_ptr<Card>> cards;
         std::vector<Player> players;
         std::vector<std::string> move;
+        std::vector<int> playersIndices;
 
         std::vector<std::string> provinces;
         std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
