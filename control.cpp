@@ -223,7 +223,7 @@ void Control::showUncaptured()
 void Control::setWar()
 {
     Player player;
-    selectWarPlace(youngestPlayer());
+    selectWarPlace(getDeterminer());
     system("cls");
     while (!endEachWar())
     {
@@ -240,10 +240,26 @@ void Control::setWar()
     {
         std::cout << winner.getName() << " WINS! ";
         winner.addProvinces(warPlace);
+        setDeterminer(winner);
     }
     else 
         std::cout << " This War Has No Winners!!! ";
 }
+void Control::run()
+{
+    setDeterminer( youngestPlayer());
+    //selectWarPlace(getDeterminer());
+    setWar();
+}
+void Control::setDeterminer ( Player Determiner)
+{
+    DeterminerOfWar = Determiner;
+}
+Player & Control::getDeterminer()
+{
+    return DeterminerOfWar;
+}
+
 void Control::selectMove(Player & player, int index)
 {
     move.resize(playerNumber, "temp");

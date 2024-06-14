@@ -39,6 +39,11 @@ class Control {
         bool endEachWar();
         bool winEachWar();
         int endGame();
+        void run();
+        void setDeterminer( Player Determiner);
+        Player & getDeterminer();
+      
+
 
     private:
         std::vector<std::shared_ptr<Card>> cards;
@@ -53,6 +58,7 @@ class Control {
         std::string warPlace;
         std::string season;
         Player winner;
+        Player DeterminerOfWar;
 };
 
 #endif

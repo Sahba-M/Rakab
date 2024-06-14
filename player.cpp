@@ -306,7 +306,7 @@ bool Player::winGame()
     Map map;
    for (int i = 0 ; i < capturedProvinces.size() ; i++)
    {
-      for (int j = 0 ; j < capturedProvinces.size() ; j++)
+      for (int j = i + 1 ; j < capturedProvinces.size() ; j++)
       {
         if (map.checkAdjacent( capturedProvinces[i], capturedProvinces[j] ))
         {
