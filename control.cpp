@@ -236,7 +236,10 @@ void Control::setWar()
         }
     }
     cardAction();
-    std::cout << winEachWar().getName() << " WINS! ";
+    if (winEachWar())
+        std::cout << winner.getName() << " WINS! ";
+    else 
+        std::cout << " !NO WINNER! ";
 }
 void Control::selectMove(Player & player, int index)
 {
@@ -344,7 +347,7 @@ int Control::getProvinceNumber()
 {
     return provinceNumber;
 }
-Player Control::winEachWar()
+bool Control::winEachWar()
 {
     int max = 0;
     std::vector<Player> winPlayers;
@@ -354,7 +357,7 @@ Player Control::winEachWar()
     }
     for (int j = 0; j < getPlayerNumber(); j++)
     {
-        std::cout << players[j].getScorePlayer() << ",,,";
+        // std::cout << players[j].getScorePlayer() << ",,,";
         if (max == players[j].getScorePlayer())
         {
             winPlayers.push_back(players[j]);
@@ -362,11 +365,12 @@ Player Control::winEachWar()
     }
     if (winPlayers.size() == 1)
     {
-        return winPlayers[0];
+        winner = winPlayers[0];
+        return true;
     }
     else
     {
-        return players[0];
+        return false;
     } //setwar again
 }
 std::vector<Player> Control::getPlayers()

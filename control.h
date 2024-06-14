@@ -37,7 +37,7 @@ class Control {
         void setSeason( std::string season );
         void showPurpleCard();
         bool endEachWar();
-        Player winEachWar();
+        bool winEachWar();
         bool ifBurn();
 
     private:
@@ -52,6 +52,7 @@ class Control {
         int provinceNumber;
         std::string warPlace;
         std::string season;
+        Player winner;
 };
 
 #endif
