@@ -10,6 +10,7 @@
 #include "yellow.h"
 #include "scarecrow.h"
 #include "princes.h"
+#include "map.h"
 
 
 struct SharedPtrCompare {
@@ -299,3 +300,25 @@ void Player::yellowInScore()
     }
     setScorePlayer(sum);
 }
+bool Player::winGame()
+{
+    int proximity = 0;
+    Map map;
+   for (int i = 0 ; i < capturedProvinces.size() ; i++)
+   {
+      for (int j = 0 ; j < capturedProvinces.size() ; j++)
+      {
+        if (map.checkAdjacent( capturedProvinces[i], capturedProvinces[j] ))
+        {
+            proximity++;
+        }  
+      }
+   }
+   if ( proximity >= 3 || capturedProvinces.size() >= 5 )
+   {
+     return true;
+   } else
+        return false;
+}
+
+

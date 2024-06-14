@@ -242,7 +242,7 @@ void Control::setWar()
         winner.addProvinces(warPlace);
     }
     else 
-        std::cout << " !NO WINNER! ";
+        std::cout << " This War Has No Winners!!! ";
 }
 void Control::selectMove(Player & player, int index)
 {
@@ -360,7 +360,6 @@ bool Control::winEachWar()
     }
     for (int j = 0; j < getPlayerNumber(); j++)
     {
-        // std::cout << players[j].getScorePlayer() << ",,,";
         if (max == players[j].getScorePlayer())
         {
             winPlayers.push_back(players[j]);
@@ -374,7 +373,7 @@ bool Control::winEachWar()
     else
     {
         return false;
-    } //setwar again
+    }
 }
 std::vector<Player> Control::getPlayers()
 {
@@ -442,7 +441,6 @@ void Control::showPurpleCard()
 }
 void Control::cardAction()
 {
-
     for ( int i = 0 ; i < playerNumber ; i++ )
     {
         players[i].yellowInScore();
@@ -486,7 +484,6 @@ void Control::cardAction()
         }
     }
 }
-
 void Control::setSeason(std::string season)
 {
     this->season = season;

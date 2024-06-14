@@ -42,6 +42,7 @@ class Player {
         bool hasYellowCard();
         void yellowInScore();
         bool ifBurn();
+        bool winGame();
 
     private:
         int age ;
