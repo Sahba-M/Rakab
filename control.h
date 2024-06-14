@@ -43,6 +43,7 @@ class Control {
         void setDeterminer( Player & Determiner);
         Player & getDeterminer();
         int findPlayerIndex ( const Player & player );
+        void setPlayersReady();
 
 
     private:

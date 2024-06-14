@@ -224,7 +224,6 @@ void Control::setWar()
 {
     // Player player;
     selectWarPlace(getDeterminer());
-    std::cout << DeterminerOfWar.getName() << std::endl;
     int startIndex = findPlayerIndex(DeterminerOfWar);
     int currentIndex = startIndex ;
     system("cls");
@@ -236,6 +235,7 @@ void Control::setWar()
             std::cout << " The War Is Over " << warPlace << '\n';
             selectMove(players[currentIndex], currentIndex);
             currentIndex = (currentIndex + 1) % players.size();
+            sleep(5);
             system("cls");
         }
     }
@@ -246,7 +246,7 @@ void Control::setWar()
         winner.addProvinces(warPlace);
         auto elementFound = std::find(provinces.begin(), provinces.end(), warPlace);
         if (elementFound != provinces.end())
-            provinces.erase(elementFound);
+        provinces.erase(elementFound);
         setDeterminer(winner);
     }
     else 
@@ -255,7 +255,7 @@ void Control::setWar()
         setDeterminer(players[playersIndices.back()]);
     }
 }
-void Control::setDeterminer ( Player & Determiner)
+void Control::setDeterminer ( Player & Determiner )
 {
     DeterminerOfWar = Determiner;
 }
@@ -523,6 +523,13 @@ bool Control::endEachWar()
     }
     return flag;
 }
+void Control::setPlayersReady()
+{
+    for ( auto & player : players )
+    {
+        player.setPass(false);
+    } 
+}
 bool Control::endGame()
 {
     std::vector<Player> gamePlayers;
@@ -561,6 +568,7 @@ void Control::run()
     //selectWarPlace(getDeterminer());
     while (!endGame())
     {
+        setPlayersReady();
         setWar();
     }
 }
