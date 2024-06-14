@@ -10,17 +10,10 @@ void SpringCard::setPriority()
 }
 void SpringCard::useCard ( std::vector <Player> & players , int numPlayer ) 
 {
-    std::vector <int> indicesPlayers = findMaxPlayer ( players );
-    for ( int i = 0 ; i < players.size() ; i++ )
+    std::vector<int> indicesPlayers = findMaxPlayer ( players );
+    for ( auto index : indicesPlayers )
     {
-        for ( auto num : indicesPlayers )
-        {
-            if ( i == indicesPlayers.back() )
-            {
-                players[i].setScorePlayer (players[i].getScorePlayer() + 3);
-                indicesPlayers.pop_back();
-            }  
-        }
+        players[index].setScorePlayer (players[index].getScorePlayer() + 3);
     }
 }
 std::vector<int> SpringCard::findMaxPlayer ( std::vector <Player> players )
@@ -29,8 +22,10 @@ std::vector<int> SpringCard::findMaxPlayer ( std::vector <Player> players )
     int max = findMaxScore (players);
     for ( int i = 0 ; i < players.size() ; i++ )
     {
-        if (  players[i].maxYcards() == max )
+        if ( players[i].maxYcards() == max )
+        {
             indices.push_back(i) ;
+        }
     }
     return indices ;
 }

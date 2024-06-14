@@ -254,7 +254,10 @@ void Control::selectMove(Player & player, int index)
             player.showHandCards();
             player.recognizeYellow();
             player.selectCard();
+            if ((player.getSeason() == "winter" || player.getSeason() == "spring"))
             setSeason(player.getSeason()); 
+            // std::cout << season << "****" ;
+            // sleep(3);
         }
         else if (move[index] == "help")
         {
@@ -443,30 +446,27 @@ void Control::cardAction()
     DrummerCard drummer;
     PrincesCard prince;
     // winter -- drummer -- spring -- princes
+
+    std::cout << "\n~~~" << season << "\n" ;
     if (season == "winter")
     {
-        sleep(3);
-        std::cout << "before using";
-        sleep(3);
         winter.useCard(players, -1);
-        sleep(3);
-        std::cout << "after using";
-        sleep(3);
     }
 
     for (int i = 0; i <  getPlayerNumber(); i++)
     {
-        sleep(3);
-        std:: cout << " for winter ";
-        sleep(3);
         if (players[i].hasDrummer())
         {
             drummer.useCard(players, i);
         }
     }
 
+
     if (season == "spring")
         spring.useCard(players, -1);
+
+    for ( int i = 0 ; i < playerNumber; i++ )
+        std::cout << "\nafter spring score:" << players[i].getScorePlayer() << "~";
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
@@ -479,6 +479,7 @@ void Control::cardAction()
         }
     }
 }
+
 void Control::setSeason(std::string season)
 {
     this->season = season;
