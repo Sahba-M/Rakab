@@ -26,9 +26,10 @@ void SpringCard::useCard ( std::vector <Player> & players , int numPlayer )
 std::vector<int> SpringCard::findMaxPlayer ( std::vector <Player> players )
 {
     std::vector <int> indices ;
+    int max = findMaxScore (players);
     for ( int i = 0 ; i < players.size() ; i++ )
     {
-        if ( findMaxScore (players) == players[i].maxYcards() )
+        if (  players[i].maxYcards() == max )
             indices.push_back(i) ;
     }
     return indices ;

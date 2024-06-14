@@ -116,7 +116,11 @@ void Player::selectCard()
             
         }
         else if ( tempName == "spring" || tempName == "winter" )
+        {
             setSeason(tempName);
+            std::cout << " select card ";
+            sleep(3);
+        }
         if (elementFound != hand.end())
         {
             found = true;

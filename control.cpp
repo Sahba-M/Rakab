@@ -238,7 +238,7 @@ void Control::setWar()
     cardAction();
     std::cout << winEachWar().getName() << " WINS! ";
 }
-void Control::selectMove(Player &player, int index)
+void Control::selectMove(Player & player, int index)
 {
     move.resize(playerNumber, "temp");
     char choice ;
@@ -444,7 +444,11 @@ void Control::cardAction()
     PrincesCard prince;
     // winter -- drummer -- spring -- princes
     if (season == "winter")
+    {
+        std::cout << "before using";
         winter.useCard(players, -1);
+        std::cout << "after using";
+    }
 
     for (int i = 0; i <  getPlayerNumber(); i++)
     {
