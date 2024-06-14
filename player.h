@@ -43,6 +43,7 @@ class Player {
         void yellowInScore();
         bool ifBurn();
         bool winGame();
+        int getNumProvinces();
 
     private:
         int age ;

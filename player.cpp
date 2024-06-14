@@ -300,6 +300,10 @@ void Player::yellowInScore()
     }
     setScorePlayer(sum);
 }
+int Player::getNumProvinces()
+{
+    return (capturedProvinces.size());
+}
 bool Player::winGame()
 {
     int proximity = 0;
