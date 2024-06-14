@@ -237,7 +237,10 @@ void Control::setWar()
     }
     cardAction();
     if (winEachWar())
+    {
         std::cout << winner.getName() << " WINS! ";
+        winner.addProvinces(warPlace);
+    }
     else 
         std::cout << " !NO WINNER! ";
 }
