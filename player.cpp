@@ -275,12 +275,3 @@ void Player::yellowInScore()
     }
     setScorePlayer(sum);
 }
-std::vector<int> Player::ycardsToInt()
-{
-    std::vector <int> Ycards ;
-    for ( int i = 0 ; i < yellowCards.size() ; i++ )
-    {
-        Ycards.push_back(stoi( yellowCards[i]->getName()));
-    }
-    return Ycards;
-}

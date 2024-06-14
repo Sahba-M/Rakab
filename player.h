@@ -41,7 +41,6 @@ class Player {
         bool getPass();
         bool hasYellowCard();
         void yellowInScore();
-        std::vector<int> ycardsToInt();
 
     private:
         int age ;
@@ -54,7 +53,7 @@ class Player {
 
         int cardsEachPlayer;
         int scorePlayer;
-        std::string season;
+        std::string season = "deafult";
         bool pass = false;
 
 

@@ -10,7 +10,11 @@ void WinterCard::setPriority()
 
 void WinterCard::useCard ( std::vector <Player> & players, int numPlayer )
  {
-    std::vector<std::shared_ptr<Card>> Ycards = players[numPlayer].getYcards();
-    int scores = Ycards.size();  
-    players[numPlayer].setScorePlayer(scores);
+   // std::cout << "*use winter*" ;
+   std::vector<std::shared_ptr<Card>> Ycards = players[numPlayer].getYcards();
+   int scores = Ycards.size();  
+   for ( auto player : players )
+   {
+      players[numPlayer].setScorePlayer(scores);
+   }
  }
