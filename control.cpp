@@ -505,5 +505,23 @@ bool Control::endEachWar()
     }
     return flag;
 }
+int Control::endGame()
+{
+    std::vector<Player> gamePlayers;
+    for( auto player : players)
+    {
+         if (player.winGame())
+         {
+            gamePlayers.push_back(player);
+         }   
+    }
+    system("cls");
+    for (int i = 0; i < gamePlayers.size(); i++)
+    {
+        std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER... \n ";
+    }
+    
+}
+
 
 
