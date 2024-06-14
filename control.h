@@ -38,6 +38,7 @@ class Control {
         void showPurpleCard();
         bool endEachWar();
         Player winEachWar();
+        bool ifBurn();
 
     private:
         std::vector<std::shared_ptr<Card>> cards;

@@ -168,10 +168,27 @@ bool Player::hasYellowCard()
     {
         if (std::dynamic_pointer_cast<YellowCard>(card))
         {
-            return false;
+            return true;
         } 
     }
-    return true;
+    return false;
+}
+bool Player::ifBurn()
+{
+    char response;
+    if (!hasYellowCard())
+    {
+       std::cout << "\n\n "<< getName() << " You Have No Yellow Card!!! " ;
+       std::cout <<  "\n Do You Want To Burn Your Cards? (Y/N) ";
+       std::cin >> response;
+    }
+    if (response == 'Y')
+    {
+        return true;
+    } else
+    {
+        return false;
+    }  
 }
 void Player::showYcard()
 {

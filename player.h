@@ -41,6 +41,7 @@ class Player {
         bool getPass();
         bool hasYellowCard();
         void yellowInScore();
+        bool ifBurn();
 
     private:
         int age ;

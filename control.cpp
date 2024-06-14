@@ -241,8 +241,9 @@ void Control::setWar()
 void Control::selectMove(Player &player, int index)
 {
     move.resize(playerNumber, "temp");
-    char choice;
-    if (move[index] != "pass" && player.getHandSize() != 0)
+    char choice ;
+   
+    if (move[index] != "pass" && player.getHandSize() != 0 && (!player.ifBurn()))
     {
         std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): ";
         std::cin >> move[index];
@@ -488,3 +489,5 @@ bool Control::endEachWar()
     }
     return flag;
 }
+
+
