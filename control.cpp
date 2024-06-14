@@ -243,7 +243,7 @@ void Control::selectMove(Player &player, int index)
     move.resize(playerNumber, "temp");
     char choice ;
    
-    if (move[index] != "pass" && player.getHandSize() != 0 && (!player.ifBurn()))
+    if (move[index] != "pass" && player.getHandSize() != 0 )
     {
         std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): ";
         std::cin >> move[index];
@@ -448,6 +448,8 @@ void Control::cardAction()
 
     for (int i = 0; i <  getPlayerNumber(); i++)
     {
+        sleep(3);
+        std:: cout << " for winter ";
         if (players[i].hasDrummer())
         {
             drummer.useCard(players, i);
