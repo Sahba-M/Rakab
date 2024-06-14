@@ -38,11 +38,11 @@ class Control {
         void showPurpleCard();
         bool endEachWar();
         bool winEachWar();
-        int endGame();
+        void endGame();
         void run();
-        void setDeterminer( Player Determiner);
+        void setDeterminer( Player & Determiner);
         Player & getDeterminer();
-      
+        int findPlayerIndex ( const Player & player );
 
 
     private:

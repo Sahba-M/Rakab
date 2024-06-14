@@ -12,7 +12,9 @@ int main()
     control.distributeCards();
     //control.showPlayersHand();
     control.readProvinces();
-    control.setWar();
+    // control.setWar();
+    control.run();
+
     
 
     return 0;

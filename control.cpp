@@ -224,14 +224,25 @@ void Control::setWar()
 {
     Player player;
     selectWarPlace(getDeterminer());
+    std::cout << DeterminerOfWar.getName() << std::endl;
+    int startIndex = findPlayerIndex(DeterminerOfWar);
+    int currentIndex = startIndex ;
     system("cls");
     while (!endEachWar())
     {
-        for (int j = 0; j < getPlayerNumber(); j++)
+        // 4 = 0 1 2 3 .... 
+        // starter -> 2
+        // i = 2 ... i < 4 + 4 - 2 = 2 * 4 - 2 
+
+
+
+        for ( int i = 0 ; i < getPlayerNumber()  ; i++ )
         {
+
             showPlayGround();
             std::cout << " The War Is Over " << warPlace << '\n';
-            selectMove(players[j], j);
+            selectMove(players[currentIndex], currentIndex);
+            currentIndex = (currentIndex + 1) % players.size();
             system("cls");
         }
     }
@@ -243,7 +254,10 @@ void Control::setWar()
         setDeterminer(winner);
     }
     else 
+    {
         std::cout << " This War Has No Winners!!! ";
+
+    }
 }
 void Control::run()
 {
@@ -251,7 +265,7 @@ void Control::run()
     //selectWarPlace(getDeterminer());
     setWar();
 }
-void Control::setDeterminer ( Player Determiner)
+void Control::setDeterminer ( Player & Determiner)
 {
     DeterminerOfWar = Determiner;
 }
@@ -521,7 +535,7 @@ bool Control::endEachWar()
     }
     return flag;
 }
-int Control::endGame()
+void Control::endGame()
 {
     std::vector<Player> gamePlayers;
     for( auto player : players)
@@ -538,6 +552,15 @@ int Control::endGame()
     }
     
 }
-
+int Control::findPlayerIndex ( const Player & player ) 
+{
+    for ( int i = 0 ; i < players.size() ; i++ ) 
+    {
+        if ( players[i].getName() == player.getName() ) {
+            return i ;
+        }
+    }
+    return -1; // player not found
+}
 
 
