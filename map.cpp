@@ -6,19 +6,20 @@ void Map::readMatrix ()
     if (!input.is_open()) 
         std::cerr << " Unable to open file ! " << std::endl ;
     int number;
-    while (input.eof()) 
+    while (!input.eof()) 
     {
-        std::vector <int> row;
+
+        std::vector <int> row ;
         for ( int i = 0 ; i < 14 ; i++ ) 
         {
             if ( input >> number )   
             {
-            row.push_back(number);
+                row.push_back(number);
             }
         }
         if (!row.empty()) 
         {
-        adjacencyMatrix.push_back(row);
+            adjacencyMatrix.push_back(row);
         }
     }
     input.close();  
@@ -45,5 +46,24 @@ bool Map::checkAdjacent ( const std::string & p1 , const std::string & p2 )
 {
     int index1 = provinceMap[p1];
     int index2 = provinceMap[p2];
-    return adjacencyMatrix[index1][index2] == 1;
+    if (adjacencyMatrix[index1][index2] == 1)
+        return true;
+    else    
+        return false;
 }
+// int main()
+// {
+//     Map map ;
+//     map.readUnorderedMap();
+//     map.readMatrix();
+//     std::cout << map.provinceMap["LIA"] << std::endl;
+//     std::cout << map.provinceMap["ROLLO"] << std::endl;
+//     std::cout << map.provinceMap["ENNA"] << std::endl;
+//     std::cout << map.provinceMap.size() << std::endl;
+//     std::cout << map.adjacencyMatrix.size() << std::endl;
+//     std::cout << map.adjacencyMatrix[map.adjacencyMatrix.size()-1].size() << std::endl;
+
+//     std::cout << map.checkAdjacent("LIA" , "ROLLO");
+//     std::cout << " " ;
+//     std::cout << map.checkAdjacent("ENNA" , "ROLLO");
+// }

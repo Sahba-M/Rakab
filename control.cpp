@@ -222,7 +222,8 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
-    
+    std::cout << " set war begin ";
+    sleep(1);
     selectWarPlace(getDeterminer());
     int startIndex = findPlayerIndex(DeterminerOfWar);
     int currentIndex = startIndex ;
@@ -250,6 +251,7 @@ void Control::setWar()
         provinces.erase(elementFound);
         std::cout << " after erasing ..." ;
         setDeterminer(winner);
+        std::cout << "after setDeter";
         
     }
     else 
@@ -537,7 +539,7 @@ void Control::setPlayersReady()
     for ( auto & player : players )
     {
         player.setPass(false);
-    } 
+    }
 }
 bool Control::endGame()
 {
@@ -550,8 +552,7 @@ bool Control::endGame()
           std::cout << " _ { " << tempPlayer[i].getName() << " } " << " IS WINER... \n ";
        }  
        return true;  
-    } else
-    {
+    } 
         for( auto & player : players)
         {
             if (player.winGame())
@@ -568,8 +569,7 @@ bool Control::endGame()
         if ( gamePlayers.size() != 0 )
             return true;
         else 
-            return false;
-    } 
+            return false; 
 }
 int Control::findPlayerIndex ( const Player & player ) 
 {
@@ -613,11 +613,14 @@ std::vector<Player> Control::maxProvinces()
 }
 void Control::burnCards()
 {
+    std::cout << " before for ";
+
     for ( auto & player : players )
     {
         player.burnCardsPlayer(); 
         allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end());
     }
+    std::cout << " after for ";
 }
 void Control::chargeCards()
 {

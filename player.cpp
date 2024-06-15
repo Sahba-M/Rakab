@@ -305,23 +305,38 @@ int Player::getNumProvinces()
 }
 bool Player::winGame()
 {
+    for (int i = 0; i < capturedProvinces.size(); i++)
+    {
+        std::cout << " ~~~ " << capturedProvinces[i] ;
+    }
+    
+
+
     int proximity = 0;
     Map map;
-   for (int i = 0 ; i < capturedProvinces.size() ; i++)
+    map.readMatrix();
+    map.readUnorderedMap();
+    for (int i = 0 ; i < capturedProvinces.size() ; i++)
+    {
+        std::cout << " win game for 1 begin ";
+       for (int j = i + 1 ; j < capturedProvinces.size() ; j++)
+       {
+         std::cout << " win game for 2 begin ";
+         if (map.checkAdjacent(capturedProvinces[i], capturedProvinces[j]))
+         {
+             std::cout << " if win game ";
+             // sleep(2);
+             proximity++;
+         }  
+       }
+    }
+   if ( proximity == 3 || capturedProvinces.size() == 5 )
    {
-      for (int j = i + 1 ; j < capturedProvinces.size() ; j++)
-      {
-        if (map.checkAdjacent( capturedProvinces[i], capturedProvinces[j] ))
-        {
-            proximity++;
-        }  
-      }
-   }
-   if ( proximity >= 3 || capturedProvinces.size() >= 5 )
-   {
-     return true;
-   } else
+        return true;
+   } 
+        std::cout << "false return";
         return false;
+
 }
 void Player::burnCardsPlayer()
 {
