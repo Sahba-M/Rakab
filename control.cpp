@@ -175,7 +175,7 @@ void Control::getInformation()
 void Control::distributeCards()
 {
     std::cin.ignore();
-    for (Player &player : players)
+    for ( Player & player : players )
     {
         std::cout << " I Want To Give The Cards To  _" << player.getName() << "_  Please Give Him/Her The System \n";
         for (int i = 0; i < player.getCardsEachPlayer(); i++)
@@ -599,4 +599,11 @@ std::vector<Player> & Control::maxProvinces()
     }
     return maxProvinces;
 }
-
+void Control::burnCards()
+{
+    for ( auto & player : players )
+    {
+        player.burnCardsPlayer(); 
+        allBurnedCards.insert(allBurnedCards.begin(), player.getBurnedCards().begin(), player.getBurnedCards().end());
+    }
+}

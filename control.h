@@ -45,11 +45,13 @@ class Control {
         int findPlayerIndex ( const Player & player );
         void setPlayersReady();
         std::vector<Player> & maxProvinces();
+        void burnCards();
 
 
 
     private:
         std::vector<std::shared_ptr<Card>> cards;
+        std::vector<std::shared_ptr<Card>> allBurnedCards;
         std::vector<Player> players;
         std::vector<std::string> move;
         std::vector<int> playersIndices;
