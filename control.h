@@ -44,9 +44,9 @@ class Control {
         Player & getDeterminer();
         int findPlayerIndex ( const Player & player );
         void setPlayersReady();
-        std::vector<Player> & maxProvinces();
+        std::vector<Player> maxProvinces();
         void burnCards();
-        bool chargeCards();
+        void chargeCards();
 
 
 

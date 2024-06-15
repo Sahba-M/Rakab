@@ -582,7 +582,7 @@ void Control::run()
         setWar();
     }
 }
-std::vector<Player> & Control::maxProvinces()
+std::vector<Player> Control::maxProvinces()
 {
     std::vector<Player> maxProvinces;
     int max = 0;
@@ -594,7 +594,7 @@ std::vector<Player> & Control::maxProvinces()
     {
        if (max == players[i].getNumProvinces())
        {
-         maxProvinces.push_back(players[i]);
+            maxProvinces.push_back(players[i]);
        }  
     }
     return maxProvinces;
@@ -607,7 +607,7 @@ void Control::burnCards()
         allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end());
     }
 }
-bool Control::chargeCards()
+void Control::chargeCards()
 {
     int counter = 0 ;
     for ( int i = 0 ; i < getPlayerNumber() ; i++ )
