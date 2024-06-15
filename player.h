@@ -45,9 +45,9 @@ class Player {
         bool winGame();
         int getNumProvinces();
         void burnCardsPlayer();
-        std::vector<std::shared_ptr<Card>> & Player::getBurnedCards();
+        std::vector<std::shared_ptr<Card>> & getBurnedCards();
         void burnHand();
-        std::vector<std::shared_ptr<Card>> & Player::getHandCards();
+        std::vector<std::shared_ptr<Card>> & getHandCards();
 
 
 
