@@ -178,7 +178,7 @@ void Control::distributeCards()
     for ( Player & player : players )
     {
         std::cout << " I Want To Give The Cards To  _" << player.getName() << "_  Please Give Him/Her The System \n";
-        for (int i = 0; i < player.numCardsOfPlayer(); i++)
+        for (int i = 0 ; i < player.numCardsOfPlayer() ; i++)
         {
             if (!cards.empty())
             {
@@ -222,7 +222,7 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
-    // Player player;
+    
     selectWarPlace(getDeterminer());
     int startIndex = findPlayerIndex(DeterminerOfWar);
     int currentIndex = startIndex ;
@@ -231,29 +231,39 @@ void Control::setWar()
     {
         for ( int i = 0 ; i < getPlayerNumber()  ; i++ )
         {
+            showAllCaptured();
             showPlayGround();
-            std::cout << " The War Is Over " << warPlace << '\n';
+            std::cout << "\n\n The War Is Over " << warPlace << "\n\n ";
             selectMove(players[currentIndex], currentIndex);
             currentIndex = (currentIndex + 1) % players.size();
-            sleep(5);
             system("cls");
         }
     }
     cardAction();
     if (winEachWar())
     {
-        std::cout << " >>> " << winner.getName() << " <<< " <<  " Is The Winner Of This Hand!!! \n ";
-        winner.addProvinces(warPlace);
+        std::cout << " >>> " << winner.getName() << " <<< " <<  " Is The Winner Of This Round!!! \n ";
+        sleep(5);
+        std::cout << warPlace << " is warPlace " ;
         auto elementFound = std::find(provinces.begin(), provinces.end(), warPlace);
         if (elementFound != provinces.end())
         provinces.erase(elementFound);
+        std::cout << " after erasing ..." ;
         setDeterminer(winner);
+        
     }
     else 
     {
         std::cout << " This War Has No Winners!!! ";
+        sleep(5);
         setDeterminer(players[playersIndices.back()]);
     }
+
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        move[i] = "temp";
+    }
+    
 }
 void Control::setDeterminer ( Player & Determiner )
 {
@@ -265,7 +275,7 @@ Player & Control::getDeterminer()
 }
 void Control::selectMove(Player & player, int index)
 {
-    move.resize(playerNumber, "temp");
+    move.resize(playerNumber , "temp");
     char choice ;
    
     if (move[index] != "pass" && player.getHandSize() != 0 )
@@ -281,8 +291,7 @@ void Control::selectMove(Player & player, int index)
             player.selectCard();
             if ((player.getSeason() == "winter" || player.getSeason() == "spring"))
             setSeason(player.getSeason()); 
-            // std::cout << season << "****" ;
-            // sleep(3);
+            
         }
         else if (move[index] == "help")
         {
@@ -311,14 +320,13 @@ void Control::selectMove(Player & player, int index)
         }
         else
         {
-            std::cout << " ERROR : Invalid Move... ";
+            std::cout << " ERROR : Invalid Move... \n ";
             selectMove(player, index);
         }
     }
     else
     {
         playersIndices.push_back(index);
-        std::cout << index << " player\n";
         player.setPass(true);
     }
 }
@@ -351,7 +359,6 @@ void Control::selectWarPlace(Player &player)
 
         if (elementFound != provinces.end())
         {
-            // provinces.erase(elementFound);
             found = true;
             break;
         }
@@ -373,6 +380,7 @@ int Control::getProvinceNumber()
 }
 bool Control::winEachWar()
 {
+    int winnerIndex ;
     int max = 0;
     std::vector<Player> winPlayers;
     for (auto player : players)
@@ -384,11 +392,13 @@ bool Control::winEachWar()
         if (max == players[j].getScorePlayer())
         {
             winPlayers.push_back(players[j]);
+            winnerIndex = j ;
         }
     }
     if (winPlayers.size() == 1)
     {
         winner = winPlayers[0];
+        players[winnerIndex].addProvinces(warPlace);
         return true;
     }
     else
@@ -473,7 +483,7 @@ void Control::cardAction()
     PrincesCard prince;
     // winter -- drummer -- spring -- princes
 
-    std::cout << "\n~~~" << season << "\n" ;
+   
     if (season == "winter")
     {
         winter.useCard(players, -1);
@@ -542,25 +552,24 @@ bool Control::endGame()
        return true;  
     } else
     {
-    for( auto player : players)
-    {
-         if (player.winGame())
-         {
-            gamePlayers.push_back(player);
-         }   
-    }
-    system("cls");
-    for (int i = 0; i < gamePlayers.size(); i++)
-    {
-        std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER... \n ";
-    }
+        for( auto & player : players)
+        {
+            if (player.winGame())
+            {
+               gamePlayers.push_back(player);
+            }   
+        }
+        system("cls");
+        for (int i = 0; i < gamePlayers.size(); i++)
+        {
+            std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER... \n ";
+        }
 
-    if ( gamePlayers.size() != 0 )
-        return true;
-    else 
-        return false;
-    }
-    
+        if ( gamePlayers.size() != 0 )
+            return true;
+        else 
+            return false;
+    } 
 }
 int Control::findPlayerIndex ( const Player & player ) 
 {
@@ -575,12 +584,15 @@ int Control::findPlayerIndex ( const Player & player )
 void Control::run()
 {
     setDeterminer( youngestPlayer());
-    //selectWarPlace(getDeterminer());
     while (!endGame())
     {
+        std::cout << " while run ";
         setPlayersReady();
         setWar();
+        burnCards();
     }
+    std::cout << "after while ";
+
 }
 std::vector<Player> Control::maxProvinces()
 {
@@ -629,5 +641,18 @@ void Control::chargeCards()
     cards.insert(cards.end(), allBurnedCards.begin(), allBurnedCards.end());
     shuffleCards();
     distributeCards();
+}
+void Control::showAllCaptured()
+{
+    std::cout << " The Captured Privinces Is : \n ";
+    std::cout << " --------------------------- \n";
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        players[i].showCapturedProvinces();
+    }
+    std::cout << " --------------------------- \n\n";
+
+
+    
 }
 

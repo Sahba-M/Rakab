@@ -144,7 +144,6 @@ void Player::setSeason(std::string season)
 }
 std::string Player:: getSeason()
 {
-    std::cout << "getseason" ;
     return season;
 }
 void Player::showUsedCards()
@@ -340,6 +339,16 @@ void Player::burnHand()
 std::vector<std::shared_ptr<Card>> & Player::getHandCards()
 {
     return hand ;
+}
+void Player::showCapturedProvinces()
+{
+    std::cout << getName() << " : " ;
+    for (int i = 0; i < capturedProvinces.size(); i++)
+    {
+        std::cout << capturedProvinces[i] << " - ";
+    }
+    std::cout << '\n';
+    
 }
 
 
