@@ -324,5 +324,13 @@ bool Player::winGame()
    } else
         return false;
 }
-
+void Player::burnCardsPlayer()
+{
+    burnedCards = usedCards ;
+    usedCards.resize(0);
+}
+std::vector<std::shared_ptr<Card>> & Player::getBurnedCards()
+{
+    return burnedCards ;
+}
 

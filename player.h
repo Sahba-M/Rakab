@@ -44,6 +44,9 @@ class Player {
         bool ifBurn();
         bool winGame();
         int getNumProvinces();
+        void burnCardsPlayer();
+        std::vector<std::shared_ptr<Card>> & Player::getBurnedCards();
+
 
     private:
         int age ;
@@ -52,6 +55,7 @@ class Player {
         std::vector<std::shared_ptr<Card>> hand ; //cards in hand
         std::vector<std::shared_ptr<Card>> usedCards ; //Cards on the floor
         std::vector<std::shared_ptr<Card>> yellowCards;
+        std::vector<std::shared_ptr<Card>> burnedCards;
         std::vector<std::string> capturedProvinces;
 
         int cardsEachPlayer;
