@@ -222,8 +222,6 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
-    std::cout << " set war begin ";
-    sleep(1);
     selectWarPlace(getDeterminer());
     int startIndex = findPlayerIndex(DeterminerOfWar);
     int currentIndex = startIndex ;
@@ -234,7 +232,7 @@ void Control::setWar()
         {
             showAllCaptured();
             showPlayGround();
-            std::cout << "\n\n The War Is Over " << warPlace << "\n\n ";
+            std::cout << "\n The War Is Over " << warPlace << "\n\n ";
             selectMove(players[currentIndex], currentIndex);
             currentIndex = (currentIndex + 1) % players.size();
             system("cls");
@@ -245,13 +243,10 @@ void Control::setWar()
     {
         std::cout << " >>> " << winner.getName() << " <<< " <<  " Is The Winner Of This Round!!! \n ";
         sleep(5);
-        std::cout << warPlace << " is warPlace " ;
         auto elementFound = std::find(provinces.begin(), provinces.end(), warPlace);
         if (elementFound != provinces.end())
         provinces.erase(elementFound);
-        std::cout << " after erasing ..." ;
         setDeterminer(winner);
-        std::cout << "after setDeter";
         
     }
     else 
@@ -334,12 +329,12 @@ void Control::selectMove(Player & player, int index)
 }
 void Control::showPlayGround()
 {
-    std::cout << "---------------------\n";
+    std::cout << "--------------------------- \n";
     for (int i = 0; i < players.size(); i++)
     {
         players[i].showUsedCards();
     }
-    std::cout << "---------------------\n";
+    std::cout << "--------------------------- \n";
 }
 void Control::selectWarPlace(Player &player)
 {
@@ -549,7 +544,7 @@ bool Control::endGame()
        std::vector<Player> tempPlayer = maxProvinces();
        for (int i = 0; i < tempPlayer.size(); i++)
        {
-          std::cout << " _ { " << tempPlayer[i].getName() << " } " << " IS WINER... \n ";
+          std::cout << " _ { " << tempPlayer[i].getName() << " } " << " IS WINER ... \n ";
        }  
        return true;  
     } 
@@ -563,7 +558,7 @@ bool Control::endGame()
         system("cls");
         for (int i = 0; i < gamePlayers.size(); i++)
         {
-            std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER... \n ";
+            std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER ... \n ";
         }
 
         if ( gamePlayers.size() != 0 )
@@ -583,15 +578,19 @@ int Control::findPlayerIndex ( const Player & player )
 }
 void Control::run()
 {
+    setCards();
+    shuffleCards(); 
+    controlNumber();
+    getInformation();
+    distributeCards();
+    readProvinces();
     setDeterminer( youngestPlayer());
     while (!endGame())
     {
-        std::cout << " while run ";
         setPlayersReady();
         setWar();
         burnCards();
     }
-    std::cout << "after while ";
 
 }
 std::vector<Player> Control::maxProvinces()
@@ -613,14 +612,12 @@ std::vector<Player> Control::maxProvinces()
 }
 void Control::burnCards()
 {
-    std::cout << " before for ";
 
     for ( auto & player : players )
     {
         player.burnCardsPlayer(); 
         allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end());
     }
-    std::cout << " after for ";
 }
 void Control::chargeCards()
 {
@@ -647,13 +644,13 @@ void Control::chargeCards()
 }
 void Control::showAllCaptured()
 {
-    std::cout << " The Captured Privinces Is : \n ";
-    std::cout << " --------------------------- \n";
+    std::cout << " The Captured Privinces Is : \n";
+    std::cout << "--------------------------- \n";
     for (int i = 0; i < getPlayerNumber(); i++)
     {
         players[i].showCapturedProvinces();
     }
-    std::cout << " --------------------------- \n\n";
+    std::cout << "--------------------------- \n\n";
 
 
     

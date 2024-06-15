@@ -51,19 +51,3 @@ bool Map::checkAdjacent ( const std::string & p1 , const std::string & p2 )
     else    
         return false;
 }
-// int main()
-// {
-//     Map map ;
-//     map.readUnorderedMap();
-//     map.readMatrix();
-//     std::cout << map.provinceMap["LIA"] << std::endl;
-//     std::cout << map.provinceMap["ROLLO"] << std::endl;
-//     std::cout << map.provinceMap["ENNA"] << std::endl;
-//     std::cout << map.provinceMap.size() << std::endl;
-//     std::cout << map.adjacencyMatrix.size() << std::endl;
-//     std::cout << map.adjacencyMatrix[map.adjacencyMatrix.size()-1].size() << std::endl;
-
-//     std::cout << map.checkAdjacent("LIA" , "ROLLO");
-//     std::cout << " " ;
-//     std::cout << map.checkAdjacent("ENNA" , "ROLLO");
-// }
