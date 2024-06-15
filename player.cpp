@@ -82,7 +82,7 @@ void Player::showProvinces()
     }
     
 }
-int Player::getCardsEachPlayer()//The number of cards to be dealt
+int Player::numCardsOfPlayer()//The number of cards to be dealt
 {
     return (10 + capturedProvinces.size());
 }
@@ -326,11 +326,20 @@ bool Player::winGame()
 }
 void Player::burnCardsPlayer()
 {
-    burnedCards = usedCards ;
+    burnedCards.insert(burnedCards.end(), usedCards.begin(), usedCards.end());
     usedCards.resize(0);
 }
 std::vector<std::shared_ptr<Card>> & Player::getBurnedCards()
 {
     return burnedCards ;
 }
+void Player::burnHand()
+{
+    burnedCards.insert(burnedCards.end(), hand.begin(), hand.end());
+}
+std::vector<std::shared_ptr<Card>> & Player::getHandCards()
+{
+    return hand ;
+}
+
 

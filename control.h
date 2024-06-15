@@ -46,6 +46,7 @@ class Control {
         void setPlayersReady();
         std::vector<Player> & maxProvinces();
         void burnCards();
+        bool chargeCards();
 
 
 

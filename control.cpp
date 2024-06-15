@@ -178,7 +178,7 @@ void Control::distributeCards()
     for ( Player & player : players )
     {
         std::cout << " I Want To Give The Cards To  _" << player.getName() << "_  Please Give Him/Her The System \n";
-        for (int i = 0; i < player.getCardsEachPlayer(); i++)
+        for (int i = 0; i < player.numCardsOfPlayer(); i++)
         {
             if (!cards.empty())
             {
@@ -604,6 +604,30 @@ void Control::burnCards()
     for ( auto & player : players )
     {
         player.burnCardsPlayer(); 
-        allBurnedCards.insert(allBurnedCards.begin(), player.getBurnedCards().begin(), player.getBurnedCards().end());
+        allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end());
     }
 }
+bool Control::chargeCards()
+{
+    int counter = 0 ;
+    for ( int i = 0 ; i < getPlayerNumber() ; i++ )
+    {
+        if ( players[i].getHandSize() != 0 )
+        {
+            counter++ ;
+        }
+    }
+    if ( counter == 0 || counter == 1 )
+    {
+        burnCards();
+        for ( auto & player : players )
+        {
+            player.burnHand();
+            allBurnedCards.insert(allBurnedCards.end(), player.getHandCards().begin(), player.getHandCards().end());
+        }
+    }
+    cards.insert(cards.end(), allBurnedCards.begin(), allBurnedCards.end());
+    shuffleCards();
+    distributeCards();
+}
+

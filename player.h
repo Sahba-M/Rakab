@@ -23,7 +23,7 @@ class Player {
         void showProvinces();
         void selectCard ();
         void showUsedCards();
-        int  getCardsEachPlayer(); //For the number of cards during distribution
+        int  numCardsOfPlayer(); //For the number of cards during distribution
         void showYcard();
         bool isFind ( std::shared_ptr<Card> Ycard ); //Find the yellow card
         std::vector<std::shared_ptr<Card>> getYcards();
@@ -46,6 +46,10 @@ class Player {
         int getNumProvinces();
         void burnCardsPlayer();
         std::vector<std::shared_ptr<Card>> & Player::getBurnedCards();
+        void burnHand();
+        std::vector<std::shared_ptr<Card>> & Player::getHandCards();
+
+
 
 
     private:
