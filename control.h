@@ -44,6 +44,8 @@ class Control {
         Player & getDeterminer();
         int findPlayerIndex ( const Player & player );
         void setPlayersReady();
+        std::vector<Player> & maxProvinces();
+
 
 
     private:

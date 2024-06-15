@@ -242,7 +242,7 @@ void Control::setWar()
     cardAction();
     if (winEachWar())
     {
-        std::cout << winner.getName() << " WINS! ";
+        std::cout << " >>> " << winner.getName() << " <<< " <<  " Is The Winner Of This Hand!!! \n ";
         winner.addProvinces(warPlace);
         auto elementFound = std::find(provinces.begin(), provinces.end(), warPlace);
         if (elementFound != provinces.end())
@@ -263,7 +263,6 @@ Player & Control::getDeterminer()
 {
     return DeterminerOfWar;
 }
-
 void Control::selectMove(Player & player, int index)
 {
     move.resize(playerNumber, "temp");
@@ -533,6 +532,16 @@ void Control::setPlayersReady()
 bool Control::endGame()
 {
     std::vector<Player> gamePlayers;
+    if ( provinces.size() == 0 )
+    {
+       std::vector<Player> tempPlayer = maxProvinces();
+       for (int i = 0; i < tempPlayer.size(); i++)
+       {
+          std::cout << " _ { " << tempPlayer[i].getName() << " } " << " IS WINER... \n ";
+       }  
+       return true;  
+    } else
+    {
     for( auto player : players)
     {
          if (player.winGame())
@@ -550,6 +559,7 @@ bool Control::endGame()
         return true;
     else 
         return false;
+    }
     
 }
 int Control::findPlayerIndex ( const Player & player ) 
@@ -572,5 +582,21 @@ void Control::run()
         setWar();
     }
 }
-
+std::vector<Player> & Control::maxProvinces()
+{
+    std::vector<Player> maxProvinces;
+    int max = 0;
+    for (int i = 0; i < players.size(); i++)
+    {
+       max = players[i].getNumProvinces() > max ? players[i].getNumProvinces() : max;
+    }
+    for (int i = 0; i < players.size(); i++)
+    {
+       if (max == players[i].getNumProvinces())
+       {
+         maxProvinces.push_back(players[i]);
+       }  
+    }
+    return maxProvinces;
+}
 
