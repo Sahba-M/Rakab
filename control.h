@@ -36,6 +36,7 @@ class Control {
         void burnCards();
         void chargeCards();
         void showAllCaptured();
+        void askBurn();
         bool endEachWar();
         bool winEachWar();
         bool endGame();

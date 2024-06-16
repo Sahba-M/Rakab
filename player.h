@@ -41,6 +41,7 @@ class Player {
         bool hasPrinces();
         bool getPass();
         bool hasYellowCard();
+        bool hasPurpleCard();
         bool ifBurn();
         bool winGame();
         std::string getName() const ;

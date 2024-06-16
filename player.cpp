@@ -176,6 +176,7 @@ void Player::burnCardsPlayer()
 void Player::burnHand()
 {
     burnedCards.insert(burnedCards.end(), hand.begin(), hand.end());
+    hand.resize(0);
 }
 void Player::showCapturedProvinces()
 {
@@ -239,10 +240,21 @@ bool Player::hasYellowCard()
     }
     return false;
 }
+bool Player::hasPurpleCard()
+{
+    for (const auto & card : hand)
+    {
+        if (std::dynamic_pointer_cast<PurpleCard>(card))
+        {
+            return true;
+        } 
+    }
+    return false;
+}
 bool Player::ifBurn()
 {
     char response;
-    if (!hasYellowCard())
+    if (!hasYellowCard() && hasPurpleCard())
     {
        std::cout << "\n\n "<< getName() << " You Have No Yellow Card!!! " ;
        std::cout <<  "\n Do You Want To Burn Your Cards? (Y/N) ";

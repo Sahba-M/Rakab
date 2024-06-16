@@ -279,12 +279,12 @@ void Control::selectWarPlace(Player &player)
     do
     {
         std::cout << "\n ";
-        std::cout << " --------------------------------------------------------------------------------------------------------\n ";
+        std::cout << "---------------------------------------------------------------------------------------------------------\n ";
         for (int i = 0; i < provinces.size(); i++)
         {
             std::cout << provinces[i] << "  ";
         }
-        std::cout << "\n --------------------------------------------------------------------------------------------------------\n\n ";
+        std::cout << "\n ---------------------------------------------------------------------------------------------------------\n\n ";
         std::cout << std::endl;
         if (found == true)
             std::cout << " " << player.getName() << " Enter Your Chosen Province: ";
@@ -432,7 +432,9 @@ void Control::run()
     {
         setPlayersReady();
         setWar();
+        askBurn();
         burnCards();
+        chargeCards();
     }
 }
 void Control::burnCards()
@@ -462,20 +464,31 @@ void Control::chargeCards()
             player.burnHand();
             allBurnedCards.insert(allBurnedCards.end(), player.getHandCards().begin(), player.getHandCards().end());
         }
+        cards.insert(cards.end(), allBurnedCards.begin(), allBurnedCards.end());
+        shuffleCards();
+        distributeCards();
     }
-    cards.insert(cards.end(), allBurnedCards.begin(), allBurnedCards.end());
-    shuffleCards();
-    distributeCards();
 }
 void Control::showAllCaptured()
 {
-    std::cout << " The Captured Privinces Is : \n";
+    std::cout << " The Captured Provinces Is : \n";
     std::cout << "\n";
     for (int i = 0; i < getPlayerNumber(); i++)
     {
         players[i].showCapturedProvinces();
     }
     std::cout << "\n\n";  
+}
+void Control::askBurn()
+{
+    for ( auto & player : players )
+    {
+        if (player.ifBurn()) 
+        {
+            player.burnHand();
+        }
+        system("cls");
+    }
 }
 int  Control::getPlayerNumber()
 {
@@ -595,7 +608,7 @@ Player & Control::getDeterminer()
 {
     return DeterminerOfWar;
 }
-Player &Control::youngestPlayer()
+Player & Control::youngestPlayer()
 {
 
     std::vector<int> playersAge;
