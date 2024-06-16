@@ -12,7 +12,7 @@ class Map {
         void readUnorderedMap ();
         bool checkAdjacent ( const std::string & p1 , const std::string & p2 );
 
-    // public:
+    private:
         std::vector < std::vector <int> > adjacencyMatrix ;
         std::unordered_map < std::string , int > provinceMap ;
 

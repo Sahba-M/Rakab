@@ -14,40 +14,40 @@ class Player {
         void setName ( std::string name );
         void setAge ( int age );
         void setColor ( std::string color );
-        std::string getName() const ;
-        std::string getColor() const ;
-        int  getAge() const ;
+        void setSeason(std::string season);
+        void setPass( bool pass );
+        void setScorePlayer ( int scorePlayer );
         void addCard (  std::shared_ptr<Card> card );
         void showHandCards();
         void addProvinces( std::string province );
         void showProvinces();
         void selectCard ();
         void showUsedCards();
-        int  numCardsOfPlayer(); //For the number of cards during distribution
         void showYcard();
-        bool isFind ( std::shared_ptr<Card> Ycard ); //Find the yellow card
-        std::vector<std::shared_ptr<Card>> getYcards();
-        void setScorePlayer ( int scorePlayer );
-        int  getScorePlayer();
         void recognizeYellow();
-        int maxYcards();
-        void setSeason(std::string season);
-        std::string getSeason();
-        bool hasDrummer();
-        bool hasPrinces();
-        int numberOfPrinces();
-        int getHandSize();
-        void setPass( bool pass );
-        bool getPass();
-        bool hasYellowCard();
         void yellowInScore();
-        bool ifBurn();
-        bool winGame();
-        int getNumProvinces();
         void burnCardsPlayer();
         void showCapturedProvinces();
-        std::vector<std::shared_ptr<Card>> & getBurnedCards();
         void burnHand();
+        int  getAge() const ;
+        int  getScorePlayer();
+        int  getHandSize();
+        int  getNumProvinces();
+        int  numCardsOfPlayer(); //For the number of cards during distribution
+        int  maxYcards();
+        int  numberOfPrinces();
+        bool isFind ( std::shared_ptr<Card> Ycard ); //Find the yellow card
+        bool hasDrummer();
+        bool hasPrinces();
+        bool getPass();
+        bool hasYellowCard();
+        bool ifBurn();
+        bool winGame();
+        std::string getName() const ;
+        std::string getColor() const ;
+        std::string getSeason();
+        std::vector<std::shared_ptr<Card>> getYcards();
+        std::vector<std::shared_ptr<Card>> & getBurnedCards();
         std::vector<std::shared_ptr<Card>> & getHandCards();
 
 

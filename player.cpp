@@ -46,18 +46,6 @@ void Player::setColor ( std::string color )
 {
     this->color = color ;
 }
-int Player::getAge() const 
-{
-    return age ;
-}
-std::string Player::getName() const 
-{
-    return name ;
-}
-std::string Player::getColor() const 
-{
-    return color ;
-}
 void Player::addCard ( std::shared_ptr<Card> card )
 {
     hand.push_back( card );
@@ -80,16 +68,10 @@ void Player::showProvinces()
     {
         std::cout << capturedProvinces[i] << " ";
     }
-    
-}
-int Player::numCardsOfPlayer()//The number of cards to be dealt
-{
-    return (10 + capturedProvinces.size());
 }
 void Player::selectCard()
 {
     std::shared_ptr <Card> card;
-    // recognizeYellow();
     std::string tempName;
     bool found = true;
     do
@@ -118,11 +100,7 @@ void Player::selectCard()
         }
         else if ( tempName == "spring" || tempName == "winter" )
         {
-            std::cout << " if select card";
-            sleep(3);
             setSeason(tempName);
-            std::cout << tempName << " season set shod ...";
-            sleep(4);
         }
         if (elementFound != hand.end())
         {
@@ -141,10 +119,6 @@ void Player::selectCard()
 void Player::setSeason(std::string season)
 {
     this->season = season;
-}
-std::string Player:: getSeason()
-{
-    return season;
 }
 void Player::showUsedCards()
 {
@@ -168,6 +142,91 @@ void Player::recognizeYellow()
               yellowCards.push_back(usedCard);
            }
      }
+}
+void Player::showYcard()
+{
+     for (const auto &  usedYcard : yellowCards) 
+     {
+        std::cout << usedYcard->getName() <<" --- ";
+     }
+} 
+void Player::setScorePlayer ( int scorePlayer )
+{
+    this -> scorePlayer = scorePlayer ;
+}
+void Player::setPass( bool pass )
+{
+    this -> pass = pass;
+}
+void Player::yellowInScore()
+{
+    int sum = 0 ;
+    recognizeYellow();
+    for (auto card : yellowCards)
+    {
+        sum += stoi(card->getName());
+    }
+    setScorePlayer(sum);
+}
+void Player::burnCardsPlayer()
+{
+    burnedCards.insert(burnedCards.end(), usedCards.begin(), usedCards.end());
+    usedCards.resize(0);
+}
+void Player::burnHand()
+{
+    burnedCards.insert(burnedCards.end(), hand.begin(), hand.end());
+}
+void Player::showCapturedProvinces()
+{
+    std::cout << " ---> " << getName() << " : " ;
+    for (int i = 0; i < capturedProvinces.size(); i++)
+    {
+        std::cout << capturedProvinces[i] << " - ";
+    }
+    std::cout << '\n';
+    
+}
+int Player::getAge() const 
+{
+    return age ;
+}
+int Player::getScorePlayer()
+{
+    return scorePlayer ;
+}
+int Player::maxYcards()
+{    
+    std::vector<int> yellowIntegers;
+    for (auto card: yellowCards)
+    {
+        yellowIntegers.push_back(stoi(card->getName()));
+    }
+    auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end());
+    return (*maxElement);   
+}
+int Player::numCardsOfPlayer()//The number of cards to be dealt
+{
+    return (10 + capturedProvinces.size());
+}
+int Player::numberOfPrinces()
+{
+  int counter = 0;
+    
+    for ( auto card : usedCards )
+    {
+        if (card->getName() == "princes")
+            counter++;
+    }
+    return counter;    
+}
+int Player::getHandSize()
+{
+    return hand.size();
+}
+int Player::getNumProvinces()
+{
+    return (capturedProvinces.size());
 }
 bool Player::hasYellowCard()
 {
@@ -197,14 +256,6 @@ bool Player::ifBurn()
         return false;
     }  
 }
-void Player::showYcard()
-{
-    //  recognizeYellow();
-     for (const auto &  usedYcard : yellowCards) 
-     {
-        std::cout << usedYcard->getName() <<" --- ";
-     }
-} 
 bool Player::isFind ( std::shared_ptr<Card> Ycard )//for finding yellow card
 {
     auto elementFound = std::find_if(yellowCards.begin(), yellowCards.end(), [Ycard](const std::shared_ptr<Card> & card) { return *card == *Ycard; });
@@ -218,28 +269,6 @@ bool Player::isFind ( std::shared_ptr<Card> Ycard )//for finding yellow card
         {
             return false ;
         }
-}
-std::vector<std::shared_ptr<Card>> Player::getYcards()
-{
-    return yellowCards ;
-}
-void Player::setScorePlayer ( int scorePlayer )
-{
-    this -> scorePlayer = scorePlayer ;
-}
-int Player::getScorePlayer()
-{
-    return scorePlayer ;
-}
-int Player::maxYcards()
-{    
-    std::vector<int> yellowIntegers;
-    for (auto card: yellowCards)
-    {
-        yellowIntegers.push_back(stoi(card->getName()));
-    }
-    auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end());
-    return (*maxElement);   
 }
 bool Player::hasDrummer()
 {
@@ -266,42 +295,9 @@ bool Player::hasPrinces()
         return false;
    }
 }
-int Player::numberOfPrinces()
-{
-  int counter = 0;
-    
-    for ( auto card : usedCards )
-    {
-        if (card->getName() == "princes")
-            counter++;
-    }
-    return counter;    
-}
-int Player::getHandSize()
-{
-    return hand.size();
-}
-void Player::setPass( bool pass )
-{
-    this -> pass = pass;
-}
 bool Player::getPass()
 {
     return pass;
-}
-void Player::yellowInScore()
-{
-    int sum = 0 ;
-    recognizeYellow();
-    for (auto card : yellowCards)
-    {
-        sum += stoi(card->getName());
-    }
-    setScorePlayer(sum);
-}
-int Player::getNumProvinces()
-{
-    return (capturedProvinces.size());
 }
 bool Player::winGame()
 {
@@ -326,32 +322,32 @@ bool Player::winGame()
         return false;
 
 }
-void Player::burnCardsPlayer()
+std::string Player:: getSeason()
 {
-    burnedCards.insert(burnedCards.end(), usedCards.begin(), usedCards.end());
-    usedCards.resize(0);
+    return season;
 }
-std::vector<std::shared_ptr<Card>> & Player::getBurnedCards()
+std::string Player::getName() const 
 {
-    return burnedCards ;
+    return name ;
 }
-void Player::burnHand()
+std::string Player::getColor() const 
 {
-    burnedCards.insert(burnedCards.end(), hand.begin(), hand.end());
+    return color ;
 }
 std::vector<std::shared_ptr<Card>> & Player::getHandCards()
 {
     return hand ;
 }
-void Player::showCapturedProvinces()
+std::vector<std::shared_ptr<Card>> & Player::getBurnedCards()
 {
-    std::cout << getName() << " : " ;
-    for (int i = 0; i < capturedProvinces.size(); i++)
-    {
-        std::cout << capturedProvinces[i] << " - ";
-    }
-    std::cout << '\n';
-    
+    return burnedCards ;
 }
+std::vector<std::shared_ptr<Card>> Player::getYcards()
+{
+    return yellowCards ;
+}
+
+
+
 
 

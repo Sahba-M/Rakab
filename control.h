@@ -13,13 +13,9 @@ class Control {
         Control(); 
         void setCards();
         void setPlayerNumber (int playerNumber);
-        int  getPlayerNumber();
         void controlNumber();
         void shuffleCards();
-        // void showCards();
-        Player & youngestPlayer();
         void getInformation();
-        std::string controlColors();
         void showColors();
         void distributeCards();
         void readProvinces();
@@ -29,37 +25,39 @@ class Control {
         void showPlayGround();
         void selectWarPlace (Player & player);
         void setProvinceNumber(int provinceNumber);
-        int  getProvinceNumber();
-        std::vector<Player> getPlayers();
         void guideGame();
         void guideCards();
         void cardAction();
         void setSeason( std::string season );
         void showPurpleCard();
-        bool endEachWar();
-        bool winEachWar();
-        bool endGame();
         void run();
         void setDeterminer( Player & Determiner);
-        Player & getDeterminer();
-        int findPlayerIndex ( const Player & player );
         void setPlayersReady();
-        std::vector<Player> maxProvinces();
         void burnCards();
         void chargeCards();
         void showAllCaptured();
+        bool endEachWar();
+        bool winEachWar();
+        bool endGame();
+        int  getPlayerNumber();
+        int findPlayerIndex ( const Player & player );
+        int  getProvinceNumber();
+        std::string controlColors();
+        std::vector<Player> getPlayers();
+        std::vector<Player> maxProvinces();
+        Player & getDeterminer();
+        Player & youngestPlayer();
 
 
 
     private:
         std::vector<std::shared_ptr<Card>> cards;
         std::vector<std::shared_ptr<Card>> allBurnedCards;
-        std::vector<Player> players;
-        std::vector<std::string> move;
-        std::vector<int> playersIndices;
-
         std::vector<std::string> provinces;
         std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
+        std::vector<std::string> move;
+        std::vector<Player> players;
+        std::vector<int> playersIndices;
 
         int playerNumber;
         int provinceNumber;

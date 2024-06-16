@@ -9,8 +9,6 @@ class ScarecrowCard : public PurpleCard {
         ScarecrowCard ();
         void useThisCard ( Player & player );
 
-    private:
-
 };
 
 #endif

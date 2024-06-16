@@ -13,10 +13,6 @@ void Card:: setScore(int score)
 {
     this->score = score;
 }
-int Card:: getScore()
-{
-    return score;
-}
 void Card::setName (std::string name)
 {
     this->name = name;
@@ -25,9 +21,12 @@ std::string Card::getName()
 {
     return name ;
 }
+int Card:: getScore()
+{
+    return score;
+}
 bool  Card::operator== (const Card & other)
 {
     return this->name == other.name;
 }
-
 

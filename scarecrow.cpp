@@ -9,8 +9,8 @@ void ScarecrowCard::useThisCard ( Player & player )
 {
     bool found = false;
     std::string selectYcard;
+    
     player.showYcard();
-    // system("cls");
     std::cout << "\n" << player.getName() << " Which Card Do You Want To Remove? : ";
     std::cin >> selectYcard;
     std::shared_ptr<Card> card = std::make_shared<YellowCard>(selectYcard);

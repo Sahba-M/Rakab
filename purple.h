@@ -8,18 +8,13 @@
 class PurpleCard : public Card {
 
     public:
-    PurpleCard();
-    PurpleCard ( std::string name );
-    virtual void setPriority() {};
-    // virtual void setPower() = 0;
-    virtual void useCard ( std::vector <Player> & players , int ) {};
+      PurpleCard();
+      PurpleCard ( std::string name );
+      virtual void setPriority() {};
+      virtual void useCard ( std::vector <Player> & players , int ) {};
 
    protected:
      int priority;
-
-
-   
-
 
 };
 

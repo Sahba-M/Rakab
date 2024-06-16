@@ -29,10 +29,6 @@ void Control::setPlayerNumber(int playerNumber)
 {
     this->playerNumber = playerNumber;
 }
-int Control::getPlayerNumber()
-{
-    return playerNumber;
-}
 void Control::controlNumber()
 {
     int counter = 0;
@@ -88,32 +84,6 @@ void Control::shuffleCards()
     std::mt19937 generator(randomDevice()); // random number generator (seed)
     std::shuffle(cards.begin(), cards.end(), generator);
 }
-Player &Control::youngestPlayer()
-{
-
-    std::vector<int> playersAge;
-    std::vector<int> youngestIndices;
-
-    for (int i = 0; i < playerNumber; i++)
-    {
-        playersAge.push_back(players[i].getAge());
-    }
-
-    int minAge = *min_element(playersAge.begin(), playersAge.end());
-
-    for (int i = 0; i < playersAge.size(); i++)
-    {
-        if (playersAge[i] == minAge)
-        {
-            youngestIndices.push_back(i);
-        }
-    }
-
-    srand(time(0));
-    int randomIndex = youngestIndices[rand() % youngestIndices.size()];
-    // std::cout << "The youngest person is: " << players[randomIndex].getName() << std::endl;
-    return players[randomIndex];
-}
 void Control::showColors()
 {
     std::cout << "\n ";
@@ -121,35 +91,6 @@ void Control::showColors()
     {
         std::cout << colors[i] << " ~ ";
     }
-}
-std::string Control::controlColors()
-{
-    bool found = true;
-    std::string chooseColor;
-    do
-    {
-        showColors();
-        if (found == true)
-            std::cout << std::endl
-                      << " Enter Your Chosen Color: ";
-
-        std::cin >> chooseColor;
-
-        auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
-
-        if (elementFound != colors.end())
-        {
-            colors.erase(elementFound);
-            found = true;
-            break;
-        }
-        else
-        {
-            std::cout << " \n ERROR: Please Enter Your Color Again : " << std::endl;
-            found = false;
-        }
-    } while (!found);
-    return chooseColor;
 }
 void Control::getInformation()
 {
@@ -177,7 +118,7 @@ void Control::distributeCards()
     std::cin.ignore();
     for ( Player & player : players )
     {
-        std::cout << " I Want To Give The Cards To  _" << player.getName() << "_  Please Give Him/Her The System \n";
+        std::cout << " I Want To Give The Cards To  > " << player.getName() << " <  Please Give Him/Her The System \n";
         for (int i = 0 ; i < player.numCardsOfPlayer() ; i++)
         {
             if (!cards.empty())
@@ -186,7 +127,6 @@ void Control::distributeCards()
                 cards.pop_back();
             }
         }
-
         std::cin.ignore();
         player.showHandCards();
 
@@ -232,7 +172,7 @@ void Control::setWar()
         {
             showAllCaptured();
             showPlayGround();
-            std::cout << "\n The War Is Over " << warPlace << "\n\n ";
+            std::cout << "\n The War Is Over => " << warPlace << "\n\n ";
             selectMove(players[currentIndex], currentIndex);
             currentIndex = (currentIndex + 1) % players.size();
             system("cls");
@@ -241,7 +181,7 @@ void Control::setWar()
     cardAction();
     if (winEachWar())
     {
-        std::cout << " >>> " << winner.getName() << " <<< " <<  " Is The Winner Of This Round!!! \n ";
+        std::cout << " >>> " << winner.getName() << " <<< " <<  " Is The Winner Of This Round!!! \n\n ";
         sleep(5);
         auto elementFound = std::find(provinces.begin(), provinces.end(), warPlace);
         if (elementFound != provinces.end())
@@ -265,10 +205,6 @@ void Control::setWar()
 void Control::setDeterminer ( Player & Determiner )
 {
     DeterminerOfWar = Determiner;
-}
-Player & Control::getDeterminer()
-{
-    return DeterminerOfWar;
 }
 void Control::selectMove(Player & player, int index)
 {
@@ -317,7 +253,7 @@ void Control::selectMove(Player & player, int index)
         }
         else
         {
-            std::cout << " ERROR : Invalid Move... \n ";
+            std::cout << " ERROR : Invalid Move... ";
             selectMove(player, index);
         }
     }
@@ -343,10 +279,12 @@ void Control::selectWarPlace(Player &player)
     do
     {
         std::cout << "\n ";
+        std::cout << " --------------------------------------------------------------------------------------------------------\n ";
         for (int i = 0; i < provinces.size(); i++)
         {
-            std::cout << provinces[i] << " ~ ";
+            std::cout << provinces[i] << "  ";
         }
+        std::cout << "\n --------------------------------------------------------------------------------------------------------\n\n ";
         std::cout << std::endl;
         if (found == true)
             std::cout << " " << player.getName() << " Enter Your Chosen Province: ";
@@ -370,42 +308,6 @@ void Control::selectWarPlace(Player &player)
 void Control::setProvinceNumber(int provinceNumber)
 {
     this->provinceNumber = provinceNumber;
-}
-int Control::getProvinceNumber()
-{
-    return provinceNumber;
-}
-bool Control::winEachWar()
-{
-    int winnerIndex ;
-    int max = 0;
-    std::vector<Player> winPlayers;
-    for (auto player : players)
-    {
-        max = player.getScorePlayer() > max ? player.getScorePlayer() : max;
-    }
-    for (int j = 0; j < getPlayerNumber(); j++)
-    {
-        if (max == players[j].getScorePlayer())
-        {
-            winPlayers.push_back(players[j]);
-            winnerIndex = j ;
-        }
-    }
-    if (winPlayers.size() == 1)
-    {
-        winner = winPlayers[0];
-        players[winnerIndex].addProvinces(warPlace);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-std::vector<Player> Control::getPlayers()
-{
-    return players;
 }
 void Control::guideGame()
 {
@@ -478,9 +380,7 @@ void Control::cardAction()
     SpringCard spring;
     DrummerCard drummer;
     PrincesCard prince;
-    // winter -- drummer -- spring -- princes
-
-   
+    
     if (season == "winter")
     {
         winter.useCard(players, -1);
@@ -512,69 +412,12 @@ void Control::setSeason(std::string season)
 {
     this->season = season;
 }
-bool Control::endEachWar()
-{
-    bool flag = false;
-    for (auto player : players)
-    {
-        if (player.getPass() == true)
-        {
-            flag = true;
-        }
-        else
-        {
-            flag = false;
-            break;
-        }
-    }
-    return flag;
-}
 void Control::setPlayersReady()
 {
     for ( auto & player : players )
     {
         player.setPass(false);
     }
-}
-bool Control::endGame()
-{
-    std::vector<Player> gamePlayers;
-    if ( provinces.size() == 0 )
-    {
-       std::vector<Player> tempPlayer = maxProvinces();
-       for (int i = 0; i < tempPlayer.size(); i++)
-       {
-          std::cout << " _ { " << tempPlayer[i].getName() << " } " << " IS WINER ... \n ";
-       }  
-       return true;  
-    } 
-        for( auto & player : players)
-        {
-            if (player.winGame())
-            {
-               gamePlayers.push_back(player);
-            }   
-        }
-        system("cls");
-        for (int i = 0; i < gamePlayers.size(); i++)
-        {
-            std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER ... \n ";
-        }
-
-        if ( gamePlayers.size() != 0 )
-            return true;
-        else 
-            return false; 
-}
-int Control::findPlayerIndex ( const Player & player ) 
-{
-    for ( int i = 0 ; i < players.size() ; i++ ) 
-    {
-        if ( players[i].getName() == player.getName() ) {
-            return i ;
-        }
-    }
-    return -1; // player not found
 }
 void Control::run()
 {
@@ -591,24 +434,6 @@ void Control::run()
         setWar();
         burnCards();
     }
-
-}
-std::vector<Player> Control::maxProvinces()
-{
-    std::vector<Player> maxProvinces;
-    int max = 0;
-    for (int i = 0; i < players.size(); i++)
-    {
-       max = players[i].getNumProvinces() > max ? players[i].getNumProvinces() : max;
-    }
-    for (int i = 0; i < players.size(); i++)
-    {
-       if (max == players[i].getNumProvinces())
-       {
-            maxProvinces.push_back(players[i]);
-       }  
-    }
-    return maxProvinces;
 }
 void Control::burnCards()
 {
@@ -645,14 +470,182 @@ void Control::chargeCards()
 void Control::showAllCaptured()
 {
     std::cout << " The Captured Privinces Is : \n";
-    std::cout << "--------------------------- \n";
+    std::cout << "\n";
     for (int i = 0; i < getPlayerNumber(); i++)
     {
         players[i].showCapturedProvinces();
     }
-    std::cout << "--------------------------- \n\n";
-
-
-    
+    std::cout << "\n\n";  
 }
+int  Control::getPlayerNumber()
+{
+    return playerNumber;
+}
+int Control::findPlayerIndex ( const Player & player ) 
+{
+    for ( int i = 0 ; i < players.size() ; i++ ) 
+    {
+        if ( players[i].getName() == player.getName() ) {
+            return i ;
+        }
+    }
+    return -1; // player not found
+}
+int Control::getProvinceNumber()
+{
+    return provinceNumber;
+}
+bool Control::endGame()
+{
+    std::vector<Player> gamePlayers;
+    if ( provinces.size() == 0 )
+    {
+       std::vector<Player> tempPlayer = maxProvinces();
+       for (int i = 0; i < tempPlayer.size(); i++)
+       {
+          std::cout << "  { " << tempPlayer[i].getName() << " } " << " IS WINER :) \n ";
+       }  
+       return true;  
+    } 
+        for( auto & player : players)
+        {
+            if (player.winGame())
+            {
+               gamePlayers.push_back(player);
+            }   
+        }
+        system("cls");
+        for (int i = 0; i < gamePlayers.size(); i++)
+        {
+            std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER ... \n ";
+        }
 
+        if ( gamePlayers.size() != 0 )
+            return true;
+        else 
+            return false; 
+}
+bool Control::endEachWar()
+{
+    bool flag = false;
+    for (auto player : players)
+    {
+        if (player.getPass() == true)
+        {
+            flag = true;
+        }
+        else
+        {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
+bool Control::winEachWar()
+{
+    int winnerIndex ;
+    int max = 0;
+    std::vector<Player> winPlayers;
+    for (auto player : players)
+    {
+        max = player.getScorePlayer() > max ? player.getScorePlayer() : max;
+    }
+    for (int j = 0; j < getPlayerNumber(); j++)
+    {
+        if (max == players[j].getScorePlayer())
+        {
+            winPlayers.push_back(players[j]);
+            winnerIndex = j ;
+        }
+    }
+    if (winPlayers.size() == 1)
+    {
+        winner = winPlayers[0];
+        players[winnerIndex].addProvinces(warPlace);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+std::vector<Player> Control::maxProvinces()
+{
+    std::vector<Player> maxProvinces;
+    int max = 0;
+    for (int i = 0; i < players.size(); i++)
+    {
+       max = players[i].getNumProvinces() > max ? players[i].getNumProvinces() : max;
+    }
+    for (int i = 0; i < players.size(); i++)
+    {
+       if (max == players[i].getNumProvinces())
+       {
+            maxProvinces.push_back(players[i]);
+       }  
+    }
+    return maxProvinces;
+}
+std::vector<Player> Control::getPlayers()
+{
+    return players;
+}
+Player & Control::getDeterminer()
+{
+    return DeterminerOfWar;
+}
+Player &Control::youngestPlayer()
+{
+
+    std::vector<int> playersAge;
+    std::vector<int> youngestIndices;
+
+    for (int i = 0; i < playerNumber; i++)
+    {
+        playersAge.push_back(players[i].getAge());
+    }
+
+    int minAge = *min_element(playersAge.begin(), playersAge.end());
+
+    for (int i = 0; i < playersAge.size(); i++)
+    {
+        if (playersAge[i] == minAge)
+        {
+            youngestIndices.push_back(i);
+        }
+    }
+    srand(time(0));
+    int randomIndex = youngestIndices[rand() % youngestIndices.size()];
+
+    return players[randomIndex];
+}
+std::string Control::controlColors()
+{
+    bool found = true;
+    std::string chooseColor;
+    do
+    {
+        showColors();
+        if (found == true)
+            std::cout << std::endl
+                      << " Enter Your Chosen Color: ";
+
+        std::cin >> chooseColor;
+
+        auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
+
+        if (elementFound != colors.end())
+        {
+            colors.erase(elementFound);
+            found = true;
+            break;
+        }
+        else
+        {
+            std::cout << " \n ERROR: Please Enter Your Color Again : " << std::endl;
+            found = false;
+        }
+    } while (!found);
+    return chooseColor;
+}

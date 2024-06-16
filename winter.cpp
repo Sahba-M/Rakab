@@ -8,7 +8,6 @@ void WinterCard::setPriority()
 {
    priority = 2;
 }
-
 void WinterCard::useCard ( std::vector <Player> & players , int numPlayer )
  {
    int scores;

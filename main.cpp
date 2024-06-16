@@ -3,7 +3,7 @@
 
 int main()
 {
-    Control control ;
-    control.run();
+    Control rakab ;
+    rakab.run();
     return 0;
 }

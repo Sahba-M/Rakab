@@ -6,9 +6,6 @@
 class YellowCard : public Card {
     public:
     YellowCard( std::string name );
-    
-
-    private:
 }; 
 
 #endif
