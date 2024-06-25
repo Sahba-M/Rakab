@@ -20,48 +20,50 @@ class Control {
         void distributeCards();
         void readProvinces();//Filling the provinces vector
         void showUncaptured();//Showing provinces that have not been captured at all
-        void setWar();//
-        void selectMove(Player & player,int index);//
-        void showPlayGround();//
-        void selectWarPlace (Player & player);//
-        void setProvinceNumber(int provinceNumber);//
+        void setWar();
+        void setWarPlace(std::string warPlace);
+        void selectMove(Player & player,int index);
+        void showPlayGround();//Show used player cards
+        void selectWarPlace (Player & player);
+        void setProvinceNumber(int provinceNumber);//Set the number of game provinces
         void guideGame();//Show game guide
         void guideCards();//Display guide cards
-        void cardAction();//
-        void setSeason( std::string season );//
+        void cardAction();//calculate scores and special cards operation
+        void setSeason( std::string season );
         void showPurpleCard();
-        void run();//
+        void run();
         void setDeterminer( Player & Determiner);
-        void setPlayersReady();//
-        void burnCards();//
-        void chargeCards();//
-        void showAllCaptured();//
-        void askBurn();//
-        bool endEachWar();//
-        bool winEachWar();//
-        bool endGame();//
-        int  getPlayerNumber();//
-        int  findPlayerIndex ( const Player & player );//
-        int  getProvinceNumber();//
-        std::string controlColors();//
-        std::vector<Player> getPlayers();//
-        std::vector<Player> maxProvinces();//
-        Player & getDeterminer();//
-        Player & youngestPlayer();//
+        void setPlayersReady();//change to false variable of pass after each round (for all players)
+        void burnCards();//fill the allBurnedCards vector
+        void chargeCards();
+        void showAllCaptured();
+        void askBurn();//to burn hand cards of the player who has not got yellow cards
+        bool endEachWar();//checking that all players pass
+        bool winEachWar();
+        bool endGame();
+        int  getPlayerNumber();
+        int  findPlayerIndex ( const Player & player );//finding the index of determiner to start a new round (for clockwise movement)
+        int  getProvinceNumber();
+        std::string controlColors();
+        std::string getWarPlace();
+        std::vector<Player> getPlayers();
+        std::vector<Player> maxProvinces();//Find the players who have captured the most provinces
+        Player & getDeterminer();
+        Player & youngestPlayer();
 
     private:
         std::vector<std::shared_ptr<Card>> cards;//A vector of all cards
         std::vector<std::shared_ptr<Card>> allBurnedCards;
         std::vector<std::string> provinces;
         std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
-        std::vector<std::string> move;
+        std::vector<std::string> move;// for save move choices of players
         std::vector<Player> players;
-        std::vector<int> playersIndices;
+        std::vector<int> playersIndices;// for saving indexes of players who pass
         int playerNumber;//The number of players in the game
         int provinceNumber;
         std::string warPlace;
         std::string season;
-        Player winner;
+        Player winner;// for winner of each round
         Player DeterminerOfWar;//Determining the location of the battle
 };
 
