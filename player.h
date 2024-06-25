@@ -60,7 +60,6 @@ class Player {
         std::vector<std::shared_ptr<Card>> burnedCards;//Burned player cards
         std::vector<std::string> capturedProvinces;//The player's captured provinces
         int age ;
-        int cardsEachPlayer;//????
         int scorePlayer;
         bool pass = false;
 };

@@ -82,13 +82,10 @@ void Player::selectCard()
         
         if ( tempName == "scarecrow" )
         { 
-            if (yellowCards.size() == 0)
-            {
-                found = false; //؟؟؟؟
-            } else
+            if (yellowCards.size() != 0)
             {
                 ScarecrowCard scarecrow ;
-                scarecrow.useThisCard(*this);//؟؟؟؟
+                scarecrow.useThisCard(*this);//we want to use useCard for current player 
             }   
         }
         else if ( tempName == "spring" || tempName == "winter" )

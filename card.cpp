@@ -9,7 +9,7 @@ Card::Card ( std::string name , int score )
 Card::Card(){}
 Card::~Card() = default;
 
-void Card:: setScore(int score)
+void Card::setScore(int score)
 {
     this->score = score;
 }
