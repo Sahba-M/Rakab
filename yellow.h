@@ -4,6 +4,7 @@
 #define YELLOW_H
 
 class YellowCard : public Card {
+    
     public:
     YellowCard( std::string name );
 }; 

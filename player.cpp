@@ -13,7 +13,7 @@
 #include "map.h"
 
 
-struct SharedPtrCompare {
+struct SharedPtrCompare {//To compare two shred_pointers
     template <class T, class U>
     bool operator() ( const std::shared_ptr <T> & lhs , const std::shared_ptr <U> & rhs ) const 
     {
@@ -24,9 +24,9 @@ struct SharedPtrCompare {
 Player::Player(){ scorePlayer = 0 ; };
 Player::Player ( int age , std::string name , std::string color ) 
 {
-  setAge( age );
-  setName( name );
-  setColor( color );
+  setAge(age);
+  setName(name);
+  setColor(color);
 } 
 void Player::setName ( std::string name )
 {
@@ -62,13 +62,6 @@ void Player::addProvinces( std::string province )
 {
     capturedProvinces.push_back(province);
 }
-void Player::showProvinces()
-{
-    for (int i = 0; i < capturedProvinces.size(); i++)
-    {
-        std::cout << capturedProvinces[i] << " ";
-    }
-}
 void Player::selectCard()
 {
     std::shared_ptr <Card> card;
@@ -76,35 +69,39 @@ void Player::selectCard()
     bool found = true;
     do
     {
-        if ( found == true )
-            std::cout  << " Enter Your Chosen Card: ";
+        if ( found == true )//for the first time
+            std::cout  << " Enter Your Chosen Card : ";
+
         std::cin >> tempName;
        
-        
-        if ( tempName.length() <= 2)
+        if ( tempName.length() <= 2)//Detection of yellow or purple card
             card = std::make_shared <YellowCard> (tempName);
         else
             card = std::make_shared <PurpleCard> (tempName);
-        auto elementFound = std::find_if(hand.begin(), hand.end(), [ & card ]( const std::shared_ptr <Card> & c ) { return *c == *card ; });
+
+        
         if ( tempName == "scarecrow" )
         { 
             if (yellowCards.size() == 0)
             {
-                found = false; 
+                found = false; //؟؟؟؟
             } else
             {
                 ScarecrowCard scarecrow ;
-                scarecrow.useThisCard(*this);
-            }
-            
+                scarecrow.useThisCard(*this);//؟؟؟؟
+            }   
         }
         else if ( tempName == "spring" || tempName == "winter" )
         {
             setSeason(tempName);
         }
-        if (elementFound != hand.end())
+
+        auto elementFound = std::find_if(hand.begin(), hand.end(), [ & card ]( const std::shared_ptr <Card> & c ) { return *c == *card ; });
+        //Find the selected card in the player's hand (c is the current element in hand)
+     
+        if (elementFound != hand.end())//If found
         {
-            found = true;
+            found = true;//Exit the loop
             hand.erase(elementFound);
             usedCards.push_back(card);
         }
@@ -114,7 +111,6 @@ void Player::selectCard()
             found = false;
         }
     } while (!found);
-   
 }
 void Player::setSeason(std::string season)
 {
@@ -170,13 +166,13 @@ void Player::yellowInScore()
 }
 void Player::burnCardsPlayer()
 {
-    burnedCards.insert(burnedCards.end(), usedCards.begin(), usedCards.end());
-    usedCards.resize(0);
+    burnedCards.insert(burnedCards.end(), usedCards.begin(), usedCards.end());//Add elements to the end of the vector
+    usedCards.resize(0);//Remove used cards
 }
 void Player::burnHand()
 {
     burnedCards.insert(burnedCards.end(), hand.begin(), hand.end());
-    hand.resize(0);
+    hand.resize(0);//Remove hand cards
 }
 void Player::showCapturedProvinces()
 {
@@ -203,12 +199,12 @@ int Player::maxYcards()
     {
         yellowIntegers.push_back(stoi(card->getName()));
     }
-    auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end());
-    return (*maxElement);   
+    auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end());//Find the largest element using the max_element function
+    return (*maxElement);//To access the pointer value, not the pointer itself
 }
-int Player::numCardsOfPlayer()//The number of cards to be dealt
+int Player::numCardsOfPlayer()
 {
-    return (10 + capturedProvinces.size());
+    return (10 + getNumProvinces());
 }
 int Player::numberOfPrinces()
 {
@@ -268,13 +264,15 @@ bool Player::ifBurn()
         return false;
     }  
 }
-bool Player::isFind ( std::shared_ptr<Card> Ycard )//for finding yellow card
+bool Player::isFind ( std::shared_ptr<Card> Ycard )
 {
     auto elementFound = std::find_if(yellowCards.begin(), yellowCards.end(), [Ycard](const std::shared_ptr<Card> & card) { return *card == *Ycard; });
         if (elementFound != yellowCards.end())
         {
             hand.push_back(Ycard);
             usedCards.erase(std::remove(usedCards.begin(), usedCards.end(), *elementFound), usedCards.end());
+            //The remove function moves all the elements equal to elementFound to the end of the vector
+            //then the erase function deletes all of them
             return true ;
         }
         else 
@@ -285,8 +283,10 @@ bool Player::isFind ( std::shared_ptr<Card> Ycard )//for finding yellow card
 bool Player::hasDrummer()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("drummer");
+
     auto elementFound = std::find_if(usedCards.begin(), usedCards.end(),
    [ & card ]( const std::shared_ptr <Card> & ptr ) { return SharedPtrCompare()( ptr , card ); });
+
     if ( elementFound != usedCards.end() )
     {
         return true ;
@@ -297,8 +297,10 @@ bool Player::hasDrummer()
 bool Player::hasPrinces()
 {
    std::shared_ptr<Card> card = std::make_shared<PurpleCard>("princes");
+
    auto elemenFound = std::find_if(usedCards.begin(), usedCards.end(),
    [ & card ]( const std::shared_ptr <Card> & ptr ) { return SharedPtrCompare()( ptr , card ); });
+
    if ( elemenFound != usedCards.end())
    {
         return true;
@@ -313,21 +315,21 @@ bool Player::getPass()
 }
 bool Player::winGame()
 {
-    int proximity = 0;
+    int CapturedProvinces = 0;
     Map map;
     map.readMatrix();
     map.readUnorderedMap();
-    for (int i = 0 ; i < capturedProvinces.size() ; i++)
+    for (int i = 0 ; i < getNumProvinces() ; i++)
     {
-       for (int j = i + 1 ; j < capturedProvinces.size() ; j++)
+       for (int j = i + 1 ; j < getNumProvinces() ; j++)
        {
-         if (map.checkAdjacent(capturedProvinces[i], capturedProvinces[j]))
+         if (map.checkAdjacent(capturedProvinces[i], capturedProvinces[j]))//Proximity detection
          {
-             proximity++;
+             CapturedProvinces++;
          }  
        }
     }
-   if ( proximity == 3 || capturedProvinces.size() == 5 )
+   if ( CapturedProvinces == 3 || getNumProvinces() == 5 )
    {
         return true;
    } 

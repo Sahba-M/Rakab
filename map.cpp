@@ -5,10 +5,10 @@ void Map::readMatrix ()
     std::ifstream input ("matrix.txt") ; 
     if (!input.is_open()) 
         std::cerr << " Unable to open file ! " << std::endl ;
+
     int number;
     while (!input.eof()) 
     {
-
         std::vector <int> row ;
         for ( int i = 0 ; i < 14 ; i++ ) 
         {
@@ -31,8 +31,8 @@ void Map::readUnorderedMap ()
     if (!input.is_open()) 
         std::cerr << " Unable to open file !" << std::endl ;
         
-    std::string key ;
-    int value ;
+    std::string key ;//The names of the provinces
+    int value ;//Number of provinces
     while (!input.eof())
     {
         if ( input >> value >> key )

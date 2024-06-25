@@ -2,12 +2,11 @@
 
 #include "princes.h"
 
+#ifndef PRINCES_H
+#define PRINCES_H
 
-void PrincesCard::setPriority() 
-{
-  priority = 5;
-}
 void PrincesCard::useCard ( std::vector <Player> & players, int numPlayer ) 
 {
   players[numPlayer].setScorePlayer(players[numPlayer].getScorePlayer() + 10);
 }
+#endif

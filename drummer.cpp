@@ -9,9 +9,5 @@ DrummerCard::DrummerCard(){}
 void DrummerCard::useCard ( std::vector <Player> & players , int numPlayer )
 {
     int sum = players[numPlayer].getScorePlayer();
-    players[numPlayer].setScorePlayer(sum*2);
-}
-void DrummerCard::setPriority()
-{
-    priority = 3;
+    players[numPlayer].setScorePlayer( sum*2 );
 }

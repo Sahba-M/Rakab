@@ -4,7 +4,7 @@
 #define CARD_H
 
 
-class Card {
+class Card {//The card class is a parent class
 
     public:
         Card( std::string name , int score = 0 );
@@ -20,6 +20,5 @@ class Card {
         int score;
         std::string name;
 };
-
 #endif 
 

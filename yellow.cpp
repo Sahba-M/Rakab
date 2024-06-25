@@ -4,5 +4,5 @@
 
 YellowCard::YellowCard ( std::string name ) : Card (name)
 {
-    setScore ( stoi (name) );
+    setScore ( stoi (name) );//؟؟؟؟؟
 } 

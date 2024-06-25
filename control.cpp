@@ -42,7 +42,7 @@ void Control::controlNumber()
     }
     setPlayerNumber(counter);
 }
-void Control::setCards() // read cards
+void Control::setCards() 
 {
     std::ifstream cardInput;
     cardInput.open("yellowCard.txt");
@@ -50,8 +50,9 @@ void Control::setCards() // read cards
     {
         std::cerr << " Can Not Open The File! " << std::endl;
     }
-    int cardNumber;
+    int cardNumber;//Number of yellow cards 
     std::string yellowCardType;
+
     while (!cardInput.eof())
     {
         cardInput >> cardNumber >> yellowCardType;
@@ -99,9 +100,7 @@ void Control::getInformation()
     std::string color;
     for (int i = 0; i < playerNumber; i++)
     {
-        std::cout << " Player " << i + 1 << " : " << '\n'
-                  << " Enter Your Name : ";
-
+        std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
         std::cin >> name;
 
         std::cout << " Enter Your Age : ";
@@ -109,7 +108,7 @@ void Control::getInformation()
 
         color = controlColors();
         std::cout << "-----------------------\n";
-        players.push_back(Player(age, name, color));
+        players.push_back(Player(age, name, color));//Fill vector of players
     }
     system("cls");
 }
@@ -123,7 +122,7 @@ void Control::distributeCards()
         {
             if (!cards.empty())
             {
-                player.addCard(cards.back()); // It is added to the hand
+                player.addCard(cards.back()); // Gives the last vector card to the player
                 cards.pop_back();
             }
         }
@@ -138,9 +137,9 @@ void Control::readProvinces()
 {
     std::string province, ignore;
     std::ifstream inputProvinces;
-    inputProvinces.open("map.txt");
     setProvinceNumber(14);
 
+    inputProvinces.open("map.txt");
     if (!inputProvinces.is_open())
     {
         std::cerr << " Can Not Open File... " << std::endl;
@@ -319,8 +318,8 @@ void Control::guideGame()
         std::cerr << " Can Not Open File... " << std::endl;
     }
     system("cls");
-    std::cout << " ------------------------------------------------- \n"
-              << std::setw(13) << " << HELP PAGE >> \n\n";
+
+    std::cout << " ------------------------------------------------- \n" << std::setw(13) << " << HELP PAGE >> \n\n";   
     while (std::getline(inputGuide, explanation))
     {
         std::cout << explanation << std::endl;
@@ -337,8 +336,7 @@ void Control::guideCards()
     inputGuides.open("cardGuide.txt");
     if (!inputGuides.is_open())
     {
-        std::cerr << " Can Not Open File... \n"
-                  << std::endl;
+        std::cerr << " Can Not Open File... \n" << std::endl;       
     }
     while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
     {

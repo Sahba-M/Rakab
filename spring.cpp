@@ -4,10 +4,7 @@
 #include "spring.h"
 #include "player.h"
 
-void SpringCard::setPriority()
-{
-    priority = 4 ;
-}
+
 void SpringCard::useCard ( std::vector <Player> & players , int numPlayer ) 
 {
     std::vector<int> indicesPlayers = findMaxPlayer ( players );
