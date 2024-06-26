@@ -14,35 +14,35 @@ class Player {
         void setName ( std::string name );
         void setAge ( int age );
         void setColor ( std::string color );
-        void setSeason(std::string season); //To control spring and winter
-        void setPass( bool pass );//Player passing control
+        void setSeason ( std::string season ); //To control spring and winter
+        void setPass( bool pass ); //Player passing control
         void setScorePlayer ( int scorePlayer );
-        void addCard (  std::shared_ptr<Card> card );//Add a card to the player's hand
-        void showHandCards();//Show the cards in the player's hand
-        void addProvinces( std::string province );//Add player captured provinces
-        void selectCard ();//Card selection by the player
-        void showUsedCards();//Show the player's played cards
-        void showYcard();//Show the yellow cards used by the player
-        void recognizeYellow();//Detection of yellow cards used by players
-        void yellowInScore();//Calculation of player's yellow card points
-        void burnCardsPlayer();//Add used cards to burned cards
+        void addCard ( std::shared_ptr<Card> card ); //Add a card to the player's hand
+        void showHandCards(); //Show the cards in the player's hand
+        void addProvinces ( std::string province ); //Add player captured provinces
+        void selectCard (); //Card selection by the player
+        void showUsedCards(); //Show the player's played cards
+        void showYcard(); //Show the yellow cards used by the player
+        void recognizeYellow(); //Detection of yellow cards used by players
+        void yellowInScore(); //Calculation of player's yellow card points
+        void burnCardsPlayer(); //Add used cards to burned cards
         void showCapturedProvinces();
-        void burnHand();//Add hand cards to burned cards
+        void burnHand(); //Add hand cards to burned cards
         int  getAge() const ;
         int  getScorePlayer();
-        int  getHandSize();//The number of cards in the player's hand
-        int  getNumProvinces();//The number of provinces captured by the player
+        int  getHandSize(); //The number of cards in the player's hand
+        int  getNumProvinces(); //The number of provinces captured by the player
         int  numCardsOfPlayer(); //For the number of cards during distribution
-        int  maxYcards();//Find the most valuable yellow card player
-        int  numberOfPrinces();//The number of princes cards used by the player
+        int  maxYcards(); //Find the most valuable yellow card player
+        int  numberOfPrinces(); //The number of princes cards used by the player
         bool isFind ( std::shared_ptr<Card> Ycard ); //Find the yellow card and return it to the player's hand
-        bool hasDrummer();//Having a drummer card in the player's used cards
-        bool hasPrinces();//Having a principle card in the player's used cards
+        bool hasDrummer(); //Having a drummer card in the player's used cards
+        bool hasPrinces(); //Having a principle card in the player's used cards
         bool getPass();
-        bool hasYellowCard();//Having yellow cards in the player's hand
-        bool hasPurpleCard();//Having purple cards in the player's hand
-        bool ifBurn();//Does the player want to burn her hand if she doesn't have yellow cards?
-        bool winGame();//Determine the winner of the game
+        bool hasYellowCard(); //Having yellow cards in the player's hand
+        bool hasPurpleCard(); //Having purple cards in the player's hand
+        bool ifBurn(); //Does the player want to burn her hand if she doesn't have yellow cards?
+        bool winGame(); //Determine the winner of the game
         std::string getName() const ;
         std::string getColor() const ;
         std::string getSeason();
@@ -56,9 +56,9 @@ class Player {
         std::string color ;
         std::vector<std::shared_ptr<Card>> hand ; //cards in hand
         std::vector<std::shared_ptr<Card>> usedCards ; //Cards on the floor
-        std::vector<std::shared_ptr<Card>> yellowCards;//Yellow cards for each player
-        std::vector<std::shared_ptr<Card>> burnedCards;//Burned player cards
-        std::vector<std::string> capturedProvinces;//The player's captured provinces
+        std::vector<std::shared_ptr<Card>> yellowCards; //Yellow cards for each player
+        std::vector<std::shared_ptr<Card>> burnedCards; //Burned player cards
+        std::vector<std::string> capturedProvinces; //The player's captured provinces
         int age ;
         int scorePlayer;
         bool pass = false;

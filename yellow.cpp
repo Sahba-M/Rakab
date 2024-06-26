@@ -2,7 +2,4 @@
 
 #include "yellow.h"
 
-YellowCard::YellowCard ( std::string name ) : Card (name)
-{
-    setScore ( stoi (name) );//؟؟؟؟؟
-} 
+YellowCard::YellowCard ( std::string name ) : Card (name) {}
