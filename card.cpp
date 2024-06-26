@@ -6,6 +6,7 @@ Card::Card ( std::string name )
     setName( name );
 }
 Card::Card(){}
+Card::~Card() = default;
 
 void Card::setName (std::string name)
 {
