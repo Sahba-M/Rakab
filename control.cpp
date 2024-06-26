@@ -27,7 +27,7 @@
 Control::Control() { provinceNumber = 14; }
 void Control::setPlayerNumber(int playerNumber)
 {
-    this->playerNumber = playerNumber;
+    this -> playerNumber = playerNumber;
 }
 void Control::controlNumber()
 {
@@ -88,7 +88,7 @@ void Control::shuffleCards()
 void Control::showColors()
 {
     std::cout << "\n ";
-    for (int i = 0; i < colors.size(); i++)
+    for ( int i = 0 ; i < colors.size() ; i++ )
     {
         std::cout << colors[i] << " ~ ";
     }
@@ -98,7 +98,7 @@ void Control::getInformation()
     int age;
     std::string name;
     std::string color;
-    for (int i = 0; i < playerNumber; i++)
+    for ( int i = 0 ; i < getPlayerNumber() ; i++ )
     {
         std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
         std::cin >> name;

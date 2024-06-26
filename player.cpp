@@ -13,7 +13,7 @@
 #include "map.h"
 
 
-struct SharedPtrCompare {//To compare two shred_pointers
+struct SharedPtrCompare { //To compare two shred_pointers
     template <class T, class U>
     bool operator() ( const std::shared_ptr <T> & lhs , const std::shared_ptr <U> & rhs ) const 
     {
@@ -69,12 +69,12 @@ void Player::selectCard()
     bool found = true;
     do
     {
-        if ( found == true )//for the first time
+        if ( found == true ) //for the first time
             std::cout  << " Enter Your Chosen Card : ";
 
         std::cin >> tempName;
        
-        if ( tempName.length() <= 2)//Detection of yellow or purple card
+        if ( tempName.length() <= 2) //Detection of yellow or purple card
             card = std::make_shared <YellowCard> (tempName);
         else
             card = std::make_shared <PurpleCard> (tempName);
@@ -85,7 +85,7 @@ void Player::selectCard()
             if (yellowCards.size() != 0)
             {
                 ScarecrowCard scarecrow ;
-                scarecrow.useThisCard(*this);//we want to use useCard for current player 
+                scarecrow.useThisCard(*this); //we want to use useCard for current player 
             }   
         }
         else if ( tempName == "spring" || tempName == "winter" )
@@ -96,9 +96,9 @@ void Player::selectCard()
         auto elementFound = std::find_if(hand.begin(), hand.end(), [ & card ]( const std::shared_ptr <Card> & c ) { return *c == *card ; });
         //Find the selected card in the player's hand (c is the current element in hand)
      
-        if (elementFound != hand.end())//If found
+        if (elementFound != hand.end()) //If found
         {
-            found = true;//Exit the loop
+            found = true; //Exit the loop
             hand.erase(elementFound);
             usedCards.push_back(card);
         }
@@ -129,19 +129,19 @@ void Player::recognizeYellow()
 {
     yellowCards.resize(0);
     for (const auto &  usedCard : usedCards) 
-     { 
-           if (std::dynamic_pointer_cast<YellowCard>(usedCard)) 
-           {
-              yellowCards.push_back(usedCard);
-           }
-     }
+    { 
+        if (std::dynamic_pointer_cast<YellowCard>(usedCard)) 
+        {
+           yellowCards.push_back(usedCard);
+        }
+    }
 }
 void Player::showYcard()
 {
-     for (const auto &  usedYcard : yellowCards) 
-     {
-        std::cout << usedYcard->getName() <<" --- ";
-     }
+    for (const auto &  usedYcard : yellowCards) 
+    {
+       std::cout << usedYcard->getName() <<" --- ";
+    }
 } 
 void Player::setScorePlayer ( int scorePlayer )
 {
@@ -163,13 +163,13 @@ void Player::yellowInScore()
 }
 void Player::burnCardsPlayer()
 {
-    burnedCards.insert(burnedCards.end(), usedCards.begin(), usedCards.end());//Add elements to the end of the vector
-    usedCards.resize(0);//Remove used cards
+    burnedCards.insert(burnedCards.end(), usedCards.begin(), usedCards.end()); //Add elements to the end of the vector
+    usedCards.resize(0); //Remove used cards
 }
 void Player::burnHand()
 {
     burnedCards.insert(burnedCards.end(), hand.begin(), hand.end());
-    hand.resize(0);//Remove hand cards
+    hand.resize(0); //Remove hand cards
 }
 void Player::showCapturedProvinces()
 {
@@ -196,8 +196,8 @@ int Player::maxYcards()
     {
         yellowIntegers.push_back(stoi(card->getName()));
     }
-    auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end());//Find the largest element using the max_element function
-    return (*maxElement);//To access the pointer value, not the pointer itself
+    auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end()); //Find the largest element using the max_element function
+    return (*maxElement); //To access the pointer value, not the pointer itself
 }
 int Player::numCardsOfPlayer()
 {
@@ -281,7 +281,7 @@ bool Player::hasDrummer()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("drummer");
 
-    auto elementFound = std::find_if(usedCards.begin(), usedCards.end(),
+    auto elementFound = std::find_if ( usedCards.begin() , usedCards.end() ,
    [ & card ]( const std::shared_ptr <Card> & ptr ) { return SharedPtrCompare()( ptr , card ); });
 
     if ( elementFound != usedCards.end() )
@@ -295,7 +295,7 @@ bool Player::hasPrinces()
 {
    std::shared_ptr<Card> card = std::make_shared<PurpleCard>("princes");
 
-   auto elemenFound = std::find_if(usedCards.begin(), usedCards.end(),
+   auto elemenFound = std::find_if ( usedCards.begin() , usedCards.end() ,
    [ & card ]( const std::shared_ptr <Card> & ptr ) { return SharedPtrCompare()( ptr , card ); });
 
    if ( elemenFound != usedCards.end())
@@ -320,20 +320,20 @@ bool Player::winGame()
     {
        for (int j = i + 1 ; j < getNumProvinces() ; j++)
        {
-         if (map.checkAdjacent(capturedProvinces[i], capturedProvinces[j]))//Proximity detection
+         if (map.checkAdjacent(capturedProvinces[i], capturedProvinces[j])) //Proximity detection
          {
              CapturedProvinces++;
          }  
        }
     }
-   if ( CapturedProvinces == 3 || getNumProvinces() == 5 )
-   {
-        return true;
-   } 
+    if ( CapturedProvinces == 3 || getNumProvinces() == 5 )
+    {
+         return true;
+    } 
         return false;
 
 }
-std::string Player:: getSeason()
+std::string Player::getSeason()
 {
     return season;
 }
