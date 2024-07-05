@@ -34,13 +34,7 @@ void Player::setName ( std::string name )
 }
 void Player::setAge ( int age )
 {
-    if (age > 0)
-    {
-        this->age = age ;
-    } else
-    {
-        age = 0;
-    }
+    this->age = age ;
 }
 void Player::setColor ( std::string color )
 {

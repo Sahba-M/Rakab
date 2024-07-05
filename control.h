@@ -41,6 +41,7 @@ class Control {
         bool endEachWar(); //checking that all players pass
         bool winEachWar();
         bool endGame();
+        int  controlAge();
         int  getPlayerNumber();
         int  findPlayerIndex ( const Player & player ); //finding the index of determiner to start a new round (for clockwise movement)
         int  getProvinceNumber();

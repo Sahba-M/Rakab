@@ -101,10 +101,12 @@ void Control::getInformation()
     for ( int i = 0 ; i < getPlayerNumber() ; i++ )
     {
         std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
-        std::cin >> name;
+        std::cin.ignore();
+        std::getline( std::cin,name );
 
-        std::cout << " Enter Your Age : ";
-        std::cin >> age;
+        // std::cout << " Enter Your Age : ";
+        // std::cin >> age;
+        age = controlAge();
 
         color = controlColors();
         std::cout << "-----------------------\n";
@@ -512,6 +514,19 @@ int Control::findPlayerIndex ( const Player & player )
 int Control::getProvinceNumber()
 {
     return provinceNumber;
+}
+int Control::controlAge()
+{
+    int chooseAge;
+    bool res = false;
+    while (!res)
+    {
+         std::cout << " Enter Your Valid Age : ";
+         std::cin >> chooseAge;
+         if (chooseAge > 0)
+            res = true; 
+    }
+    return chooseAge;   
 }
 bool Control::endGame()
 {
