@@ -13,6 +13,7 @@
 #include <thread>
 #include <conio.h>
 #include <unordered_map>
+#include <climits>
 
 #include "control.h"
 #include "card.h"
@@ -23,8 +24,14 @@
 #include "drummer.h"
 #include "princes.h"
 #include "player.h"
+#include "map.h"
 
-Control::Control() { provinceNumber = 14; }
+Control::Control()
+{
+     provinceNumber = 14;
+     int threshold = 3;
+}
+
 void Control::setPlayerNumber(int playerNumber)
 {
     this -> playerNumber = playerNumber;
@@ -215,7 +222,14 @@ void Control::selectMove ( Player & player , int index )
     {
         std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): ";
         std::cin >> move[index];
+        std::string closestMatch = findClosestMatch(move[index], cardsAndOrdersNames, threshold);
 
+        if (!closestMatch.empty() && closestMatch != move[index]) {
+            std::cout << "Did you mean " << closestMatch << "? (yes/no): ";
+            std::string response;
+            std::cin >> response;
+            //????????????????????????????????????????????????????
+        }
         if (move[index] == "card")
         {
             std::cout << " ";
@@ -377,7 +391,7 @@ void Control::showPurpleCard()
 }
 void Control::cardAction()
 {
-    //The priority of the cards is: winter - drummer - spring - princes
+    //The priority of the cards is: dean - winter - drummer - spring - princes , virago
 
     for ( int i = 0 ; i < getPlayerNumber() ; i++ ) // filling up the scores related to the yellow cards
     {
@@ -429,6 +443,9 @@ void Control::setPlayersReady()
 }
 void Control::run()
 {
+    Map map;
+    map.readMatrix();
+    map.readUnorderedMap();
     setCards();
     shuffleCards(); 
     controlNumber();
@@ -528,6 +545,33 @@ int Control::controlAge()
     }
     return chooseAge;   
 }
+int Control::levenshteinDistance(const std::string &s1, const std::string &s2) {
+    int m = s1.size();
+    int n = s2.size();
+    
+    if (m == 0) return n; // If one of the strings is empty
+    if (n == 0) return m;
+  
+    std::vector<int> prevRow(n + 1), currRow(n + 1);  // Create two vectors to store distances for the current and previous rows
+
+    for (int j = 0; j <= n; ++j) { // Initialize the previous row
+        prevRow[j] = j;
+    }
+
+    for (int i = 1; i <= m; ++i) {
+        currRow[0] = i;
+        for (int j = 1; j <= n; ++j) {
+            if (s1[i - 1] == s2[j - 1]) {
+                currRow[j] = prevRow[j - 1];
+            } else {
+                currRow[j] = 1 + std::min({prevRow[j], currRow[j - 1], prevRow[j - 1]});
+            }
+        }
+        prevRow = currRow;
+    }
+
+    return currRow[n];
+}
 bool Control::endGame()
 {
     std::vector<Player> gamePlayers;
@@ -542,7 +586,7 @@ bool Control::endGame()
     } 
         for ( auto & player : players )
         {
-            if (player.winGame())
+            if (winGame(player))
             {
                gamePlayers.push_back(player);
             }   
@@ -557,6 +601,14 @@ bool Control::endGame()
             return true;
         else 
             return false; 
+}
+bool Control::winGame(Player player)
+{
+    if ( player.isProximity() || player.getNumProvinces() == 5 )
+    {
+         return true;
+    } 
+    return false;
 }
 bool Control::endEachWar()
 {
@@ -683,5 +735,23 @@ std::string Control::controlColors()
 std::string Control::getWarPlace()
 {
     return warPlace;
+}
+std::string Control::findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold) {
+    std::string closestMatch;
+    int minDistance = INT_MAX;
+
+    for (const auto &card : cards) {
+        int distance = levenshteinDistance(input, card);
+        if (distance < minDistance) {
+            minDistance = distance;
+            closestMatch = card;
+        }
+    }
+
+    if (minDistance <= threshold) {
+        return closestMatch;
+    } else {
+        return "";
+    }
 }
 

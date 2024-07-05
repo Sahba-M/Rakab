@@ -42,13 +42,16 @@ class Player {
         bool hasYellowCard(); //Having yellow cards in the player's hand
         bool hasPurpleCard(); //Having purple cards in the player's hand
         bool ifBurn(); //Does the player want to burn her hand if she doesn't have yellow cards?
-        bool winGame(); //Determine the winner of the game
+        bool isProximity();
+
+       // bool winGame(); //Determine the winner of the game
         std::string getName() const ;
         std::string getColor() const ;
         std::string getSeason();
         std::vector<std::shared_ptr<Card>> getYcards();
         std::vector<std::shared_ptr<Card>> & getBurnedCards();
         std::vector<std::shared_ptr<Card>> & getHandCards();
+      
 
     private:
         std::string season;

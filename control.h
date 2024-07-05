@@ -37,16 +37,20 @@ class Control {
         void burnCards(); //fill the allBurnedCards vector
         void chargeCards();
         void showAllCaptured();
+        bool winGame(Player player);
         void askBurn(); //to burn hand cards of the player who has not got yellow cards
         bool endEachWar(); //checking that all players pass
         bool winEachWar();
         bool endGame();
+        int levenshteinDistance(const std::string &s1, const std::string &s2);// Optimized function to calculate the Levenshtein distance between two strings
         int  controlAge();
         int  getPlayerNumber();
         int  findPlayerIndex ( const Player & player ); //finding the index of determiner to start a new round (for clockwise movement)
         int  getProvinceNumber();
         std::string controlColors();
         std::string getWarPlace();
+        std::string findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold);
+
         std::vector<Player> getPlayers();
         std::vector<Player> maxProvinces(); //Find the players who have captured the most provinces
         Player & getDeterminer();
@@ -57,11 +61,14 @@ class Control {
         std::vector<std::shared_ptr<Card>> allBurnedCards;
         std::vector<std::string> provinces;
         std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
+        std::vector<std::string> cardsAndOrdersNames = {"drummer", "princes", "scarecrow", "spring", "winter", "help", "card", "pass"};
+
         std::vector<std::string> move; // for save move choices of players
         std::vector<Player> players;
         std::vector<int> playersIndices; // for saving indexes of players who pass
         int playerNumber; //The number of players in the game
         int provinceNumber;
+        int threshold;
         std::string warPlace;
         std::string season;
         Player winner; // for winner of each round

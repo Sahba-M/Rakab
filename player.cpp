@@ -304,28 +304,48 @@ bool Player::getPass()
 {
     return pass;
 }
-bool Player::winGame()
+// bool Player::winGame()
+// {
+//     int CapturedProvinces = 0;
+//     Map map;
+//     map.readMatrix();
+//     map.readUnorderedMap();
+//     for (int i = 0 ; i < getNumProvinces() ; i++)
+//     {
+//        for (int j = i + 1 ; j < getNumProvinces() ; j++)
+//        {
+//          if (map.checkAdjacent(capturedProvinces[i], capturedProvinces[j])) //Proximity detection
+//          {
+//              CapturedProvinces++;
+//          }  
+//        }
+//     }
+//     if ( CapturedProvinces == 3 || getNumProvinces() == 5 )
+//     {
+//          return true;
+//     } 
+//         return false;
+
+// }
+bool Player::isProximity()
 {
-    int CapturedProvinces = 0;
     Map map;
-    map.readMatrix();
-    map.readUnorderedMap();
+    int CapturedProvinces = 0;
     for (int i = 0 ; i < getNumProvinces() ; i++)
     {
        for (int j = i + 1 ; j < getNumProvinces() ; j++)
        {
          if (map.checkAdjacent(capturedProvinces[i], capturedProvinces[j])) //Proximity detection
          {
-             CapturedProvinces++;
+            CapturedProvinces++;
          }  
        }
     }
-    if ( CapturedProvinces == 3 || getNumProvinces() == 5 )
+    if ( CapturedProvinces == 3 )
     {
-         return true;
-    } 
-        return false;
-
+        return true;
+    }
+    return false;
 }
 std::string Player::getSeason()
 {
