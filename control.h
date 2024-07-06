@@ -37,8 +37,9 @@ class Control {
         void burnCards(); //fill the allBurnedCards vector
         void chargeCards();
         void showAllCaptured();
-        bool winGame(Player player);
         void askBurn(); //to burn hand cards of the player who has not got yellow cards
+        void test();
+        bool winGame(Player player);
         bool endEachWar(); //checking that all players pass
         bool winEachWar();
         bool endGame();
@@ -55,7 +56,7 @@ class Control {
         std::vector<Player> maxProvinces(); //Find the players who have captured the most provinces
         Player & getDeterminer();
         Player & youngestPlayer();
-
+        bool res= false;
     private:
         std::vector<std::shared_ptr<Card>> cards; //A vector of all cards
         std::vector<std::shared_ptr<Card>> allBurnedCards;

@@ -28,13 +28,13 @@
 
 Control::Control()
 {
-     provinceNumber = 14;
-     int threshold = 3;
+    provinceNumber = 14;
+    int threshold = 3;
 }
 
 void Control::setPlayerNumber(int playerNumber)
 {
-    this -> playerNumber = playerNumber;
+    this->playerNumber = playerNumber;
 }
 void Control::controlNumber()
 {
@@ -49,7 +49,7 @@ void Control::controlNumber()
     }
     setPlayerNumber(counter);
 }
-void Control::setCards() 
+void Control::setCards()
 {
     std::ifstream cardInput;
     cardInput.open("yellowCard.txt");
@@ -57,7 +57,7 @@ void Control::setCards()
     {
         std::cerr << " Can Not Open The File! " << std::endl;
     }
-    int cardNumber; //Number of yellow cards 
+    int cardNumber; // Number of yellow cards
     std::string yellowCardType;
 
     while (!cardInput.eof())
@@ -95,21 +95,22 @@ void Control::shuffleCards()
 void Control::showColors()
 {
     std::cout << "\n ";
-    for ( int i = 0 ; i < colors.size() ; i++ )
+    for (int i = 0; i < colors.size(); i++)
     {
         std::cout << colors[i] << " ~ ";
     }
 }
 void Control::getInformation()
 {
-    int age ;
-    std::string name ;
-    std::string color ;
-    for ( int i = 0 ; i < getPlayerNumber() ; i++ )
+    int age;
+    std::string name;
+    std::string color;
+    for (int i = 0; i < getPlayerNumber(); i++)
     {
-        std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
+        std::cout << " Player " << i + 1 << " : " << '\n'
+                  << " Enter Your Name : ";
         std::cin.ignore();
-        std::getline( std::cin,name );
+        std::getline(std::cin, name);
 
         // std::cout << " Enter Your Age : ";
         // std::cin >> age;
@@ -117,17 +118,17 @@ void Control::getInformation()
 
         color = controlColors();
         std::cout << "-----------------------\n";
-        players.push_back ( Player ( age , name , color )); //Fill vector of players
+        players.push_back(Player(age, name, color)); // Fill vector of players
     }
     system("cls");
 }
 void Control::distributeCards()
 {
     std::cin.ignore();
-    for ( Player & player : players )
+    for (Player &player : players)
     {
         std::cout << " I Want To Give The Cards To  > " << player.getName() << " <  Please Give Him/Her The System \n";
-        for (int i = 0 ; i < player.numCardsOfPlayer() ; i++)
+        for (int i = 0; i < player.numCardsOfPlayer(); i++)
         {
             if (!cards.empty())
             {
@@ -144,8 +145,8 @@ void Control::distributeCards()
 }
 void Control::readProvinces()
 {
-    std::string province , ignore ;
-    std::ifstream inputProvinces ;
+    std::string province, ignore;
+    std::ifstream inputProvinces;
     setProvinceNumber(provinceNumber);
 
     inputProvinces.open("map.txt");
@@ -163,29 +164,29 @@ void Control::readProvinces()
 }
 void Control::showUncaptured()
 {
-    for ( int i = 0 ; i < provinces.size() ; i++ )
+    for (int i = 0; i < provinces.size(); i++)
     {
         std::cout << provinces[i] << "  ";
     }
 }
 void Control::setWar()
 {
-    selectWarPlace (getDeterminer());
-    int startIndex = findPlayerIndex (getDeterminer());
-    int currentIndex = startIndex ;
-    system("cls");
-    while (!endEachWar())
-    {
-        for ( int i = 0 ; i < getPlayerNumber()  ; i++ )
+        selectWarPlace(getDeterminer());
+        int startIndex = findPlayerIndex(getDeterminer());
+        int currentIndex = startIndex;
+        system("cls");
+        while (!endEachWar())
         {
-            showAllCaptured();
-            showPlayGround();
-            std::cout << "\n The War Is Over => " << getWarPlace() << "\n\n ";
-            selectMove(players[currentIndex], currentIndex);
-            currentIndex = (currentIndex + 1) % players.size();
-            system("cls");
+            for (int i = 0; i < getPlayerNumber(); i++)
+            {
+                showAllCaptured();
+                showPlayGround();
+                std::cout << "\n The War Is Over => " << getWarPlace() << "\n\n ";
+                selectMove(players[currentIndex], currentIndex);
+                currentIndex = (currentIndex + 1) % players.size();
+                system("cls");
+            }
         }
-    }
     cardAction();
     if (winEachWar())
     {
@@ -196,7 +197,7 @@ void Control::setWar()
         provinces.erase(elementFound);
         setDeterminer(winner);
     }
-    else 
+    else
     {
         std::cout << " This War Has No Winners!!! ";
         sleep(5);
@@ -207,24 +208,24 @@ void Control::setWar()
     {
         move[i] = "temp";
     }
-    
 }
-void Control::setDeterminer ( Player & Determiner )
+void Control::setDeterminer(Player &Determiner)
 {
-    DeterminerOfWar = Determiner ;
+    DeterminerOfWar = Determiner;
 }
-void Control::selectMove ( Player & player , int index )
+void Control::selectMove(Player &player, int index)
 {
-    move.resize(getPlayerNumber() , "temp"); //Filling the initial value of move vector with "temp"
-    char choice ;
-   
-    if ( move[index] != "pass" && player.getHandSize() != 0 )
+    move.resize(getPlayerNumber(), "temp"); // Filling the initial value of move vector with "temp"
+    char choice;
+
+    if (move[index] != "pass" && player.getHandSize() != 0)
     {
         std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): ";
         std::cin >> move[index];
         std::string closestMatch = findClosestMatch(move[index], cardsAndOrdersNames, threshold);
 
-        if (!closestMatch.empty() && closestMatch != move[index]) {
+        if (!closestMatch.empty() && closestMatch != move[index])
+        {
             std::cout << "Did you mean " << closestMatch << "? (yes/no): ";
             std::string response;
             std::cin >> response;
@@ -234,11 +235,11 @@ void Control::selectMove ( Player & player , int index )
         {
             std::cout << " ";
             player.showHandCards();
-            player.recognizeYellow();//update yellowCard vector
+            player.recognizeYellow(); // update yellowCard vector
             player.selectCard();
 
-            if ((player.getSeason() == "winter" || player.getSeason() == "spring"))// the season set here
-                setSeason(player.getSeason()); 
+            if ((player.getSeason() == "winter" || player.getSeason() == "spring")) // the season set here
+                setSeason(player.getSeason());
         }
         else if (move[index] == "help")
         {
@@ -273,7 +274,7 @@ void Control::selectMove ( Player & player , int index )
             selectMove(player, index);
         }
     }
-    else //if pass 
+    else // if pass
     {
         playersIndices.push_back(index);
         player.setPass(true);
@@ -282,7 +283,7 @@ void Control::selectMove ( Player & player , int index )
 void Control::showPlayGround()
 {
     std::cout << "--------------------------- \n";
-    for ( int i = 0 ; i < players.size() ; i++ )
+    for (int i = 0; i < players.size(); i++)
     {
         players[i].showUsedCards();
     }
@@ -320,15 +321,15 @@ void Control::selectWarPlace(Player &player)
         }
     } while (!found);
 
-   setWarPlace(chooseProvince);
+    setWarPlace(chooseProvince);
 }
-void Control::setWarPlace ( std::string warPlace )
+void Control::setWarPlace(std::string warPlace)
 {
-    this -> warPlace = warPlace ;
+    this->warPlace = warPlace;
 }
-void Control::setProvinceNumber ( int provinceNumber )
+void Control::setProvinceNumber(int provinceNumber)
 {
-    this -> provinceNumber = provinceNumber ;
+    this->provinceNumber = provinceNumber;
 }
 void Control::guideGame()
 {
@@ -341,8 +342,9 @@ void Control::guideGame()
     }
     system("cls");
 
-    std::cout << " ------------------------------------------------- \n" << std::setw(13) << " << HELP PAGE >> \n\n";   
-    while (std::getline(inputGuide , explanation))
+    std::cout << " ------------------------------------------------- \n"
+              << std::setw(13) << " << HELP PAGE >> \n\n";
+    while (std::getline(inputGuide, explanation))
     {
         std::cout << explanation << std::endl;
     }
@@ -353,14 +355,15 @@ void Control::guideCards()
 {
     std::ifstream inputGuides;
     std::string cardName, cardDescription, requestedCard;
-    std::unordered_map < std::string , std::string > card;
+    std::unordered_map<std::string, std::string> card;
 
     inputGuides.open("cardGuide.txt");
     if (!inputGuides.is_open())
     {
-        std::cerr << " Can Not Open File... \n" << std::endl;       
+        std::cerr << " Can Not Open File... \n"
+                  << std::endl;
     }
-    while ( inputGuides >> cardName >> std::ws && std::getline (inputGuides , cardDescription) )
+    while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
     {
         card[cardName] = cardDescription;
     }
@@ -391,24 +394,26 @@ void Control::showPurpleCard()
 }
 void Control::cardAction()
 {
-    //The priority of the cards is: dean - winter - drummer - spring - princes , virago
+    std::cout << " start action ";
+    // The priority of the cards is: dean - winter - drummer - spring - princes , virago
 
-    for ( int i = 0 ; i < getPlayerNumber() ; i++ ) // filling up the scores related to the yellow cards
+    for (int i = 0; i < getPlayerNumber(); i++) // filling up the scores related to the yellow cards
     {
         players[i].yellowInScore();
     }
+    std::cout << "\nafter for\n";
 
     WinterCard winter;
     SpringCard spring;
     DrummerCard drummer;
     PrincesCard prince;
-    
+
     if (season == "winter")
     {
         winter.useCard(players, -1);
     }
 
-    for (int i = 0; i <  getPlayerNumber(); i++)
+    for (int i = 0; i < getPlayerNumber(); i++)
     {
         if (players[i].hasDrummer())
         {
@@ -429,14 +434,15 @@ void Control::cardAction()
             }
         }
     }
+    std::cout << " end action";
 }
-void Control::setSeason ( std::string season )
+void Control::setSeason(std::string season)
 {
-    this -> season = season;
+    this->season = season;
 }
 void Control::setPlayersReady()
 {
-    for ( auto & player : players )
+    for (auto &player : players)
     {
         player.setPass(false);
     }
@@ -447,12 +453,12 @@ void Control::run()
     map.readMatrix();
     map.readUnorderedMap();
     setCards();
-    shuffleCards(); 
+    shuffleCards();
     controlNumber();
     getInformation();
     distributeCards();
     readProvinces();
-    setDeterminer( youngestPlayer());
+    setDeterminer(youngestPlayer());
     while (!endGame())
     {
         setPlayersReady();
@@ -464,26 +470,26 @@ void Control::run()
 }
 void Control::burnCards()
 {
-    for ( auto & player : players )
+    for (auto &player : players)
     {
-        player.burnCardsPlayer(); 
-        allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end()); //for all player
+        player.burnCardsPlayer();
+        allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end()); // for all player
     }
 }
 void Control::chargeCards()
 {
-    int counter = 0 ;
-    for ( int i = 0 ; i < getPlayerNumber() ; i++ )
+    int counter = 0;
+    for (int i = 0; i < getPlayerNumber(); i++)
     {
-        if ( players[i].getHandSize() != 0 ) //check if the card is finish or not
+        if (players[i].getHandSize() != 0) // check if the card is finish or not
         {
-            counter++ ;
+            counter++;
         }
     }
-    if ( counter == 0 || counter == 1 )
+    if (counter == 0 || counter == 1)
     {
         burnCards();
-        for ( auto & player : players )
+        for (auto &player : players)
         {
             player.burnHand();
             allBurnedCards.insert(allBurnedCards.end(), player.getHandCards().begin(), player.getHandCards().end());
@@ -497,33 +503,34 @@ void Control::showAllCaptured()
 {
     std::cout << " The Captured Provinces Is : \n";
     std::cout << "\n";
-    for ( int i = 0 ; i < getPlayerNumber() ; i++ )
+    for (int i = 0; i < getPlayerNumber(); i++)
     {
         players[i].showCapturedProvinces();
     }
-    std::cout << "\n\n";  
+    std::cout << "\n\n";
 }
 void Control::askBurn()
 {
-    for ( auto & player : players )
+    for (auto &player : players)
     {
-        if (player.ifBurn()) 
+        if (player.ifBurn())
         {
             player.burnHand();
         }
         system("cls");
     }
 }
-int  Control::getPlayerNumber()
+int Control::getPlayerNumber()
 {
     return playerNumber;
 }
-int Control::findPlayerIndex ( const Player & player ) 
+int Control::findPlayerIndex(const Player &player)
 {
-    for ( int i = 0 ; i < players.size() ; i++ ) 
+    for (int i = 0; i < players.size(); i++)
     {
-        if ( players[i].getName() == player.getName() ) {
-            return i ;
+        if (players[i].getName() == player.getName())
+        {
+            return i;
         }
     }
     return -1; // player not found
@@ -538,32 +545,41 @@ int Control::controlAge()
     bool res = false;
     while (!res)
     {
-         std::cout << " Enter Your Valid Age : ";
-         std::cin >> chooseAge;
-         if (chooseAge > 0)
-            res = true; 
+        std::cout << " Enter Your Valid Age : ";
+        std::cin >> chooseAge;
+        if (chooseAge > 0)
+            res = true;
     }
-    return chooseAge;   
+    return chooseAge;
 }
-int Control::levenshteinDistance(const std::string &s1, const std::string &s2) {
+int Control::levenshteinDistance(const std::string &s1, const std::string &s2)
+{
     int m = s1.size();
     int n = s2.size();
-    
-    if (m == 0) return n; // If one of the strings is empty
-    if (n == 0) return m;
-  
-    std::vector<int> prevRow(n + 1), currRow(n + 1);  // Create two vectors to store distances for the current and previous rows
 
-    for (int j = 0; j <= n; ++j) { // Initialize the previous row
+    if (m == 0)
+        return n; // If one of the strings is empty
+    if (n == 0)
+        return m;
+
+    std::vector<int> prevRow(n + 1), currRow(n + 1); // Create two vectors to store distances for the current and previous rows
+
+    for (int j = 0; j <= n; ++j)
+    { // Initialize the previous row
         prevRow[j] = j;
     }
 
-    for (int i = 1; i <= m; ++i) {
+    for (int i = 1; i <= m; ++i)
+    {
         currRow[0] = i;
-        for (int j = 1; j <= n; ++j) {
-            if (s1[i - 1] == s2[j - 1]) {
+        for (int j = 1; j <= n; ++j)
+        {
+            if (s1[i - 1] == s2[j - 1])
+            {
                 currRow[j] = prevRow[j - 1];
-            } else {
+            }
+            else
+            {
                 currRow[j] = 1 + std::min({prevRow[j], currRow[j - 1], prevRow[j - 1]});
             }
         }
@@ -575,45 +591,45 @@ int Control::levenshteinDistance(const std::string &s1, const std::string &s2) {
 bool Control::endGame()
 {
     std::vector<Player> gamePlayers;
-    if ( provinces.size() == 0 )
+    if (provinces.size() == 0)
     {
-       std::vector<Player> tempPlayer = maxProvinces();
-       for ( int i = 0 ; i < tempPlayer.size() ; i++ )
-       {
-          std::cout << "  { " << tempPlayer[i].getName() << " } " << " IS WINER :) \n ";
-       }  
-       return true;  
-    } 
-        for ( auto & player : players )
+        std::vector<Player> tempPlayer = maxProvinces();
+        for (int i = 0; i < tempPlayer.size(); i++)
         {
-            if (winGame(player))
-            {
-               gamePlayers.push_back(player);
-            }   
+            std::cout << "  { " << tempPlayer[i].getName() << " } " << " IS WINER :) \n ";
         }
-        system("cls");
-        for ( int i = 0 ; i < gamePlayers.size() ; i++ )
+        return true;
+    }
+    for (auto &player : players)
+    {
+        if (winGame(player))
         {
-            std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER ... \n ";
+            gamePlayers.push_back(player);
         }
+    }
+    system("cls");
+    for (int i = 0; i < gamePlayers.size(); i++)
+    {
+        std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER ... \n ";
+    }
 
-        if ( gamePlayers.size() != 0 ) //to check we have winner or not
-            return true;
-        else 
-            return false; 
+    if (gamePlayers.size() != 0) // to check we have winner or not
+        return true;
+    else
+        return false;
 }
 bool Control::winGame(Player player)
 {
-    if ( player.isProximity() || player.getNumProvinces() == 5 )
+    if (player.isProximity() || player.getNumProvinces() == 5)
     {
-         return true;
-    } 
+        return true;
+    }
     return false;
 }
 bool Control::endEachWar()
 {
     bool flag = false;
-    for ( auto player : players )
+    for (auto player : players)
     {
         if (player.getPass() == true)
         {
@@ -629,19 +645,19 @@ bool Control::endEachWar()
 }
 bool Control::winEachWar()
 {
-    int winnerIndex ;
+    int winnerIndex;
     int max = 0;
     std::vector<Player> winPlayers;
-    for ( auto player : players )
+    for (auto player : players)
     {
-        max = player.getScorePlayer() > max ? player.getScorePlayer() : max ;
+        max = player.getScorePlayer() > max ? player.getScorePlayer() : max;
     }
-    for ( int j = 0 ; j < getPlayerNumber() ; j++ )
+    for (int j = 0; j < getPlayerNumber(); j++)
     {
         if (max == players[j].getScorePlayer())
         {
             winPlayers.push_back(players[j]);
-            winnerIndex = j ;
+            winnerIndex = j;
         }
     }
     if (winPlayers.size() == 1)
@@ -661,14 +677,14 @@ std::vector<Player> Control::maxProvinces()
     int max = 0;
     for (int i = 0; i < players.size(); i++)
     {
-       max = players[i].getNumProvinces() > max ? players[i].getNumProvinces() : max;
+        max = players[i].getNumProvinces() > max ? players[i].getNumProvinces() : max;
     }
     for (int i = 0; i < players.size(); i++)
     {
-       if (max == players[i].getNumProvinces())
-       {
+        if (max == players[i].getNumProvinces())
+        {
             maxProvinces.push_back(players[i]);
-       }  
+        }
     }
     return maxProvinces;
 }
@@ -676,21 +692,21 @@ std::vector<Player> Control::getPlayers()
 {
     return players;
 }
-Player & Control::getDeterminer()
+Player &Control::getDeterminer()
 {
     return DeterminerOfWar;
 }
-Player & Control::youngestPlayer()
+Player &Control::youngestPlayer()
 {
     std::vector<int> playersAge;
     std::vector<int> youngestIndices;
 
-    for ( int i = 0 ; i < getPlayerNumber() ; i++ )
+    for (int i = 0; i < getPlayerNumber(); i++)
     {
         playersAge.push_back(players[i].getAge());
     }
 
-    int minAge = *min_element(playersAge.begin(), playersAge.end()); //Find the minimum age
+    int minAge = *min_element(playersAge.begin(), playersAge.end()); // Find the minimum age
 
     for (int i = 0; i < playersAge.size(); i++)
     {
@@ -712,8 +728,9 @@ std::string Control::controlColors()
     {
         showColors();
         if (found == true)
-            std::cout << std::endl << " Enter Your Chosen Color: ";
-                     
+            std::cout << std::endl
+                      << " Enter Your Chosen Color: ";
+
         std::cin >> chooseColor;
 
         auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
@@ -736,22 +753,27 @@ std::string Control::getWarPlace()
 {
     return warPlace;
 }
-std::string Control::findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold) {
+std::string Control::findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold)
+{
     std::string closestMatch;
     int minDistance = INT_MAX;
 
-    for (const auto &card : cards) {
+    for (const auto &card : cards)
+    {
         int distance = levenshteinDistance(input, card);
-        if (distance < minDistance) {
+        if (distance < minDistance)
+        {
             minDistance = distance;
             closestMatch = card;
         }
     }
 
-    if (minDistance <= threshold) {
+    if (minDistance <= threshold)
+    {
         return closestMatch;
-    } else {
+    }
+    else
+    {
         return "";
     }
 }
-
