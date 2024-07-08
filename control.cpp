@@ -171,9 +171,6 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
-    Player p;
-    while (p.res!=true)
-    {
         selectWarPlace(getDeterminer());
         int startIndex = findPlayerIndex(getDeterminer());
         int currentIndex = startIndex;
@@ -190,7 +187,6 @@ void Control::setWar()
                 system("cls");
             }
         }
-    }
     cardAction();
     if (winEachWar())
     {
@@ -222,7 +218,7 @@ void Control::selectMove(Player &player, int index)
     move.resize(getPlayerNumber(), "temp"); // Filling the initial value of move vector with "temp"
     char choice;
 
-    if (move[index] != "pass" && player.getHandSize() != 0 && player.res != true)
+    if (move[index] != "pass" && player.getHandSize() != 0 )
     {
         std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): ";
         std::cin >> move[index];
@@ -364,8 +360,8 @@ void Control::guideCards()
     inputGuides.open("cardGuide.txt");
     if (!inputGuides.is_open())
     {
-        std::cerr << " Can Not Open File... \n"
-                  << std::endl;
+        std::cerr << " Can Not Open File... \n" << std::endl;
+                  
     }
     while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
     {
@@ -377,14 +373,12 @@ void Control::guideCards()
     std::cout << "\n Please Enter The Name Of The Card You Want: ";
     std::cin >> requestedCard;
 
-    if (card.find(requestedCard) != card.end())
+    while (card.find(requestedCard) == card.end())
     {
-        std::cout << "\n ------> " << card[requestedCard] << " <------ " << std::endl;
+        std::cout << "\n Please Enter Again: ";
+        std::cin >> requestedCard;
     }
-    else
-    {
-        std::cout << " Card Not Found! " << std::endl;
-    }
+    std::cout << "\n ------> " << card[requestedCard] << " <------ " << std::endl;
 }
 void Control::showPurpleCard()
 {

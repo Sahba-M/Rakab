@@ -56,7 +56,7 @@ class Control {
         std::vector<Player> maxProvinces(); //Find the players who have captured the most provinces
         Player & getDeterminer();
         Player & youngestPlayer();
-        bool res= false;
+    
     private:
         std::vector<std::shared_ptr<Card>> cards; //A vector of all cards
         std::vector<std::shared_ptr<Card>> allBurnedCards;

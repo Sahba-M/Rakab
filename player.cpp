@@ -79,9 +79,6 @@ void Player::selectCard()
         {
             // leaderCard leader;
             // leader.useCard();
-            res = true;
-            found = true;
-            
         }
 
         else if (tempName == "scarecrow")

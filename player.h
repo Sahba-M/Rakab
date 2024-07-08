@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <string>
 
 #include "card.h"
 
@@ -51,9 +52,6 @@ class Player {
         std::vector<std::shared_ptr<Card>> getYcards();
         std::vector<std::shared_ptr<Card>> & getBurnedCards();
         std::vector<std::shared_ptr<Card>> & getHandCards();
-        bool res = false;
-       
-      
 
     private:
         std::string season;
