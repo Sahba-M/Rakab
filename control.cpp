@@ -171,6 +171,9 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
+    Player p;
+    while (p.res!=true)
+    {
         selectWarPlace(getDeterminer());
         int startIndex = findPlayerIndex(getDeterminer());
         int currentIndex = startIndex;
@@ -187,6 +190,7 @@ void Control::setWar()
                 system("cls");
             }
         }
+    }
     cardAction();
     if (winEachWar())
     {
@@ -218,7 +222,7 @@ void Control::selectMove(Player &player, int index)
     move.resize(getPlayerNumber(), "temp"); // Filling the initial value of move vector with "temp"
     char choice;
 
-    if (move[index] != "pass" && player.getHandSize() != 0)
+    if (move[index] != "pass" && player.getHandSize() != 0 && player.res != true)
     {
         std::cout << " " << player.getName() << " Please Choose Your Movement ( pass / card / help ): ";
         std::cin >> move[index];

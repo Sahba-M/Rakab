@@ -13,6 +13,7 @@
 #include "map.h"
 #include "leader.h"
 
+
 struct SharedPtrCompare
 { // To compare two shred_pointers
     template <class T, class U>
@@ -76,9 +77,11 @@ void Player::selectCard()
 
         if (tempName == "leader")
         {
-            leaderCard leader;
-            leader.useCard();
-           
+            // leaderCard leader;
+            // leader.useCard();
+            res = true;
+            found = true;
+            
         }
 
         else if (tempName == "scarecrow")
