@@ -23,6 +23,7 @@
 #include "spring.h"
 #include "drummer.h"
 #include "princes.h"
+#include "virago.h"
 #include "player.h"
 #include "map.h"
 
@@ -195,7 +196,10 @@ void Control::setWar()
         auto elementFound = std::find(provinces.begin(), provinces.end(),getWarPlace());
         if (elementFound != provinces.end())
         provinces.erase(elementFound);
-        setDeterminer(winner);
+        if ( !changeDeterminer() )
+        {
+            setDeterminer(winner);
+        }
     }
     else
     {
@@ -392,19 +396,18 @@ void Control::showPurpleCard()
 }
 void Control::cardAction()
 {
-    std::cout << " start action ";
     // The priority of the cards is: dean - winter - drummer - spring - princes , virago
 
     for (int i = 0; i < getPlayerNumber(); i++) // filling up the scores related to the yellow cards
     {
         players[i].yellowInScore();
     }
-    std::cout << "\nafter for\n";
 
     WinterCard winter;
     SpringCard spring;
     DrummerCard drummer;
     PrincesCard prince;
+    ViragoCard virago;
 
     if (season == "winter")
     {
@@ -432,7 +435,18 @@ void Control::cardAction()
             }
         }
     }
-    std::cout << " end action";
+
+    for ( int i = 0; i < getPlayerNumber(); i++ )
+    {
+        if (players[i].hasVirago())
+        {
+            for (int j = 0; j < players[i].numberOfPrinces(); j++)
+            {
+                virago.useCard(players, i);
+            }
+        }
+    }
+    // changeDeterminer();
 }
 void Control::setSeason(std::string season)
 {
@@ -518,6 +532,16 @@ void Control::askBurn()
         system("cls");
     }
 }
+bool Control::changeDeterminer()
+{
+    std::vector<int> indices = findIndexVirago();
+    if ( indices.size() == 1 )
+    {
+        setDeterminer (players[indices[0]]);
+        return true ;
+    }
+    return false ;
+}
 int Control::getPlayerNumber()
 {
     return playerNumber;
@@ -585,6 +609,15 @@ int Control::levenshteinDistance(const std::string &s1, const std::string &s2)
     }
 
     return currRow[n];
+}
+int Control::findMaxVirago()
+{
+    int max = 0 ;
+    for ( auto player : players )
+    {
+        max = player.numberOfVirago() > max ? player.numberOfVirago() : max ;
+    }
+    return max ;
 }
 bool Control::endGame()
 {
@@ -689,6 +722,19 @@ std::vector<Player> Control::maxProvinces()
 std::vector<Player> Control::getPlayers()
 {
     return players;
+}
+std::vector<int> Control::findIndexVirago()
+{
+    std::vector <int> indices ;
+    int max = findMaxVirago();
+    for ( int i = 0 ; i < players.size() ; i++ )
+    {
+        if ( players[i].maxYcards() == max )
+        {
+            indices.push_back(i) ;
+        }
+    }
+    return indices ;
 }
 Player &Control::getDeterminer()
 {

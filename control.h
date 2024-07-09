@@ -38,22 +38,24 @@ class Control {
         void chargeCards();
         void showAllCaptured();
         void askBurn(); //to burn hand cards of the player who has not got yellow cards
-        void test();
+        bool changeDeterminer(); 
         bool winGame(Player player);
         bool endEachWar(); //checking that all players pass
         bool winEachWar();
         bool endGame();
-        int levenshteinDistance(const std::string &s1, const std::string &s2);// Optimized function to calculate the Levenshtein distance between two strings
+        int  levenshteinDistance(const std::string &s1, const std::string &s2); // Optimized function to calculate the Levenshtein distance between two strings
         int  controlAge();
         int  getPlayerNumber();
         int  findPlayerIndex ( const Player & player ); //finding the index of determiner to start a new round (for clockwise movement)
         int  getProvinceNumber();
+        int  findMaxVirago(); // finding the max number of virago card in playground cards
         std::string controlColors();
         std::string getWarPlace();
         std::string findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold);
 
         std::vector<Player> getPlayers();
         std::vector<Player> maxProvinces(); //Find the players who have captured the most provinces
+        std::vector<int> findIndexVirago(); //Find the indices of players who have the most virago card
         Player & getDeterminer();
         Player & youngestPlayer();
     

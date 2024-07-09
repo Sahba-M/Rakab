@@ -215,6 +215,17 @@ int Player::numberOfPrinces()
     }
     return counter;
 }
+int Player::numberOfVirago()
+{
+    int counter = 0;
+
+    for (auto card : usedCards)
+    {
+        if (card->getName() == "virago")
+            counter++;
+    }
+    return counter;
+}
 int Player::getHandSize()
 {
     return hand.size();
@@ -284,9 +295,7 @@ bool Player::hasDrummer()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("drummer");
 
-    auto elementFound = std::find_if(usedCards.begin(), usedCards.end(),
-                                     [&card](const std::shared_ptr<Card> &ptr)
-                                     { return SharedPtrCompare()(ptr, card); });
+    auto elementFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
 
     if (elementFound != usedCards.end())
     {
@@ -299,9 +308,22 @@ bool Player::hasPrinces()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("princes");
 
-    auto elemenFound = std::find_if(usedCards.begin(), usedCards.end(),
-                                    [&card](const std::shared_ptr<Card> &ptr)
-                                    { return SharedPtrCompare()(ptr, card); });
+    auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
+
+    if (elemenFound != usedCards.end())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool Player::hasVirago()
+{
+    std::shared_ptr<Card> card = std::make_shared<PurpleCard>("virago");
+
+    auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
 
     if (elemenFound != usedCards.end())
     {
