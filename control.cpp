@@ -196,7 +196,7 @@ void Control::setWar()
         auto elementFound = std::find(provinces.begin(), provinces.end(),getWarPlace());
         if (elementFound != provinces.end())
         provinces.erase(elementFound);
-        if ( !changeDeterminer() )
+        if ( changeDeterminer() == false )
         {
             setDeterminer(winner);
         }
@@ -729,7 +729,7 @@ std::vector<int> Control::findIndexVirago()
     int max = findMaxVirago();
     for ( int i = 0 ; i < players.size() ; i++ )
     {
-        if ( players[i].maxYcards() == max )
+        if ( players[i].numberOfVirago() == max )
         {
             indices.push_back(i) ;
         }
