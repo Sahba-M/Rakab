@@ -196,7 +196,7 @@ void Control::setWar()
         auto elementFound = std::find(provinces.begin(), provinces.end(),getWarPlace());
         if (elementFound != provinces.end())
         provinces.erase(elementFound);
-        if ( changeDeterminer() == false )
+        if ( !changeDeterminer() )
         {
             setDeterminer(winner);
         }
@@ -205,7 +205,10 @@ void Control::setWar()
     {
         std::cout << " This War Has No Winners!!! ";
         sleep(5);
-        setDeterminer(players[playersIndices.back()]); //set the last player who pass the game
+        if (!changeDeterminer())
+        {
+             setDeterminer(players[playersIndices.back()]); //set the last player who pass the game 
+        }
     }
 
     for (int i = 0; i < getPlayerNumber(); i++) //to update move vector from "pass" to "temp"
@@ -440,7 +443,7 @@ void Control::cardAction()
     {
         if (players[i].hasVirago())
         {
-            for (int j = 0; j < players[i].numberOfPrinces(); j++)
+            for (int j = 0; j < players[i].numberOfVirago(); j++)
             {
                 virago.useCard(players, i);
             }
