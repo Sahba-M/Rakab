@@ -338,29 +338,6 @@ bool Player::getPass()
 {
     return pass;
 }
-// bool Player::winGame()
-// {
-//     int CapturedProvinces = 0;
-//     Map map;
-//     map.readMatrix();
-//     map.readUnorderedMap();
-//     for (int i = 0 ; i < getNumProvinces() ; i++)
-//     {
-//        for (int j = i + 1 ; j < getNumProvinces() ; j++)
-//        {
-//          if (map.checkAdjacent(capturedProvinces[i], capturedProvinces[j])) //Proximity detection
-//          {
-//              CapturedProvinces++;
-//          }
-//        }
-//     }
-//     if ( CapturedProvinces == 3 || getNumProvinces() == 5 )
-//     {
-//          return true;
-//     }
-//         return false;
-
-// }
 bool Player::isProximity()
 {
     Map map;
