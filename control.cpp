@@ -173,7 +173,11 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
-    selectPeacePlace(getDeterminerPeace());
+    if (getIfDean())
+    {
+        selectPeacePlace(getDeterminerPeace());
+        setIfDean(false);
+    }
     selectWarPlace(getDeterminer());
 
     int startIndex = findPlayerIndex(getDeterminer());
@@ -322,6 +326,12 @@ void Control::selectWarPlace(Player &player)
             std::cout << " " << player.getName() << " Enter Your Chosen Province: ";
         std::cin >> chooseProvince;
 
+        if ( chooseProvince == getPeacePlace())
+        {
+            std::cout << " You Can Not Choose This province ; Because It is Peace Place ." << std::endl;
+            found = false;
+            break;
+        }
         auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
         if (elementFound != provinces.end())
         {
@@ -379,462 +389,449 @@ void Control::selectPeacePlace(Player &player)
         setPeace(chooseProvince);
     }         
 }
-    void Control::setWarPlace(std::string warPlace)
-    {
-        this->warPlace = warPlace;
-    }
-    void Control::setProvinceNumber(int provinceNumber)
-    {
-        this->provinceNumber = provinceNumber;
-    }
-    void Control::guideGame()
-    {
-        std::ifstream inputGuide;
-        std::string explanation;
-        inputGuide.open("guide.txt");
-        if (!inputGuide.is_open())
-        {
-            std::cerr << " Can Not Open File... " << std::endl;
-        }
-        system("cls");
-
-        std::cout << " ------------------------------------------------- \n"
-                  << std::setw(13) << " << HELP PAGE >> \n\n";
-        while (std::getline(inputGuide, explanation))
-        {
-            std::cout << explanation << std::endl;
-        }
-        std::cout << " \n\n ------------------------------------------------- \n";
-        inputGuide.close();
-    }
-    void Control::guideCards()
-    {
-        std::ifstream inputGuides;
-        std::string cardName, cardDescription, requestedCard;
-        std::unordered_map<std::string, std::string> card;
-
-        inputGuides.open("cardGuide.txt");
-        if (!inputGuides.is_open())
-        {
-            std::cerr << " Can Not Open File... \n"
-                      << std::endl;
-        }
-        while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
-        {
-            card[cardName] = cardDescription;
-        }
-        inputGuides.close();
-
-        showPurpleCard();
-        std::cout << "\n Please Enter The Name Of The Card You Want: ";
-        std::cin >> requestedCard;
-
-        while (card.find(requestedCard) == card.end())
-        {
-            std::cout << "\n Please Enter Again: ";
-            std::cin >> requestedCard;
-        }
-        std::cout << "\n ------> " << card[requestedCard] << " <------ " << std::endl;
-    }
-    void Control::showPurpleCard()
-    {
-        std::vector<std::string> purpleCards = {"Scarecrow", "Drummer", "Princes", "Winter", "Spring"};
-        std::cout << "\n ------------------------------------------- \n ";
-        for (auto card : purpleCards)
-        {
-            std::cout << card << "  ";
-        }
-        std::cout << "\n ------------------------------------------- \n\n ";
-    }
-void Control::cardAction()
-    {
-        // The priority of the cards is: dean - winter - drummer - spring - princes , virago
-
-        for (int i = 0; i < getPlayerNumber(); i++) // filling up the scores related to the yellow cards
-        {
-            players[i].yellowInScore();
-        }
-
-        WinterCard winter;
-        SpringCard spring;
-        DrummerCard drummer;
-        PrincesCard prince;
-        ViragoCard virago;
-        DeanCard dean;
-
-
-        for (int i = 0; i < getPlayerNumber(); i++)
-        {
-            if (players[i].hasDean())
-            {
-                dean.useCard(players, i);
-            }
-        }
-
-        if (season == "winter")
-        {
-            winter.useCard(players, -1);
-        }
-
-        for (int i = 0; i < getPlayerNumber(); i++)
-        {
-            if (players[i].hasDrummer())
-            {
-                drummer.useCard(players, i);
-            }
-        }
-
-        if (season == "spring")
-            spring.useCard(players, -1);
-
-        for (int i = 0; i < getPlayerNumber(); i++)
-        {
-            if (players[i].hasPrinces())
-            {
-                for (int j = 0; j < players[i].numberOfPrinces(); j++)
-                {
-                    prince.useCard(players, i);
-                }
-            }
-        }
-
-        for (int i = 0; i < getPlayerNumber(); i++)
-        {
-            if (players[i].hasVirago())
-            {
-                for (int j = 0; j < players[i].numberOfVirago(); j++)
-                {
-                    virago.useCard(players, i);
-                }
-            }
-        }
-        findLastDean();
+void Control::setWarPlace(std::string warPlace)
+{
+    this->warPlace = warPlace;
 }
-    void Control::setSeason(std::string season)
+void Control::setProvinceNumber(int provinceNumber)
+{
+    this->provinceNumber = provinceNumber;
+}
+void Control::guideGame()
+{
+    std::ifstream inputGuide;
+    std::string explanation;
+    inputGuide.open("guide.txt");
+    if (!inputGuide.is_open())
     {
-        this->season = season;
+        std::cerr << " Can Not Open File... " << std::endl;
     }
-    void Control::setPlayersReady()
+    system("cls");
+    std::cout << " ------------------------------------------------- \n"
+              << std::setw(13) << " << HELP PAGE >> \n\n";
+    while (std::getline(inputGuide, explanation))
     {
-        for (auto &player : players)
+        std::cout << explanation << std::endl;
+    }
+    std::cout << " \n\n ------------------------------------------------- \n";
+    inputGuide.close();
+}
+void Control::guideCards()
+{
+    std::ifstream inputGuides;
+    std::string cardName, cardDescription, requestedCard;
+    std::unordered_map<std::string, std::string> card;
+    inputGuides.open("cardGuide.txt");
+    if (!inputGuides.is_open())
+    {
+        std::cerr << " Can Not Open File... \n"
+                  << std::endl;
+    }
+    while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
+    {
+        card[cardName] = cardDescription;
+    }
+    inputGuides.close();
+    showPurpleCard();
+    std::cout << "\n Please Enter The Name Of The Card You Want: ";
+    std::cin >> requestedCard;
+    while (card.find(requestedCard) == card.end())
+    {
+        std::cout << "\n Please Enter Again: ";
+        std::cin >> requestedCard;
+    }
+    std::cout << "\n ------> " << card[requestedCard] << " <------ " << std::endl;
+}
+void Control::showPurpleCard()
+{
+    std::vector<std::string> purpleCards = {"Scarecrow", "Drummer", "Princes", "Winter", "Spring"};
+    std::cout << "\n ------------------------------------------- \n ";
+    for (auto card : purpleCards)
+    {
+        std::cout << card << "  ";
+    }
+    std::cout << "\n ------------------------------------------- \n\n ";
+}
+void Control::cardAction()
+{
+    // The priority of the cards is: dean - winter - drummer - spring - princes , virago
+    for (int i = 0; i < getPlayerNumber(); i++) // filling up the scores related to the yellow cards
+    {
+        players[i].yellowInScore();
+    }
+    WinterCard winter;
+    SpringCard spring;
+    DrummerCard drummer;
+    PrincesCard prince;
+    ViragoCard virago;
+    DeanCard dean;
+
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].hasDean())
         {
-            player.setPass(false);
+            dean.useCard(players, i);
+            setIfDean(true);
         }
     }
-    void Control::run()
+    if (season == "winter")
     {
-        Map map;
-        map.readMatrix();
-        map.readUnorderedMap();
-        setCards();
+        winter.useCard(players, -1);
+    }
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].hasDrummer())
+        {
+            drummer.useCard(players, i);
+        }
+    }
+    if (season == "spring")
+        spring.useCard(players, -1);
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].hasPrinces())
+        {
+            for (int j = 0; j < players[i].numberOfPrinces(); j++)
+            {
+                prince.useCard(players, i);
+            }
+        }
+    }
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].hasVirago())
+        {
+            for (int j = 0; j < players[i].numberOfVirago(); j++)
+            {
+                virago.useCard(players, i);
+            }
+        }
+    }
+    findLastDean();
+}
+void Control::setSeason(std::string season)
+{
+    this->season = season;
+}
+void Control::setPlayersReady()
+{
+    for (auto &player : players)
+    {
+        player.setPass(false);
+    }
+}
+void Control::run()
+{
+    Map map;
+    map.readMatrix();
+    map.readUnorderedMap();
+    setCards();
+    shuffleCards();
+    controlNumber();
+    getInformation();
+    distributeCards();
+    readProvinces();
+    setDeterminer(youngestPlayer());
+    while (!endGame())
+    {
+        setPlayersReady();
+        setWar();
+        askBurn();
+        burnCards();
+        chargeCards();
+    }
+}
+void Control::burnCards()
+{
+    for (auto &player : players)
+    {
+        player.burnCardsPlayer();
+        allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end()); // for all player
+    }
+}
+void Control::chargeCards()
+{
+    int counter = 0;
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].getHandSize() != 0) // check if the card is finish or not
+        {
+            counter++;
+        }
+    }
+    if (counter == 0 || counter == 1)
+    {
+        burnCards();
+        for (auto &player : players)
+        {
+            player.burnHand();
+            allBurnedCards.insert(allBurnedCards.end(), player.getHandCards().begin(), player.getHandCards().end());
+        }
+        cards.insert(cards.end(), allBurnedCards.begin(), allBurnedCards.end());
         shuffleCards();
-        controlNumber();
-        getInformation();
         distributeCards();
-        readProvinces();
-        setDeterminer(youngestPlayer());
-        while (!endGame())
-        {
-            setPlayersReady();
-            setWar();
-            askBurn();
-            burnCards();
-            chargeCards();
-        }
     }
-    void Control::burnCards()
+}
+void Control::showAllCaptured()
+{
+    std::cout << " The Captured Provinces Is : \n";
+    std::cout << "\n";
+    for (int i = 0; i < getPlayerNumber(); i++)
     {
-        for (auto &player : players)
-        {
-            player.burnCardsPlayer();
-            allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end()); // for all player
-        }
+        players[i].showCapturedProvinces();
     }
-    void Control::chargeCards()
+    std::cout << "\n\n";
+}
+void Control::askBurn()
+{
+    for (auto &player : players)
     {
-        int counter = 0;
-        for (int i = 0; i < getPlayerNumber(); i++)
+        if (player.ifBurn())
         {
-            if (players[i].getHandSize() != 0) // check if the card is finish or not
-            {
-                counter++;
-            }
-        }
-        if (counter == 0 || counter == 1)
-        {
-            burnCards();
-            for (auto &player : players)
-            {
-                player.burnHand();
-                allBurnedCards.insert(allBurnedCards.end(), player.getHandCards().begin(), player.getHandCards().end());
-            }
-            cards.insert(cards.end(), allBurnedCards.begin(), allBurnedCards.end());
-            shuffleCards();
-            distributeCards();
-        }
-    }
-    void Control::showAllCaptured()
-    {
-        std::cout << " The Captured Provinces Is : \n";
-        std::cout << "\n";
-        for (int i = 0; i < getPlayerNumber(); i++)
-        {
-            players[i].showCapturedProvinces();
-        }
-        std::cout << "\n\n";
-    }
-    void Control::askBurn()
-    {
-        for (auto &player : players)
-        {
-            if (player.ifBurn())
-            {
-                player.burnHand();
-            }
-            system("cls");
-        }
-    }
-    void Control::setPeace(std::string peacePlace)
-    {
-        this->peacePlace = peacePlace;
-    }
-    bool Control::changeDeterminer()
-    {
-        std::vector<int> indices = findIndexVirago();
-        if (indices.size() == 1)
-        {
-            setDeterminer(players[indices[0]]);
-            return true;
-        }
-        return false;
-    }
-    int Control::getPlayerNumber()
-    {
-        return playerNumber;
-    }
-    int Control::findPlayerIndex(const Player &player)
-    {
-        for (int i = 0; i < players.size(); i++)
-        {
-            if (players[i].getName() == player.getName())
-            {
-                return i;
-            }
-        }
-        return -1; // player not found
-    }
-    int Control::getProvinceNumber()
-    {
-        return provinceNumber;
-    }
-    int Control::controlAge()
-    {
-        int chooseAge;
-        bool res = false;
-        while (!res)
-        {
-            std::cout << " Enter Your Valid Age : ";
-            std::cin >> chooseAge;
-            if (chooseAge > 0)
-                res = true;
-        }
-        return chooseAge;
-    }
-    int Control::levenshteinDistance(const std::string &s1, const std::string &s2)
-    {
-        int m = s1.size();
-        int n = s2.size();
-
-        if (m == 0)
-            return n; // If one of the strings is empty
-        if (n == 0)
-            return m;
-
-        std::vector<int> prevRow(n + 1), currRow(n + 1); // Create two vectors to store distances for the current and previous rows
-
-        for (int j = 0; j <= n; ++j)
-        { // Initialize the previous row
-            prevRow[j] = j;
-        }
-
-        for (int i = 1; i <= m; ++i)
-        {
-            currRow[0] = i;
-            for (int j = 1; j <= n; ++j)
-            {
-                if (s1[i - 1] == s2[j - 1])
-                {
-                    currRow[j] = prevRow[j - 1];
-                }
-                else
-                {
-                    currRow[j] = 1 + std::min({prevRow[j], currRow[j - 1], prevRow[j - 1]});
-                }
-            }
-            prevRow = currRow;
-        }
-
-        return currRow[n];
-    }
-    int Control::findMaxVirago()
-    {
-        int max = 0;
-        for (auto player : players)
-        {
-            max = player.numberOfVirago() > max ? player.numberOfVirago() : max;
-        }
-        return max;
-    }
-    bool Control::endGame()
-    {
-        std::vector<Player> gamePlayers;
-        if (provinces.size() == 0)
-        {
-            std::vector<Player> tempPlayer = maxProvinces();
-            for (int i = 0; i < tempPlayer.size(); i++)
-            {
-                std::cout << "  { " << tempPlayer[i].getName() << " } " << " IS WINER :) \n ";
-            }
-            return true;
-        }
-        for (auto &player : players)
-        {
-            if (winGame(player))
-            {
-                gamePlayers.push_back(player);
-            }
+            player.burnHand();
         }
         system("cls");
-        for (int i = 0; i < gamePlayers.size(); i++)
-        {
-            std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER ... \n ";
-        }
-
-        if (gamePlayers.size() != 0) // to check we have winner or not
-            return true;
-        else
-            return false;
     }
-    bool Control::winGame(Player player)
+}
+void Control::setPeace(std::string peacePlace)
+{
+    this->peacePlace = peacePlace;
+}
+void Control::setIfDean( bool ifDean )
+{
+   this -> ifDean = ifDean; 
+}
+bool Control::getIfDean()
+{
+    return ifDean;
+}
+bool Control::changeDeterminer()
+{
+    std::vector<int> indices = findIndexVirago();
+    if (indices.size() == 1)
     {
-        if (player.isProximity() || player.getNumProvinces() == 5)
-        {
-            return true;
-        }
-        return false;
+        setDeterminer(players[indices[0]]);
+        return true;
     }
-    bool Control::endEachWar()
+    return false;
+}
+int Control::getPlayerNumber()
+{
+    return playerNumber;
+}
+int Control::findPlayerIndex(const Player &player)
+{
+    for (int i = 0; i < players.size(); i++)
     {
-        bool flag = false;
-        for (auto player : players)
+        if (players[i].getName() == player.getName())
         {
-            if (player.getPass() == true)
+            return i;
+        }
+    }
+    return -1; // player not found
+}
+int Control::getProvinceNumber()
+{
+    return provinceNumber;
+}
+int Control::controlAge()
+{
+    int chooseAge;
+    bool res = false;
+    while (!res)
+    {
+        std::cout << " Enter Your Valid Age : ";
+        std::cin >> chooseAge;
+        if (chooseAge > 0)
+            res = true;
+    }
+    return chooseAge;
+}
+int Control::levenshteinDistance(const std::string &s1, const std::string &s2)
+{
+    int m = s1.size();
+    int n = s2.size();
+    if (m == 0)
+        return n; // If one of the strings is empty
+    if (n == 0)
+        return m;
+    std::vector<int> prevRow(n + 1), currRow(n + 1); // Create two vectors to store distances for the current and previous rows
+    for (int j = 0; j <= n; ++j)
+    { // Initialize the previous row
+        prevRow[j] = j;
+    }
+    for (int i = 1; i <= m; ++i)
+    {
+        currRow[0] = i;
+        for (int j = 1; j <= n; ++j)
+        {
+            if (s1[i - 1] == s2[j - 1])
             {
-                flag = true;
+                currRow[j] = prevRow[j - 1];
             }
             else
             {
-                flag = false;
-                break;
+                currRow[j] = 1 + std::min({prevRow[j], currRow[j - 1], prevRow[j - 1]});
             }
         }
-        return flag;
+        prevRow = currRow;
     }
-    bool Control::winEachWar()
+    return currRow[n];
+}
+int Control::findMaxVirago()
+{
+    int max = 0;
+    for (auto player : players)
     {
-        int winnerIndex;
-        int max = 0;
-        std::vector<Player> winPlayers;
-        for (auto player : players)
+        max = player.numberOfVirago() > max ? player.numberOfVirago() : max;
+    }
+    return max;
+}
+bool Control::endGame()
+{
+    std::vector<Player> gamePlayers;
+    if (provinces.size() == 0)
+    {
+        std::vector<Player> tempPlayer = maxProvinces();
+        for (int i = 0; i < tempPlayer.size(); i++)
         {
-            max = player.getScorePlayer() > max ? player.getScorePlayer() : max;
+            std::cout << "  { " << tempPlayer[i].getName() << " } " << " IS WINER :) \n ";
         }
-        for (int j = 0; j < getPlayerNumber(); j++)
+        return true;
+    }
+    for (auto &player : players)
+    {
+        if (winGame(player))
         {
-            if (max == players[j].getScorePlayer())
-            {
-                winPlayers.push_back(players[j]);
-                winnerIndex = j;
-            }
+            gamePlayers.push_back(player);
         }
-        if (winPlayers.size() == 1)
+    }
+    system("cls");
+    for (int i = 0; i < gamePlayers.size(); i++)
+    {
+        std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER ... \n ";
+    }
+    if (gamePlayers.size() != 0) // to check we have winner or not
+        return true;
+    else
+        return false;
+}
+bool Control::winGame(Player player)
+{
+    if (player.isProximity() || player.getNumProvinces() == 5)
+    {
+        return true;
+    }
+    return false;
+}
+bool Control::endEachWar()
+{
+    bool flag = false;
+    for (auto player : players)
+    {
+        if (player.getPass() == true)
         {
-            winner = winPlayers[0];
-            players[winnerIndex].addProvinces(warPlace);
-            return true;
+            flag = true;
         }
         else
         {
-            return false;
+            flag = false;
+            break;
         }
     }
-    std::vector<Player> Control::maxProvinces()
+    return flag;
+}
+bool Control::winEachWar()
+{
+    int winnerIndex;
+    int max = 0;
+    std::vector<Player> winPlayers;
+    for (auto player : players)
     {
-        std::vector<Player> maxProvinces;
-        int max = 0;
-        for (int i = 0; i < players.size(); i++)
+        max = player.getScorePlayer() > max ? player.getScorePlayer() : max;
+    }
+    for (int j = 0; j < getPlayerNumber(); j++)
+    {
+        if (max == players[j].getScorePlayer())
         {
-            max = players[i].getNumProvinces() > max ? players[i].getNumProvinces() : max;
+            winPlayers.push_back(players[j]);
+            winnerIndex = j;
         }
-        for (int i = 0; i < players.size(); i++)
+    }
+    if (winPlayers.size() == 1)
+    {
+        winner = winPlayers[0];
+        players[winnerIndex].addProvinces(warPlace);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+std::vector<Player> Control::maxProvinces()
+{
+    std::vector<Player> maxProvinces;
+    int max = 0;
+    for (int i = 0; i < players.size(); i++)
+    {
+        max = players[i].getNumProvinces() > max ? players[i].getNumProvinces() : max;
+    }
+    for (int i = 0; i < players.size(); i++)
+    {
+        if (max == players[i].getNumProvinces())
         {
-            if (max == players[i].getNumProvinces())
-            {
-                maxProvinces.push_back(players[i]);
-            }
+            maxProvinces.push_back(players[i]);
         }
-        return maxProvinces;
     }
-    std::vector<Player> Control::getPlayers()
+    return maxProvinces;
+}
+std::vector<Player> Control::getPlayers()
+{
+    return players;
+}
+std::vector<int> Control::findIndexVirago()
+{
+    std::vector<int> indices;
+    int max = findMaxVirago();
+    for (int i = 0; i < players.size(); i++)
     {
-        return players;
-    }
-    std::vector<int> Control::findIndexVirago()
-    {
-        std::vector<int> indices;
-        int max = findMaxVirago();
-        for (int i = 0; i < players.size(); i++)
+        if (players[i].numberOfVirago() == max)
         {
-            if (players[i].numberOfVirago() == max)
-            {
-                indices.push_back(i);
-            }
+            indices.push_back(i);
         }
-        return indices;
     }
-    Player &Control::getDeterminer()
+    return indices;
+}
+Player &Control::getDeterminer()
+{
+    return DeterminerOfWar;
+}
+Player &Control::youngestPlayer()
+{
+    std::vector<int> playersAge;
+    std::vector<int> youngestIndices;
+    for (int i = 0; i < getPlayerNumber(); i++)
     {
-        return DeterminerOfWar;
+        playersAge.push_back(players[i].getAge());
     }
-    Player &Control::youngestPlayer()
+    int minAge = *min_element(playersAge.begin(), playersAge.end()); // Find the minimum age
+    for (int i = 0; i < playersAge.size(); i++)
     {
-        std::vector<int> playersAge;
-        std::vector<int> youngestIndices;
-
-        for (int i = 0; i < getPlayerNumber(); i++)
+        if (playersAge[i] == minAge)
         {
-            playersAge.push_back(players[i].getAge());
+            youngestIndices.push_back(i);
         }
-
-        int minAge = *min_element(playersAge.begin(), playersAge.end()); // Find the minimum age
-
-        for (int i = 0; i < playersAge.size(); i++)
-        {
-            if (playersAge[i] == minAge)
-            {
-                youngestIndices.push_back(i);
-            }
-        }
-        srand(time(0));
-        int randomIndex = youngestIndices[rand() % youngestIndices.size()];
-
-        return players[randomIndex];
     }
-    Player & Control::getDeterminerPeace()
-    {
-        return DeterminerOfPeace;
-    }
-Player Control::findLastDean()
+    srand(time(0));
+    int randomIndex = youngestIndices[rand() % youngestIndices.size()];
+    return players[randomIndex];
+}
+Player & Control::getDeterminerPeace()
+{
+    return DeterminerOfPeace;
+}
+void Control::findLastDean()
 {
     Player player;
     for( auto tempPlayer : players)
@@ -846,64 +843,59 @@ Player Control::findLastDean()
     }
     setDeterminerPeace(player);
 }
-    std::string Control::controlColors()
+std::string Control::controlColors()
+{
+    bool found = true;
+    std::string chooseColor;
+    do
     {
-        bool found = true;
-        std::string chooseColor;
-        do
+        showColors();
+        if (found == true)
+            std::cout << std::endl
+                      << " Enter Your Chosen Color: ";
+        std::cin >> chooseColor;
+        auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
+        if (elementFound != colors.end())
         {
-            showColors();
-            if (found == true)
-                std::cout << std::endl
-                          << " Enter Your Chosen Color: ";
-
-            std::cin >> chooseColor;
-
-            auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
-
-            if (elementFound != colors.end())
-            {
-                colors.erase(elementFound);
-                found = true;
-                break;
-            }
-            else
-            {
-                std::cout << " \n ERROR: Please Enter Your Color Again : " << std::endl;
-                found = false;
-            }
-        } while (!found);
-        return chooseColor;
-    }
-    std::string Control::getWarPlace()
-    {
-        return warPlace;
-    }
-    std::string Control::getWarPeace()
-    {
-        return peacePlace;
-    }
-    std::string Control::findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold)
-    {
-        std::string closestMatch;
-        int minDistance = INT_MAX;
-
-        for (const auto &card : cards)
-        {
-            int distance = levenshteinDistance(input, card);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                closestMatch = card;
-            }
-        }
-
-        if (minDistance <= threshold)
-        {
-            return closestMatch;
+            colors.erase(elementFound);
+            found = true;
+            break;
         }
         else
         {
-            return "";
+            std::cout << " \n ERROR: Please Enter Your Color Again : " << std::endl;
+            found = false;
+        }
+    } while (!found);
+    return chooseColor;
+}
+std::string Control::getWarPlace()
+{
+    return warPlace;
+}
+std::string Control::getPeacePlace()
+{
+    return peacePlace;
+}
+std::string Control::findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold)
+{
+    std::string closestMatch;
+    int minDistance = INT_MAX;
+    for (const auto &card : cards)
+    {
+        int distance = levenshteinDistance(input, card);
+        if (distance < minDistance)
+        {
+            minDistance = distance;
+            closestMatch = card;
         }
     }
+    if (minDistance <= threshold)
+    {
+        return closestMatch;
+    }
+    else
+    {
+        return "";
+    }
+}

@@ -41,6 +41,9 @@ class Control {
         void selectPeacePlace(Player &player);
         void showAllCaptured();
         void askBurn(); //to burn hand cards of the player who has not got yellow cards
+        void findLastDean(); //Find the last player who played dean
+        void setIfDean( bool ifDean );
+        bool getIfDean(); 
         bool changeDeterminer(); 
         bool winGame(Player player);
         bool endEachWar(); //checking that all players pass
@@ -54,7 +57,7 @@ class Control {
         int  findMaxVirago(); // finding the max number of virago card in playground cards
         std::string controlColors();
         std::string getWarPlace();
-        std::string getWarPeace();
+        std::string getPeacePlace();
         std::string findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold);
 
         std::vector<Player> getPlayers();
@@ -63,7 +66,6 @@ class Control {
         Player & getDeterminer();
         Player & getDeterminerPeace();
         Player & youngestPlayer();
-        Player findLastDean(); //Find the last player who played dean
         
     
     private:
@@ -79,6 +81,7 @@ class Control {
         int playerNumber; //The number of players in the game
         int provinceNumber;
         int threshold;
+        bool ifDean = false;
         std::string warPlace;
         std::string peacePlace = "null";
         std::string season;
