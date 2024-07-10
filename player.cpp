@@ -226,6 +226,17 @@ int Player::numberOfVirago()
     }
     return counter;
 }
+int Player::numberOfDean()
+{
+    int counter = 0;
+
+    for (auto card : usedCards)
+    {
+        if (card->getName() == "dean")
+            counter++;
+    }
+    return counter;
+}
 int Player::getHandSize()
 {
     return hand.size();
@@ -322,6 +333,21 @@ bool Player::hasPrinces()
 bool Player::hasVirago()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("virago");
+
+    auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
+
+    if (elemenFound != usedCards.end())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool Player::hasDean()
+{
+    std::shared_ptr<Card> card = std::make_shared<PurpleCard>("dean");
 
     auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
 

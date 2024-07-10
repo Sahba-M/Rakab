@@ -24,6 +24,7 @@
 #include "drummer.h"
 #include "princes.h"
 #include "virago.h"
+#include "dean.h"
 #include "player.h"
 #include "map.h"
 
@@ -415,6 +416,15 @@ void Control::cardAction()
     DrummerCard drummer;
     PrincesCard prince;
     ViragoCard virago;
+    DeanCard dean;
+
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].hasDean())
+        {
+            dean.useCard(players , i);
+        }
+    }
 
     if (season == "winter")
     {
@@ -453,7 +463,8 @@ void Control::cardAction()
             }
         }
     }
-    // changeDeterminer();
+
+    
 }
 void Control::setSeason(std::string season)
 {

@@ -37,10 +37,12 @@ class Player {
         int  maxYcards(); //Find the most valuable yellow card player
         int  numberOfPrinces(); //The number of princes cards used by the player
         int  numberOfVirago(); //The number of virago cards used by the player
+        int  numberOfDean(); //The number of dean cards used by the player
         bool isFind ( std::shared_ptr<Card> Ycard ); //Find the yellow card and return it to the player's hand
         bool hasDrummer(); //Having a drummer card in the player's used cards
         bool hasPrinces(); //Having a princes card in the player's used cards
         bool hasVirago(); //Having a virago card in the player's used cards
+        bool hasDean(); //Having a dean card in the player's used cards
         bool getPass();
         bool hasYellowCard(); //Having yellow cards in the player's hand
         bool hasPurpleCard(); //Having purple cards in the player's hand
