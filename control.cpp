@@ -330,18 +330,20 @@ void Control::selectWarPlace(Player &player)
         {
             std::cout << " You Can Not Choose This province ; Because It is Peace Place ." << std::endl;
             found = false;
-            break;
-        }
-        auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
-        if (elementFound != provinces.end())
-        {
-            found = true;
-            break;
         }
         else
         {
-            std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
-            found = false;
+            auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
+            if (elementFound != provinces.end())
+            {
+                found = true;
+                break;
+            }
+            else
+            {
+                std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
+                found = false;
+            }
         }
     } while (!found);
 
