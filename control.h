@@ -21,6 +21,7 @@ class Control {
         void readProvinces(); //Filling the provinces vector
         void showUncaptured(); //Showing provinces that have not been captured at all
         void setWar();
+        void setPeace( std::string peacePlace );
         void setWarPlace ( std::string warPlace );
         void selectMove ( Player & player,int index );
         void showPlayGround(); //Show used player cards
@@ -37,6 +38,7 @@ class Control {
         void setPlayersReady(); //change to false variable of pass after each round (for all players)
         void burnCards(); //fill the allBurnedCards vector
         void chargeCards();
+        void selectPeacePlace(Player &player);
         void showAllCaptured();
         void askBurn(); //to burn hand cards of the player who has not got yellow cards
         bool changeDeterminer(); 
@@ -52,6 +54,7 @@ class Control {
         int  findMaxVirago(); // finding the max number of virago card in playground cards
         std::string controlColors();
         std::string getWarPlace();
+        std::string getWarPeace();
         std::string findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold);
 
         std::vector<Player> getPlayers();
@@ -59,6 +62,7 @@ class Control {
         std::vector<int> findIndexVirago(); //Find the indices of players who have the most virago card
         Player & getDeterminer();
         Player & youngestPlayer();
+        
     
     private:
         std::vector<std::shared_ptr<Card>> cards; //A vector of all cards
@@ -74,6 +78,7 @@ class Control {
         int provinceNumber;
         int threshold;
         std::string warPlace;
+        std::string peacePlace;
         std::string season;
         Player winner; // for winner of each round
         Player DeterminerOfWar; //Determining the location of the battle
