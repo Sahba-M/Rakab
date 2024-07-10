@@ -173,7 +173,9 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
+    selectPeacePlace(getDeterminerPeace());
     selectWarPlace(getDeterminer());
+
     int startIndex = findPlayerIndex(getDeterminer());
     int currentIndex = startIndex;
     system("cls");
@@ -377,8 +379,6 @@ void Control::selectPeacePlace(Player &player)
         setPeace(chooseProvince);
     }         
 }
-    
-
     void Control::setWarPlace(std::string warPlace)
     {
         this->warPlace = warPlace;
@@ -446,7 +446,7 @@ void Control::selectPeacePlace(Player &player)
         }
         std::cout << "\n ------------------------------------------- \n\n ";
     }
-    void Control::cardAction()
+void Control::cardAction()
     {
         // The priority of the cards is: dean - winter - drummer - spring - princes , virago
 
@@ -461,6 +461,7 @@ void Control::selectPeacePlace(Player &player)
         PrincesCard prince;
         ViragoCard virago;
         DeanCard dean;
+
 
         for (int i = 0; i < getPlayerNumber(); i++)
         {
@@ -507,7 +508,8 @@ void Control::selectPeacePlace(Player &player)
                 }
             }
         }
-    }
+        findLastDean();
+}
     void Control::setSeason(std::string season)
     {
         this->season = season;
@@ -828,6 +830,22 @@ void Control::selectPeacePlace(Player &player)
 
         return players[randomIndex];
     }
+    Player & Control::getDeterminerPeace()
+    {
+        return DeterminerOfPeace;
+    }
+Player Control::findLastDean()
+{
+    Player player;
+    for( auto tempPlayer : players)
+    {
+        if ( tempPlayer.hasDean() )
+        {
+           player = tempPlayer;
+        }
+    }
+    setDeterminerPeace(player);
+}
     std::string Control::controlColors()
     {
         bool found = true;

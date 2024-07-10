@@ -61,7 +61,9 @@ class Control {
         std::vector<Player> maxProvinces(); //Find the players who have captured the most provinces
         std::vector<int> findIndexVirago(); //Find the indices of players who have the most virago card
         Player & getDeterminer();
+        Player & getDeterminerPeace();
         Player & youngestPlayer();
+        Player findLastDean(); //Find the last player who played dean
         
     
     private:
@@ -78,7 +80,7 @@ class Control {
         int provinceNumber;
         int threshold;
         std::string warPlace;
-        std::string peacePlace;
+        std::string peacePlace = "null";
         std::string season;
         Player winner; // for winner of each round
         Player DeterminerOfWar; //Determining the location of the battle
