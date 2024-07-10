@@ -226,17 +226,17 @@ int Player::numberOfVirago()
     }
     return counter;
 }
-int Player::numberOfDean()
-{
-    int counter = 0;
+// int Player::numberOfDean()
+// {
+//     int counter = 0;
 
-    for (auto card : usedCards)
-    {
-        if (card->getName() == "dean")
-            counter++;
-    }
-    return counter;
-}
+//     for (auto card : usedCards)
+//     {
+//         if (card->getName() == "dean")
+//             counter++;
+//     }
+//     return counter;
+// }
 int Player::getHandSize()
 {
     return hand.size();
@@ -244,6 +244,18 @@ int Player::getHandSize()
 int Player::getNumProvinces()
 {
     return (capturedProvinces.size());
+}
+int Player::numberOfMaxYcards()
+{
+    int counter = 0 ;
+    for ( int i = 0 ; i < yellowCards.size(); i++ )
+    {
+        if ( stoi(yellowCards[i]->getName()) == maxYcards())
+        {
+            counter++;
+        }
+    }
+    return counter ;
 }
 bool Player::hasYellowCard()
 {

@@ -6,7 +6,7 @@ void DeanCard::useCard ( std::vector <Player> & players , int numPlayer )
     std::vector<int> indicesPlayers = findMaxPlayer ( players );
     for ( auto index : indicesPlayers )
     {
-        players[index].setScorePlayer (players[index].getScorePlayer() - findMaxScore(players));
+        players[index].setScorePlayer (players[index].getScorePlayer() - (players[index].numberOfMaxYcards() * findMaxScore(players)));
     }
 }
 std::vector<int> DeanCard::findMaxPlayer ( std::vector <Player> players )
