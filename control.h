@@ -33,6 +33,7 @@ class Control {
         void showPurpleCard();
         void run();
         void setDeterminer ( Player & Determiner);
+        void setDeterminerPeace ( Player & Determiner);
         void setPlayersReady(); //change to false variable of pass after each round (for all players)
         void burnCards(); //fill the allBurnedCards vector
         void chargeCards();
@@ -76,6 +77,8 @@ class Control {
         std::string season;
         Player winner; // for winner of each round
         Player DeterminerOfWar; //Determining the location of the battle
+        Player DeterminerOfPeace; //Determining the location of the peace place
+        
 };
 
 #endif

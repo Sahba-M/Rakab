@@ -216,9 +216,13 @@ void Control::setWar()
         move[i] = "temp";
     }
 }
-void Control::setDeterminer(Player &Determiner)
+void Control::setDeterminer(Player & Determiner)
 {
     DeterminerOfWar = Determiner;
+}
+void Control::setDeterminerPeace ( Player & Determiner )
+{
+    DeterminerOfPeace = Determiner;
 }
 void Control::selectMove(Player &player, int index)
 {
