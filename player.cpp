@@ -193,12 +193,15 @@ int Player::getScorePlayer()
 int Player::maxYcards()
 {
     std::vector<int> yellowIntegers;
-    for (auto card : yellowCards)
-    {
-        yellowIntegers.push_back(stoi(card->getName()));
-    }
-    auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end()); // Find the largest element using the max_element function
-    return (*maxElement);                                                             // To access the pointer value, not the pointer itself
+  
+        for (auto card : yellowCards)
+        {
+            yellowIntegers.push_back(stoi(card->getName()));
+        }
+        auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end()); // Find the largest element using the max_element function
+                                                                                            // To access the pointer value, not the pointer itself
+    return (*maxElement);  
+                                                               
 }
 int Player::numCardsOfPlayer()
 {
