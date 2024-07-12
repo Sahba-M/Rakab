@@ -27,6 +27,7 @@
 #include "dean.h"
 #include "player.h"
 #include "map.h"
+#include "leader.h"
 
 Control::Control()
 {
@@ -173,6 +174,8 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
+    LeaderCard leader;
+    
     if (getIfDean())
     {
         selectPeacePlace(getDeterminerPeace());
@@ -183,6 +186,7 @@ void Control::setWar()
     int startIndex = findPlayerIndex(getDeterminer());
     int currentIndex = startIndex;
     system("cls");
+    
     while (!endEachWar())
     {
         for (int i = 0; i < getPlayerNumber(); i++)
@@ -191,6 +195,12 @@ void Control::setWar()
             showPlayGround();
             std::cout << "\n The War Is Over => " << getWarPlace() << "\n\n ";
             selectMove(players[currentIndex], currentIndex);
+            if (players[i].getIfLeader())
+            {
+                leader.useCard(players,-1);
+                system("cls");
+                break;
+            }
             currentIndex = (currentIndex + 1) % players.size();
             system("cls");
         }
@@ -476,7 +486,6 @@ void Control::cardAction()
             setIfDean(true);
         }
     }
-    sleep(2);
     if (season == "winter")
     {
         winter.useCard(players, -1);

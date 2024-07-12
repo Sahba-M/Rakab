@@ -77,8 +77,7 @@ void Player::selectCard()
 
         if (tempName == "leader")
         {
-            // leaderCard leader;
-            // leader.useCard();
+            setIfLeader(true);
         }
 
         else if (tempName == "scarecrow")
@@ -114,6 +113,10 @@ void Player::selectCard()
 void Player::setSeason(std::string season)
 {
     this->season = season;
+}
+void Player::setIfLeader(bool ifLeader)
+{
+    this-> ifLeader = ifLeader;
 }
 void Player::showUsedCards()
 {
@@ -237,17 +240,6 @@ int Player::numberOfVirago()
     }
     return counter;
 }
-// int Player::numberOfDean()
-// {
-//     int counter = 0;
-
-//     for (auto card : usedCards)
-//     {
-//         if (card->getName() == "dean")
-//             counter++;
-//     }
-//     return counter;
-// }
 int Player::getHandSize()
 {
     return hand.size();
@@ -418,6 +410,10 @@ bool Player::isProximity()
     }
     return false;
 }
+bool Player::getIfLeader()
+{
+    return ifLeader;
+}
 std::string Player::getSeason()
 {
     return season;
@@ -430,14 +426,6 @@ std::string Player::getColor() const
 {
     return color;
 }
-// std::vector<std::shared_ptr<Card>> &Player::getHandCards()
-// {
-//     return hand;
-// }
-// std::vector<std::shared_ptr<Card>> &Player::getBurnedCards()
-// {
-//     return burnedCards;
-// }
 std::vector<std::shared_ptr<Card>> Player::getYcards()
 {
     return yellowCards;

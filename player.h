@@ -31,6 +31,7 @@ class Player {
         void burnHand(); //Add hand cards to burned cards
         void insertBurnedCard ( std::vector<std::shared_ptr<Card>> & cards );
         void insertHandCard ( std::vector<std::shared_ptr<Card>> & cards );
+        void setIfLeader(bool ifLeader);
         int  getAge() const ;
         int  getScorePlayer();
         int  getHandSize(); //The number of cards in the player's hand
@@ -52,6 +53,7 @@ class Player {
         bool hasPurpleCard(); //Having purple cards in the player's hand
         bool ifBurn(); //Does the player want to burn her hand if she doesn't have yellow cards?
         bool isProximity();
+        bool getIfLeader();
 
        // bool winGame(); //Determine the winner of the game
         std::string getName() const ;
@@ -74,5 +76,6 @@ class Player {
         int age ;
         int scorePlayer;
         bool pass = false;
+        bool ifLeader = false;
 };
 #endif  

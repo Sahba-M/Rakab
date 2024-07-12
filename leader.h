@@ -2,10 +2,10 @@
 
 #include "purple.h"
 
-class leaderCard :public PurpleCard{
+class LeaderCard :public PurpleCard{
      
      public:
-        leaderCard();
+        LeaderCard();
         virtual void useCard ( std::vector <Player> & players , int numPlayer ) override;
 
 };

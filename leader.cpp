@@ -3,10 +3,10 @@
 #include "leader.h"
 #include "player.h"
 
-leaderCard::leaderCard(){}
- void leaderCard::useCard ( std::vector <Player> & players , int numPlayer )
+LeaderCard::LeaderCard(){}
+ void LeaderCard::useCard ( std::vector <Player> & players , int numPlayer )
  {
-    for(auto player : players)
+    for(auto &player : players)
     {
         player.setPass(true);
     }
