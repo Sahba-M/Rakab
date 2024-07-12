@@ -29,6 +29,8 @@ class Player {
         void burnCardsPlayer(); //Add used cards to burned cards
         void showCapturedProvinces();
         void burnHand(); //Add hand cards to burned cards
+        void insertBurnedCard ( std::vector<std::shared_ptr<Card>> & cards );
+        void insertHandCard ( std::vector<std::shared_ptr<Card>> & cards );
         int  getAge() const ;
         int  getScorePlayer();
         int  getHandSize(); //The number of cards in the player's hand
@@ -45,6 +47,7 @@ class Player {
         bool hasVirago(); //Having a virago card in the player's used cards
         bool hasDean(); //Having a dean card in the player's used cards
         bool getPass();
+        bool hasYellowGround();
         bool hasYellowCard(); //Having yellow cards in the player's hand
         bool hasPurpleCard(); //Having purple cards in the player's hand
         bool ifBurn(); //Does the player want to burn her hand if she doesn't have yellow cards?
@@ -55,8 +58,9 @@ class Player {
         std::string getColor() const ;
         std::string getSeason();
         std::vector<std::shared_ptr<Card>> getYcards();
-        std::vector<std::shared_ptr<Card>> & getBurnedCards();
-        std::vector<std::shared_ptr<Card>> & getHandCards();
+        // std::vector<std::shared_ptr<Card>> & getBurnedCards();
+        // std::vector<std::shared_ptr<Card>> & getHandCards();
+        
 
     private:
         std::string season;

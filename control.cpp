@@ -221,6 +221,7 @@ void Control::setWar()
     for (int i = 0; i < getPlayerNumber(); i++) // to update move vector from "pass" to "temp"
     {
         move[i] = "temp";
+        players[i].setSeason("temp");
     }
 }
 void Control::setDeterminer(Player &Determiner)
@@ -354,6 +355,14 @@ void Control::selectPeacePlace(Player &player)
     bool found = true;
     std::string chooseProvince, response = "null";
 
+    std::cout << "\n ";
+    std::cout << "---------------------------------------------------------------------------------------------------------\n ";
+    for (int i = 0; i < provinces.size(); i++)
+    {
+        std::cout << provinces[i] << "  ";
+    }
+    std::cout << "\n ---------------------------------------------------------------------------------------------------------\n\n\n ";
+    std::cout << std::endl;
     std::cout << " " << player.getName() << " Do You Want To Determine The Peace Place? (Y/N) ";
     std::cin >> response;
 
@@ -361,15 +370,6 @@ void Control::selectPeacePlace(Player &player)
     {
         do
         {
-            std::cout << "\n ";
-            std::cout << "---------------------------------------------------------------------------------------------------------\n ";
-            for (int i = 0; i < provinces.size(); i++)
-            {
-                std::cout << provinces[i] << "  ";
-            }
-            std::cout << "\n ---------------------------------------------------------------------------------------------------------\n\n\n ";
-            std::cout << std::endl;
-
             if (found == true)
             {
                 std::cout << " Enter Your Choosen Province : ";
@@ -476,6 +476,7 @@ void Control::cardAction()
             setIfDean(true);
         }
     }
+    sleep(2);
     if (season == "winter")
     {
         winter.useCard(players, -1);
@@ -510,6 +511,7 @@ void Control::cardAction()
         }
     }
     findLastDean();
+    setSeason("temp");
 }
 void Control::setSeason(std::string season)
 {
@@ -548,7 +550,8 @@ void Control::burnCards()
     for (auto &player : players)
     {
         player.burnCardsPlayer();
-        allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end()); // for all player
+        player.insertBurnedCard (allBurnedCards);  // for all player
+        // allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end()); // for all player
     }
 }
 void Control::chargeCards()
@@ -567,7 +570,9 @@ void Control::chargeCards()
         for (auto &player : players)
         {
             player.burnHand();
-            allBurnedCards.insert(allBurnedCards.end(), player.getHandCards().begin(), player.getHandCards().end());
+            player.insertHandCard (allBurnedCards); 
+            // allBurnedCards.insert(allBurnedCards.end(), player.getHandCards().begin(), player.getHandCards().end());
+
         }
         cards.insert(cards.end(), allBurnedCards.begin(), allBurnedCards.end());
         shuffleCards();
@@ -900,4 +905,8 @@ std::string Control::findClosestMatch(const std::string &input, const std::vecto
     {
         return "";
     }
+}
+std::string Control::getSeason()
+{
+    return season;
 }

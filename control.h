@@ -59,6 +59,7 @@ class Control {
         std::string getWarPlace();
         std::string getPeacePlace();
         std::string findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold);
+        std::string getSeason();
 
         std::vector<Player> getPlayers();
         std::vector<Player> maxProvinces(); //Find the players who have captured the most provinces

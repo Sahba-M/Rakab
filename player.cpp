@@ -182,6 +182,14 @@ void Player::showCapturedProvinces()
     }
     std::cout << '\n';
 }
+void Player::insertBurnedCard ( std::vector<std::shared_ptr<Card>> & cards )
+{
+    cards.insert(cards.end(), burnedCards.begin(), burnedCards.end()); // for all player
+}
+void Player::insertHandCard ( std::vector<std::shared_ptr<Card>> & cards )
+{
+    cards.insert(cards.end(), hand.begin(), hand.end()); // for all player
+}
 int Player::getAge() const
 {
     return age;
@@ -259,6 +267,17 @@ int Player::numberOfMaxYcards()
         }
     }
     return counter ;
+}
+bool Player::hasYellowGround()
+{
+    for (const auto &card : usedCards)
+    {
+        if (std::dynamic_pointer_cast<YellowCard>(card))
+        {
+            return true;
+        }
+    }
+    return false;
 }
 bool Player::hasYellowCard()
 {
@@ -411,14 +430,14 @@ std::string Player::getColor() const
 {
     return color;
 }
-std::vector<std::shared_ptr<Card>> &Player::getHandCards()
-{
-    return hand;
-}
-std::vector<std::shared_ptr<Card>> &Player::getBurnedCards()
-{
-    return burnedCards;
-}
+// std::vector<std::shared_ptr<Card>> &Player::getHandCards()
+// {
+//     return hand;
+// }
+// std::vector<std::shared_ptr<Card>> &Player::getBurnedCards()
+// {
+//     return burnedCards;
+// }
 std::vector<std::shared_ptr<Card>> Player::getYcards()
 {
     return yellowCards;
