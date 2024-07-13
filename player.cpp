@@ -430,3 +430,32 @@ std::vector<std::shared_ptr<Card>> Player::getYcards()
 {
     return yellowCards;
 }
+std::istream &operator>> (std::istream &input, Player &player )
+{
+   
+    std::getline(input, player.name);
+    input >> player.age >> player.color; 
+
+    for (int i = 0; i < player.capturedProvinces.size(); i++)
+    {
+        input >> player.capturedProvinces[i];
+    }
+     for (const auto &cardPtr : player.hand)
+    {
+        input >> cardPtr->getName();
+    }
+     for (int i = 0; i < player.usedCards.size(); i++)
+    {
+        input >> player.usedCards[i];
+    }
+     for (int i = 0; i < player.burnedCards.size(); i++)
+    {
+        input >> player.burnedCards[i]->getName();
+    }
+     for (int i = 0; i < player.yellowCards.size(); i++)
+    {
+        input >> player.yellowCards[i]->getName();
+    }
+    
+}
+

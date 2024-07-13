@@ -110,10 +110,11 @@ void Control::getInformation()
     std::string color;
     for (int i = 0; i < getPlayerNumber(); i++)
     {
-        std::cout << " Player " << i + 1 << " : " << '\n'
-                  << " Enter Your Name : ";
+        std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
+                 
         std::cin.ignore();
         std::getline(std::cin, name);
+
 
         // std::cout << " Enter Your Age : ";
         // std::cin >> age;
@@ -436,8 +437,8 @@ void Control::guideCards()
     inputGuides.open("cardGuide.txt");
     if (!inputGuides.is_open())
     {
-        std::cerr << " Can Not Open File... \n"
-                  << std::endl;
+        std::cerr << " Can Not Open File... \n" << std::endl;
+                 
     }
     while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
     {
@@ -918,4 +919,37 @@ std::string Control::findClosestMatch(const std::string &input, const std::vecto
 std::string Control::getSeason()
 {
     return season;
+}
+
+
+void Control::removeGameSaving(int index )
+{
+    if ( index < files.size() )
+    {
+        std::remove(files[index].c_str()); // remove file from system
+        files.erase(files.begin() + index); // remove filename from vector
+    }
+}
+void Control::addGameName ( const std::string & fileName )
+{
+   files.push_back(fileName);
+}
+void Control::saveGame()
+{
+    std::ifstream inputData;
+
+    std::string name, age, color;
+
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        
+    }
+    
+    
+    
+    inputData.open("saveGame.txt");
+    if (!inputData.is_open())
+    {
+        std::cerr << " Can Not Open File... \n";         
+    }
 }

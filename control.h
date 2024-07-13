@@ -67,6 +67,13 @@ class Control {
         Player & getDeterminer();
         Player & getDeterminerPeace();
         Player & youngestPlayer();
+
+        
+
+        void addGameName ( const std::string & fileName ); // to save the name of the files
+        void removeGameSaving ( int index ); // to remove file from list
+        void saveGame();
+
         
     
     private:
@@ -89,7 +96,9 @@ class Control {
         Player winner; // for winner of each round
         Player DeterminerOfWar; //Determining the location of the battle
         Player DeterminerOfPeace; //Determining the location of the peace place
-        
+
+
+        std::vector<std::string> files; //files list
 };
 
 #endif

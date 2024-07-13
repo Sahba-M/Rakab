@@ -5,6 +5,9 @@
 
 class Card { //The card class is a parent class
 
+     friend std::istream &operator>> (std::istream &input, Card &card);
+
+   
     public:
         Card( std::string name );
         Card();

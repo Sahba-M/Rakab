@@ -9,6 +9,9 @@
 #define PLAYER_H
 
 class Player {
+
+    friend std::istream &operator>> (std::istream &input, Player &player );
+
     public:
         Player();
         Player ( int age , std::string name , std::string color );
