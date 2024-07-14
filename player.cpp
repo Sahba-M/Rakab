@@ -430,35 +430,67 @@ std::vector<std::shared_ptr<Card>> Player::getYcards()
 {
     return yellowCards;
 }
-// std::istream & operator>> (std::istream &input, Player &player )
-// {
-//     std::vector<std::shared_ptr<Card>> cards;
-//     std::shared_ptr<Card> card;
-//     std::getline(input, player.name);
-//     input >> player.age >> player.color; 
+std::istream & operator>> (std::istream &input, Player &player )
+{
+    std::string name, color;
 
-//     for (int i = 0; i < player.capturedProvinces.size(); i++)
-//     {
-//         input >> player.capturedProvinces[i];
-//     }
-//      for (const auto & cardPtr : player.hand)
-//     {
-//         input >> *card ;
-        
-//     }
-//      for (int i = 0; i < player.usedCards.size(); i++)
-//     {
-//         input >> player.usedCards[i];
-//     }
-//      for (int i = 0; i < player.burnedCards.size(); i++)
-//     {
-//         input >> player.burnedCards[i]->getName();
-//     }
-//      for (int i = 0; i < player.yellowCards.size(); i++)
-//     {
-//         input >> player.yellowCards[i]->getName();
-//     }   
-// }
+    bool pass;
+
+    int age, size;
+
+    std::vector<std::string> provinces;
+
+    std::vector<std::shared_ptr<Card>> cards;
+
+    std::getline(input, name);
+    player.setName(name);
+
+    input >> age;
+    player.setAge(age);
+
+    input >> color;
+    player.setColor(color); 
+
+    input >> size;
+    for (int i = 0; i < size ; i++)
+    {
+        input >> provinces[i];
+        player.capturedProvinces[i] = provinces[i];
+    }
+
+    input >> size;
+    for (int i = 0; i < size ; i++)
+    {
+        input >> cards[i];
+        player.hand[i] = cards[i];
+    }
+
+    input >> size;
+    for (int i = 0; i < size ; i++)
+    {
+        input >> cards[i];
+        player.usedCards[i] = cards[i];
+    }
+
+    input >> size;
+    for (int i = 0; i < size ; i++)
+    {
+        input >> cards[i];
+        player.burnedCards[i] = cards[i];
+    }
+
+    input >> size;
+    for (int i = 0; i < size ; i++)
+    {
+        input >> cards[i];
+         player.yellowCards[i] = cards[i];
+    }
+   
+    input >> pass;
+    player.setPass(pass);
+
+    return input;
+}
 
 std::ostream & operator<< ( std::ostream & output , Player & player ) 
 {
@@ -489,7 +521,7 @@ std::ostream & operator<< ( std::ostream & output , Player & player )
     {
         output << *player.yellowCards[i] << " ";
     }
-    output << '\n' << std::boolalpha << player.pass << "\n";
+    output << '\n' << player.pass << "\n";
 
     return output;
 }

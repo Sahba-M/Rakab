@@ -22,11 +22,8 @@ bool  Card::operator== (const Card & other)
 {
     return this->name == other.name;
 }
-// std::istream &operator>> (std::istream &input, Card &card)
-// {
-//     input >> card.name;
-//     return input;
-// }
+
+
 std::istream & operator>> (std::istream & input , std::shared_ptr<Card> & card) {
     std::string name;
     input >> name; 

@@ -73,6 +73,8 @@ class Control {
         void addGameName ( const std::string & fileName ); // to save the name of the files
         void removeGameSaving ( int index ); // to remove file from list
         void saveGame();
+        void loadGame();
+
 
         
     

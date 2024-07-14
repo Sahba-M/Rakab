@@ -954,7 +954,7 @@ void Control::saveGame()
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
-        outputData << players[i] << std::endl;
+        outputData << players[i];
     }
 
     outputData << provinces.size() << std::endl;
@@ -990,6 +990,71 @@ void Control::saveGame()
     outputData << DeterminerOfPeace << std::endl;
     outputData << DeterminerOfWar << std::endl;
 
-    outputData.close();
+    outputData.close(); 
+}
+void Control::loadGame()
+{
+    std::ifstream inputData;
+
+    inputData.open("saveGame.txt");
+    if (!inputData.is_open())
+    {
+        std::cerr << " Can Not Open File... \n";         
+    }
+
+    int numberOfPlayer, size;
     
+    std::string place, season;
+
+    Player tempPlayer;
+
+    std::vector <std::string > provinces;
+    std::vector <std::string > move;
+
+    std::vector<std::shared_ptr<Card>> cards; 
+
+    inputData >> numberOfPlayer;
+    setPlayerNumber(numberOfPlayer);
+
+    inputData >> size;
+    for (int i = 0; i < size; i++)
+    {
+        inputData >> provinces[i];
+        this->provinces[i] = provinces[i]; 
+    }
+    inputData >> size;
+    for (int i = 0; i < size; i++)
+    {
+        inputData >> cards[i];
+        this->cards[i] = cards[i]; 
+    }
+    inputData >> size;
+    for (int i = 0; i < size; i++)
+    {
+        inputData >> cards[i];
+        this->allBurnedCards[i] = cards[i]; 
+    }
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+         inputData >> move[i];
+         this->move[i] = move[i];
+    }
+    inputData >> place;
+    setWarPlace(place);
+
+    inputData >> place;
+    setPeace(place);
+
+    inputData >> season;
+    setSeason(season);
+
+    inputData >> tempPlayer;
+    winner = tempPlayer;
+
+    inputData >> tempPlayer;
+    setDeterminer(tempPlayer);
+
+     inputData >> tempPlayer;
+    setDeterminerPeace(tempPlayer);
+      
 }

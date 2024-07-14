@@ -1,45 +1,42 @@
 3
 A
-12 RED
+1 PINK
 0
 9
-virago virago 4 spring 1 scarecrow princes 1 scarecrow 1
+10 5 6 5 scarecrow leader 1 drummer 1 1
 2 0
 0
 
 false
-
 B
-13 PINK
+2 RED
 0
 10
-leader 10 6 4 scarecrow 4 3 virago drummer 3 0
+scarecrow 4 virago spring winter virago 5 scarecrow 6 virago 0
 0
 0
 
 false
-
 C
-23 GREEN
+3 YELLOW
 0
 10
-3 scarecrow dean drummer scarecrow 2 virago 6 drummer virago 0
+dean winter 4 dean 2 1 spring 6 4 dean 0
 0
 0
 
 false
-
 14
 BELLA CALINE PLADACI ENNA ATELA DIMASE BORGE MORINA ROLLO TALMONE ARMENTO LIA OLIVADI ELINIA 
 83
-scarecrow scarecrow 2 4 scarecrow 10 1 1 5 10 spring 6 scarecrow 5 1 3 virago 1 10 5 princes leader scarecrow 2 5 scarecrow 5 scarecrow winter 2 dean scarecrow 10 10 leader 5 6 2 3 scarecrow spring 10 drummer 1 dean drummer 3 4 winter 6 dean 6 3 scarecrow 4 winter virago scarecrow 10 1 5 leader 1 virago virago virago 1 virago drummer 6 leader dean 4 6 3 2 dean princes 2 4 5 virago leader 
+1 scarecrow 2 drummer 1 3 4 1 virago 6 scarecrow 5 drummer 2 virago leader scarecrow scarecrow spring 5 virago scarecrow dean scarecrow winter leader 10 4 3 5 6 dean 2 princes 10 drummer 3 scarecrow dean 2 10 3 1 drummer scarecrow 10 4 virago 1 10 virago virago 10 3 scarecrow leader virago 1 princes 2 scarecrow 5 4 scarecrow 6 virago 3 3 scarecrow scarecrow leader 10 princes 6 4 drummer 2 6 3 leader 5 virago 1 
 0
 
-card temp temp LIA
+card temp temp BELLA
 null
 null
 
-128 
+1970160845 
 0
 0
 0
@@ -49,7 +46,7 @@ null
 false
 
 
-12582264 
+12842952 
 0
 0
 0
@@ -59,10 +56,10 @@ false
 false
 
 A
-12 RED
+1 PINK
 0
 10
-virago virago 4 spring 1 scarecrow princes 1 2 scarecrow 0
+10 5 6 5 scarecrow leader 1 drummer 1 2 0
 0
 0
 
