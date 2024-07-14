@@ -5,7 +5,8 @@
 
 class Card { //The card class is a parent class
 
-     friend std::istream &operator>> (std::istream &input, Card &card);
+     friend std::ifstream & operator>> ( std::istream & input , Card & card );
+     friend std::ostream & operator<< ( std::ostream & output , const Card & card );
 
    
     public:

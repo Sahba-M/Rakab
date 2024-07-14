@@ -90,9 +90,9 @@ class Control {
         int provinceNumber;
         int threshold;
         bool ifDean = false;
-        std::string warPlace;
+        std::string warPlace = "null";
         std::string peacePlace = "null";
-        std::string season;
+        std::string season = "null";
         Player winner; // for winner of each round
         Player DeterminerOfWar; //Determining the location of the battle
         Player DeterminerOfPeace; //Determining the location of the peace place

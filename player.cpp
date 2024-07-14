@@ -430,32 +430,67 @@ std::vector<std::shared_ptr<Card>> Player::getYcards()
 {
     return yellowCards;
 }
-std::istream &operator>> (std::istream &input, Player &player )
-{
-   
-    std::getline(input, player.name);
-    input >> player.age >> player.color; 
+// std::istream & operator>> (std::istream &input, Player &player )
+// {
+//     std::vector<std::shared_ptr<Card>> cards;
+//     std::shared_ptr<Card> card;
+//     std::getline(input, player.name);
+//     input >> player.age >> player.color; 
 
+//     for (int i = 0; i < player.capturedProvinces.size(); i++)
+//     {
+//         input >> player.capturedProvinces[i];
+//     }
+//      for (const auto & cardPtr : player.hand)
+//     {
+//         input >> *card ;
+        
+//     }
+//      for (int i = 0; i < player.usedCards.size(); i++)
+//     {
+//         input >> player.usedCards[i];
+//     }
+//      for (int i = 0; i < player.burnedCards.size(); i++)
+//     {
+//         input >> player.burnedCards[i]->getName();
+//     }
+//      for (int i = 0; i < player.yellowCards.size(); i++)
+//     {
+//         input >> player.yellowCards[i]->getName();
+//     }   
+// }
+
+std::ostream & operator<< ( std::ostream & output , Player & player ) 
+{
+    output << player.name << "\n";
+    output << player.age << " " << player.color << "\n";
+    output << player.capturedProvinces.size() << "\n";
     for (int i = 0; i < player.capturedProvinces.size(); i++)
     {
-        input >> player.capturedProvinces[i];
+        output << player.capturedProvinces[i] << " ";
     }
-     for (const auto &cardPtr : player.hand)
+    output << player.hand.size() << "\n";
+    for (int i = 0; i < player.hand.size(); i++)
     {
-        input >> cardPtr->getName();
+        output << *player.hand[i] << " ";
     }
-     for (int i = 0; i < player.usedCards.size(); i++)
+    output << player.usedCards.size() << "\n";
+    for (int i = 0; i < player.usedCards.size(); i++)
     {
-        input >> player.usedCards[i];
+        output << *player.usedCards[i] << " ";
     }
-     for (int i = 0; i < player.burnedCards.size(); i++)
+    output << player.burnedCards.size() << "\n";
+    for (int i = 0; i < player.burnedCards.size(); i++)
     {
-        input >> player.burnedCards[i]->getName();
+        output << *player.burnedCards[i] << " ";
     }
-     for (int i = 0; i < player.yellowCards.size(); i++)
+    output << player.yellowCards.size() << "\n";
+    for (int i = 0; i < player.yellowCards.size(); i++)
     {
-        input >> player.yellowCards[i]->getName();
+        output << *player.yellowCards[i] << " ";
     }
-    
+    output << '\n' << std::boolalpha << player.pass << "\n";
+
+    return output;
 }
 

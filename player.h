@@ -10,7 +10,8 @@
 
 class Player {
 
-    friend std::istream &operator>> (std::istream &input, Player &player );
+    friend std::istream & operator>> (std::istream &input , Player &player );
+    friend std::ostream & operator<< ( std::ostream & output , Player & player );
 
     public:
         Player();
@@ -58,13 +59,11 @@ class Player {
         bool isProximity();
         bool getIfLeader();
 
-       // bool winGame(); //Determine the winner of the game
+       
         std::string getName() const ;
         std::string getColor() const ;
         std::string getSeason();
         std::vector<std::shared_ptr<Card>> getYcards();
-        // std::vector<std::shared_ptr<Card>> & getBurnedCards();
-        // std::vector<std::shared_ptr<Card>> & getHandCards();
         
 
     private:

@@ -175,6 +175,7 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
+
     LeaderCard leader;
     
     if (getIfDean())
@@ -204,6 +205,8 @@ void Control::setWar()
             }
             currentIndex = (currentIndex + 1) % players.size();
             system("cls");
+
+            saveGame(); // save the game
         }
     }
     cardAction();
@@ -234,6 +237,9 @@ void Control::setWar()
         move[i] = "temp";
         players[i].setSeason("temp");
     }
+
+    saveGame();
+    
 }
 void Control::setDeterminer(Player &Determiner)
 {
@@ -936,20 +942,54 @@ void Control::addGameName ( const std::string & fileName )
 }
 void Control::saveGame()
 {
-    std::ifstream inputData;
+    std::ofstream outputData;
 
-    std::string name, age, color;
-
-    for (int i = 0; i < getPlayerNumber(); i++)
-    {
-        
-    }
-    
-    
-    
-    inputData.open("saveGame.txt");
-    if (!inputData.is_open())
+    outputData.open("saveGame.txt");
+    if (!outputData.is_open())
     {
         std::cerr << " Can Not Open File... \n";         
     }
+
+    outputData << playerNumber << "\n";
+
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        outputData << players[i] << std::endl;
+    }
+
+    outputData << provinces.size() << std::endl;
+    for (const auto & province : provinces)
+    {
+        outputData << province << " ";
+    }
+    outputData << '\n' ;
+
+    outputData << cards.size() << std::endl;
+    for (const auto & card : cards)
+    {
+        outputData << *card << " ";
+    }
+    outputData << '\n' ;
+
+    outputData << allBurnedCards.size() << std::endl;
+    for (const auto & card : allBurnedCards)
+    {
+        outputData << *card << " ";
+    }
+    outputData << '\n' ;
+
+    for ( int i = 0 ; i < getPlayerNumber() ; i++ )
+    {
+        outputData << move[i] << " ";
+    }
+
+    outputData << warPlace << std::endl;
+    outputData << peacePlace << std::endl;
+    outputData << season << std::endl;
+    outputData << winner << std::endl;
+    outputData << DeterminerOfPeace << std::endl;
+    outputData << DeterminerOfWar << std::endl;
+
+    outputData.close();
+    
 }
