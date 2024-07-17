@@ -1,9 +1,10 @@
-#include <iostream>
-
-#include "purple.h"
 
 #ifndef DRUMMER_H
 #define DRUMMER_H
+
+#include <iostream>
+
+#include "purple.h"
 
 
 class DrummerCard:public PurpleCard
