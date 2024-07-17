@@ -1,5 +1,6 @@
 #include <iostream>
 #include "control.h"
+#include "player.h"
 
 int main()
 {

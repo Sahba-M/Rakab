@@ -1,7 +1,9 @@
-#include <string>
-
 #ifndef CARD_H
 #define CARD_H
+
+#include <string>
+#include <memory>
+
 
 class Card { //The card class is a parent class
 
