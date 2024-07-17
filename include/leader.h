@@ -1,3 +1,6 @@
+#ifndef LEADER_H
+#define LEADER_H
+
 #include <iostream>
 
 #include "purple.h"
@@ -9,3 +12,5 @@ class LeaderCard :public PurpleCard{
         virtual void useCard ( std::vector <Player> & players , int numPlayer ) override;
 
 };
+
+#endif

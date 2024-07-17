@@ -1,4 +1,3 @@
-
 #ifndef DRUMMER_H
 #define DRUMMER_H
 

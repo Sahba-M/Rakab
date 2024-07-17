@@ -1,10 +1,11 @@
+#ifndef MAP_H
+#define MAP_H
+
 #include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <fstream>
 
-#ifndef MAP_H
-#define MAP_H
 
 class Map {
     public:

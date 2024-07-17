@@ -1,9 +1,8 @@
-#include "card.h"
-#include"player.h"
-
 #ifndef PURPLE_H
 #define PURPLE_H
 
+#include "card.h"
+#include"player.h"
 
 class PurpleCard : public Card {//The purple class is a parent class
 

@@ -1,7 +1,7 @@
-#include "purple.h"
-
 #ifndef SCARECROW_H
 #define SCARECROW_H
+
+#include "purple.h"
 
 class ScarecrowCard : public PurpleCard {
 

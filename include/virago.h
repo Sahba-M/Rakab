@@ -1,7 +1,9 @@
-#include "purple.h"
-
 #ifndef VIRAGO_H
 #define VIRAGO_H
+
+#include "purple.h"
+
+
 class ViragoCard : public PurpleCard
 {
     public:

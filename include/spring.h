@@ -1,10 +1,10 @@
+#ifndef SPRING_H
+#define SPRING_H
+
 #include <iostream>
 
 #include "purple.h"
 #include "control.h"
-
-#ifndef SPRING_H
-#define SPRING_H
 
 class SpringCard :public PurpleCard
 {

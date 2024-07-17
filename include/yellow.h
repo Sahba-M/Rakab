@@ -1,7 +1,7 @@
-#include "card.h"
-
 #ifndef YELLOW_H
 #define YELLOW_H
+
+#include "card.h"
 
 class YellowCard : public Card {
     

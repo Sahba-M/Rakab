@@ -1,7 +1,7 @@
-#include "purple.h"
-
 #ifndef DEAN_H
 #define DEAN_H
+
+#include "purple.h"
 
 class DeanCard : public PurpleCard
 {

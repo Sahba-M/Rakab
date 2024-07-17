@@ -1,12 +1,12 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <iostream>
 #include <vector>
 #include <memory>
 #include <string>
 
 #include "card.h"
-
-#ifndef PLAYER_H
-#define PLAYER_H
 
 class Player {
 

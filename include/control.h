@@ -1,11 +1,12 @@
+#ifndef CONTROL_H
+#define CONTROL_H
+
 #include<vector>
 #include <memory>
 
 #include "card.h"
 #include "player.h"
 
-#ifndef CONTROL_H
-#define CONTROL_H
 
 class Control {
     
