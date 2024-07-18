@@ -153,7 +153,7 @@ void Control::readProvinces()
     std::ifstream inputProvinces;
     setProvinceNumber(provinceNumber);
 
-    inputProvinces.open("map.txt");
+    inputProvinces.open("../../src/map.txt");
     if (!inputProvinces.is_open())
     {
         std::cerr << " Can Not Open File... " << std::endl;
@@ -996,7 +996,7 @@ void Control::loadGame()
 {
     std::ifstream inputData;
 
-    inputData.open("saveGame.txt");
+    inputData.open("../../src/saveGame.txt");
     if (!inputData.is_open())
     {
         std::cerr << " Can Not Open File... \n";         

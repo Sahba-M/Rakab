@@ -1,7 +1,7 @@
 #include <iostream>
 #include <raylib.h>
 
-// #include "control.h"
+#include "control.h"
 // #include "player.h"
 #include "menu.h"
 
@@ -12,7 +12,7 @@ int main()
     MenuGame menu;
     
     InitWindow(screenWidth, screenHeight, "Rakab Game");
-    
+
     while (WindowShouldClose() == false)
     {
         BeginDrawing();
@@ -22,7 +22,7 @@ int main()
         EndDrawing();
     }
     
-    // Control rakab ;
-    // rakab.run();
+    Control rakab ;
+    rakab.run();
     return 0;
 }
