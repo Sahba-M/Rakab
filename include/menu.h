@@ -7,7 +7,8 @@
 class MenuGame
 {
     public:
-    MenuGame();
+    // MenuGame();
+    ~MenuGame();
     void setBackGround();
 
 
