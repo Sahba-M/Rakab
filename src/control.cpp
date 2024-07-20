@@ -55,7 +55,7 @@ void Control::controlNumber()
 void Control::setCards()
 {
     std::ifstream cardInput;
-    cardInput.open("../../src/yellowCard.txt");
+    cardInput.open("../src/yellowCard.txt");
     if (!cardInput.is_open())
     {
         std::cerr << " Can Not Open The File! " << std::endl;
@@ -73,7 +73,7 @@ void Control::setCards()
     }
     cardInput.close();
 
-    cardInput.open("../../src/purpleCard.txt");
+    cardInput.open("../src/purpleCard.txt");
     if (!cardInput.is_open())
     {
         std::cerr << " Can Not Open The File! " << std::endl;
@@ -153,7 +153,7 @@ void Control::readProvinces()
     std::ifstream inputProvinces;
     setProvinceNumber(provinceNumber);
 
-    inputProvinces.open("../../src/map.txt");
+    inputProvinces.open("../src/map.txt");
     if (!inputProvinces.is_open())
     {
         std::cerr << " Can Not Open File... " << std::endl;
@@ -420,7 +420,7 @@ void Control::guideGame()
 {
     std::ifstream inputGuide;
     std::string explanation;
-    inputGuide.open("../../src/guide.txt");
+    inputGuide.open("../src/guide.txt");
     if (!inputGuide.is_open())
     {
         std::cerr << " Can Not Open File... " << std::endl;
@@ -440,7 +440,7 @@ void Control::guideCards()
     std::ifstream inputGuides;
     std::string cardName, cardDescription, requestedCard;
     std::unordered_map<std::string, std::string> card;
-    inputGuides.open("../../src/cardGuide.txt");
+    inputGuides.open("../src/cardGuide.txt");
     if (!inputGuides.is_open())
     {
         std::cerr << " Can Not Open File... \n" << std::endl;
@@ -874,8 +874,8 @@ std::string Control::controlColors()
     {
         showColors();
         if (found == true)
-            std::cout << std::endl
-                      << " Enter Your Chosen Color: ";
+            std::cout << std::endl << " Enter Your Chosen Color: ";
+                      
         std::cin >> chooseColor;
         auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
         if (elementFound != colors.end())
@@ -944,7 +944,7 @@ void Control::saveGame()
 {
     std::ofstream outputData;
 
-    outputData.open("../../src/saveGame.txt");
+    outputData.open("../src/saveGame.txt");
     if (!outputData.is_open())
     {
         std::cerr << " Can Not Open File... \n";         
@@ -996,7 +996,7 @@ void Control::loadGame()
 {
     std::ifstream inputData;
 
-    inputData.open("../../src/saveGame.txt");
+    inputData.open("../src/saveGame.txt");
     if (!inputData.is_open())
     {
         std::cerr << " Can Not Open File... \n";         

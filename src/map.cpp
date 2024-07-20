@@ -2,7 +2,7 @@
 
 void Map::readMatrix ()
 {
-    std::ifstream input ("../../src/matrix.txt") ; 
+    std::ifstream input ("../src/matrix.txt") ; 
     if (!input.is_open()) 
         std::cerr << " Unable to open file ! " << std::endl ;
 
@@ -27,7 +27,7 @@ void Map::readMatrix ()
 void Map::readUnorderedMap ()
 {
     std::ifstream input ; 
-    input.open("../../src/map.txt") ;
+    input.open("../src/map.txt") ;
     if (!input.is_open()) 
         std::cerr << " Unable to open file !" << std::endl ;
         
