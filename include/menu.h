@@ -7,9 +7,12 @@
 class MenuGame
 {
     public:
-    // MenuGame();
+    MenuGame();
     ~MenuGame();
     void setBackGround();
+    int getScreenWidth();
+    int getScreenHeight();
+    void setTitle();
 
 
     private:

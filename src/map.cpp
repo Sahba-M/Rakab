@@ -1,5 +1,7 @@
 #include "map.h"
 
+
+
 void Map::readMatrix ()
 {
     std::ifstream input ("../src/matrix.txt") ; 

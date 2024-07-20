@@ -2,22 +2,21 @@
 #include <raylib.h>
 
 #include "control.h"
-// #include "player.h"
 #include "menu.h"
 
 int main()
 {
-    const int screenWidth = 1075;
-    const int screenHeight = 636;
+    
     MenuGame menu;
     
-    InitWindow(screenWidth, screenHeight, "Rakab Game");
+    InitWindow(menu.getScreenWidth(), menu.getScreenHeight(), "Rakab Game");
 
-    while (WindowShouldClose() == false)
+    while (!WindowShouldClose())
     {
         BeginDrawing();
 
         menu.setBackGround();
+        menu.setTitle();
 
         EndDrawing();
     }
