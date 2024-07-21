@@ -65,56 +65,25 @@ void  MenuGame::setList()
    buttons[3].text = "Exit";
    buttons[3].bounds = { 450, 380, 250, 45 };
 
+    Vector2 mousePosition = GetMousePosition();
+
+    for (int i = 0 ; i < 4 ; i++)
+    {
+        if (CheckCollisionPointRec(mousePosition, buttons[i].bounds)) 
+        {
+            // Change colors on button click
+            buttons[i].buttonColor = { 0 , 0 , 0 , 110 };
+            buttons[i].color = { 234 , 237 , 240 , 255 };
+        }
+        else 
+        {
+            buttons[i].color = BLACK;
+            buttons[i].buttonColor = {0 , 0 , 0 , 30};
+        }
+    }
+
     // Draw button background
     // Draw button text
-
-    Vector2 mousePosition = GetMousePosition();
-    if (CheckCollisionPointRec(mousePosition, buttons[0].bounds)) 
-    {
-        // Change colors on button click
-        buttons[0].buttonColor = { 0 , 0 , 0 , 110 };
-        buttons[0].color = { 234 , 237 , 240 , 255 };
-    }
-    else 
-    {
-        buttons[0].color = BLACK;
-        buttons[0].buttonColor = {0 , 0 , 0 , 30};
-    }
-    if (CheckCollisionPointRec(mousePosition, buttons[1].bounds)) 
-    {
-        // Change colors on button click
-        buttons[1].buttonColor = { 0 , 0 , 0 , 110 };
-        buttons[1].color = { 234 , 237 , 240 , 255 };
-    }
-    else 
-    {
-        buttons[1].color = BLACK;
-        buttons[1].buttonColor = {0 , 0 , 0 , 30};
-    }
-    if (CheckCollisionPointRec(mousePosition, buttons[2].bounds)) 
-    {
-        // Change colors on button click
-        buttons[2].buttonColor = { 0 , 0 , 0 , 110 };
-        buttons[2].color = { 234 , 237 , 240 , 255 };
-    }
-    else 
-    {
-        buttons[2].color = BLACK;
-        buttons[2].buttonColor = {0 , 0 , 0 , 30};
-    }
-    if (CheckCollisionPointRec(mousePosition, buttons[3].bounds)) 
-    {
-        // Change colors on button click
-        buttons[3].buttonColor = { 0 , 0 , 0 , 110 };
-        buttons[3].color = { 234 , 237 , 240 , 255 };
-    }
-    else 
-    {
-        buttons[3].color = BLACK;
-        buttons[3].buttonColor = {0 , 0 , 0 , 30};
-    }
-
-
     DrawRectangle (buttons[0].bounds.x, buttons[0].bounds.y, buttons[0].bounds.width, buttons[0].bounds.height, buttons[0].buttonColor);
     DrawTextEx(font , buttons[0].text, { buttons[0].bounds.x + 70 , buttons[0].bounds.y + 10} , 30 , 2, buttons[0].color);
     DrawRectangle (buttons[1].bounds.x, buttons[1].bounds.y, buttons[1].bounds.width, buttons[1].bounds.height, buttons[1].buttonColor);
