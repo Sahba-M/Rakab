@@ -1,4 +1,6 @@
 #include <raylib.h>
+#include <iostream>
+#include <unistd.h>
 
 #include"menu.h"
 
@@ -27,21 +29,114 @@ void  MenuGame::setBackGround()
     Texture2D backgroundImage = LoadTextureFromImage(image);
     
     DrawTexture(backgroundImage, 0, 0, WHITE);
-
-    
-   
-  
 }
+
 void  MenuGame::setTitle()
 {
     Color textColor;
-    textColor  = {7, 14, 115, 250};
+    textColor  = {4, 9, 72, 255};
 
-    Font font = LoadFont ("C:/font/titleFont.ttf");
+    Font font = LoadFont ("C:/font/title.otf");
     const char* text = "Rakab";
-
-     //DrawText ( "Rakab" , 250 , 100 , 60 , textColor );
-     Vector2 textPosition = { 100, 100 };
-   
-     DrawTextEx(font, text, (Vector2){ 750, 50 }, 100, 2, textColor);
+    Vector2 textPosition = { 100, 100 };
+    
+    DrawTextEx(font, text, (Vector2){ 430, 50 }, 90, 2, textColor);
 }
+
+void  MenuGame::setList()
+{
+    buttons.reserve(4);
+    Font font = LoadFont ("C:/font/listFont.otf");
+
+    bool colorChanged = false;
+    float timer = 0.0f;
+    const float changeDuration = 2.0f; // Duration in seconds to revert colors
+
+
+   buttons[0].text = "Start New Game";
+   buttons[0].bounds = { 450, 230, 250, 45 };
+   
+   buttons[1].text = "Load Game";
+   buttons[1].bounds = { 450, 280, 250, 45 };
+
+   buttons[2].text = "Help";
+   buttons[2].bounds = { 450, 330, 250, 45 };
+
+   buttons[3].text = "Exit";
+   buttons[3].bounds = { 450, 380, 250, 45 };
+
+    // Draw button background
+    // Draw button text
+
+    Vector2 mousePosition = GetMousePosition();
+    if (CheckCollisionPointRec(mousePosition, buttons[0].bounds)) 
+    {
+        // Change colors on button click
+        buttons[0].buttonColor = { 0 , 0 , 0 , 110 };
+        buttons[0].color = { 234 , 237 , 240 , 255 };
+    }
+    else 
+    {
+        buttons[0].color = BLACK;
+        buttons[0].buttonColor = {0 , 0 , 0 , 30};
+    }
+    if (CheckCollisionPointRec(mousePosition, buttons[1].bounds)) 
+    {
+        // Change colors on button click
+        buttons[1].buttonColor = { 0 , 0 , 0 , 110 };
+        buttons[1].color = { 234 , 237 , 240 , 255 };
+    }
+    else 
+    {
+        buttons[1].color = BLACK;
+        buttons[1].buttonColor = {0 , 0 , 0 , 30};
+    }
+    if (CheckCollisionPointRec(mousePosition, buttons[2].bounds)) 
+    {
+        // Change colors on button click
+        buttons[2].buttonColor = { 0 , 0 , 0 , 110 };
+        buttons[2].color = { 234 , 237 , 240 , 255 };
+    }
+    else 
+    {
+        buttons[2].color = BLACK;
+        buttons[2].buttonColor = {0 , 0 , 0 , 30};
+    }
+    if (CheckCollisionPointRec(mousePosition, buttons[3].bounds)) 
+    {
+        // Change colors on button click
+        buttons[3].buttonColor = { 0 , 0 , 0 , 110 };
+        buttons[3].color = { 234 , 237 , 240 , 255 };
+    }
+    else 
+    {
+        buttons[3].color = BLACK;
+        buttons[3].buttonColor = {0 , 0 , 0 , 30};
+    }
+
+
+    DrawRectangle (buttons[0].bounds.x, buttons[0].bounds.y, buttons[0].bounds.width, buttons[0].bounds.height, buttons[0].buttonColor);
+    DrawTextEx(font , buttons[0].text, { buttons[0].bounds.x + 30 , buttons[0].bounds.y + 10} , 30 , 2, buttons[0].color);
+    DrawRectangle (buttons[1].bounds.x, buttons[1].bounds.y, buttons[1].bounds.width, buttons[1].bounds.height, buttons[1].buttonColor);
+    DrawTextEx(font , buttons[1].text, { buttons[1].bounds.x + 60 , buttons[1].bounds.y + 10} , 30 , 2, buttons[1].color);
+    DrawRectangle (buttons[2].bounds.x, buttons[2].bounds.y, buttons[2].bounds.width, buttons[2].bounds.height, buttons[2].buttonColor);
+    DrawTextEx(font , buttons[2].text, { buttons[2].bounds.width/2 + buttons[2].bounds.x - 25 , buttons[2].bounds.y + 10} , 30 , 2, buttons[2].color);
+    DrawRectangle (buttons[3].bounds.x, buttons[3].bounds.y, buttons[3].bounds.width, buttons[3].bounds.height, buttons[3].buttonColor);
+    DrawTextEx(font , buttons[3].text, { buttons[3].bounds.width/2 + buttons[3].bounds.x - 25 , buttons[3].bounds.y + 10} , 30 , 2, buttons[3].color);
+
+}   
+
+bool MenuGame::exit ()
+{
+    Vector2 mousePosition = GetMousePosition();
+    if (CheckCollisionPointRec(mousePosition, buttons[3].bounds)) 
+    {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            CloseWindow(); // Close the window and exit the program
+            return true;
+        }
+    }
+    return false;
+}
+ 

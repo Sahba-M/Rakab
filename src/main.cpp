@@ -10,6 +10,7 @@ int main()
     MenuGame menu;
     
     InitWindow(menu.getScreenWidth(), menu.getScreenHeight(), "Rakab Game");
+    SetTargetFPS(60);
 
     while (!WindowShouldClose())
     {
@@ -17,6 +18,11 @@ int main()
 
         menu.setBackGround();
         menu.setTitle();
+        menu.setList();
+        if (menu.exit())
+        {
+            return 0 ;
+        }
 
         EndDrawing();
     }
