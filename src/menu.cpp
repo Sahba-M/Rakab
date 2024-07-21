@@ -53,7 +53,7 @@ void  MenuGame::setList()
     const float changeDuration = 2.0f; // Duration in seconds to revert colors
 
 
-   buttons[0].text = "Start New Game";
+   buttons[0].text = "New Game";
    buttons[0].bounds = { 450, 230, 250, 45 };
    
    buttons[1].text = "Load Game";
@@ -116,9 +116,9 @@ void  MenuGame::setList()
 
 
     DrawRectangle (buttons[0].bounds.x, buttons[0].bounds.y, buttons[0].bounds.width, buttons[0].bounds.height, buttons[0].buttonColor);
-    DrawTextEx(font , buttons[0].text, { buttons[0].bounds.x + 30 , buttons[0].bounds.y + 10} , 30 , 2, buttons[0].color);
+    DrawTextEx(font , buttons[0].text, { buttons[0].bounds.x + 70 , buttons[0].bounds.y + 10} , 30 , 2, buttons[0].color);
     DrawRectangle (buttons[1].bounds.x, buttons[1].bounds.y, buttons[1].bounds.width, buttons[1].bounds.height, buttons[1].buttonColor);
-    DrawTextEx(font , buttons[1].text, { buttons[1].bounds.x + 60 , buttons[1].bounds.y + 10} , 30 , 2, buttons[1].color);
+    DrawTextEx(font , buttons[1].text, { buttons[1].bounds.x + 67 , buttons[1].bounds.y + 10} , 30 , 2, buttons[1].color);
     DrawRectangle (buttons[2].bounds.x, buttons[2].bounds.y, buttons[2].bounds.width, buttons[2].bounds.height, buttons[2].buttonColor);
     DrawTextEx(font , buttons[2].text, { buttons[2].bounds.width/2 + buttons[2].bounds.x - 25 , buttons[2].bounds.y + 10} , 30 , 2, buttons[2].color);
     DrawRectangle (buttons[3].bounds.x, buttons[3].bounds.y, buttons[3].bounds.width, buttons[3].bounds.height, buttons[3].buttonColor);
