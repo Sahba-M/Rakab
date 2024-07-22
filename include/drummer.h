@@ -10,7 +10,7 @@ class DrummerCard:public PurpleCard
 {
   public:
     DrummerCard();
-    virtual void useCard ( std::vector <Player> & players, int numPlayer ) override;
+    void useCard ( std::vector <Player> & players, int , int number ) ;
 };
 
 #endif 

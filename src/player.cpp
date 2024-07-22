@@ -229,6 +229,17 @@ int Player::numberOfPrinces()
     }
     return counter;
 }
+int Player::numberOfDrummer()
+{
+    int counter = 0;
+
+    for (auto card : usedCards)
+    {
+        if (card->getName() == "drummer")
+            counter++;
+    }
+    return counter;
+}
 int Player::numberOfVirago()
 {
     int counter = 0;

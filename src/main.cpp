@@ -7,31 +7,31 @@
 int main()
 {
     
-    MenuGame menu;
+    // MenuGame menu;
     
-    InitWindow(menu.getScreenWidth(), menu.getScreenHeight(), "Rakab Game");
-    SetTargetFPS(60);
+    // InitWindow(menu.getScreenWidth(), menu.getScreenHeight(), "Rakab Game");
+    // SetTargetFPS(60);
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
+    // while (!WindowShouldClose())
+    // {
+    //     BeginDrawing();
 
-        if (menu.getCheckMenu())
-        {
-            menu.setBackGround();
-            menu.setTitle();
-            menu.setList();
-            if (menu.exit())
-            {
-                return 0 ;
-            }
-        }
+    //     if (menu.getCheckMenu())
+    //     {
+    //         menu.setBackGround();
+    //         menu.setTitle();
+    //         menu.setList();
+    //         if (menu.exit())
+    //         {
+    //             return 0 ;
+    //         }
+    //     }
         
 
         
 
-        EndDrawing();
-    }
+    //     EndDrawing();
+    // }
     
     Control rakab ;
     rakab.run();

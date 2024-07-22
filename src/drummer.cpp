@@ -6,8 +6,8 @@
 
 DrummerCard::DrummerCard(){}
 
-void DrummerCard::useCard ( std::vector <Player> & players , int numPlayer )
+void DrummerCard::useCard ( std::vector <Player> & players , int numPlayer, int number )
 {
     int sum = players[numPlayer].getScorePlayer();
-    players[numPlayer].setScorePlayer( sum*2 );
+    players[numPlayer].setScorePlayer( sum * number );
 }

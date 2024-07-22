@@ -43,6 +43,7 @@ class Player {
         int  numCardsOfPlayer(); //For the number of cards during distribution
         int  maxYcards(); //Find the most valuable yellow card player
         int  numberOfPrinces(); //The number of princes cards used by the player
+        int  numberOfDrummer(); //The number of drummer cards used by the player
         int  numberOfVirago(); //The number of virago cards used by the player
         int  numberOfMaxYcards(); //The number of max cards used by the player
         // int  numberOfDean(); //The number of dean cards used by the player
