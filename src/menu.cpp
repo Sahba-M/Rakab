@@ -1,6 +1,7 @@
 #include <raylib.h>
 #include <iostream>
 #include <unistd.h>
+#include <stdlib.h>
 
 #include"menu.h"
 
@@ -93,6 +94,8 @@ void  MenuGame::setList()
     DrawRectangle (buttons[3].bounds.x, buttons[3].bounds.y, buttons[3].bounds.width, buttons[3].bounds.height, buttons[3].buttonColor);
     DrawTextEx(font , buttons[3].text, { buttons[3].bounds.width/2 + buttons[3].bounds.x - 25 , buttons[3].bounds.y + 10} , 30 , 2, buttons[3].color);
 
+
+    help();
 }   
 
 bool MenuGame::exit ()
@@ -108,4 +111,16 @@ bool MenuGame::exit ()
     }
     return false;
 }
- 
+ void MenuGame::help()
+ {
+    Vector2 mousePosition = GetMousePosition();
+    if (CheckCollisionPointRec(mousePosition, buttons[2].bounds))
+    {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            system ("start C:/assets/help.pdf");
+        }
+        
+    }
+    
+ }

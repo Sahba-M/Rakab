@@ -23,6 +23,7 @@ class MenuGame
     void setTitle();
     void  setList();
     bool exit ();
+    void help();
     // bool IsClicked (TextButton button);
 
 
