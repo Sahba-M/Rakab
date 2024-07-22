@@ -4,6 +4,7 @@
 
 #include <raylib.h>
 #include <vector>
+#define MAX_INPUT_CHARS 20
 
 struct TextButton {
     const char* text;
@@ -32,6 +33,8 @@ class GraphicGame
     void setImage();
     int getScreen();
     void setRecInput();
+    void drawInput();
+
 
     
 
@@ -42,6 +45,12 @@ class GraphicGame
         std::vector <TextButton> buttons ;
         bool checkMenu = true;
         GameScreen currentScreen;
+
+        char name[MAX_INPUT_CHARS + 1] = "\0";      // NOTE: One extra space required for null terminator char '\0'
+        int letterCount = 0;
+        Rectangle textBox = { 500, 180, 225, 50 };
+        bool mouseOnText = false;
+        int framesCounter = 0;
 
 };
 
