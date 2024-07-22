@@ -176,7 +176,6 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
-
     LeaderCard leader;
     
     if (getIfDean())

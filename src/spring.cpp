@@ -31,7 +31,13 @@ int SpringCard::findMaxScore ( std::vector <Player> players )
     int max = 0 ;
     for ( auto player : players )
     {
-        max = player.maxYcards() > max ? player.maxYcards() : max ;
+        if (player.numberOfPrinces() > 0)
+        {
+            max = 10;
+        } else
+        {
+            max = player.maxYcards() > max ? player.maxYcards() : max ;
+        }
     }
     return max ;
 }
