@@ -12,6 +12,8 @@ struct TextButton {
     Color buttonColor = {0 , 0 , 0 , 30};
 };
 
+enum GameScreen { MENU = 0 , IMAGE }; 
+
 class MenuGame
 {
     public:
@@ -21,13 +23,15 @@ class MenuGame
     int getScreenWidth();
     int getScreenHeight();
     void setTitle();
-    void  setList();
+    void setList();
     bool exit ();
     void help();
     void start();
     void setCheckMenu(bool checkMenu);
     bool getCheckMenu();
-    // bool IsClicked (TextButton button);
+    void setImage();
+    int getScreen();
+    
 
 
     private:
@@ -35,6 +39,7 @@ class MenuGame
         int screenHeight ;
         std::vector <TextButton> buttons ;
         bool checkMenu = true;
+        GameScreen currentScreen;
 
 };
 

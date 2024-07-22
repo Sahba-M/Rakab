@@ -16,7 +16,7 @@ int main()
     {
         BeginDrawing();
 
-        if (menu.getCheckMenu())
+        if (menu.getScreen() == MENU)
         {
             menu.setBackGround();
             menu.setTitle();
@@ -26,8 +26,10 @@ int main()
                 return 0 ;
             }
         }
-        
-
+        else if (menu.getScreen() == IMAGE)
+        {
+            menu.setImage();
+        }
         
 
         EndDrawing();
