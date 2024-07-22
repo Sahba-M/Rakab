@@ -31,7 +31,7 @@
 
 Control::Control()
 {
-    provinceNumber = 14;
+    provinceNumber = 15;
     int threshold = 3;
 }
 
