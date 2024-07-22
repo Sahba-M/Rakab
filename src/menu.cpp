@@ -25,6 +25,7 @@ MenuGame::~MenuGame()
 
 void  MenuGame::setBackGround()
 {
+    
     SetTargetFPS(60); // Set the target frames-per-second
     Image image = LoadImage("C:/assets/photoMenu.png"); 
     Texture2D backgroundImage = LoadTextureFromImage(image);
@@ -94,7 +95,7 @@ void  MenuGame::setList()
     DrawRectangle (buttons[3].bounds.x, buttons[3].bounds.y, buttons[3].bounds.width, buttons[3].bounds.height, buttons[3].buttonColor);
     DrawTextEx(font , buttons[3].text, { buttons[3].bounds.width/2 + buttons[3].bounds.x - 25 , buttons[3].bounds.y + 10} , 30 , 2, buttons[3].color);
 
-
+    start();
     help();
 }   
 
@@ -121,6 +122,34 @@ bool MenuGame::exit ()
             system ("start C:/assets/help.pdf");
         }
         
-    }
-    
+    } 
  }
+ void MenuGame::start()
+ {
+    Vector2 mousePosition = GetMousePosition();
+    if (CheckCollisionPointRec(mousePosition, buttons[0].bounds))
+    {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            setCheckMenu(false);
+
+            SetTargetFPS(60); // Set the target frames-per-second
+
+            Image image = LoadImage("C:/assets/background.png"); 
+            Texture2D backgroundImage = LoadTextureFromImage(image);
+            
+            DrawTexture(backgroundImage, 0, 0, WHITE);
+
+        }
+        
+    } 
+ }
+
+ void MenuGame::setCheckMenu(bool checkMenu)
+ {
+    this->checkMenu = checkMenu;
+ }
+bool MenuGame::getCheckMenu()
+{
+    return checkMenu;
+}

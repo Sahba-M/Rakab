@@ -24,6 +24,9 @@ class MenuGame
     void  setList();
     bool exit ();
     void help();
+    void start();
+    void setCheckMenu(bool checkMenu);
+    bool getCheckMenu();
     // bool IsClicked (TextButton button);
 
 
@@ -31,6 +34,7 @@ class MenuGame
         int screenWidth ;
         int screenHeight ;
         std::vector <TextButton> buttons ;
+        bool checkMenu = true;
 
 };
 

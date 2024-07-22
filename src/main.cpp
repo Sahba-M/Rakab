@@ -16,13 +16,19 @@ int main()
     {
         BeginDrawing();
 
-        menu.setBackGround();
-        menu.setTitle();
-        menu.setList();
-        if (menu.exit())
+        if (menu.getCheckMenu())
         {
-            return 0 ;
+            menu.setBackGround();
+            menu.setTitle();
+            menu.setList();
+            if (menu.exit())
+            {
+                return 0 ;
+            }
         }
+        
+
+        
 
         EndDrawing();
     }
