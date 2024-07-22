@@ -2,33 +2,34 @@
 #include <raylib.h>
 
 #include "control.h"
-#include "menu.h"
+#include "graphic.h"
 
 int main()
 {
     
-    MenuGame menu;
+    GraphicGame graphic;
     
-    InitWindow(menu.getScreenWidth(), menu.getScreenHeight(), "Rakab Game");
+    InitWindow(graphic.getScreenWidth(), graphic.getScreenHeight(), "Rakab Game");
     SetTargetFPS(60);
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
 
-        if (menu.getScreen() == MENU)
+        if (graphic.getScreen() == MENU)
         {
-            menu.setBackGround();
-            menu.setTitle();
-            menu.setList();
-            if (menu.exit())
+            graphic.setBackGround();
+            graphic.setTitle();
+            graphic.setList();
+            if (graphic.exit())
             {
                 return 0 ;
             }
         }
-        else if (menu.getScreen() == IMAGE)
+        else if (graphic.getScreen() == IMAGE)
         {
-            menu.setImage();
+            graphic.setImage();
+            graphic.getInformation();
         }
         
 

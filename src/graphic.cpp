@@ -3,29 +3,29 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include"menu.h"
+#include"graphic.h"
 
 
-MenuGame::MenuGame()
+GraphicGame::GraphicGame()
 {
     screenWidth = 1075;
     screenHeight = 636;
     currentScreen = MENU;
 }
-int MenuGame::getScreenWidth()
+int GraphicGame::getScreenWidth()
 {
     return screenWidth;
 }
-int MenuGame::getScreenHeight()
+int GraphicGame::getScreenHeight()
 {
     return screenHeight;
 }
-MenuGame::~MenuGame()
+GraphicGame::~GraphicGame()
 {
     // UnloadTexture(backgroundImage);
 }
 
-void  MenuGame::setBackGround()
+void  GraphicGame::setBackGround()
 {
     
     SetTargetFPS(60); // Set the target frames-per-second
@@ -35,7 +35,7 @@ void  MenuGame::setBackGround()
     DrawTexture(backgroundImage, 0, 0, WHITE);
 }
 
-void  MenuGame::setTitle()
+void  GraphicGame::setTitle()
 {
     Color textColor;
     textColor  = {4, 9, 72, 255};
@@ -47,7 +47,7 @@ void  MenuGame::setTitle()
     DrawTextEx(font, text, (Vector2){ 430, 50 }, 90, 2, textColor);
 }
 
-void  MenuGame::setList()
+void  GraphicGame::setList()
 {
     buttons.reserve(4);
     Font font = LoadFont ("C:/font/listFont.otf");
@@ -101,7 +101,7 @@ void  MenuGame::setList()
     help();
 }   
 
-bool MenuGame::exit ()
+bool GraphicGame::exit ()
 {
     Vector2 mousePosition = GetMousePosition();
     if (CheckCollisionPointRec(mousePosition, buttons[3].bounds)) 
@@ -114,7 +114,7 @@ bool MenuGame::exit ()
     }
     return false;
 }
- void MenuGame::help()
+ void GraphicGame::help()
  {
     Vector2 mousePosition = GetMousePosition();
     if (CheckCollisionPointRec(mousePosition, buttons[2].bounds))
@@ -126,7 +126,7 @@ bool MenuGame::exit ()
         
     } 
  }
- void MenuGame::start()
+ void GraphicGame::start()
  {
     Vector2 mousePosition = GetMousePosition();
     if (CheckCollisionPointRec(mousePosition, buttons[0].bounds))
@@ -139,7 +139,7 @@ bool MenuGame::exit ()
     } 
  }
 
- void MenuGame::setImage()
+ void GraphicGame::setImage()
  {
     Image image = LoadImage("C:/assets/background.png"); 
     Texture2D backgroundImage = LoadTextureFromImage(image);
@@ -147,69 +147,67 @@ bool MenuGame::exit ()
     DrawTexture(backgroundImage, 0, 0, WHITE);
  }
 
-void MenuGame::setCheckMenu(bool checkMenu)
+void GraphicGame::setCheckMenu(bool checkMenu)
 {
    this->checkMenu = checkMenu;
 }
-bool MenuGame::getCheckMenu()
+bool GraphicGame::getCheckMenu()
 {
     return checkMenu;
 }
-int MenuGame::getScreen()
+int GraphicGame::getScreen()
 {
     return currentScreen;
 }
 
+void GraphicGame::setRecInput()
+{
+    Rectangle inputBox = { 500, 200, 400, 60 };
+    Color boxColor = LIGHTGRAY;
+    char text[256] = "";  // Buffer for user input
+    int textLength = 0;
+    bool editing = false;
 
+    
 
+    while (!WindowShouldClose())
+    {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) 
+        {
+            Vector2 mousePoint = GetMousePosition();
+            if (CheckCollisionPointRec(mousePoint, inputBox)) 
+            {
+                editing = true;  // Start editing
+            } else {
+                editing = false; // Stop editing
+            }
+        }
+    }
+    if (editing) 
+    {
+        boxColor = YELLOW;
+        if (IsKeyPressed(KEY_BACKSPACE)) 
+        {
+            if (textLength > 0) 
+            {
+                textLength--;
+                text[textLength] = '\0';  // Null-terminate the string
+            }
+        } else 
+        {
+            for (int key = KEY_SPACE; key <= KEY_Z; key++) 
+            {
+                if (IsKeyPressed(key) && textLength < 255) 
+                {
+                    text[textLength] = (char)key; // Add the character
+                    textLength++;
+                    text[textLength] = '\0'; // Null-terminate the string
+                }
+            }
+        }
+    }
 
+    DrawRectangleRec(inputBox, boxColor);
+    DrawText(text, inputBox.x + 10, inputBox.y + 20, 20, BLACK);
 
-
-
-// enum GameScreen { MENU = 0, IMAGE }; 
- 
-// int main() { 
-//     // Initialization 
-//     const int screenWidth = 800; 
-//     const int screenHeight = 450; 
-//     InitWindow(screenWidth, screenHeight, "raylib - switch screen example"); 
- 
-//     // Load image 
-//     Texture2D image = LoadTexture("image.png"); // Ensure "image.png" is in the same directory as the executable 
- 
-//     GameScreen currentScreen = MENU; 
-//     Rectangle button = {screenWidth / 2.0f - 50, screenHeight / 2.0f - 25, 100, 50}; 
- 
-//     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second 
- 
-//     // Main game loop 
-//     while (!WindowShouldClose())    // Detect window close button or ESC key 
-//     { 
-//         // Update 
-//         if (currentScreen == MENU) { 
-//             if (CheckCollisionPointRec(GetMousePosition(), button) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) { 
-//                 currentScreen = IMAGE; 
-//             } 
-//         } 
- 
-//         // Draw 
-//         BeginDrawing(); 
- 
-//         ClearBackground(RAYWHITE); 
- 
-//         if (currentScreen == MENU) { 
-//             DrawRectangleRec(button, GRAY); 
-//             DrawText("Click me", screenWidth / 2 - 40, screenHeight / 2 - 10, 20, DARKGRAY); 
-//         } else if (currentScreen == IMAGE) { 
-//             DrawTexture(image, screenWidth / 2 - image.width / 2, screenHeight / 2 - image.height / 2, WHITE); 
-//         } 
- 
-//         EndDrawing(); 
-//     } 
- 
-//     // De-Initialization 
-//     UnloadTexture(image);   // Unload image texture 
-//     CloseWindow();          // Close window and OpenGL context 
- 
-//     return 0; 
-// }
+}

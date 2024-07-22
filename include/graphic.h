@@ -14,11 +14,11 @@ struct TextButton {
 
 enum GameScreen { MENU = 0 , IMAGE }; 
 
-class MenuGame
+class GraphicGame
 {
     public:
-    MenuGame();
-    ~MenuGame();
+    GraphicGame();
+    ~GraphicGame();
     void setBackGround();
     int getScreenWidth();
     int getScreenHeight();
@@ -31,6 +31,8 @@ class MenuGame
     bool getCheckMenu();
     void setImage();
     int getScreen();
+    void setRecInput();
+
     
 
 

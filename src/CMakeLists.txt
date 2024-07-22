@@ -14,7 +14,7 @@ set(PROJECT_SOURCES
     winter.cpp 
     spring.cpp 
     main.cpp
-    menu.cpp
+    graphic.cpp
 )
 
 add_executable(${PROJECT_NAME}
