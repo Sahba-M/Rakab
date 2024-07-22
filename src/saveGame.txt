@@ -2,48 +2,48 @@
 A
 1 PINK
 0
-9
-scarecrow 1 winter 2 6 leader 5 1 10 1
-4 0
+8
+5 5 virago princes 10 1 1 2 2
+winter 2 0
 1
-4 
+2 
 1
 B
-2 RED
-1
-LIA 6
-dean 2 virago 6 virago scarecrow 4
-2 2 drummer drummer 0
-2
-2 2 
-1
-C
-3 YELLOW
+3 RED
 0
 9
-dean scarecrow scarecrow spring 1 1 scarecrow virago virago 1
-6 0
-1
-6 
-1
-14
-BELLA CALINE PLADACI ATELA DIMASE BORGE MORINA ROLLO TALMONE ARMENTO ENNA OLIVADI ELINIA PARMA 
-83
-3 virago scarecrow leader dean spring scarecrow 1 2 10 drummer drummer 5 winter leader 4 scarecrow scarecrow dean 6 virago 3 princes 2 4 10 5 3 scarecrow 3 virago 1 virago scarecrow princes scarecrow virago 1 10 4 leader 5 4 leader 5 10 scarecrow 4 princes 1 4 virago 3 5 6 10 6 dean 2 10 spring virago 1 1 3 4 5 scarecrow leader 2 drummer 5 10 6 scarecrow 3 scarecrow virago drummer 3 6 dean winter 
+6 virago 6 scarecrow scarecrow drummer 4 princes 4 1
+scarecrow 0
 0
 
-temp temp temp LIA
+1
+C
+6 YELLOW
+0
+9
+scarecrow dean virago virago drummer leader 4 4 princes 1
+3 0
+1
+3 
+1
+15
+BELLA CALINE PLADACI LIA ATELA DIMASE BORGE MORINA ROLLO TALMONE ARMENTO ENNA OLIVADI ELINIA PARMA 
+83
+dean scarecrow winter virago 3 1 1 virago dean leader scarecrow 6 leader virago spring virago 3 10 10 1 scarecrow 1 6 2 virago spring 10 6 3 dean leader scarecrow 2 leader drummer 4 2 2 scarecrow 3 2 1 scarecrow 5 6 drummer scarecrow 4 leader winter scarecrow drummer 10 scarecrow virago spring 5 3 5 10 3 drummer 5 3 1 5 1 virago dean scarecrow 6 6 4 10 10 virago 5 1 dean scarecrow scarecrow 2 4 
+0
+
+temp temp temp ENNA
 null
 temp
-B
-2 RED
+
+2 
 0
-6
-dean 2 virago 6 virago scarecrow 4
-2 2 drummer drummer 0
-2
-2 2 
-1
+0
+0
+0
+0
+
+0
 
 
 0 
@@ -55,13 +55,13 @@ dean 2 virago 6 virago scarecrow 4
 
 0
 
-B
-2 RED
+C
+6 YELLOW
 0
-6
-dean 2 virago 6 virago scarecrow 4
-2 2 drummer drummer 0
-2
-2 2 
+9
+scarecrow dean virago virago drummer leader 4 4 princes 1
+3 0
+1
+3 
 1
 
