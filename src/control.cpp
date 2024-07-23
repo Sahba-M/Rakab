@@ -14,6 +14,7 @@
 #include <conio.h>
 #include <unordered_map>
 #include <climits>
+#include <math.h>
 
 #include "control.h"
 #include "card.h"
@@ -175,7 +176,6 @@ void Control::showUncaptured()
 }
 void Control::setWar()
 {
-
     LeaderCard leader;
     
     if (getIfDean())
@@ -484,6 +484,7 @@ void Control::cardAction()
     PrincesCard prince;
     ViragoCard virago;
     DeanCard dean;
+    
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
@@ -492,7 +493,7 @@ void Control::cardAction()
             dean.useCard(players, i);
             setIfDean(true);
         }
-    }
+    }                                                      
     if (season == "winter")
     {
         winter.useCard(players, -1);
@@ -501,7 +502,8 @@ void Control::cardAction()
     {
         if (players[i].hasDrummer())
         {
-            drummer.useCard(players, i);
+            double calcuteNumber = pow (1.5, players[i].numberOfDrummer());
+            drummer.useCard(players,i, calcuteNumber);
         }
     }
     if (season == "spring")
