@@ -1,12 +1,13 @@
 #include "input.h"
+#include "raylib.h"
 #include <string.h>
 
 InputBox::InputBox ( float posX , float posY , float width , float height ) 
 {
-        bounds = { posX, posY, width, height };
-        text[0] = '\0'; // Initialize text as empty string
-        active = false;
-        editing = false;
+    bounds = {posX , posY, width, height};
+    text[0] = '\0'; // Initialize text as empty string
+    active = false;
+    editing = false;
 }
 
 const char* InputBox::GetInput() 
@@ -54,13 +55,17 @@ void InputBox::Update()
 
 void InputBox::Draw() 
 {
-    float roundness = 0.3f;
-    DrawRectangleRounded(bounds , roundness , 0 , LIGHTGRAY);
+    float roundness = 0.4f;
+    Font font =  LoadFont ("C:/font/inputFont.otf");
+    Color color = { 171 , 220 , 245 , 225 };
+    Color borderColor = { 6 , 87 , 128 , 255 };
+    DrawRectangleRounded(bounds , roundness , 0 , color);
     // Draw text
-    DrawText(text, bounds.x + 5, bounds.y + 8, 20, BLACK);
+    DrawTextEx( font , text , {bounds.x + 15, bounds.y + 25} , 25 , 2 , BLACK);
     // Draw rectangle border if active
     if (active) 
     {
-        DrawRectangleLines(bounds.x, bounds.y, bounds.width, bounds.height, BLACK);
+        Rectangle border = {bounds.x, bounds.y, bounds.width, bounds.height};
+        DrawRectangleRoundedLines ( border , roundness , 0 , 4 , borderColor);
     }
 }

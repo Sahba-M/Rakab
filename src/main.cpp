@@ -15,10 +15,10 @@ int main()
     while (!WindowShouldClose())
     {
 
-        // if (graphic.getScreen() == IMAGE)
-        // {
-        //     graphic.setRecInput();
-        // }
+        if (graphic.getScreen() == INFO)
+        {
+            graphic.getInformation();
+        }
 
         BeginDrawing();
 
@@ -32,11 +32,15 @@ int main()
                 return 0 ;
             }
         }
-        else if (graphic.getScreen() == IMAGE)
+        else if (graphic.getScreen() == NUMBER)
         {
             graphic.setImage();
             graphic.askNumber();
-            // graphic.drawInput();
+        }
+        else if (graphic.getScreen() == INFO)
+        {
+            graphic.setImage();
+            graphic.drawInput();
         }
         
 

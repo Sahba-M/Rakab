@@ -133,19 +133,41 @@ bool GraphicGame::exit ()
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            currentScreen = IMAGE;
+            currentScreen = NUMBER;
         }
-        
     } 
  }
 
  void GraphicGame::setImage()
  {
+    Font font = LoadFont ("C:/font/listFont.otf");
     Image image = LoadImage("C:/assets/background.png"); 
     Texture2D backgroundImage = LoadTextureFromImage(image);
-    
     DrawTexture(backgroundImage, 0, 0, WHITE);
-    // UnloadImage(backgroundImage);
+
+    TextButton goBack ;
+    goBack.bounds = { 30 , 30 , 150 , 60 };
+    goBack.text = "Back To MENU";
+    Vector2 mousePosition = GetMousePosition();
+
+    if (CheckCollisionPointRec(mousePosition, goBack.bounds))
+    {
+        goBack.color = { 234 , 237 , 240 , 255 };
+        goBack.buttonColor = { 101 , 107 , 110 , 200};
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            currentScreen = MENU;
+        }
+    } 
+    else
+    {
+        goBack.color = BLACK;
+        goBack.buttonColor = { 174 , 185 , 191 , 200};
+    }
+
+    DrawRectangleRounded (goBack.bounds , 0.4f , 0 , goBack.buttonColor);
+    DrawTextEx(font , goBack.text, { goBack.bounds.x + 12 , goBack.bounds.y + 20 } , 25 , 2, goBack.color);
+
  }
 
 void GraphicGame::setCheckMenu(bool checkMenu)
@@ -160,71 +182,22 @@ int GraphicGame::getScreen()
 {
     return currentScreen;
 }
-
-void GraphicGame::setRecInput()
-{
-        if (CheckCollisionPointRec(GetMousePosition(), textBox)) mouseOnText = true;
-        else mouseOnText = false;
-
-        if (mouseOnText)
-        {
-            // Set the window's cursor to the I-Beam
-            SetMouseCursor(MOUSE_CURSOR_IBEAM);
-
-            // Get char pressed (unicode character) on the queue
-            int key = GetCharPressed();
-
-            // Check if more characters have been pressed on the same frame
-            while (key > 0)
-            {
-                // NOTE: Only allow keys in range [32..125]
-                if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS))
-                {
-                    name[letterCount] = (char)key;
-                    name[letterCount+1] = '\0'; // Add null terminator at the end of the string.
-                    letterCount++;
-                }
-
-                key = GetCharPressed();  // Check next character in the queue
-            }
-
-            if (IsKeyPressed(KEY_BACKSPACE))
-            {
-                letterCount--;
-                if (letterCount < 0) letterCount = 0;
-                name[letterCount] = '\0';
-            }
-        }
-        else SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-
-        if (mouseOnText) framesCounter++;
-        else framesCounter = 0;
-}
-
-
 void GraphicGame::drawInput() 
 {
+    Font font =  LoadFont ("C:/font/inputFont.otf");
+    Color backColor = { 70 , 157 , 212 , 200 };
 
-            ClearBackground(RAYWHITE);
+    Rectangle back { 320 , 80 , 270 , 75 };
+    DrawRectangleRounded ( back , 0.4f , 0 , backColor );
+    DrawTextEx( font , " Enter Your Name " , { 330 , 105 } , 30 , 2 , BLACK );
+    inputName.Draw();
+    back = { 320 , 165 , 270 , 75 };
+    DrawRectangleRounded ( back , 0.4f , 0 , backColor );
+    DrawTextEx( font , " Enter Your Age " , { 330 , 190 } , 30 , 2 , BLACK );
+    inputAge.Draw();
 
 
-            DrawRectangleRec(textBox, LIGHTGRAY);
-            if (mouseOnText) DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, RED);
-            else DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, DARKGRAY);
 
-            DrawText(name, (int)textBox.x + 5, (int)textBox.y + 8, 40, MAROON);
-
-            DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, MAX_INPUT_CHARS), 315, 250, 20, DARKGRAY);
-
-            if (mouseOnText)
-            {
-                if (letterCount < MAX_INPUT_CHARS)
-                {
-                    // Draw blinking underscore char
-                    if (((framesCounter/20)%2) == 0) DrawText("_", (int)textBox.x + 8 + MeasureText(name, 40), (int)textBox.y + 12, 40, MAROON);
-                }
-                else DrawText("Press BACKSPACE to delete chars...", 230, 300, 20, GRAY);
-            }
 }
 int GraphicGame::getNumberofPlayer()
 {
@@ -234,7 +207,6 @@ void GraphicGame::setNumberofPlayer(int numberofPlayer)
 {
     this->numberofPlayer = numberofPlayer;
 }
-
 void GraphicGame::askNumber()
 {
     Font font = LoadFont ("C:/font/askFont.otf");
@@ -291,19 +263,24 @@ void GraphicGame::askNumber()
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             setNumberofPlayer(i + 3);
+            currentScreen = INFO;
             break;
         }
       }
     }  
 }
-void GraphicGame::getInformationG()
+void GraphicGame::getInformation()
 {
-    Font font =  LoadFont ("C:/font/askFont.otf");
+    // Font font =  LoadFont ("C:/font/askFont.otf");
 
-    DrawTextEx( font , " Enter Your Name: " , { 340 + 2 , 100 + 2 } , 35 , 2 , BLACK );
+    // DrawTextEx( font , " Enter Your Name: " , { 340 , 100 } , 35 , 2 , BLACK );
 
-    drawInput();
-    setRecInput();
+    inputName.Update();
+    inputAge.Update();
+
+
+    // drawInput();
+    // setRecInput();
 
     // DrawTextEx( font , "Enter Your Age : " , { 340 - 2 , 100 - 2 } , 35 , 2 , BLACK );
     // DrawTextEx( font , "Enter Your Color: " , { 340 + 2 , 100 - 2 } , 35 , 2 , BLACK );

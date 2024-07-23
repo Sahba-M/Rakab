@@ -4,6 +4,8 @@
 
 #include <raylib.h>
 #include <vector>
+#include "input.h"
+
 #define MAX_INPUT_CHARS 20
 
 struct TextButton {
@@ -13,7 +15,7 @@ struct TextButton {
     Color buttonColor = {0 , 0 , 0 , 30};
 };
 
-enum GameScreen { MENU = 0 , IMAGE }; 
+enum GameScreen { MENU = 0 , NUMBER , INFO }; 
 
 class GraphicGame
 {
@@ -34,10 +36,10 @@ class GraphicGame
     void setNumberofPlayer(int numberofPlayer);
     int getScreen();
     int getNumberofPlayer();
-    void setRecInput();
+    // void setRecInput();
     void drawInput();
     void askNumber();
-    void getInformationG();
+    void getInformation();
 
 
 
@@ -52,13 +54,19 @@ class GraphicGame
         std::vector <TextButton> buttons ;
         GameScreen currentScreen;
 
-        char name[MAX_INPUT_CHARS + 1] = "\0";      // NOTE: One extra space required for null terminator char '\0'
-        int letterCount = 0;
-        Rectangle textBox = { 500, 180, 225, 50 };
-        bool mouseOnText = false;
-        int framesCounter = 0;
+
+        // char name[MAX_INPUT_CHARS + 1] = "\0";      // NOTE: One extra space required for null terminator char '\0'
+        // int letterCount = 0;
+        // Rectangle textBox = { 500, 180, 225, 50 };
+        // bool mouseOnText = false;
+        // int framesCounter = 0;
+
+        InputBox inputName { 600 , 80 , 200 , 75 };
+        InputBox inputAge { 600 , 165 , 100 , 75 };
+
 
         std::vector <TextButton> numButtons ;
+        
 
 };
 
