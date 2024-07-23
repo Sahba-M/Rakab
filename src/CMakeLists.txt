@@ -15,6 +15,7 @@ set(PROJECT_SOURCES
     spring.cpp 
     main.cpp
     graphic.cpp
+    input.cpp
 )
 
 add_executable(${PROJECT_NAME}
