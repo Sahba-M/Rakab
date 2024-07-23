@@ -15,6 +15,11 @@ const char* InputBox::GetInput()
     return text;
 }
 
+void InputBox::setInputDefault ()
+{
+    text[0] = '\0';
+}
+
 void InputBox::Update() 
 {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) 

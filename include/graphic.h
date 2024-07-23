@@ -15,7 +15,7 @@ struct TextButton {
     Color buttonColor = {0 , 0 , 0 , 30};
 };
 
-enum GameScreen { MENU = 0 , NUMBER , INFO }; 
+enum GameScreen { MENU = 0 , NUMBER , INFO , GAME }; 
 
 class GraphicGame
 {
@@ -61,8 +61,11 @@ class GraphicGame
         // bool mouseOnText = false;
         // int framesCounter = 0;
 
-        InputBox inputName { 600 , 80 , 200 , 75 };
-        InputBox inputAge { 600 , 165 , 100 , 75 };
+        InputBox inputName { 600 , 160 , 200 , 75 };
+        InputBox inputAge { 600 , 245 , 100 , 75 };
+        TextButton submit ;
+        bool next = false ;
+
 
 
         std::vector <TextButton> numButtons ;

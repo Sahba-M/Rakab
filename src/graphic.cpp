@@ -184,17 +184,60 @@ int GraphicGame::getScreen()
 }
 void GraphicGame::drawInput() 
 {
-    Font font =  LoadFont ("C:/font/inputFont.otf");
-    Color backColor = { 70 , 157 , 212 , 200 };
+    static int counter = 1 ;
+    if (counter <= getNumberofPlayer())
+    {
+        Font font =  LoadFont ("C:/font/inputFont.otf");
+        Color backColor = { 70 , 157 , 212 , 200 };
+        char text[2] ; 
+        text[0] = counter + '0';
+        text[1] = '\0';
 
-    Rectangle back { 320 , 80 , 270 , 75 };
-    DrawRectangleRounded ( back , 0.4f , 0 , backColor );
-    DrawTextEx( font , " Enter Your Name " , { 330 , 105 } , 30 , 2 , BLACK );
-    inputName.Draw();
-    back = { 320 , 165 , 270 , 75 };
-    DrawRectangleRounded ( back , 0.4f , 0 , backColor );
-    DrawTextEx( font , " Enter Your Age " , { 330 , 190 } , 30 , 2 , BLACK );
-    inputAge.Draw();
+        Rectangle back = { 500 , 70 , 150 , 70 };
+        DrawRectangleRounded ( back , 0.4f , 0 , {227, 214, 95, 200});
+        DrawTextEx ( font , "Player" , { 525 , 90 } , 25 , 2 , BLACK );
+        DrawTextEx ( font , text , { 615 , 90 } , 25 , 2 , BLACK );
+
+        if ( next )
+        {
+            inputName.setInputDefault();
+            inputAge.setInputDefault();
+            next = false ;
+        }
+
+        back = { 320 , 160 , 270 , 75 };
+        DrawRectangleRounded ( back , 0.4f , 0 , backColor );
+        DrawTextEx( font , " Enter Your Name " , { 330 , 185 } , 30 , 2 , BLACK );
+        inputName.Draw();
+        back = { 320 , 245 , 270 , 75 };
+        DrawRectangleRounded ( back , 0.4f , 0 , backColor );
+        DrawTextEx( font , " Enter Your Age " , { 330 , 270 } , 30 , 2 , BLACK );
+        inputAge.Draw();
+    
+        submit.bounds = { 500 , 350 , 150 , 70 };
+        submit.text = "NEXT";
+
+        Vector2 mousePosition = GetMousePosition();
+
+        if (CheckCollisionPointRec(mousePosition, submit.bounds))
+        {
+            submit.color = { 234 , 237 , 240 , 255 };
+            submit.buttonColor = { 22 , 122 , 11 , 200};
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                counter++;
+                next = true;
+            }
+        } 
+        else
+        {
+            submit.color = BLACK;
+            submit.buttonColor = { 87 , 186 , 76 , 200};
+        }
+        DrawRectangleRounded (submit.bounds , 0.4f , 0 , submit.buttonColor);
+        DrawTextEx(font , submit.text, { submit.bounds.x + 45 , submit.bounds.y + 20 } , 25 , 2, submit.color);
+    }
+    else currentScreen = GAME; 
 
 
 

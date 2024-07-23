@@ -7,6 +7,7 @@ class InputBox {
     public:
         InputBox ( float posX , float posY , float width , float height );
         const char* GetInput(); 
+        void setInputDefault ();
         void Update();
         void Draw();
 
