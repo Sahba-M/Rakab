@@ -3,27 +3,29 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include"menu.h"
+#include"graphic.h"
 
-MenuGame::MenuGame()
+
+GraphicGame::GraphicGame()
 {
     screenWidth = 1075;
     screenHeight = 636;
+    currentScreen = MENU;
 }
-int MenuGame::getScreenWidth()
+int GraphicGame::getScreenWidth()
 {
     return screenWidth;
 }
-int MenuGame::getScreenHeight()
+int GraphicGame::getScreenHeight()
 {
     return screenHeight;
 }
-MenuGame::~MenuGame()
+GraphicGame::~GraphicGame()
 {
     // UnloadTexture(backgroundImage);
 }
 
-void  MenuGame::setBackGround()
+void  GraphicGame::setBackGround()
 {
     
     SetTargetFPS(60); // Set the target frames-per-second
@@ -33,7 +35,7 @@ void  MenuGame::setBackGround()
     DrawTexture(backgroundImage, 0, 0, WHITE);
 }
 
-void  MenuGame::setTitle()
+void  GraphicGame::setTitle()
 {
     Color textColor;
     textColor  = {4, 9, 72, 255};
@@ -45,12 +47,12 @@ void  MenuGame::setTitle()
     DrawTextEx(font, text, (Vector2){ 430, 50 }, 90, 2, textColor);
 }
 
-void  MenuGame::setList()
+void  GraphicGame::setList()
 {
     buttons.reserve(4);
     Font font = LoadFont ("C:/font/listFont.otf");
 
-    bool colorChanged = false;
+    // bool colorChanged = false;
     float timer = 0.0f;
     const float changeDuration = 2.0f; // Duration in seconds to revert colors
 
@@ -99,7 +101,7 @@ void  MenuGame::setList()
     help();
 }   
 
-bool MenuGame::exit ()
+bool GraphicGame::exit ()
 {
     Vector2 mousePosition = GetMousePosition();
     if (CheckCollisionPointRec(mousePosition, buttons[3].bounds)) 
@@ -112,7 +114,7 @@ bool MenuGame::exit ()
     }
     return false;
 }
- void MenuGame::help()
+ void GraphicGame::help()
  {
     Vector2 mousePosition = GetMousePosition();
     if (CheckCollisionPointRec(mousePosition, buttons[2].bounds))
@@ -124,32 +126,88 @@ bool MenuGame::exit ()
         
     } 
  }
- void MenuGame::start()
+ void GraphicGame::start()
  {
     Vector2 mousePosition = GetMousePosition();
     if (CheckCollisionPointRec(mousePosition, buttons[0].bounds))
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            setCheckMenu(false);
-
-            SetTargetFPS(60); // Set the target frames-per-second
-
-            Image image = LoadImage("C:/assets/background.png"); 
-            Texture2D backgroundImage = LoadTextureFromImage(image);
-            
-            DrawTexture(backgroundImage, 0, 0, WHITE);
-
+            currentScreen = IMAGE;
         }
         
     } 
  }
 
- void MenuGame::setCheckMenu(bool checkMenu)
+ void GraphicGame::setImage()
  {
-    this->checkMenu = checkMenu;
+    Image image = LoadImage("C:/assets/background.png"); 
+    Texture2D backgroundImage = LoadTextureFromImage(image);
+    
+    DrawTexture(backgroundImage, 0, 0, WHITE);
  }
-bool MenuGame::getCheckMenu()
+
+void GraphicGame::setCheckMenu(bool checkMenu)
+{
+   this->checkMenu = checkMenu;
+}
+bool GraphicGame::getCheckMenu()
 {
     return checkMenu;
+}
+int GraphicGame::getScreen()
+{
+    return currentScreen;
+}
+
+void GraphicGame::setRecInput()
+{
+    Rectangle inputBox = { 500, 200, 400, 60 };
+    Color boxColor = LIGHTGRAY;
+    char text[256] = "";  // Buffer for user input
+    int textLength = 0;
+    bool editing = false;
+
+    
+
+    while (!WindowShouldClose())
+    {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) 
+        {
+            Vector2 mousePoint = GetMousePosition();
+            if (CheckCollisionPointRec(mousePoint, inputBox)) 
+            {
+                editing = true;  // Start editing
+            } else {
+                editing = false; // Stop editing
+            }
+        }
+    }
+    if (editing) 
+    {
+        boxColor = YELLOW;
+        if (IsKeyPressed(KEY_BACKSPACE)) 
+        {
+            if (textLength > 0) 
+            {
+                textLength--;
+                text[textLength] = '\0';  // Null-terminate the string
+            }
+        } else 
+        {
+            for (int key = KEY_SPACE; key <= KEY_Z; key++) 
+            {
+                if (IsKeyPressed(key) && textLength < 255) 
+                {
+                    text[textLength] = (char)key; // Add the character
+                    textLength++;
+                    text[textLength] = '\0'; // Null-terminate the string
+                }
+            }
+        }
+    }
+
+    DrawRectangleRec(inputBox, boxColor);
+    DrawText(text, inputBox.x + 10, inputBox.y + 20, 20, BLACK);
+
 }
