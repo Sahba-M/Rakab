@@ -163,7 +163,6 @@ int GraphicGame::getScreen()
 
 void GraphicGame::setRecInput()
 {
-        
         if (CheckCollisionPointRec(GetMousePosition(), textBox)) mouseOnText = true;
         else mouseOnText = false;
 
@@ -208,7 +207,6 @@ void GraphicGame::drawInput()
 
             ClearBackground(RAYWHITE);
 
-            DrawText("PLACE MOUSE OVER INPUT BOX!", 240, 140, 20, GRAY);
 
             DrawRectangleRec(textBox, LIGHTGRAY);
             if (mouseOnText) DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, RED);
@@ -228,11 +226,20 @@ void GraphicGame::drawInput()
                 else DrawText("Press BACKSPACE to delete chars...", 230, 300, 20, GRAY);
             }
 }
+int GraphicGame::getNumberofPlayer()
+{
+    return numberofPlayer;
+}
+void GraphicGame::setNumberofPlayer(int numberofPlayer)
+{
+    this->numberofPlayer = numberofPlayer;
+}
 
 void GraphicGame::askNumber()
 {
     Font font = LoadFont ("C:/font/askFont.otf");
     Color recColor = {132 , 132 , 132 , 255};
+
     DrawTextEx( font , "Choose The Number Of Players :" , { 340 + 2 , 100 + 2 } , 35 , 2 , BLACK );
     DrawTextEx( font , "Choose The Number Of Players :" , { 340 - 2 , 100 - 2 } , 35 , 2 , BLACK );
     DrawTextEx( font , "Choose The Number Of Players :" , { 340 + 2 , 100 - 2 } , 35 , 2 , BLACK );
@@ -277,4 +284,27 @@ void GraphicGame::askNumber()
         DrawTextEx(font , numButtons[i].text, { numButtons[i].bounds.x + 40 , numButtons[i].bounds.y + 10 } , 30 , 2, numButtons[i].color);
     }
 
+    for (int i = 0; i < 4; i++)
+    {
+      if (CheckCollisionPointRec(mousePosition, numButtons[i].bounds))
+      {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            setNumberofPlayer(i + 3);
+            break;
+        }
+      }
+    }  
+}
+void GraphicGame::getInformationG()
+{
+    Font font =  LoadFont ("C:/font/askFont.otf");
+
+    DrawTextEx( font , " Enter Your Name: " , { 340 + 2 , 100 + 2 } , 35 , 2 , BLACK );
+
+    drawInput();
+    setRecInput();
+
+    // DrawTextEx( font , "Enter Your Age : " , { 340 - 2 , 100 - 2 } , 35 , 2 , BLACK );
+    // DrawTextEx( font , "Enter Your Color: " , { 340 + 2 , 100 - 2 } , 35 , 2 , BLACK );
 }
