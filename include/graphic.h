@@ -31,10 +31,13 @@ class GraphicGame
     void setCheckMenu(bool checkMenu);
     bool getCheckMenu();
     void setImage();
+    void setNumberofPlayer(int numberofPlayer);
     int getScreen();
+    int getNumberofPlayer();
     void setRecInput();
     void drawInput();
     void askNumber();
+    void getInformationG();
 
 
 
@@ -44,6 +47,7 @@ class GraphicGame
     private:
         int screenWidth ;
         int screenHeight ;
+        int numberofPlayer ;
         bool checkMenu = true;
         std::vector <TextButton> buttons ;
         GameScreen currentScreen;
