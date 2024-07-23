@@ -34,6 +34,8 @@ class GraphicGame
     int getScreen();
     void setRecInput();
     void drawInput();
+    void askNumber();
+
 
 
     
@@ -42,8 +44,8 @@ class GraphicGame
     private:
         int screenWidth ;
         int screenHeight ;
-        std::vector <TextButton> buttons ;
         bool checkMenu = true;
+        std::vector <TextButton> buttons ;
         GameScreen currentScreen;
 
         char name[MAX_INPUT_CHARS + 1] = "\0";      // NOTE: One extra space required for null terminator char '\0'
@@ -51,6 +53,8 @@ class GraphicGame
         Rectangle textBox = { 500, 180, 225, 50 };
         bool mouseOnText = false;
         int framesCounter = 0;
+
+        std::vector <TextButton> numButtons ;
 
 };
 

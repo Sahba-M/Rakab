@@ -163,13 +163,6 @@ int GraphicGame::getScreen()
 
 void GraphicGame::setRecInput()
 {
-    // char name[MAX_INPUT_CHARS + 1] = "\0";      // NOTE: One extra space required for null terminator char '\0'
-    // int letterCount = 0;
-
-    // Rectangle textBox = { screenWidth/2.0f - 100, 180, 225, 50 };
-    // bool mouseOnText = false;
-
-    // int framesCounter = 0;
         
         if (CheckCollisionPointRec(GetMousePosition(), textBox)) mouseOnText = true;
         else mouseOnText = false;
@@ -236,52 +229,52 @@ void GraphicGame::drawInput()
             }
 }
 
+void GraphicGame::askNumber()
+{
+    Font font = LoadFont ("C:/font/askFont.otf");
+    Color recColor = {132 , 132 , 132 , 255};
+    DrawTextEx( font , "Choose The Number Of Players :" , { 340 + 2 , 100 + 2 } , 35 , 2 , BLACK );
+    DrawTextEx( font , "Choose The Number Of Players :" , { 340 - 2 , 100 - 2 } , 35 , 2 , BLACK );
+    DrawTextEx( font , "Choose The Number Of Players :" , { 340 + 2 , 100 - 2 } , 35 , 2 , BLACK );
+    DrawTextEx( font , "Choose The Number Of Players :" , { 340 - 2 , 100 + 2 } , 35 , 2 , BLACK );
+    DrawTextEx( font , "Choose The Number Of Players :" , { 340 , 100 } , 35 , 2 , LIGHTGRAY );
+    DrawRectangle ( 325 , 145 , 450 , 5 , recColor );
 
-    // Rectangle inputBox = { 500, 200, 400, 60 };
-    // Rectangle buttonRec = { 910, 200, 80, 60 };
-    // Color boxColor = LIGHTGRAY;
-    // char text[256] = "";  // Buffer for user input
-    // int textLength = 0;
-    // bool editing = false;
-    // bool submitted = false;
+    numButtons.reserve(4);
 
-
+    numButtons[0].text = "3";
+    numButtons[0].bounds = { 430, 200, 100, 60 };
     
+    numButtons[1].text = "4";
+    numButtons[1].bounds = { 550, 200, 100, 60 };
+ 
+    numButtons[2].text = "5";
+    numButtons[2].bounds = { 430, 280, 100, 60 };
+ 
+    numButtons[3].text = "6";
+    numButtons[3].bounds = { 550, 280, 100, 60 };
 
-    // if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) 
-    // {
-    //     Vector2 mousePoint = GetMousePosition();
-    //     if (CheckCollisionPointRec(mousePoint, inputBox)) 
-    //     {
-    //         editing = true;  // Start editing
-    //     } else {
-    //         editing = false; // Stop editing
-    //     }
-    // }
-    // if (editing) 
-    // {
-    //     boxColor = YELLOW;
-    //     if (IsKeyPressed(KEY_BACKSPACE)) 
-    //     {
-    //         if (textLength > 0) 
-    //         {
-    //             textLength--;
-    //             text[textLength] = '\0';  // Null-terminate the string
-    //         }
-    //     } else 
-    //     {
-    //         for (int key = KEY_SPACE; key <= KEY_Z; key++) 
-    //         {
-    //             if (IsKeyPressed(key) && textLength < 255) 
-    //             {
-    //                 text[textLength] = (char)key; // Add the character
-    //                 textLength++;
-    //                 text[textLength] = '\0'; // Null-terminate the string
-    //             }
-    //         }
-    //     }
-    // }
+    Vector2 mousePosition = GetMousePosition();
 
+    for (int i = 0 ; i < 4 ; i++)
+        {
+            if (CheckCollisionPointRec(mousePosition, numButtons[i].bounds)) 
+            {
+                // Change colors on button click
+                numButtons[i].buttonColor = { 154 , 107 , 198 , 200 };
+                numButtons[i].color = { 234 , 237 , 240 , 255 };
+            }
+            else 
+            {
+                numButtons[i].buttonColor = { 197 , 169 , 218 , 200 };
+                numButtons[i].color = BLACK;
+            }
+        }    
 
-    // DrawRectangleRec(inputBox, boxColor);
-    // DrawText(text, inputBox.x + 10, inputBox.y + 20, 20, BLACK);
+    for ( int i = 0 ; i < 4 ; i++ )
+    {
+        DrawRectangle (numButtons[i].bounds.x, numButtons[i].bounds.y, numButtons[i].bounds.width, numButtons[i].bounds.height, numButtons[i].buttonColor);
+        DrawTextEx(font , numButtons[i].text, { numButtons[i].bounds.x + 40 , numButtons[i].bounds.y + 10 } , 30 , 2, numButtons[i].color);
+    }
+
+}
