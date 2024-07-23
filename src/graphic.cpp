@@ -233,6 +233,7 @@ void GraphicGame::askNumber()
 {
     Font font = LoadFont ("C:/font/askFont.otf");
     Color recColor = {132 , 132 , 132 , 255};
+    float roundness = 0.3f;
     DrawTextEx( font , "Choose The Number Of Players :" , { 340 + 2 , 100 + 2 } , 35 , 2 , BLACK );
     DrawTextEx( font , "Choose The Number Of Players :" , { 340 - 2 , 100 - 2 } , 35 , 2 , BLACK );
     DrawTextEx( font , "Choose The Number Of Players :" , { 340 + 2 , 100 - 2 } , 35 , 2 , BLACK );
@@ -273,7 +274,7 @@ void GraphicGame::askNumber()
 
     for ( int i = 0 ; i < 4 ; i++ )
     {
-        DrawRectangle (numButtons[i].bounds.x, numButtons[i].bounds.y, numButtons[i].bounds.width, numButtons[i].bounds.height, numButtons[i].buttonColor);
+        DrawRectangleRounded (numButtons[i].bounds , roundness , 0 , numButtons[i].buttonColor);
         DrawTextEx(font , numButtons[i].text, { numButtons[i].bounds.x + 40 , numButtons[i].bounds.y + 10 } , 30 , 2, numButtons[i].color);
     }
 
