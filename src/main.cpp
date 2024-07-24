@@ -7,41 +7,41 @@
 int main()
 {
     
-    GraphicGame graphic;
+    // GraphicGame graphic;
     
-    InitWindow(graphic.getScreenWidth(), graphic.getScreenHeight(), "Rakab Game");
-    SetTargetFPS(60);
+    // InitWindow(graphic.getScreenWidth(), graphic.getScreenHeight(), "Rakab Game");
+    // SetTargetFPS(60);
 
-    while (!WindowShouldClose())
-    {
+    // while (!WindowShouldClose())
+    // {
 
-        // if (graphic.getScreen() == IMAGE)
-        // {
-        //     graphic.setRecInput();
-        // }
+    //     // if (graphic.getScreen() == IMAGE)
+    //     // {
+    //     //     graphic.setRecInput();
+    //     // }
 
-        BeginDrawing();
+    //     BeginDrawing();
 
-        if (graphic.getScreen() == MENU)
-        {
-            graphic.setBackGround();
-            graphic.setTitle();
-            graphic.setList();
-            if (graphic.exit())
-            {
-                return 0 ;
-            }
-        }
-        else if (graphic.getScreen() == IMAGE)
-        {
-            graphic.setImage();
-            graphic.askNumber();
-            // graphic.drawInput();
-        }
+    //     if (graphic.getScreen() == MENU)
+    //     {
+    //         graphic.setBackGround();
+    //         graphic.setTitle();
+    //         graphic.setList();
+    //         if (graphic.exit())
+    //         {
+    //             return 0 ;
+    //         }
+    //     }
+    //     else if (graphic.getScreen() == IMAGE)
+    //     {
+    //         graphic.setImage();
+    //         graphic.askNumber();
+    //         // graphic.drawInput();
+    //     }
         
 
-        EndDrawing();
-    }
+    //     EndDrawing();
+    // }
     
     Control rakab ;
     rakab.run();
