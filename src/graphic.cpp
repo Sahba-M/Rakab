@@ -2,6 +2,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include"graphic.h"
 
@@ -327,4 +328,12 @@ void GraphicGame::getInformation()
 
     // DrawTextEx( font , "Enter Your Age : " , { 340 - 2 , 100 - 2 } , 35 , 2 , BLACK );
     // DrawTextEx( font , "Enter Your Color: " , { 340 + 2 , 100 - 2 } , 35 , 2 , BLACK );
+}
+void GraphicGame::transferInformation ( std::string & name , int & age )
+{
+    if ( next )
+    {
+        name = inputName.GetInput();
+        age = atoi(inputAge.GetInput());
+    }
 }

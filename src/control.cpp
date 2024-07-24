@@ -117,12 +117,16 @@ void Control::getInformation()
         std::getline(std::cin, name);
 
 
-        // std::cout << " Enter Your Age : ";
-        // std::cin >> age;
+        std::cout << " Enter Your Age : ";
+        std::cin >> age;
         age = controlAge();
 
         color = controlColors();
         std::cout << "-----------------------\n";
+
+        // graphic.transferInformation(name , age);
+        // std::cout << name << age ;
+
         players.push_back(Player(age, name, color)); // Fill vector of players
     }
     system("cls");

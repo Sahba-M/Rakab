@@ -40,6 +40,8 @@ class GraphicGame
     void drawInput();
     void askNumber();
     void getInformation();
+    void transferInformation( std::string & inputName, int & inputAge );
+
 
 
 

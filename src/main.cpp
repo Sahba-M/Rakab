@@ -7,6 +7,7 @@
 int main()
 {
     
+    Control rakab ;
     GraphicGame graphic;
     
     InitWindow(graphic.getScreenWidth(), graphic.getScreenHeight(), "Rakab Game");
@@ -41,13 +42,13 @@ int main()
         {
             graphic.setImage();
             graphic.drawInput();
+            // rakab.getInformation();
         }
         
 
         EndDrawing();
     }
     
-    Control rakab ;
     rakab.run();
     return 0;
 }

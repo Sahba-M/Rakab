@@ -6,6 +6,8 @@
 
 #include "card.h"
 #include "player.h"
+#include "graphic.h"
+#include "raylib.h"
 
 
 class Control {
@@ -100,8 +102,9 @@ class Control {
         Player DeterminerOfWar; //Determining the location of the battle
         Player DeterminerOfPeace; //Determining the location of the peace place
 
-
         std::vector<std::string> files; //files list
+        GraphicGame graphic;
+
 };
 
 #endif
