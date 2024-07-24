@@ -201,10 +201,13 @@ void Control::setWar()
             showPlayGround();
             std::cout << "\n The War Is Over => " << getWarPlace() << "\n\n ";
             selectMove(players[currentIndex], currentIndex);
-            if (players[i].getIfLeader())
+            if (players[currentIndex].getIfLeader())
             {
                 leader.useCard(players,-1);
+                setIsLeader(true);
                 system("cls");
+                std::cout << "end if leader \n";
+                sleep(2);
                 break;
             }
             currentIndex = (currentIndex + 1) % players.size();
@@ -220,20 +223,27 @@ void Control::setWar()
         sleep(5);
         auto elementFound = std::find(provinces.begin(), provinces.end(), getWarPlace());
         if (elementFound != provinces.end())
-            provinces.erase(elementFound);
-        if (!changeDeterminer())
+               provinces.erase(elementFound);
+
+        if (!changeDeterminerL())
         {
-            setDeterminer(winner);
+            if (!changeDeterminer())
+            {
+               setDeterminer(winner);
+            }
         }
     }
     else
     {
         std::cout << " This War Has No Winners!!! ";
         sleep(5);
-        if (!changeDeterminer())
+        if (!changeDeterminerL())
         {
-            setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
-        }
+             if (!changeDeterminer())
+             {
+                 setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
+             } 
+        } 
     }
 
     for (int i = 0; i < getPlayerNumber(); i++) // to update move vector from "pass" to "temp"
@@ -277,6 +287,7 @@ void Control::selectMove(Player &player, int index)
             player.showHandCards();
             player.recognizeYellow(); // update yellowCard vector
             player.selectCard();
+            playerCard.push_back(player);
 
             if ((player.getSeason() == "winter" || player.getSeason() == "spring")) // the season set here
                 setSeason(player.getSeason());
@@ -644,6 +655,23 @@ bool Control::changeDeterminer()
     }
     return false;
 }
+bool Control::changeDeterminerL()
+{
+    if (getIsLeader())
+    {
+        setIsLeader(false);
+        setDeterminer(playerCard[playerCard.size() - 2]);
+
+        for(auto &player : players)
+        {
+            player.setPass(false);
+            player.setIfLeader(false);
+        }
+        return true;
+    }
+    return false; 
+}
+
 int Control::getPlayerNumber()
 {
     return playerNumber;
@@ -769,6 +797,17 @@ bool Control::endEachWar()
         }
     }
     return flag;
+}
+bool Control::ifAllPass()
+{
+    for(auto player : players)
+    {
+        if (player.getPass() == true)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 bool Control::winEachWar()
 {
@@ -932,8 +971,14 @@ std::string Control::getSeason()
 {
     return season;
 }
-
-
+void Control::setIsLeader(bool isLeader)
+{
+    this->isLeader = isLeader;
+}
+bool Control::getIsLeader()
+{
+    return isLeader;
+}
 void Control::removeGameSaving(int index )
 {
     if ( index < files.size() )

@@ -46,12 +46,17 @@ class Control {
         void askBurn(); //to burn hand cards of the player who has not got yellow cards
         void findLastDean(); //Find the last player who played dean
         void setIfDean( bool ifDean );
+        void setIsLeader(bool isLeader);
+        bool getIsLeader();
+        bool changeDeterminerL(); 
         bool getIfDean(); 
         bool changeDeterminer(); 
         bool winGame(Player player);
         bool endEachWar(); //checking that all players pass
         bool winEachWar();
         bool endGame();
+        bool ifAllPass();
+
         int  levenshteinDistance(const std::string &s1, const std::string &s2); // Optimized function to calculate the Levenshtein distance between two strings
         int  controlAge();
         int  getPlayerNumber();
@@ -87,7 +92,6 @@ class Control {
         std::vector<std::string> provinces;
         std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
         std::vector<std::string> cardsAndOrdersNames = {"drummer", "princes", "scarecrow", "spring", "winter", "help", "card", "pass"};
-
         std::vector<std::string> move; // for save move choices of players
         std::vector<Player> players;
         std::vector<int> playersIndices; // for saving indexes of players who pass
@@ -95,12 +99,15 @@ class Control {
         int provinceNumber;
         int threshold;
         bool ifDean = false;
+        bool isLeader = false;
         std::string warPlace = "null";
         std::string peacePlace = "null";
         std::string season = "null";
         Player winner; // for winner of each round
         Player DeterminerOfWar; //Determining the location of the battle
         Player DeterminerOfPeace; //Determining the location of the peace place
+
+        std::vector<Player> playerCard;
 
         std::vector<std::string> files; //files list
         GraphicGame graphic;
