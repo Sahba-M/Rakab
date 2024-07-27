@@ -36,6 +36,7 @@ class Player {
         void insertBurnedCard ( std::vector<std::shared_ptr<Card>> & cards );
         void insertHandCard ( std::vector<std::shared_ptr<Card>> & cards );
         void setIfLeader(bool ifLeader);
+        void setIfHorse(bool ifHorse);
         int  getAge() const ;
         int  getScorePlayer();
         int  getHandSize(); //The number of cards in the player's hand
@@ -52,6 +53,7 @@ class Player {
         bool hasPrinces(); //Having a princes card in the player's used cards
         bool hasVirago(); //Having a virago card in the player's used cards
         bool hasDean(); //Having a dean card in the player's used cards
+        bool hasHorse();
         bool getPass();
         bool hasYellowGround();
         bool hasYellowCard(); //Having yellow cards in the player's hand
@@ -59,6 +61,7 @@ class Player {
         bool ifBurn(); //Does the player want to burn her hand if she doesn't have yellow cards?
         bool isProximity();
         bool getIfLeader();
+        bool getIfHorse();
 
        
         std::string getName() const ;
@@ -80,5 +83,6 @@ class Player {
         int scorePlayer;
         bool pass = false;
         bool ifLeader = false;
+        bool ifHorse = false;
 };
 #endif  

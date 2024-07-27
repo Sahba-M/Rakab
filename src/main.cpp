@@ -8,46 +8,46 @@ int main()
 {
     
     Control rakab ;
-    GraphicGame graphic;
+    // GraphicGame graphic;
     
-    InitWindow(graphic.getScreenWidth(), graphic.getScreenHeight(), "Rakab Game");
-    SetTargetFPS(60);
+    // InitWindow(graphic.getScreenWidth(), graphic.getScreenHeight(), "Rakab Game");
+    // SetTargetFPS(60);
 
-    while (!WindowShouldClose())
-    {
+    // while (!WindowShouldClose())
+    // {
 
-        if (graphic.getScreen() == INFO)
-        {
-            graphic.getInformation();
-        }
+    //     if (graphic.getScreen() == INFO)
+    //     {
+    //         graphic.getInformation();
+    //     }
 
-        BeginDrawing();
+    //     BeginDrawing();
 
-        if (graphic.getScreen() == MENU)
-        {
-            graphic.setBackGround();
-            graphic.setTitle();
-            graphic.setList();
-            if (graphic.exit())
-            {
-                return 0 ;
-            }
-        }
-        else if (graphic.getScreen() == NUMBER)
-        {
-            graphic.setImage();
-            graphic.askNumber();
-        }
-        else if (graphic.getScreen() == INFO)
-        {
-            graphic.setImage();
-            graphic.drawInput();
-            // rakab.getInformation();
-        }
+    //     if (graphic.getScreen() == MENU)
+    //     {
+    //         graphic.setBackGround();
+    //         graphic.setTitle();
+    //         graphic.setList();
+    //         if (graphic.exit())
+    //         {
+    //             return 0 ;
+    //         }
+    //     }
+    //     else if (graphic.getScreen() == NUMBER)
+    //     {
+    //         graphic.setImage();
+    //         graphic.askNumber();
+    //     }
+    //     else if (graphic.getScreen() == INFO)
+    //     {
+    //         graphic.setImage();
+    //         graphic.drawInput();
+    //         // rakab.getInformation();
+    //     }
         
 
-        EndDrawing();
-    }
+    //     EndDrawing();
+    // }
     
     rakab.run();
     return 0;

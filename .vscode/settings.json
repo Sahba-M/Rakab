@@ -59,6 +59,7 @@
     "thread": "cpp",
     "variant": "cpp",
     "unordered_set": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "text_encoding": "cpp"
   }
 }

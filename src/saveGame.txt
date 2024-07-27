@@ -1,53 +1,47 @@
 3
-A
-12 PINK
-1
-LIA 6
-leader 4 scarecrow scarecrow 6 scarecrow 1
-3 3
-2 5 4 1
-3 
-1
-ENNA 7
-dean 3 2 1 3 5 virago 1
-10 2
-4 1 1
-10 
+SAHBA
+1 PINK
 0
-B
-44 PURPLE
-2
-BELLA ENNA 6
-scarecrow 10 virago 6 3 1 1
-10 3
-2 1 5 1
-10 
+7
+drummer drummer leader winter 6 dean leader 0
+3
+10 4 4 1
+4 
 1
-C
-23 RED
-0
-6
-dean dean scarecrow virago winter scarecrow 1
-drummer 3
-1 leader leader 0
+FERY
+5 RED
+1
+ENNA 6
+scarecrow 1 leader 5 4 leader 1
+5 3
+6 2 10 0
 
 1
-12
-CALINE PLADACI ATELA DIMASE BORGE MORINA ROLLO TALMONE ARMENTO OLIVADI ELINIA PARMA 
-83
-5 4 1 2 10 winter 4 leader drummer 6 virago drummer scarecrow drummer drummer virago 6 virago 3 2 3 virago scarecrow scarecrow 2 spring 6 virago scarecrow scarecrow virago 3 10 4 4 10 10 10 5 dean scarecrow scarecrow princes 1 virago drummer dean 5 6 6 3 4 10 spring scarecrow virago 4 5 princes 1 dean spring dean 5 1 2 2 3 3 1 virago virago scarecrow 6 scarecrow princes 1 2 leader 5 1 winter leader 
-15
-2 5 2 1 1 leader 2 5 4 2 1 5 1 leader leader 
-temp temp temp ENNA
+NIMA
+36 BLUE
+1
+LIA 5
+spring princes winter drummer 3 1
+4 4
+4 horse 6 leader 0
+
+1
+13
+BELLA CALINE PLADACI ATELA DIMASE BORGE MORINA ROLLO TALMONE ARMENTO OLIVADI ELINIA PARMA 
+91
+scarecrow 10 scarecrow horse 5 scarecrow virago virago 3 10 virago 1 virago dean scarecrow 3 1 dean 6 2 virago leader leader 2 virago scarecrow 10 scarecrow 3 scarecrow drummer leader 5 5 1 1 1 dean dean leader 3 scarecrow spring 6 scarecrow princes 2 scarecrow 3 6 scarecrow 3 5 2 winter 6 4 virago 1 5 10 10 virago 4 6 1 1 horse scarecrow drummer dean scarecrow 2 1 virago 5 virago virago scarecrow spring horse 4 drummer 2 scarecrow princes leader 3 2 virago 10 
+16
+10 4 6 2 4 horse 10 4 4 6 2 10 4 horse 6 leader 
+pass pass pass PARMA
 null
 temp
-B
-44 PURPLE
-1
-BELLA 6
-scarecrow 10 virago 6 3 1 1
-10 3
-2 1 5 1
+FERY
+5 RED
+0
+7
+scarecrow 5 1 leader 5 4 leader 1
+10 2
+6 2 1
 10 
 1
 
@@ -61,19 +55,13 @@ scarecrow 10 virago 6 3 1 1
 
 0
 
-B
-44 PURPLE
-1
-BELLA 6
-scarecrow 10 virago 6 3 1 1
-10 3
-2 1 5 1
-10 
-1
-LIA 7
-scarecrow spring virago scarecrow 4 leader scarecrow 1
-4 2
-10 leader 0
+FERY
+5 RED
+0
+7
+scarecrow 5 1 leader 5 4 leader 1
+10 2
+6 2 0
 
 0
 

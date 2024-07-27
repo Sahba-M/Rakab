@@ -16,6 +16,7 @@ set(PROJECT_SOURCES
     main.cpp
     graphic.cpp
     input.cpp
+    horse.cpp
 )
 
 add_executable(${PROJECT_NAME}
