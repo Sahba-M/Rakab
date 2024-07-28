@@ -79,6 +79,10 @@ void Player::selectCard()
         {
             setIfLeader(true);
         }
+        else if (tempName == "horse")
+        {
+            setIfHorse(true);
+        }
 
         else if (tempName == "scarecrow")
         {
@@ -117,6 +121,10 @@ void Player::setSeason(std::string season)
 void Player::setIfLeader(bool ifLeader)
 {
     this-> ifLeader = ifLeader;
+}
+void Player::setIfHorse(bool ifHorse)
+{
+    this->ifHorse = ifHorse;
 }
 void Player::showUsedCards()
 {
@@ -355,6 +363,25 @@ bool Player::hasDrummer()
 bool Player::hasPrinces()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("princes");
+
+    auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
+
+    if (elemenFound != usedCards.end())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool Player::getIfHorse()
+{
+    return ifHorse;
+}
+bool Player::hasHorse()
+{
+    std::shared_ptr<Card> card = std::make_shared<PurpleCard>("horse");
 
     auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
 

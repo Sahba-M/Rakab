@@ -29,6 +29,7 @@
 #include "player.h"
 #include "map.h"
 #include "leader.h"
+#include "horse.h"
 
 Control::Control()
 {
@@ -184,6 +185,8 @@ void Control::showUncaptured()
 void Control::setWar()
 {
     LeaderCard leader;
+    HorserCard horse;
+    
     
     if (getIfDean())
     {
@@ -209,8 +212,13 @@ void Control::setWar()
                 leader.useCard(players,-1);
                 setIsLeader(true);
                 system("cls");
-                std::cout << "end if leader \n";
-                sleep(2);
+                break;
+            }
+            else if (players[currentIndex].getIfHorse())
+            {
+                horse.useCard(players,-1);
+                //setIsHorse(true);
+                system("cls");
                 break;
             }
             currentIndex = (currentIndex + 1) % players.size();
@@ -220,6 +228,8 @@ void Control::setWar()
         }
     }
     cardAction();
+    
+    
     if (winEachWar())
     {
         std::cout << " >>> " << winner.getName() << " <<< " << " Is The Winner Of This Round!!! \n\n ";
@@ -674,7 +684,14 @@ bool Control::changeDeterminerL()
     }
     return false; 
 }
-
+void Control::updateHorsePlayers()
+{
+    for ( auto &player : players)
+    {
+        player.setIfHorse(false);
+    }
+    
+}
 int Control::getPlayerNumber()
 {
     return playerNumber;
@@ -815,8 +832,21 @@ bool Control::ifAllPass()
 bool Control::winEachWar()
 {
     int winnerIndex;
+
+    for (int i = 0; i < players.size(); i++)
+    {
+        if (players[i].hasHorse())
+        {
+           winnerIndex = i;
+           winner = players[i];
+           players[i].addProvinces(warPlace);
+           updateHorsePlayers();
+           return true;
+        }
+    }
     int max = 0;
     std::vector<Player> winPlayers;
+
     for (auto player : players)
     {
         max = player.getScorePlayer() > max ? player.getScorePlayer() : max;
@@ -981,6 +1011,14 @@ void Control::setIsLeader(bool isLeader)
 bool Control::getIsLeader()
 {
     return isLeader;
+}
+void Control::setIsHorse(bool isHorse)
+{
+    this->isHorse = isHorse;
+}
+bool Control::getIsHorse()
+{
+    return isHorse;
 }
 void Control::removeGameSaving(int index )
 {

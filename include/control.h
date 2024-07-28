@@ -47,6 +47,9 @@ class Control {
         void findLastDean(); //Find the last player who played dean
         void setIfDean( bool ifDean );
         void setIsLeader(bool isLeader);
+        void setIsHorse (bool isHorse ); 
+        void updateHorsePlayers();
+        bool getIsHorse();
         bool getIsLeader();
         bool changeDeterminerL(); 
         bool getIfDean(); 
@@ -100,6 +103,7 @@ class Control {
         int threshold;
         bool ifDean = false;
         bool isLeader = false;
+        bool isHorse = false;
         std::string warPlace = "null";
         std::string peacePlace = "null";
         std::string season = "null";
