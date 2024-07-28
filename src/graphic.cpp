@@ -315,25 +315,34 @@ void GraphicGame::askNumber()
 }
 void GraphicGame::getInformation()
 {
-    // Font font =  LoadFont ("C:/font/askFont.otf");
-
-    // DrawTextEx( font , " Enter Your Name: " , { 340 , 100 } , 35 , 2 , BLACK );
-
     inputName.Update();
     inputAge.Update();
-
-
-    // drawInput();
-    // setRecInput();
-
-    // DrawTextEx( font , "Enter Your Age : " , { 340 - 2 , 100 - 2 } , 35 , 2 , BLACK );
-    // DrawTextEx( font , "Enter Your Color: " , { 340 + 2 , 100 - 2 } , 35 , 2 , BLACK );
 }
 void GraphicGame::transferInformation ( std::string & name , int & age )
-{
+{   
     if ( next )
     {
         name = inputName.GetInput();
         age = atoi(inputAge.GetInput());
+
+        // std::cout << name << std::endl;
+        // std::cout << age << std::endl;
+        // std::cin >> name ;
+        next = false ;
     }
+}
+
+void GraphicGame::uploadGame()
+{
+    Image image = LoadImage("C:/assets/backGame.png"); 
+    Texture2D backgroundImage = LoadTextureFromImage(image);
+    DrawTexture(backgroundImage, 0, 0, WHITE);
+
+    Image mapimg = LoadImage("C:/assets/Map.png"); 
+    Texture2D map = LoadTextureFromImage(mapimg);
+    DrawTextureEx(map, (Vector2){200, 75}, 0.0f, 0.6f, WHITE);
+
+
+
+
 }

@@ -19,6 +19,7 @@ int main()
         if (graphic.getScreen() == INFO)
         {
             graphic.getInformation();
+            rakab.getInformation();
         }
 
         BeginDrawing();
@@ -44,9 +45,13 @@ int main()
             graphic.drawInput();
             // rakab.getInformation();
         }
-        
+        else if (graphic.getScreen() == GAME)
+        {
+            graphic.uploadGame();
+        }
 
         EndDrawing();
+
     }
     
     rakab.run();

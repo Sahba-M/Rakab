@@ -36,16 +36,11 @@ class GraphicGame
     void setNumberofPlayer(int numberofPlayer);
     int getScreen();
     int getNumberofPlayer();
-    // void setRecInput();
     void drawInput();
     void askNumber();
     void getInformation();
-    void transferInformation( std::string & inputName, int & inputAge );
-
-
-
-
-    
+    void transferInformation( std::string & inputName, int & inputAge ); 
+    void uploadGame();
 
 
     private:
@@ -56,22 +51,12 @@ class GraphicGame
         std::vector <TextButton> buttons ;
         GameScreen currentScreen;
 
-
-        // char name[MAX_INPUT_CHARS + 1] = "\0";      // NOTE: One extra space required for null terminator char '\0'
-        // int letterCount = 0;
-        // Rectangle textBox = { 500, 180, 225, 50 };
-        // bool mouseOnText = false;
-        // int framesCounter = 0;
-
         InputBox inputName { 600 , 160 , 200 , 75 };
         InputBox inputAge { 600 , 245 , 100 , 75 };
         TextButton submit ;
         bool next = false ;
 
-
-
         std::vector <TextButton> numButtons ;
-        
 
 };
 

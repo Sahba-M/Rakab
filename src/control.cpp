@@ -106,29 +106,32 @@ void Control::showColors()
 }
 void Control::getInformation()
 {
+    // static int temp = 0;
     int age;
     std::string name;
     std::string color;
-    for (int i = 0; i < getPlayerNumber(); i++)
-    {
-        std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
+    // for (int i = 0; i < getPlayerNumber(); i++)
+    // {
+        // std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
                  
-        std::cin.ignore();
-        std::getline(std::cin, name);
+        // std::cin.ignore();
+        // std::getline(std::cin, name);
 
 
-        std::cout << " Enter Your Age : ";
-        std::cin >> age;
-        age = controlAge();
+        // std::cout << " Enter Your Age : ";
+        // std::cin >> age;
+        // age = controlAge();
 
-        color = controlColors();
-        std::cout << "-----------------------\n";
-
-        // graphic.transferInformation(name , age);
-        // std::cout << name << age ;
+        // color = controlColors();
+        // std::cout << "-----------------------\n";
+        
+        graphic.transferInformation(name , age);
+        // std::cout << name << "---" << age ;
+        // std::cin >> color ;
+        
 
         players.push_back(Player(age, name, color)); // Fill vector of players
-    }
+    // }
     system("cls");
 }
 void Control::distributeCards()
