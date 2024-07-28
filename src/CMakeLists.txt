@@ -14,7 +14,6 @@ set(PROJECT_SOURCES
     winter.cpp 
     spring.cpp 
     main.cpp
-    graphic.cpp
     input.cpp
     horse.cpp
 )

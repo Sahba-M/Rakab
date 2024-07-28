@@ -16,6 +16,8 @@ class InputBox {
         char text[256];
         bool active;
         bool editing;
+        Font inputFont;
+
 
 };
 

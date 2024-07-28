@@ -8,6 +8,7 @@ InputBox::InputBox ( float posX , float posY , float width , float height )
     text[0] = '\0'; // Initialize text as empty string
     active = false;
     editing = false;
+    inputFont = LoadFont ("C:/font/inputFont.otf");
 }
 
 const char* InputBox::GetInput() 
@@ -61,12 +62,11 @@ void InputBox::Update()
 void InputBox::Draw() 
 {
     float roundness = 0.4f;
-    Font font =  LoadFont ("C:/font/inputFont.otf");
     Color color = { 171 , 220 , 245 , 225 };
     Color borderColor = { 6 , 87 , 128 , 255 };
     DrawRectangleRounded(bounds , roundness , 0 , color);
     // Draw text
-    DrawTextEx( font , text , {bounds.x + 15, bounds.y + 25} , 25 , 2 , BLACK);
+    DrawTextEx( inputFont , text , {bounds.x + 15, bounds.y + 25} , 25 , 2 , BLACK);
     // Draw rectangle border if active
     if (active) 
     {

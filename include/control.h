@@ -6,9 +6,32 @@
 
 #include "card.h"
 #include "player.h"
-#include "graphic.h"
 #include "raylib.h"
+#include "input.h"
 
+
+struct TextButton {
+    const char* text;
+    Rectangle bounds;
+    Color color = BLACK;
+    Color buttonColor = {0 , 0 , 0 , 30};
+};
+
+// struct Images {
+//     Image menu ,
+//           info , 
+//           game , 
+//            map ;
+// };
+
+struct Textures {
+    Texture2D menu ,
+              info ,
+              game ,
+               map ;
+};
+
+enum GameScreen { MENU = 0 , NUMBER , INFO , GAME }; 
 
 class Control {
     
@@ -79,12 +102,39 @@ class Control {
         Player & getDeterminerPeace();
         Player & youngestPlayer();
 
-        
 
         void addGameName ( const std::string & fileName ); // to save the name of the files
         void removeGameSaving ( int index ); // to remove file from list
         void saveGame();
         void loadGame();
+
+        // graphic functions :
+        void startGame();
+        void unloadThings();
+        void uploadThings();
+        void setMenuBackground();
+        void setAskBackground();
+        void setTitle();
+        void setMenuList();
+        int getCurrentScreen();
+        void Draw();
+        void Update();
+        void helpButton();
+        void exitButton();
+        void startButton();
+        void askNumber();
+        void drawInput();
+        void updateInput();
+        void askMap();
+
+
+
+
+
+
+
+
+        
 
 
         
@@ -110,11 +160,26 @@ class Control {
         Player winner; // for winner of each round
         Player DeterminerOfWar; //Determining the location of the battle
         Player DeterminerOfPeace; //Determining the location of the peace place
-
         std::vector<Player> playerCard;
 
         std::vector<std::string> files; //files list
-        GraphicGame graphic;
+
+        // graphic data members :
+        Font title , listFont , inputFont , askFont ;
+        Textures MyTextures ;
+        GameScreen currentScreen;
+        InputBox inputName { 600 , 160 , 200 , 75 };
+        InputBox inputAge { 600 , 245 , 100 , 75 };
+        TextButton submit ;
+        bool next = false ;
+
+        std::vector <TextButton> buttons ;
+        std::vector <TextButton> numButtons ;
+
+
+        
+
+
 
 };
 

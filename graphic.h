@@ -8,14 +8,14 @@
 
 #define MAX_INPUT_CHARS 20
 
-struct TextButton {
-    const char* text;
-    Rectangle bounds;
-    Color color = BLACK;
-    Color buttonColor = {0 , 0 , 0 , 30};
-};
+// struct TextButton {
+//     const char* text;
+//     Rectangle bounds;
+//     Color color = BLACK;
+//     Color buttonColor = {0 , 0 , 0 , 30};
+// };
 
-enum GameScreen { MENU = 0 , NUMBER , INFO , GAME }; 
+// enum GameScreen { MENU = 0 , NUMBER , INFO , GAME }; 
 
 class GraphicGame
 {
@@ -23,8 +23,8 @@ class GraphicGame
     GraphicGame();
     ~GraphicGame();
     void setBackGround();
-    int getScreenWidth();
-    int getScreenHeight();
+    int getScreenWidth();//
+    int getScreenHeight();//
     void setTitle();
     void setList();
     bool exit ();
@@ -49,7 +49,7 @@ class GraphicGame
         int numberofPlayer ;
         bool checkMenu = true;
         std::vector <TextButton> buttons ;
-        GameScreen currentScreen;
+        GameScreen screen;
 
         InputBox inputName { 600 , 160 , 200 , 75 };
         InputBox inputAge { 600 , 245 , 100 , 75 };

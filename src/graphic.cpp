@@ -11,7 +11,7 @@ GraphicGame::GraphicGame()
 {
     screenWidth = 1075;
     screenHeight = 636;
-    currentScreen = MENU;
+    screen = MENU;
 }
 int GraphicGame::getScreenWidth()
 {
@@ -134,7 +134,7 @@ bool GraphicGame::exit ()
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            currentScreen = NUMBER;
+            screen = NUMBER;
         }
     } 
  }
@@ -157,7 +157,7 @@ bool GraphicGame::exit ()
         goBack.buttonColor = { 101 , 107 , 110 , 200};
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            currentScreen = MENU;
+            screen = MENU;
         }
     } 
     else
@@ -181,7 +181,7 @@ bool GraphicGame::getCheckMenu()
 }
 int GraphicGame::getScreen()
 {
-    return currentScreen;
+    return screen;
 }
 void GraphicGame::drawInput() 
 {
@@ -238,7 +238,7 @@ void GraphicGame::drawInput()
         DrawRectangleRounded (submit.bounds , 0.4f , 0 , submit.buttonColor);
         DrawTextEx(font , submit.text, { submit.bounds.x + 45 , submit.bounds.y + 20 } , 25 , 2, submit.color);
     }
-    else currentScreen = GAME; 
+    else screen = GAME; 
 
 
 
@@ -261,7 +261,7 @@ void GraphicGame::askNumber()
     DrawTextEx( font , "Choose The Number Of Players :" , { 340 + 2 , 100 - 2 } , 35 , 2 , BLACK );
     DrawTextEx( font , "Choose The Number Of Players :" , { 340 - 2 , 100 + 2 } , 35 , 2 , BLACK );
     DrawTextEx( font , "Choose The Number Of Players :" , { 340 , 100 } , 35 , 2 , LIGHTGRAY );
-    DrawRectangle ( 325 , 145 , 450 , 5 , recColor );
+    DrawRectangle ( 325 , 90 , 450 , 100 , recColor );
 
     numButtons.reserve(4);
 
@@ -307,7 +307,7 @@ void GraphicGame::askNumber()
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             setNumberofPlayer(i + 3);
-            currentScreen = INFO;
+            screen = INFO;
             break;
         }
       }
