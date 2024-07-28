@@ -11,13 +11,13 @@ class InputBox {
         void Update();
         void Draw();
 
+
     private:
         Rectangle bounds;
         char text[256];
         bool active;
         bool editing;
-        Font inputFont;
-
+        Font font;
 
 };
 

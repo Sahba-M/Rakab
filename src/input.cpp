@@ -1,3 +1,4 @@
+#include<iostream>
 #include "input.h"
 #include "raylib.h"
 #include <string.h>
@@ -8,7 +9,8 @@ InputBox::InputBox ( float posX , float posY , float width , float height )
     text[0] = '\0'; // Initialize text as empty string
     active = false;
     editing = false;
-    inputFont = LoadFont ("C:/font/inputFont.otf");
+    std::cout << "before loading" << std::endl;
+    font = LoadFont ("C:/font/inputFont.ttf");
 }
 
 const char* InputBox::GetInput() 
@@ -23,6 +25,8 @@ void InputBox::setInputDefault ()
 
 void InputBox::Update() 
 {
+    // font = LoadFont ("C:/font/inputFont.otf");
+
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) 
     {
         // Check if mouse is inside bounds
@@ -66,7 +70,7 @@ void InputBox::Draw()
     Color borderColor = { 6 , 87 , 128 , 255 };
     DrawRectangleRounded(bounds , roundness , 0 , color);
     // Draw text
-    DrawTextEx( inputFont , text , {bounds.x + 15, bounds.y + 25} , 25 , 2 , BLACK);
+    DrawTextEx( font , text , {bounds.x + 15, bounds.y + 25} , 25 , 2 , BLACK);
     // Draw rectangle border if active
     if (active) 
     {

@@ -107,10 +107,20 @@ void Control::showColors()
 }
 void Control::getInformation()
 {
-    // static int temp = 0;
     int age;
     std::string name;
-    std::string color;
+    std::string color = "test";
+
+     if ( next )
+    {
+        name = inputName.GetInput();
+        age = atoi(inputAge.GetInput());
+        next = false ;
+        players.push_back(Player(age, name, color)); // Fill vector of players
+        std::cout << name << "-" << age ;
+        inputName.setInputDefault();
+        inputAge.setInputDefault();
+    }
     // for (int i = 0; i < getPlayerNumber(); i++)
     // {
         // std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
@@ -131,9 +141,8 @@ void Control::getInformation()
         // std::cin >> color ;
         
 
-        players.push_back(Player(age, name, color)); // Fill vector of players
     // }
-    system("cls");
+    // system("cls");
 }
 void Control::distributeCards()
 {
@@ -1233,6 +1242,7 @@ void Control::Update()
     {
     case INFO:
         updateInput();
+        getInformation();
         break;
     case GAME:
         break;
@@ -1440,13 +1450,6 @@ void Control::drawInput()
         DrawTextEx ( inputFont , "Player" , { 525 , 90 } , 25 , 2 , BLACK );
         DrawTextEx ( inputFont , text , { 615 , 90 } , 25 , 2 , BLACK );
 
-        if ( next )
-        {
-            inputName.setInputDefault();
-            inputAge.setInputDefault();
-            next = false ;
-        }
-
         back = { 320 , 160 , 270 , 75 };
         DrawRectangleRounded ( back , 0.4f , 0 , backColor );
         DrawTextEx( inputFont , " Enter Your Name " , { 330 , 185 } , 30 , 2 , BLACK );
@@ -1470,6 +1473,13 @@ void Control::drawInput()
                 counter++;
                 next = true;
             }
+
+        // if ( next )
+        // {
+        //     inputName.setInputDefault();
+        //     inputAge.setInputDefault();
+        // }
+
         } 
         else
         {
