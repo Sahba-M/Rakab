@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include "raylib.h"
+#include "asset.h"
 
 class InputBox {
     public:
@@ -17,7 +18,8 @@ class InputBox {
         char text[256];
         bool active;
         bool editing;
-        Font font;
+        AssetManager myAsset;
+        
 
 };
 

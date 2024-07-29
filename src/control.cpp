@@ -1168,10 +1168,10 @@ void Control::loadGame()
 void Control::startGame()
 {
     currentScreen = MENU;
-    int screenWidth = 1075;
-    int screenHeight = 636;
-    InitWindow(screenWidth, screenHeight, "Rakab Game");
-    uploadThings();
+    // int screenWidth = 1075;
+    // int screenHeight = 636;
+    // InitWindow(screenWidth, screenHeight, "Rakab Game");
+    // uploadThings();
     SetTargetFPS(60);
 
     while (!WindowShouldClose())
@@ -1184,32 +1184,32 @@ void Control::startGame()
 
     CloseWindow();
 }
-void Control::unloadThings()
-{
-    UnloadTexture(MyTextures.menu);
-    UnloadTexture(MyTextures.menu);
-    UnloadTexture(MyTextures.menu);
-    UnloadTexture(MyTextures.menu);
+// void Control::unloadThings()
+// {
+//     UnloadTexture(MyTextures.menu);
+//     UnloadTexture(MyTextures.menu);
+//     UnloadTexture(MyTextures.menu);
+//     UnloadTexture(MyTextures.menu);
 
-    UnloadFont(title);
-    UnloadFont(listFont);
-    UnloadFont(inputFont);
-    UnloadFont(askFont);
-}
-void Control::uploadThings()
-{
+//     UnloadFont(title);
+//     UnloadFont(listFont);
+//     UnloadFont(inputFont);
+//     UnloadFont(askFont);
+// }
+// void Control::uploadThings()
+// {
 
-    title = LoadFont ("C:/font/title.otf");
-    listFont = LoadFont ("C:/font/listFont.otf");
-    inputFont =  LoadFont ("C:/font/inputFont.otf");
-    askFont = LoadFont ("C:/font/askFont.otf");
+//     title = LoadFont ("C:/font/title.otf");
+//     listFont = LoadFont ("C:/font/listFont.otf");
+//     inputFont =  LoadFont ("C:/font/inputFont.otf");
+//     askFont = LoadFont ("C:/font/askFont.otf");
 
-    MyTextures.menu = LoadTexture("C:/assets/photoMenu.png");
-    MyTextures.info = LoadTexture("C:/assets/background.png");
-    MyTextures.game = LoadTexture("C:/assets/backGame.png");
-    MyTextures.map = LoadTexture("C:/assets/Map.png");
+//     MyTextures.menu = LoadTexture("C:/assets/photoMenu.png");
+//     MyTextures.info = LoadTexture("C:/assets/background.png");
+//     MyTextures.game = LoadTexture("C:/assets/backGame.png");
+//     MyTextures.map = LoadTexture("C:/assets/Map.png");
 
-}
+// }
 int Control::getCurrentScreen()
 {
     return currentScreen;
@@ -1250,11 +1250,11 @@ void Control::Update()
 }
 void Control::setMenuBackground()
 {
-    DrawTexture ( MyTextures.menu , 0 , 0 , WHITE );
+    DrawTexture ( myAsset.menu , 0 , 0 , WHITE );
 }
 void Control::setAskBackground()
 {
-    DrawTexture(MyTextures.info, 0, 0, WHITE);
+    DrawTexture(myAsset.info, 0, 0, WHITE);
 
     TextButton goBack ;
     goBack.bounds = { 30 , 30 , 150 , 60 };
@@ -1277,7 +1277,7 @@ void Control::setAskBackground()
     }
 
     DrawRectangleRounded (goBack.bounds , 0.4f , 0 , goBack.buttonColor);
-    DrawTextEx(listFont , goBack.text, { goBack.bounds.x + 12 , goBack.bounds.y + 20 } , 25 , 2, goBack.color);
+    DrawTextEx(myAsset.listFont , goBack.text, { goBack.bounds.x + 12 , goBack.bounds.y + 20 } , 25 , 2, goBack.color);
 }
 void Control::setTitle()
 {
@@ -1285,7 +1285,7 @@ void Control::setTitle()
     const char* text = "Rakab";
     Vector2 textPosition = { 100, 100 };
     
-    DrawTextEx(title, text, (Vector2){ 430, 50 }, 90, 2, textColor);
+    DrawTextEx(myAsset.title, text, (Vector2){ 430, 50 }, 90, 2, textColor);
 }
 void Control::setMenuList()
 {
@@ -1328,13 +1328,13 @@ void Control::setMenuList()
     // Draw button background
     // Draw button text
     DrawRectangle (buttons[0].bounds.x, buttons[0].bounds.y, buttons[0].bounds.width, buttons[0].bounds.height, buttons[0].buttonColor);
-    DrawTextEx(listFont , buttons[0].text, { buttons[0].bounds.x + 70 , buttons[0].bounds.y + 10} , 30 , 2, buttons[0].color);
+    DrawTextEx(myAsset.listFont , buttons[0].text, { buttons[0].bounds.x + 70 , buttons[0].bounds.y + 10} , 30 , 2, buttons[0].color);
     DrawRectangle (buttons[1].bounds.x, buttons[1].bounds.y, buttons[1].bounds.width, buttons[1].bounds.height, buttons[1].buttonColor);
-    DrawTextEx(listFont , buttons[1].text, { buttons[1].bounds.x + 67 , buttons[1].bounds.y + 10} , 30 , 2, buttons[1].color);
+    DrawTextEx(myAsset.listFont , buttons[1].text, { buttons[1].bounds.x + 67 , buttons[1].bounds.y + 10} , 30 , 2, buttons[1].color);
     DrawRectangle (buttons[2].bounds.x, buttons[2].bounds.y, buttons[2].bounds.width, buttons[2].bounds.height, buttons[2].buttonColor);
-    DrawTextEx(listFont , buttons[2].text, { buttons[2].bounds.width/2 + buttons[2].bounds.x - 25 , buttons[2].bounds.y + 10} , 30 , 2, buttons[2].color);
+    DrawTextEx(myAsset.listFont , buttons[2].text, { buttons[2].bounds.width/2 + buttons[2].bounds.x - 25 , buttons[2].bounds.y + 10} , 30 , 2, buttons[2].color);
     DrawRectangle (buttons[3].bounds.x, buttons[3].bounds.y, buttons[3].bounds.width, buttons[3].bounds.height, buttons[3].buttonColor);
-    DrawTextEx(listFont , buttons[3].text, { buttons[3].bounds.width/2 + buttons[3].bounds.x - 25 , buttons[3].bounds.y + 10} , 30 , 2, buttons[3].color);
+    DrawTextEx(myAsset.listFont , buttons[3].text, { buttons[3].bounds.width/2 + buttons[3].bounds.x - 25 , buttons[3].bounds.y + 10} , 30 , 2, buttons[3].color);
 
     startButton();
     helpButton();
@@ -1382,7 +1382,7 @@ void Control::askNumber()
     float roundness = 0.3f;
     Rectangle temp = {325 , 90 , 450 , 70};
     DrawRectangleRounded ( temp , 0.3f , 0 , recColor );
-    DrawTextEx( askFont , "Choose The Number Of Players :" , { 340 , 110 } , 35 , 2 , BLACK );
+    DrawTextEx( myAsset.askFont , "Choose The Number Of Players :" , { 340 , 110 } , 35 , 2 , BLACK );
 
     numButtons.reserve(4);
 
@@ -1418,7 +1418,7 @@ void Control::askNumber()
     for ( int i = 0 ; i < 4 ; i++ )
     {
         DrawRectangleRounded (numButtons[i].bounds , roundness , 0 , numButtons[i].buttonColor);
-        DrawTextEx(askFont , numButtons[i].text, { numButtons[i].bounds.x + 40 , numButtons[i].bounds.y + 10 } , 30 , 2, numButtons[i].color);
+        DrawTextEx(myAsset.askFont , numButtons[i].text, { numButtons[i].bounds.x + 40 , numButtons[i].bounds.y + 10 } , 30 , 2, numButtons[i].color);
     }
 
     for (int i = 0; i < 4; i++)
@@ -1447,16 +1447,16 @@ void Control::drawInput()
 
         Rectangle back = { 500 , 70 , 150 , 70 };
         DrawRectangleRounded ( back , 0.4f , 0 , {227, 214, 95, 200});
-        DrawTextEx ( inputFont , "Player" , { 525 , 90 } , 25 , 2 , BLACK );
-        DrawTextEx ( inputFont , text , { 615 , 90 } , 25 , 2 , BLACK );
+        DrawTextEx ( myAsset.inputFont , "Player" , { 525 , 90 } , 25 , 2 , BLACK );
+        DrawTextEx ( myAsset.inputFont , text , { 615 , 90 } , 25 , 2 , BLACK );
 
         back = { 320 , 160 , 270 , 75 };
         DrawRectangleRounded ( back , 0.4f , 0 , backColor );
-        DrawTextEx( inputFont , " Enter Your Name " , { 330 , 185 } , 30 , 2 , BLACK );
+        DrawTextEx( myAsset.inputFont , " Enter Your Name " , { 330 , 185 } , 30 , 2 , BLACK );
         inputName.Draw();
         back = { 320 , 245 , 270 , 75 };
         DrawRectangleRounded ( back , 0.4f , 0 , backColor );
-        DrawTextEx( inputFont , " Enter Your Age " , { 330 , 270 } , 30 , 2 , BLACK );
+        DrawTextEx( myAsset.inputFont , " Enter Your Age " , { 330 , 270 } , 30 , 2 , BLACK );
         inputAge.Draw();
     
         submit.bounds = { 500 , 350 , 150 , 70 };
@@ -1487,7 +1487,7 @@ void Control::drawInput()
             submit.buttonColor = { 87 , 186 , 76 , 200};  
         }
         DrawRectangleRounded (submit.bounds , 0.4f , 0 , submit.buttonColor);
-        DrawTextEx(inputFont , submit.text, { submit.bounds.x + 45 , submit.bounds.y + 20 } , 25 , 2, submit.color);
+        DrawTextEx(myAsset.inputFont , submit.text, { submit.bounds.x + 45 , submit.bounds.y + 20 } , 25 , 2, submit.color);
     }
     else currentScreen = GAME; 
 
@@ -1499,6 +1499,6 @@ void Control::updateInput()
 }
 void Control::askMap()
 {
-    DrawTexture(MyTextures.game, 0, 0, WHITE);
-    DrawTextureEx(MyTextures.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE);
+    DrawTexture(myAsset.game, 0, 0, WHITE);
+    DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE);
 }

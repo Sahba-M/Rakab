@@ -110,8 +110,8 @@ class Control {
 
         // graphic functions :
         void startGame();
-        void unloadThings();
-        void uploadThings();
+        // void unloadThings();
+        // void uploadThings();
         void setMenuBackground();
         void setAskBackground();
         void setTitle();
@@ -165,9 +165,10 @@ class Control {
         std::vector<std::string> files; //files list
 
         // graphic data members :
-        Font title , listFont , inputFont , askFont ;
-        Textures MyTextures ;
+        // Font title , listFont , inputFont , askFont ;
+        // Textures MyTextures ;
         GameScreen currentScreen;
+        AssetManager myAsset;
         InputBox inputName { 600 , 160 , 200 , 75 };
         InputBox inputAge { 600 , 245 , 100 , 75 };
         TextButton submit ;

@@ -10,7 +10,6 @@ InputBox::InputBox ( float posX , float posY , float width , float height )
     active = false;
     editing = false;
     std::cout << "before loading" << std::endl;
-    font = LoadFont ("C:/font/inputFont.ttf");
 }
 
 const char* InputBox::GetInput() 
@@ -70,7 +69,7 @@ void InputBox::Draw()
     Color borderColor = { 6 , 87 , 128 , 255 };
     DrawRectangleRounded(bounds , roundness , 0 , color);
     // Draw text
-    DrawTextEx( font , text , {bounds.x + 15, bounds.y + 25} , 25 , 2 , BLACK);
+    DrawTextEx( myAsset.inputFont , text , {bounds.x + 15, bounds.y + 25} , 25 , 2 , BLACK);
     // Draw rectangle border if active
     if (active) 
     {
