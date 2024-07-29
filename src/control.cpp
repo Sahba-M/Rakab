@@ -115,6 +115,7 @@ void Control::getInformation()
     {
         name = inputName.GetInput();
         age = atoi(inputAge.GetInput());
+
         next = false ;
         players.push_back(Player(age, name, color)); // Fill vector of players
         std::cout << name << "-" << age ;
@@ -1254,17 +1255,21 @@ void Control::setMenuBackground()
 }
 void Control::setAskBackground()
 {
-    DrawTexture(myAsset.info, 0, 0, WHITE);
+    DrawTexture(myAsset.info, 0, 0, WHITE);//Draw the image
 
     TextButton goBack ;
     goBack.bounds = { 30 , 30 , 150 , 60 };
     goBack.text = "Back To MENU";
-    Vector2 mousePosition = GetMousePosition();
+
+    Vector2 mousePosition = GetMousePosition();//Save the current mouse coordinates
 
     if (CheckCollisionPointRec(mousePosition, goBack.bounds))
     {
-        goBack.color = { 234 , 237 , 240 , 255 };
-        goBack.buttonColor = { 101 , 107 , 110 , 200};
+        // goBack.color = { 234 , 237 , 240 , 255 };// Change text color
+        // goBack.buttonColor = { 101 , 107 , 110 , 200};// Change button color
+        goBack.color = BLACK;
+        goBack.buttonColor = { 174 , 185 , 191 , 200};
+
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             currentScreen = MENU;
@@ -1272,8 +1277,10 @@ void Control::setAskBackground()
     } 
     else
     {
-        goBack.color = BLACK;
-        goBack.buttonColor = { 174 , 185 , 191 , 200};
+        goBack.color = { 234 , 237 , 240 , 255 };// Change text color
+        goBack.buttonColor = { 101 , 107 , 110 , 200};// Change button color
+        // goBack.color = BLACK;
+        // goBack.buttonColor = { 174 , 185 , 191 , 200};
     }
 
     DrawRectangleRounded (goBack.bounds , 0.4f , 0 , goBack.buttonColor);
@@ -1283,18 +1290,12 @@ void Control::setTitle()
 {
     Color textColor = {4, 9, 72, 255};
     const char* text = "Rakab";
-    Vector2 textPosition = { 100, 100 };
     
     DrawTextEx(myAsset.title, text, (Vector2){ 430, 50 }, 90, 2, textColor);
 }
 void Control::setMenuList()
 {
     buttons.reserve(4);
-
-    // bool colorChanged = false;
-    float timer = 0.0f;
-    const float changeDuration = 2.0f; // Duration in seconds to revert colors
-
 
    buttons[0].text = "New Game";
    buttons[0].bounds = { 450, 230, 250, 45 };
@@ -1315,8 +1316,8 @@ void Control::setMenuList()
         if (CheckCollisionPointRec(mousePosition, buttons[i].bounds)) 
         {
             // Change colors on button click
-            buttons[i].buttonColor = { 0 , 0 , 0 , 110 };
-            buttons[i].color = { 234 , 237 , 240 , 255 };
+            buttons[i].buttonColor = { 0 , 0 , 0 , 110 };  // button color
+            buttons[i].color = { 234 , 237 , 240 , 255 }; // text color
         }
         else 
         {
@@ -1329,17 +1330,19 @@ void Control::setMenuList()
     // Draw button text
     DrawRectangle (buttons[0].bounds.x, buttons[0].bounds.y, buttons[0].bounds.width, buttons[0].bounds.height, buttons[0].buttonColor);
     DrawTextEx(myAsset.listFont , buttons[0].text, { buttons[0].bounds.x + 70 , buttons[0].bounds.y + 10} , 30 , 2, buttons[0].color);
+
     DrawRectangle (buttons[1].bounds.x, buttons[1].bounds.y, buttons[1].bounds.width, buttons[1].bounds.height, buttons[1].buttonColor);
     DrawTextEx(myAsset.listFont , buttons[1].text, { buttons[1].bounds.x + 67 , buttons[1].bounds.y + 10} , 30 , 2, buttons[1].color);
+
     DrawRectangle (buttons[2].bounds.x, buttons[2].bounds.y, buttons[2].bounds.width, buttons[2].bounds.height, buttons[2].buttonColor);
     DrawTextEx(myAsset.listFont , buttons[2].text, { buttons[2].bounds.width/2 + buttons[2].bounds.x - 25 , buttons[2].bounds.y + 10} , 30 , 2, buttons[2].color);
+
     DrawRectangle (buttons[3].bounds.x, buttons[3].bounds.y, buttons[3].bounds.width, buttons[3].bounds.height, buttons[3].buttonColor);
     DrawTextEx(myAsset.listFont , buttons[3].text, { buttons[3].bounds.width/2 + buttons[3].bounds.x - 25 , buttons[3].bounds.y + 10} , 30 , 2, buttons[3].color);
 
     startButton();
     helpButton();
     exitButton();
-
 }
 void Control::helpButton()
 {
@@ -1349,8 +1352,7 @@ void Control::helpButton()
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             system ("start C:/assets/help.pdf");
-        }
-        
+        }   
     } 
 }
 void Control::exitButton()
@@ -1378,9 +1380,10 @@ void Control::startButton()
 void Control::askNumber()
 {
     // ClearBackground(RAYWHITE);
-    Color recColor = {170 , 170 , 170 , 170};
+    Color recColor = {170 , 170 , 170 , 170}; //Background color
     float roundness = 0.3f;
     Rectangle temp = {325 , 90 , 450 , 70};
+
     DrawRectangleRounded ( temp , 0.3f , 0 , recColor );
     DrawTextEx( myAsset.askFont , "Choose The Number Of Players :" , { 340 , 110 } , 35 , 2 , BLACK );
 
@@ -1401,21 +1404,21 @@ void Control::askNumber()
     Vector2 mousePosition = GetMousePosition();
 
     for (int i = 0 ; i < 4 ; i++)
-        {
+    {
             if (CheckCollisionPointRec(mousePosition, numButtons[i].bounds)) 
             {
                 // Change colors on button click
-                numButtons[i].buttonColor = { 154 , 107 , 198 , 200 };
+                numButtons[i].buttonColor = { 191,155,129 ,230 };
                 numButtons[i].color = { 234 , 237 , 240 , 255 };
             }
             else 
-            {
-                numButtons[i].buttonColor = { 197 , 169 , 218 , 200 };
+            { 
+                numButtons[i].buttonColor = { 141,108,88 ,170 };
                 numButtons[i].color = BLACK;
             }
-        }    
+    }    
 
-    for ( int i = 0 ; i < 4 ; i++ )
+    for ( int i = 0 ; i < 4 ; i++ ) //Draw text and buttons
     {
         DrawRectangleRounded (numButtons[i].bounds , roundness , 0 , numButtons[i].buttonColor);
         DrawTextEx(myAsset.askFont , numButtons[i].text, { numButtons[i].bounds.x + 40 , numButtons[i].bounds.y + 10 } , 30 , 2, numButtons[i].color);
@@ -1427,8 +1430,8 @@ void Control::askNumber()
       {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            setPlayerNumber(i + 3);
-            currentScreen = INFO;
+            setPlayerNumber(i + 3);//Set the number of players
+            currentScreen = INFO; //Change the screen to the information screen
             break;
         }
       }
@@ -1436,42 +1439,48 @@ void Control::askNumber()
 }
 void Control::drawInput()
 {
-    
-    static int counter = 1 ;
+    static int counter = 1 ; //Player number
+
     if (counter <= getPlayerNumber())
     {
-        Color backColor = { 70 , 157 , 212 , 200 };
+        Color backColor = { 108,194,237 , 200 };
+
         char text[2] ; 
-        text[0] = counter + '0';
-        text[1] = '\0';
+        text[0] = counter + '0'; // player number (Convert character to number)
+        text[1] = '\0'; //end
 
         Rectangle back = { 500 , 70 , 150 , 70 };
-        DrawRectangleRounded ( back , 0.4f , 0 , {227, 214, 95, 200});
-        DrawTextEx ( myAsset.inputFont , "Player" , { 525 , 90 } , 25 , 2 , BLACK );
-        DrawTextEx ( myAsset.inputFont , text , { 615 , 90 } , 25 , 2 , BLACK );
+        DrawRectangleRounded ( back , 0.4f , 0 , backColor);
+        DrawRectangleRoundedLines(back, 0.4f, 0, 3, { 6 , 87 , 128 , 255 }); 
+        DrawTextEx ( myAsset.inputFont , "Player" , { 525 , 90 } , 25 , 2 , { 28,52,40, 255 });
+        DrawTextEx ( myAsset.inputFont , text , { 615 , 90 } , 25 , 2 , { 28,52,40, 255 } );
 
-        back = { 320 , 160 , 270 , 75 };
-        DrawRectangleRounded ( back , 0.4f , 0 , backColor );
-        DrawTextEx( myAsset.inputFont , " Enter Your Name " , { 330 , 185 } , 30 , 2 , BLACK );
-        inputName.Draw();
-        back = { 320 , 245 , 270 , 75 };
-        DrawRectangleRounded ( back , 0.4f , 0 , backColor );
-        DrawTextEx( myAsset.inputFont , " Enter Your Age " , { 330 , 270 } , 30 , 2 , BLACK );
-        inputAge.Draw();
+        // back = { 320 , 160 , 270 , 75 };
+        // DrawRectangleRounded ( back , 0.4f , 0 , backColor );
+        // DrawTextEx( myAsset.inputFont , " Enter Your Name " , { 330 , 185 } , 30 , 2 , BLACK );
+        inputName.DrawName();
+
+        // back = { 320 , 245 , 270 , 75 };
+        // DrawRectangleRounded ( back , 0.4f , 0 , backColor );
+        // DrawTextEx( myAsset.inputFont , " Enter Your Age " , { 330 , 270 } , 30 , 2 , BLACK );
+        inputAge.DrawAge();
     
-        submit.bounds = { 500 , 350 , 150 , 70 };
+        submit.bounds = { 500 , 420 , 150 , 70 };
         submit.text = "NEXT";
 
         Vector2 mousePosition = GetMousePosition();
 
         if (CheckCollisionPointRec(mousePosition, submit.bounds))
         {
-            submit.color = { 234 , 237 , 240 , 255 };
-            submit.buttonColor = { 22 , 122 , 11 , 200};
+            submit.color = WHITE;
+            submit.buttonColor = {137,162,97, 180};
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
-                counter++;
-                next = true;
+                if (!inputAge.isEmpty() && !inputName.isEmpty())
+                {
+                   counter++;
+                   next = true;
+                }
             }
 
         // if ( next )
@@ -1483,13 +1492,13 @@ void Control::drawInput()
         } 
         else
         {
-            submit.color = BLACK;
-            submit.buttonColor = { 87 , 186 , 76 , 200};  
+            submit.color = { 28,52,40, 255 };
+            submit.buttonColor = { 188,206,170, 180};
         }
-        DrawRectangleRounded (submit.bounds , 0.4f , 0 , submit.buttonColor);
+        DrawRectangleRounded (submit.bounds , 0.4f , 0 , submit.buttonColor);//draw next button
         DrawTextEx(myAsset.inputFont , submit.text, { submit.bounds.x + 45 , submit.bounds.y + 20 } , 25 , 2, submit.color);
     }
-    else currentScreen = GAME; 
+    else currentScreen = GAME; //Transfer to the game screen
 
 }
 void Control::updateInput()
@@ -1499,6 +1508,6 @@ void Control::updateInput()
 }
 void Control::askMap()
 {
-    DrawTexture(myAsset.game, 0, 0, WHITE);
-    DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE);
+    DrawTexture(myAsset.game, 0, 0, WHITE); // background image
+    DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); //Map image
 }

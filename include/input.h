@@ -9,8 +9,10 @@ class InputBox {
         InputBox ( float posX , float posY , float width , float height );
         const char* GetInput(); 
         void setInputDefault ();
-        void Update();
-        void Draw();
+        void Update(); //To update the status of an input box
+        void DrawName(); //box drawing
+        void DrawAge();
+        bool isEmpty();
 
 
     private:
@@ -18,7 +20,7 @@ class InputBox {
         char text[256];
         bool active;
         bool editing;
-        AssetManager myAsset;
+        AssetManager myAsset; //an object from AssetManager
         
 
 };

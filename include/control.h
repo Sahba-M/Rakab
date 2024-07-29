@@ -10,7 +10,7 @@
 #include "input.h"
 
 
-struct TextButton {
+struct TextButton { //To draw a button
     const char* text;
     Rectangle bounds;
     Color color = BLACK;
@@ -72,6 +72,10 @@ class Control {
         void setIsLeader(bool isLeader);
         void setIsHorse (bool isHorse ); 
         void updateHorsePlayers();
+        void addGameName ( const std::string & fileName ); // to save the name of the files
+        void removeGameSaving ( int index ); // to remove file from list
+        void saveGame();
+        void loadGame();
         bool getIsHorse();
         bool getIsLeader();
         bool changeDeterminerL(); 
@@ -82,7 +86,6 @@ class Control {
         bool winEachWar();
         bool endGame();
         bool ifAllPass();
-
         int  levenshteinDistance(const std::string &s1, const std::string &s2); // Optimized function to calculate the Levenshtein distance between two strings
         int  controlAge();
         int  getPlayerNumber();
@@ -102,30 +105,24 @@ class Control {
         Player & getDeterminerPeace();
         Player & youngestPlayer();
 
-
-        void addGameName ( const std::string & fileName ); // to save the name of the files
-        void removeGameSaving ( int index ); // to remove file from list
-        void saveGame();
-        void loadGame();
-
         // graphic functions :
         void startGame();
         // void unloadThings();
         // void uploadThings();
-        void setMenuBackground();
-        void setAskBackground();
-        void setTitle();
+        void setMenuBackground(); //Draw the background image
+        void setAskBackground(); // Draw the background image(info) and Back button management
+        void setTitle(); // To write the title of the game
         void setMenuList();
-        int getCurrentScreen();
+        int  getCurrentScreen();
         void Draw();
         void Update();
-        void helpButton();
-        void exitButton();
-        void startButton();
-        void askNumber();
-        void drawInput();
-        void updateInput();
-        void askMap();
+        void helpButton(); // To click on the help button
+        void exitButton(); // To click on the exit button
+        void startButton(); // To click on the start button
+        void askNumber(); //Select the number of players
+        void drawInput(); //To manage user inputs
+        void updateInput(); //Getting and updating information
+        void askMap();//Draw a map image
 
 
 
@@ -164,14 +161,16 @@ class Control {
 
         std::vector<std::string> files; //files list
 
+
+
         // graphic data members :
         // Font title , listFont , inputFont , askFont ;
         // Textures MyTextures ;
-        GameScreen currentScreen;
-        AssetManager myAsset;
-        InputBox inputName { 600 , 160 , 200 , 75 };
-        InputBox inputAge { 600 , 245 , 100 , 75 };
-        TextButton submit ;
+        GameScreen currentScreen; //enum
+        AssetManager myAsset; // an object from AssetManager class
+        InputBox inputName { 470 , 160 , 200 , 75 };// an object from InputBox class
+        InputBox inputAge { 470 , 245 , 200 , 75 };// an object from InputBox class
+        TextButton submit ;//struct
         bool next = false ;
 
         std::vector <TextButton> buttons ;

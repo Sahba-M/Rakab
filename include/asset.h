@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 
-struct AssetManager {
+struct AssetManager { //To load the data
     AssetManager();
     ~AssetManager();
 
