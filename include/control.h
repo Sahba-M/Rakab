@@ -17,7 +17,7 @@ struct TextButton { //To draw a button
     Color buttonColor = {0 , 0 , 0 , 30};
 };
 
-struct Textures {
+struct Textures { //for images
     Texture2D menu ,
               info ,
               game ,
@@ -122,9 +122,7 @@ class Control {
         void updateInput(); //Getting and updating information
         void askMap();//Draw a map image
         void drawSigns();
-        void setGameBackground();
-
-
+        void setGameBackground(); // Draw a picture on the game table
         void DrawMousePosition();
 
 

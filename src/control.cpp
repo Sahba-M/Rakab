@@ -430,12 +430,14 @@ void Control::selectWarPlace(Player &player)
     //     }
     // } while (!found);
     Vector2 mousePosition = GetMousePosition();
+
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) 
     {
-            for (int i = 0; i < getProvinceNumber() ; i++) 
+            for (int i = 0; i < getProvinceNumber() ; i++) // Repeat for each province
             {
                 float distance = sqrtf(powf(mousePosition.x - signs[i].position.x, 2) + powf(mousePosition.y - signs[i].position.y, 2));
-                if (distance <= 11) {
+                // Calculate the distance between the mouse position and the current marker position
+                if (distance <= 11) { //Is the mouse in the circle or not?
                     setWarPlace(signs[i].name);
                     currentScreen = GAME ;
                     break;  
@@ -629,7 +631,7 @@ void Control::run()
     // getInformation();
     // distributeCards();
     // readProvinces();
-    // setDeterminer(youngestPlayer());
+     //setDeterminer(youngestPlayer());
     // while (!endGame())
     // {
     //     setPlayersReady();
@@ -1224,32 +1226,6 @@ void Control::startGame()
 
     CloseWindow();
 }
-// void Control::unloadThings()
-// {
-//     UnloadTexture(MyTextures.menu);
-//     UnloadTexture(MyTextures.menu);
-//     UnloadTexture(MyTextures.menu);
-//     UnloadTexture(MyTextures.menu);
-
-//     UnloadFont(title);
-//     UnloadFont(listFont);
-//     UnloadFont(inputFont);
-//     UnloadFont(askFont);
-// }
-// void Control::uploadThings()
-// {
-
-//     title = LoadFont ("C:/font/title.otf");
-//     listFont = LoadFont ("C:/font/listFont.otf");
-//     inputFont =  LoadFont ("C:/font/inputFont.otf");
-//     askFont = LoadFont ("C:/font/askFont.otf");
-
-//     MyTextures.menu = LoadTexture("C:/assets/photoMenu.png");
-//     MyTextures.info = LoadTexture("C:/assets/background.png");
-//     MyTextures.game = LoadTexture("C:/assets/backGame.png");
-//     MyTextures.map = LoadTexture("C:/assets/Map.png");
-
-// }
 int Control::getCurrentScreen()
 {
     return currentScreen;
@@ -1499,14 +1475,8 @@ void Control::drawInput()
         DrawTextEx ( myAsset.inputFont , "Player" , { 525 , 90 } , 25 , 2 , { 28,52,40, 255 });
         DrawTextEx ( myAsset.inputFont , text , { 615 , 90 } , 25 , 2 , { 28,52,40, 255 } );
 
-        // back = { 320 , 160 , 270 , 75 };
-        // DrawRectangleRounded ( back , 0.4f , 0 , backColor );
-        // DrawTextEx( myAsset.inputFont , " Enter Your Name " , { 330 , 185 } , 30 , 2 , BLACK );
         inputName.DrawName();
 
-        // back = { 320 , 245 , 270 , 75 };
-        // DrawRectangleRounded ( back , 0.4f , 0 , backColor );
-        // DrawTextEx( myAsset.inputFont , " Enter Your Age " , { 330 , 270 } , 30 , 2 , BLACK );
         inputAge.DrawAge();
     
         submit.bounds = { 500 , 420 , 150 , 70 };
@@ -1526,13 +1496,6 @@ void Control::drawInput()
                    next = true;
                 }
             }
-
-        // if ( next )
-        // {
-        //     inputName.setInputDefault();
-        //     inputAge.setInputDefault();
-        // }
-
         } 
         else
         {
@@ -1552,34 +1515,24 @@ void Control::updateInput()
 }
 void Control::askMap()
 {
-    const char* playerName = players[0].getName();
-    std::cout << players[0].getName(); //---------------------
+    const char* playerName = youngestPlayer().getName();
+
     DrawTexture(myAsset.game, 0, 0, WHITE); // background image
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); //Map image
-    DrawTextEx(myAsset.askFont , playerName , {500 , 15} , 30 , 2 , BLACK);
+
+    DrawTextEx(myAsset.askFont , playerName , {500 , 15} , 30 , 2 , BLACK); // Print the name of the player
     DrawTextEx(myAsset.askFont , " Choose The War Place!" , {380 , 35} , 30 , 2 , BLACK);
     DrawTextEx(myAsset.askFont , " Click On The Sign To Select  " , {380 , 580} , 30 , 2 , BLACK);
-    selectWarPlace(players[0]);
-    std::cout << getWarPlace() << std::endl;
+   // selectWarPlace(players[0]);
+    selectWarPlace(youngestPlayer());
 }
 void Control::drawSigns()
 {
-
-    DrawCircle( signs[0].position.x , signs[0].position.y , 11 , signs[0].color );
-    DrawCircle( signs[1].position.x , signs[1].position.y , 11 , signs[1].color );
-    DrawCircle( signs[2].position.x , signs[2].position.y , 11 , signs[2].color );
-    DrawCircle( signs[3].position.x , signs[3].position.y , 11 , signs[3].color );
-    DrawCircle( signs[4].position.x , signs[4].position.y , 11 , signs[4].color );
-    DrawCircle( signs[5].position.x , signs[5].position.y , 11 , signs[5].color );
-    DrawCircle( signs[6].position.x , signs[6].position.y , 11 , signs[6].color );
-    DrawCircle( signs[7].position.x , signs[7].position.y , 11 , signs[7].color );
-    DrawCircle( signs[8].position.x , signs[8].position.y , 11 , signs[8].color );
-    DrawCircle( signs[9].position.x , signs[9].position.y , 11 , signs[9].color );
-    DrawCircle( signs[10].position.x , signs[10].position.y , 11 , signs[10].color );
-    DrawCircle( signs[11].position.x , signs[11].position.y , 11 , signs[11].color );
-    DrawCircle( signs[12].position.x , signs[12].position.y , 11 , signs[12].color );
-    DrawCircle( signs[13].position.x , signs[13].position.y , 11 , signs[13].color );
-    DrawCircle( signs[14].position.x , signs[14].position.y , 11 , signs[14].color );
+    for (int i = 0; i < getProvinceNumber(); i++ )
+    {
+        DrawCircle(signs[i].position.x, signs[i].position.y, 11, signs[i].color);
+    }
+    
 }
 void Control::setGameBackground()
 {
