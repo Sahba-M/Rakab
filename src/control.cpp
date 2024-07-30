@@ -34,6 +34,27 @@
 Control::Control()
 {
     provinceNumber = 15;
+    Color color = { 186 , 186 , 186 , 120 };
+    // signColors.resize(15 , color);
+
+    signs = {  
+    { {234 , 226} , color , "ELINIA" },
+    { {344 , 111} , color , "ROLLO"  },
+    { {455 , 203} , color , "TALMONE"},
+    { {529 , 280} , color , "MORINA" },
+    { {609 , 219} , color , "BORGE"  },
+    { {608 , 173} , color , "PLADACI"},
+    { {698 , 161} , color , "BELLA"  },
+    { {800 , 225} , color , "CALINE" },
+    { {706 , 305} , color , "LIA"    },
+    { {714 , 433} , color , "ATELA"  },
+    { {635 , 521} , color , "PARMA"  },
+    { {657 , 380} , color , "DIMASE" },
+    { {527 , 387} , color , "OLIVADI"},
+    { {492 , 504} , color , "ENNA"   },
+    { {502 , 422} , color , "ARMENTO"}
+    };
+
     int threshold = 3;
 }
 
@@ -108,7 +129,7 @@ void Control::showColors()
 void Control::getInformation()
 {
     int age;
-    std::string name;
+    char* name;
     std::string color = "test";
 
      if ( next )
@@ -116,11 +137,17 @@ void Control::getInformation()
         name = inputName.GetInput();
         age = atoi(inputAge.GetInput());
 
-        next = false ;
         players.push_back(Player(age, name, color)); // Fill vector of players
         std::cout << name << "-" << age ;
         inputName.setInputDefault();
         inputAge.setInputDefault();
+        next = false ;
+
+
+        for(auto player : players)
+        {
+            std::cout << player.getName() << "--" << player.getAge() << "/" ;
+        }
     }
     // for (int i = 0; i < getPlayerNumber(); i++)
     // {
@@ -365,45 +392,56 @@ void Control::showPlayGround()
 }
 void Control::selectWarPlace(Player &player)
 {
-    bool found = true;
-    std::string chooseProvince;
-    do
+    // bool found = true;
+    // std::string chooseProvince;
+    // do
+    // {
+    //     std::cout << "\n ";
+    //     std::cout << "---------------------------------------------------------------------------------------------------------\n ";
+    //     for (int i = 0; i < provinces.size(); i++)
+    //     {
+    //         std::cout << provinces[i] << "  ";
+    //     }
+    //     std::cout << "\n ---------------------------------------------------------------------------------------------------------\n\n\n ";
+    //     std::cout << std::endl;
+
+    //     if (found == true)
+    //         std::cout << " " << player.getName() << " Enter Your Chosen Province: ";
+    //     std::cin >> chooseProvince;
+
+    //     if ( chooseProvince == getPeacePlace())
+    //     {
+    //         std::cout << " You Can Not Choose This province ; Because It is Peace Place ." << std::endl;
+    //         found = false;
+    //     }
+    //     else
+    //     {
+    //         auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
+    //         if (elementFound != provinces.end())
+    //         {
+    //             found = true;
+    //             break;
+    //         }
+    //         else
+    //         {
+    //             std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
+    //             found = false;
+    //         }
+    //     }
+    // } while (!found);
+    Vector2 mousePosition = GetMousePosition();
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) 
     {
-        std::cout << "\n ";
-        std::cout << "---------------------------------------------------------------------------------------------------------\n ";
-        for (int i = 0; i < provinces.size(); i++)
-        {
-            std::cout << provinces[i] << "  ";
-        }
-        std::cout << "\n ---------------------------------------------------------------------------------------------------------\n\n\n ";
-        std::cout << std::endl;
-
-        if (found == true)
-            std::cout << " " << player.getName() << " Enter Your Chosen Province: ";
-        std::cin >> chooseProvince;
-
-        if ( chooseProvince == getPeacePlace())
-        {
-            std::cout << " You Can Not Choose This province ; Because It is Peace Place ." << std::endl;
-            found = false;
-        }
-        else
-        {
-            auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
-            if (elementFound != provinces.end())
+            for (int i = 0; i < getProvinceNumber() ; i++) 
             {
-                found = true;
-                break;
-            }
-            else
-            {
-                std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
-                found = false;
+                float distance = sqrtf(powf(mousePosition.x - signs[i].position.x, 2) + powf(mousePosition.y - signs[i].position.y, 2));
+                if (distance <= 11) {
+                    setWarPlace(signs[i].name);
+                    currentScreen = GAME ;
+                    break;  
+                }
             }
         }
-    } while (!found);
-
-    setWarPlace(chooseProvince);
 }
 void Control::selectPeacePlace(Player &player)
 {
@@ -712,7 +750,7 @@ int Control::findPlayerIndex(const Player &player)
 {
     for (int i = 0; i < players.size(); i++)
     {
-        if (players[i].getName() == player.getName())
+        // if (players[i].getName() == player.getName())
         {
             return i;
         }
@@ -1180,6 +1218,7 @@ void Control::startGame()
         Update();
         BeginDrawing();
         Draw();
+        DrawMousePosition();
         EndDrawing();
     }
 
@@ -1232,8 +1271,12 @@ void Control::Draw()
         setAskBackground();
         drawInput();
         break;
+    case MAP:
+        // askMap();
+        drawSigns();
+        break;
     case GAME:
-        askMap();
+        setGameBackground();
         break;
     }
 }
@@ -1245,7 +1288,8 @@ void Control::Update()
         updateInput();
         getInformation();
         break;
-    case GAME:
+    case MAP:
+        askMap();
         break;
     }
 }
@@ -1498,7 +1542,7 @@ void Control::drawInput()
         DrawRectangleRounded (submit.bounds , 0.4f , 0 , submit.buttonColor);//draw next button
         DrawTextEx(myAsset.inputFont , submit.text, { submit.bounds.x + 45 , submit.bounds.y + 20 } , 25 , 2, submit.color);
     }
-    else currentScreen = GAME; //Transfer to the game screen
+    else currentScreen = MAP; //Transfer to the game screen
 
 }
 void Control::updateInput()
@@ -1508,6 +1552,50 @@ void Control::updateInput()
 }
 void Control::askMap()
 {
+    const char* playerName = players[0].getName();
+    std::cout << players[0].getName(); //---------------------
     DrawTexture(myAsset.game, 0, 0, WHITE); // background image
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); //Map image
+    DrawTextEx(myAsset.askFont , playerName , {500 , 15} , 30 , 2 , BLACK);
+    DrawTextEx(myAsset.askFont , " Choose The War Place!" , {380 , 35} , 30 , 2 , BLACK);
+    DrawTextEx(myAsset.askFont , " Click On The Sign To Select  " , {380 , 580} , 30 , 2 , BLACK);
+    selectWarPlace(players[0]);
+    std::cout << getWarPlace() << std::endl;
+}
+void Control::drawSigns()
+{
+
+    DrawCircle( signs[0].position.x , signs[0].position.y , 11 , signs[0].color );
+    DrawCircle( signs[1].position.x , signs[1].position.y , 11 , signs[1].color );
+    DrawCircle( signs[2].position.x , signs[2].position.y , 11 , signs[2].color );
+    DrawCircle( signs[3].position.x , signs[3].position.y , 11 , signs[3].color );
+    DrawCircle( signs[4].position.x , signs[4].position.y , 11 , signs[4].color );
+    DrawCircle( signs[5].position.x , signs[5].position.y , 11 , signs[5].color );
+    DrawCircle( signs[6].position.x , signs[6].position.y , 11 , signs[6].color );
+    DrawCircle( signs[7].position.x , signs[7].position.y , 11 , signs[7].color );
+    DrawCircle( signs[8].position.x , signs[8].position.y , 11 , signs[8].color );
+    DrawCircle( signs[9].position.x , signs[9].position.y , 11 , signs[9].color );
+    DrawCircle( signs[10].position.x , signs[10].position.y , 11 , signs[10].color );
+    DrawCircle( signs[11].position.x , signs[11].position.y , 11 , signs[11].color );
+    DrawCircle( signs[12].position.x , signs[12].position.y , 11 , signs[12].color );
+    DrawCircle( signs[13].position.x , signs[13].position.y , 11 , signs[13].color );
+    DrawCircle( signs[14].position.x , signs[14].position.y , 11 , signs[14].color );
+}
+void Control::setGameBackground()
+{
+    DrawTexture(myAsset.table, 0, 0, WHITE);
+}
+
+
+
+void Control::DrawMousePosition() {
+    // دریافت موقعیت موس
+    Vector2 mousePosition = GetMousePosition();
+    
+    // تبدیل موقعیت موس به رشته
+    char positionText[64];
+    sprintf(positionText, "Mouse X: %d, Y: %d", (int)mousePosition.x, (int)mousePosition.y);
+    
+    // رسم موقعیت موس در گوشه بالای صفحه
+    DrawText(positionText, 10, 10, 20, BLACK);
 }

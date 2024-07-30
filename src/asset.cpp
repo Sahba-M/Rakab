@@ -11,6 +11,7 @@ AssetManager::AssetManager()
     info = LoadTexture("C:/assets/background.png");
     game = LoadTexture("C:/assets/backGame.png");
     map = LoadTexture("C:/assets/Map.png");
+    table = LoadTexture("C:/assets/table.png");
 }
 
 AssetManager::~AssetManager()
@@ -19,6 +20,7 @@ AssetManager::~AssetManager()
     UnloadTexture(info);
     UnloadTexture(game);
     UnloadTexture(map);
+    UnloadTexture(table);
 
     UnloadFont(title);
     UnloadFont(listFont);

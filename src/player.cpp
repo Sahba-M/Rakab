@@ -24,15 +24,15 @@ struct SharedPtrCompare
 };
 
 Player::Player() { scorePlayer = 0; };
-Player::Player(int age, std::string name, std::string color)
+Player::Player(int age, const char* name, std::string color)
 {
     setAge(age);
     setName(name);
     setColor(color);
 }
-void Player::setName(std::string name)
+void Player::setName(const char* name)
 {
-    this->name = name;
+    strncpy (this->name , name , 25);
 }
 void Player::setAge(int age)
 {
@@ -456,7 +456,7 @@ std::string Player::getSeason()
 {
     return season;
 }
-std::string Player::getName() const
+const char * Player::getName() 
 {
     return name;
 }
@@ -470,7 +470,8 @@ std::vector<std::shared_ptr<Card>> Player::getYcards()
 }
 std::istream & operator>> (std::istream &input, Player &player )
 {
-    std::string name, color;
+    std::string color;
+    char* name;
 
     bool pass;
 
@@ -480,7 +481,7 @@ std::istream & operator>> (std::istream &input, Player &player )
 
     std::vector<std::shared_ptr<Card>> cards;
 
-    std::getline(input, name);
+    input >> name ;
     player.setName(name);
 
     input >> age;

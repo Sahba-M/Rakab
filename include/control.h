@@ -17,13 +17,6 @@ struct TextButton { //To draw a button
     Color buttonColor = {0 , 0 , 0 , 30};
 };
 
-// struct Images {
-//     Image menu ,
-//           info , 
-//           game , 
-//            map ;
-// };
-
 struct Textures {
     Texture2D menu ,
               info ,
@@ -31,7 +24,14 @@ struct Textures {
                map ;
 };
 
-enum GameScreen { MENU = 0 , NUMBER , INFO , GAME }; 
+struct Province {
+    Vector2 position;
+    Color color;
+    std::string name;
+};
+
+
+enum GameScreen { MENU = 0 , NUMBER , INFO , MAP , GAME }; 
 
 class Control {
     
@@ -107,8 +107,6 @@ class Control {
 
         // graphic functions :
         void startGame();
-        // void unloadThings();
-        // void uploadThings();
         void setMenuBackground(); //Draw the background image
         void setAskBackground(); // Draw the background image(info) and Back button management
         void setTitle(); // To write the title of the game
@@ -123,6 +121,11 @@ class Control {
         void drawInput(); //To manage user inputs
         void updateInput(); //Getting and updating information
         void askMap();//Draw a map image
+        void drawSigns();
+        void setGameBackground();
+
+
+        void DrawMousePosition();
 
 
 
@@ -175,6 +178,8 @@ class Control {
 
         std::vector <TextButton> buttons ;
         std::vector <TextButton> numButtons ;
+        std::vector <Color> signColors ;
+        std::vector <Province> signs ;
 
 
         

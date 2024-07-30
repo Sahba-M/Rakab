@@ -12,7 +12,7 @@ InputBox::InputBox ( float posX , float posY , float width , float height )
     std::cout << "before loading" << std::endl;
 }
 
-const char* InputBox::GetInput() 
+char* InputBox::GetInput() 
 {
     return text;
 }

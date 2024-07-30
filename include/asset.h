@@ -10,7 +10,8 @@ struct AssetManager { //To load the data
     Texture2D menu ,
               info ,
               game ,
-               map ;
+               map ,
+             table ;
     Font title ,
       listFont ,
      inputFont ,
