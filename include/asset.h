@@ -15,7 +15,8 @@ struct AssetManager { //To load the data
     Font title ,
       listFont ,
      inputFont ,
-       askFont ;
+       askFont ,
+       name ;
     
 };
 

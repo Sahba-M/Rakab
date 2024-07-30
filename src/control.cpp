@@ -1534,10 +1534,112 @@ void Control::drawSigns()
     }
     
 }
+
 void Control::setGameBackground()
 {
     DrawTexture(myAsset.table, 0, 0, WHITE);
+
+    TextButton goMap;
+    goMap.bounds = { 7, 13, 60, 60 };
+    goMap.text = "MAP";
+
+    Vector2 position = { 239, 607 };
+    if (players.size() > 0 && players[0].getName() && strlen(players[0].getName()) > 0) {
+        // Draw bold effect for player 0
+        DrawTextEx(myAsset.name, players[0].getName(), { position.x - 1, position.y }, 30, 2, BLACK);  // Draw shadow
+        DrawTextEx(myAsset.name, players[0].getName(), { position.x + 1, position.y }, 30, 2, BLACK);  // Draw shadow
+        DrawTextEx(myAsset.name, players[0].getName(), { position.x, position.y - 1 }, 30, 2, BLACK);  // Draw shadow
+        DrawTextEx(myAsset.name, players[0].getName(), { position.x, position.y + 1 }, 30, 2, BLACK);  // Draw shadow
+        // Draw the text in the original position
+        DrawTextEx(myAsset.name, players[0].getName(), position, 30, 2, WHITE);  // Draw main text
+    }
+
+    position = { 770, 607 };
+    if (players.size() > 1 && players[1].getName() && strlen(players[1].getName()) > 0) {
+        // Draw bold effect for player 1
+        DrawTextEx(myAsset.name, players[1].getName(), { position.x - 1, position.y }, 30, 2, BLACK);  
+        DrawTextEx(myAsset.name, players[1].getName(), { position.x + 1, position.y }, 30, 2, BLACK);  
+        DrawTextEx(myAsset.name, players[1].getName(), { position.x, position.y - 1 }, 30, 2, BLACK);  
+        DrawTextEx(myAsset.name, players[1].getName(), { position.x, position.y + 1 }, 30, 2, BLACK);  
+        DrawTextEx(myAsset.name, players[1].getName(), position, 30, 2, WHITE); 
+    }
+
+    position = { 1045, 330 };
+    Vector2 origin = { 0, 0 };
+    float rotation = -90.0f; 
+    if (players.size() > 2 && players[2].getName() && strlen(players[2].getName()) > 0) {
+        // Draw bold effect for player 2
+        DrawTextPro(myAsset.name, players[2].getName(), { position.x - 1, position.y }, origin, rotation, 30, 2, BLACK);  
+        DrawTextPro(myAsset.name, players[2].getName(), { position.x + 1, position.y }, origin, rotation, 30, 2, BLACK);  
+        DrawTextPro(myAsset.name, players[2].getName(), { position.x, position.y - 1 }, origin, rotation, 30, 2, BLACK);  
+        DrawTextPro(myAsset.name, players[2].getName(), { position.x, position.y + 1 }, origin, rotation, 30, 2, BLACK);  
+        DrawTextPro(myAsset.name, players[2].getName(), position, origin, rotation, 30, 2, WHITE);
+    }
+
+    if (players.size() > 3) {
+        const char* playerName3 = players[3].getName();
+        if (playerName3 && strlen(playerName3) > 0) {
+            position = { 810, 29 };
+            origin = { 0, 0 };
+            rotation = -180.0f; 
+            DrawTextPro(myAsset.name, playerName3, { position.x - 1, position.y }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName3, { position.x + 1, position.y }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName3, { position.x, position.y - 1 }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName3, { position.x, position.y + 1 }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName3, position, origin, rotation, 30, 2, WHITE);
+        }
+    }
+
+    if (players.size() > 4) {
+        const char* playerName4 = players[4].getName();
+        if (playerName4 && strlen(playerName4) > 0) {
+            position = { 280, 31 };
+            origin = { 0, 0 };
+            rotation = -180.0f; 
+            DrawTextPro(myAsset.name, playerName4, { position.x - 1, position.y }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName4, { position.x + 1, position.y }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName4, { position.x, position.y - 1 }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName4, { position.x, position.y + 1 }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName4, position, origin, rotation, 30, 2, WHITE);
+        }
+    }
+
+    if (players.size() > 5) {
+        const char* playerName5 = players[5].getName();
+        if (playerName5 && strlen(playerName5) > 0) {
+            position = { 30, 280 };
+            origin = { 0, 0 };
+            rotation = 90.0f; 
+            DrawTextPro(myAsset.name, playerName5, { position.x - 1, position.y }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName5, { position.x + 1, position.y }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName5, { position.x, position.y - 1 }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName5, { position.x, position.y + 1 }, origin, rotation, 30, 2, BLACK);  
+            DrawTextPro(myAsset.name, playerName5, position, origin, rotation, 30, 2, WHITE);
+        }
+    }
+
+    Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
+
+    if (CheckCollisionPointRec(mousePosition, goMap.bounds))
+    {
+        goMap.color = WHITE;
+        goMap.buttonColor = { 255,248,158, 200};
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            currentScreen = MAP;
+        }
+    } 
+    else
+    {
+        goMap.color = WHITE; // Change text color
+        goMap.buttonColor = { 255, 250, 183, 170 }; // Change button color
+    }
+
+    DrawRectangleRounded(goMap.bounds, 0.4f, 0, goMap.buttonColor);
+    DrawTextEx(myAsset.listFont, goMap.text, { goMap.bounds.x + 12, goMap.bounds.y + 20 }, 25, 2, goMap.color);
 }
+
 
 
 
