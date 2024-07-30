@@ -1299,8 +1299,7 @@ void Control::setAskBackground()
     {
         goBack.color = { 234 , 237 , 240 , 255 };// Change text color
         goBack.buttonColor = { 101 , 107 , 110 , 200};// Change button color
-        // goBack.color = BLACK;
-        // goBack.buttonColor = { 174 , 185 , 191 , 200};
+        
     }
 
     DrawRectangleRounded (goBack.bounds , 0.4f , 0 , goBack.buttonColor);
@@ -1520,6 +1519,31 @@ void Control::askMap()
     DrawTexture(myAsset.game, 0, 0, WHITE); // background image
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); //Map image
 
+    TextButton goGame ;
+    goGame.bounds = { 10, 12 , 150 , 60 };
+    goGame.text = "Back To GAME";
+
+    Vector2 mousePosition = GetMousePosition();//Save the current mouse coordinates
+
+    if (CheckCollisionPointRec(mousePosition, goGame.bounds))
+    {
+        goGame.color = WHITE;
+        goGame.buttonColor = { 174 , 185 , 191 , 200};
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            currentScreen = GAME;
+        }
+    } 
+    else
+    {
+        goGame.color = WHITE;// Change text color
+        goGame.buttonColor = { 0,61,59 , 200};// Change button color
+    }
+
+    DrawRectangleRounded (goGame.bounds , 0.4f , 0 , goGame.buttonColor);
+    DrawTextEx(myAsset.listFont , goGame.text, { goGame.bounds.x + 12 , goGame.bounds.y + 20 } , 25 , 2, goGame.color);
+   
     DrawTextEx(myAsset.askFont , playerName , {500 , 15} , 30 , 2 , BLACK); // Print the name of the player
     DrawTextEx(myAsset.askFont , " Choose The War Place!" , {380 , 35} , 30 , 2 , BLACK);
     DrawTextEx(myAsset.askFont , " Click On The Sign To Select  " , {380 , 580} , 30 , 2 , BLACK);
