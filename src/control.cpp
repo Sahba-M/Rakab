@@ -34,26 +34,25 @@
 Control::Control()
 {
     provinceNumber = 15;
-    Color color = { 186 , 186 , 186 , 120 };
+    Color color = {186, 186, 186, 120};
     // signColors.resize(15 , color);
 
-    signs = {  
-    { {234 , 226} , color , "ELINIA" },
-    { {344 , 111} , color , "ROLLO"  },
-    { {455 , 203} , color , "TALMONE"},
-    { {529 , 280} , color , "MORINA" },
-    { {609 , 219} , color , "BORGE"  },
-    { {608 , 173} , color , "PLADACI"},
-    { {698 , 161} , color , "BELLA"  },
-    { {800 , 225} , color , "CALINE" },
-    { {706 , 305} , color , "LIA"    },
-    { {714 , 433} , color , "ATELA"  },
-    { {635 , 521} , color , "PARMA"  },
-    { {657 , 380} , color , "DIMASE" },
-    { {527 , 387} , color , "OLIVADI"},
-    { {492 , 504} , color , "ENNA"   },
-    { {502 , 422} , color , "ARMENTO"}
-    };
+    signs = {
+        {{234, 226}, color, "ELINIA"},
+        {{344, 111}, color, "ROLLO"},
+        {{455, 203}, color, "TALMONE"},
+        {{529, 280}, color, "MORINA"},
+        {{609, 219}, color, "BORGE"},
+        {{608, 173}, color, "PLADACI"},
+        {{698, 161}, color, "BELLA"},
+        {{800, 225}, color, "CALINE"},
+        {{706, 305}, color, "LIA"},
+        {{714, 433}, color, "ATELA"},
+        {{635, 521}, color, "PARMA"},
+        {{657, 380}, color, "DIMASE"},
+        {{527, 387}, color, "OLIVADI"},
+        {{492, 504}, color, "ENNA"},
+        {{502, 422}, color, "ARMENTO"}};
 
     int threshold = 3;
 }
@@ -129,45 +128,42 @@ void Control::showColors()
 void Control::getInformation()
 {
     int age;
-    char* name;
+    char *name;
     std::string color = "test";
 
-     if ( next )
+    if (next)
     {
         name = inputName.GetInput();
         age = atoi(inputAge.GetInput());
 
         players.push_back(Player(age, name, color)); // Fill vector of players
-        std::cout << name << "-" << age ;
+        std::cout << name << "-" << age;
         inputName.setInputDefault();
         inputAge.setInputDefault();
-        next = false ;
+        next = false;
 
-
-        for(auto player : players)
+        for (auto player : players)
         {
-            std::cout << player.getName() << "--" << player.getAge() << "/" ;
+            std::cout << player.getName() << "--" << player.getAge() << "/";
         }
     }
     // for (int i = 0; i < getPlayerNumber(); i++)
     // {
-        // std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
-                 
-        // std::cin.ignore();
-        // std::getline(std::cin, name);
+    // std::cout << " Player " << i + 1 << " : " << '\n' << " Enter Your Name : ";
 
+    // std::cin.ignore();
+    // std::getline(std::cin, name);
 
-        // std::cout << " Enter Your Age : ";
-        // std::cin >> age;
-        // age = controlAge();
+    // std::cout << " Enter Your Age : ";
+    // std::cin >> age;
+    // age = controlAge();
 
-        // color = controlColors();
-        // std::cout << "-----------------------\n";
-        
-        // graphic.transferInformation(name , age);
-        // std::cout << name << "---" << age ;
-        // std::cin >> color ;
-        
+    // color = controlColors();
+    // std::cout << "-----------------------\n";
+
+    // graphic.transferInformation(name , age);
+    // std::cout << name << "---" << age ;
+    // std::cin >> color ;
 
     // }
     // system("cls");
@@ -223,19 +219,18 @@ void Control::setWar()
 {
     LeaderCard leader;
     HorserCard horse;
-    
-    
+
     if (getIfDean())
     {
         selectPeacePlace(getDeterminerPeace());
         setIfDean(false);
     }
-   // selectWarPlace(getDeterminer());
+    // selectWarPlace(getDeterminer());
 
     int startIndex = findPlayerIndex(getDeterminer());
     int currentIndex = startIndex;
     system("cls");
-    
+
     while (!endEachWar())
     {
         for (int i = 0; i < getPlayerNumber(); i++)
@@ -246,15 +241,15 @@ void Control::setWar()
             selectMove(players[currentIndex], currentIndex);
             if (players[currentIndex].getIfLeader())
             {
-                leader.useCard(players,-1);
+                leader.useCard(players, -1);
                 setIsLeader(true);
                 system("cls");
                 break;
             }
             else if (players[currentIndex].getIfHorse())
             {
-                horse.useCard(players,-1);
-                //setIsHorse(true);
+                horse.useCard(players, -1);
+                // setIsHorse(true);
                 system("cls");
                 break;
             }
@@ -265,21 +260,20 @@ void Control::setWar()
         }
     }
     cardAction();
-    
-    
+
     if (winEachWar())
     {
         std::cout << " >>> " << winner.getName() << " <<< " << " Is The Winner Of This Round!!! \n\n ";
         sleep(5);
         auto elementFound = std::find(provinces.begin(), provinces.end(), getWarPlace());
         if (elementFound != provinces.end())
-               provinces.erase(elementFound);
+            provinces.erase(elementFound);
 
         if (!changeDeterminerL())
         {
             if (!changeDeterminer())
             {
-               setDeterminer(winner);
+                setDeterminer(winner);
             }
         }
     }
@@ -289,11 +283,11 @@ void Control::setWar()
         sleep(5);
         if (!changeDeterminerL())
         {
-             if (!changeDeterminer())
-             {
-                 setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
-             } 
-        } 
+            if (!changeDeterminer())
+            {
+                setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
+            }
+        }
     }
 
     for (int i = 0; i < getPlayerNumber(); i++) // to update move vector from "pass" to "temp"
@@ -303,7 +297,6 @@ void Control::setWar()
     }
 
     saveGame();
-    
 }
 void Control::setDeterminer(Player &Determiner)
 {
@@ -431,19 +424,27 @@ void Control::selectWarPlace()
     // } while (!found);
     Vector2 mousePosition = GetMousePosition();
 
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) 
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
-            for (int i = 0; i < getProvinceNumber() ; i++) // Repeat for each province
-            {
-                float distance = sqrtf(powf(mousePosition.x - signs[i].position.x, 2) + powf(mousePosition.y - signs[i].position.y, 2));
-                // Calculate the distance between the mouse position and the current marker position
-                if (distance <= 11) { //Is the mouse in the circle or not?
-                    setWarPlace(signs[i].name);
-                    currentScreen = GAME ;
-                    break;  
-                }
+        for (int i = 0; i < getProvinceNumber(); i++) // Repeat for each province
+        {
+            float distance = sqrtf(powf(mousePosition.x - signs[i].position.x, 2) + powf(mousePosition.y - signs[i].position.y, 2));
+            // Calculate the distance between the mouse position and the current marker position
+            if (distance <= 11)
+            { // Is the mouse in the circle or not?
+                setWarPlace(signs[i].name);
+                signs[i].color = BLACK;
+
+                BeginDrawing();
+                drawSigns();
+                EndDrawing();
+                sleep(2);
+
+                currentScreen = GAME;
+                break;
             }
         }
+    }
 }
 void Control::selectPeacePlace(Player &player)
 {
@@ -478,13 +479,13 @@ void Control::selectPeacePlace(Player &player)
             }
             else
             {
-               std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
-               found = false;
+                std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
+                found = false;
             }
         } while (!found);
 
         setPeace(chooseProvince);
-    }         
+    }
 }
 void Control::setWarPlace(std::string warPlace)
 {
@@ -521,8 +522,8 @@ void Control::guideCards()
     inputGuides.open("../src/cardGuide.txt");
     if (!inputGuides.is_open())
     {
-        std::cerr << " Can Not Open File... \n" << std::endl;
-                 
+        std::cerr << " Can Not Open File... \n"
+                  << std::endl;
     }
     while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
     {
@@ -562,7 +563,6 @@ void Control::cardAction()
     PrincesCard prince;
     ViragoCard virago;
     DeanCard dean;
-    
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
@@ -571,7 +571,7 @@ void Control::cardAction()
             dean.useCard(players, i);
             setIfDean(true);
         }
-    }                                                      
+    }
     if (season == "winter")
     {
         winter.useCard(players, -1);
@@ -580,8 +580,8 @@ void Control::cardAction()
     {
         if (players[i].hasDrummer())
         {
-            double calcuteNumber = pow (1.5, players[i].numberOfDrummer());
-            drummer.useCard(players,i, calcuteNumber);
+            double calcuteNumber = pow(1.5, players[i].numberOfDrummer());
+            drummer.useCard(players, i, calcuteNumber);
         }
     }
     if (season == "spring")
@@ -631,7 +631,7 @@ void Control::run()
     // getInformation();
     // distributeCards();
     // readProvinces();
-     //setDeterminer(youngestPlayer());
+    // setDeterminer(youngestPlayer());
     // while (!endGame())
     // {
     //     setPlayersReady();
@@ -648,7 +648,7 @@ void Control::burnCards()
     for (auto &player : players)
     {
         player.burnCardsPlayer();
-        player.insertBurnedCard (allBurnedCards);  // for all player
+        player.insertBurnedCard(allBurnedCards); // for all player
         // allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end()); // for all player
     }
 }
@@ -668,9 +668,8 @@ void Control::chargeCards()
         for (auto &player : players)
         {
             player.burnHand();
-            player.insertHandCard (allBurnedCards); 
+            player.insertHandCard(allBurnedCards);
             // allBurnedCards.insert(allBurnedCards.end(), player.getHandCards().begin(), player.getHandCards().end());
-
         }
         cards.insert(cards.end(), allBurnedCards.begin(), allBurnedCards.end());
         shuffleCards();
@@ -702,9 +701,9 @@ void Control::setPeace(std::string peacePlace)
 {
     this->peacePlace = peacePlace;
 }
-void Control::setIfDean( bool ifDean )
+void Control::setIfDean(bool ifDean)
 {
-   this -> ifDean = ifDean; 
+    this->ifDean = ifDean;
 }
 bool Control::getIfDean()
 {
@@ -727,22 +726,21 @@ bool Control::changeDeterminerL()
         setIsLeader(false);
         setDeterminer(playerCard[playerCard.size() - 2]);
 
-        for(auto &player : players)
+        for (auto &player : players)
         {
             player.setPass(false);
             player.setIfLeader(false);
         }
         return true;
     }
-    return false; 
+    return false;
 }
 void Control::updateHorsePlayers()
 {
-    for ( auto &player : players)
+    for (auto &player : players)
     {
         player.setIfHorse(false);
     }
-    
 }
 int Control::getPlayerNumber()
 {
@@ -872,7 +870,7 @@ bool Control::endEachWar()
 }
 bool Control::ifAllPass()
 {
-    for(auto player : players)
+    for (auto player : players)
     {
         if (player.getPass() == true)
         {
@@ -889,11 +887,11 @@ bool Control::winEachWar()
     {
         if (players[i].hasHorse())
         {
-           winnerIndex = i;
-           winner = players[i];
-           players[i].addProvinces(warPlace);
-           updateHorsePlayers();
-           return true;
+            winnerIndex = i;
+            winner = players[i];
+            players[i].addProvinces(warPlace);
+            updateHorsePlayers();
+            return true;
         }
     }
     int max = 0;
@@ -980,18 +978,18 @@ Player &Control::youngestPlayer()
     int randomIndex = youngestIndices[rand() % youngestIndices.size()];
     return players[randomIndex];
 }
-Player & Control::getDeterminerPeace()
+Player &Control::getDeterminerPeace()
 {
     return DeterminerOfPeace;
 }
 void Control::findLastDean()
 {
     Player player;
-    for( auto tempPlayer : players)
+    for (auto tempPlayer : players)
     {
-        if ( tempPlayer.hasDean() )
+        if (tempPlayer.hasDean())
         {
-           player = tempPlayer;
+            player = tempPlayer;
         }
     }
     setDeterminerPeace(player);
@@ -1004,8 +1002,9 @@ std::string Control::controlColors()
     {
         showColors();
         if (found == true)
-            std::cout << std::endl << " Enter Your Chosen Color: ";
-                      
+            std::cout << std::endl
+                      << " Enter Your Chosen Color: ";
+
         std::cin >> chooseColor;
         auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
         if (elementFound != colors.end())
@@ -1072,17 +1071,17 @@ bool Control::getIsHorse()
 {
     return isHorse;
 }
-void Control::removeGameSaving(int index )
+void Control::removeGameSaving(int index)
 {
-    if ( index < files.size() )
+    if (index < files.size())
     {
-        std::remove(files[index].c_str()); // remove file from system
+        std::remove(files[index].c_str());  // remove file from system
         files.erase(files.begin() + index); // remove filename from vector
     }
 }
-void Control::addGameName ( const std::string & fileName )
+void Control::addGameName(const std::string &fileName)
 {
-   files.push_back(fileName);
+    files.push_back(fileName);
 }
 void Control::saveGame()
 {
@@ -1091,7 +1090,7 @@ void Control::saveGame()
     outputData.open("../src/saveGame.txt");
     if (!outputData.is_open())
     {
-        std::cerr << " Can Not Open File... \n";         
+        std::cerr << " Can Not Open File... \n";
     }
 
     outputData << playerNumber << "\n";
@@ -1102,27 +1101,27 @@ void Control::saveGame()
     }
 
     outputData << provinces.size() << std::endl;
-    for (const auto & province : provinces)
+    for (const auto &province : provinces)
     {
         outputData << province << " ";
     }
-    outputData << '\n' ;
+    outputData << '\n';
 
     outputData << cards.size() << std::endl;
-    for (const auto & card : cards)
+    for (const auto &card : cards)
     {
         outputData << *card << " ";
     }
-    outputData << '\n' ;
+    outputData << '\n';
 
     outputData << allBurnedCards.size() << std::endl;
-    for (const auto & card : allBurnedCards)
+    for (const auto &card : allBurnedCards)
     {
         outputData << *card << " ";
     }
-    outputData << '\n' ;
+    outputData << '\n';
 
-    for ( int i = 0 ; i < getPlayerNumber() ; i++ )
+    for (int i = 0; i < getPlayerNumber(); i++)
     {
         outputData << move[i] << " ";
     }
@@ -1134,7 +1133,7 @@ void Control::saveGame()
     outputData << DeterminerOfPeace << std::endl;
     outputData << DeterminerOfWar << std::endl;
 
-    outputData.close(); 
+    outputData.close();
 }
 void Control::loadGame()
 {
@@ -1143,19 +1142,19 @@ void Control::loadGame()
     inputData.open("../src/saveGame.txt");
     if (!inputData.is_open())
     {
-        std::cerr << " Can Not Open File... \n";         
+        std::cerr << " Can Not Open File... \n";
     }
 
     int numberOfPlayer, size;
-    
+
     std::string place, season;
 
     Player tempPlayer;
 
-    std::vector <std::string > provinces;
-    std::vector <std::string > move;
+    std::vector<std::string> provinces;
+    std::vector<std::string> move;
 
-    std::vector<std::shared_ptr<Card>> cards; 
+    std::vector<std::shared_ptr<Card>> cards;
 
     inputData >> numberOfPlayer;
     setPlayerNumber(numberOfPlayer);
@@ -1164,24 +1163,24 @@ void Control::loadGame()
     for (int i = 0; i < size; i++)
     {
         inputData >> provinces[i];
-        this->provinces[i] = provinces[i]; 
+        this->provinces[i] = provinces[i];
     }
     inputData >> size;
     for (int i = 0; i < size; i++)
     {
         inputData >> cards[i];
-        this->cards[i] = cards[i]; 
+        this->cards[i] = cards[i];
     }
     inputData >> size;
     for (int i = 0; i < size; i++)
     {
         inputData >> cards[i];
-        this->allBurnedCards[i] = cards[i]; 
+        this->allBurnedCards[i] = cards[i];
     }
     for (int i = 0; i < getPlayerNumber(); i++)
     {
-         inputData >> move[i];
-         this->move[i] = move[i];
+        inputData >> move[i];
+        this->move[i] = move[i];
     }
     inputData >> place;
     setWarPlace(place);
@@ -1198,11 +1197,9 @@ void Control::loadGame()
     inputData >> tempPlayer;
     setDeterminer(tempPlayer);
 
-     inputData >> tempPlayer;
+    inputData >> tempPlayer;
     setDeterminerPeace(tempPlayer);
-      
 }
-
 
 // -- graphic functions --
 
@@ -1248,7 +1245,7 @@ void Control::Draw()
         drawInput();
         break;
     case MAP:
-        //askMap();
+        // askMap();
         drawSigns();
         break;
     case GAME:
@@ -1271,93 +1268,92 @@ void Control::Update()
 }
 void Control::setMenuBackground()
 {
-    DrawTexture ( myAsset.menu , 0 , 0 , WHITE );
+    DrawTexture(myAsset.menu, 0, 0, WHITE);
 }
 void Control::setAskBackground()
 {
-    DrawTexture(myAsset.info, 0, 0, WHITE);//Draw the image
+    DrawTexture(myAsset.info, 0, 0, WHITE); // Draw the image
 
-    TextButton goBack ;
-    goBack.bounds = { 30 , 30 , 150 , 60 };
+    TextButton goBack;
+    goBack.bounds = {30, 30, 150, 60};
     goBack.text = "Back To MENU";
 
-    Vector2 mousePosition = GetMousePosition();//Save the current mouse coordinates
+    Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
 
     if (CheckCollisionPointRec(mousePosition, goBack.bounds))
     {
         // goBack.color = { 234 , 237 , 240 , 255 };// Change text color
         // goBack.buttonColor = { 101 , 107 , 110 , 200};// Change button color
         goBack.color = BLACK;
-        goBack.buttonColor = { 174 , 185 , 191 , 200};
+        goBack.buttonColor = {174, 185, 191, 200};
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             currentScreen = MENU;
         }
-    } 
+    }
     else
     {
-        goBack.color = { 234 , 237 , 240 , 255 };// Change text color
-        goBack.buttonColor = { 101 , 107 , 110 , 200};// Change button color
-        
+        goBack.color = {234, 237, 240, 255};       // Change text color
+        goBack.buttonColor = {101, 107, 110, 200}; // Change button color
     }
 
-    DrawRectangleRounded (goBack.bounds , 0.4f , 0 , goBack.buttonColor);
-    DrawTextEx(myAsset.listFont , goBack.text, { goBack.bounds.x + 12 , goBack.bounds.y + 20 } , 25 , 2, goBack.color);
+    DrawRectangleRounded(goBack.bounds, 0.4f, 0, goBack.buttonColor);
+    DrawTextEx(myAsset.listFont, goBack.text, {goBack.bounds.x + 12, goBack.bounds.y + 20}, 25, 2, goBack.color);
 }
 void Control::setTitle()
 {
     Color textColor = {4, 9, 72, 255};
-    const char* text = "Rakab";
-    
-    DrawTextEx(myAsset.title, text, (Vector2){ 430, 50 }, 90, 2, textColor);
+    const char *text = "Rakab";
+
+    DrawTextEx(myAsset.title, text, (Vector2){430, 50}, 90, 2, textColor);
 }
 void Control::setMenuList()
 {
     buttons.reserve(4);
 
-   buttons[0].text = "New Game";
-   buttons[0].bounds = { 450, 230, 250, 45 };
-   
-   buttons[1].text = "Load Game";
-   buttons[1].bounds = { 450, 280, 250, 45 };
+    buttons[0].text = "New Game";
+    buttons[0].bounds = {450, 230, 250, 45};
 
-   buttons[2].text = "Help";
-   buttons[2].bounds = { 450, 330, 250, 45 };
+    buttons[1].text = "Load Game";
+    buttons[1].bounds = {450, 280, 250, 45};
 
-   buttons[3].text = "Exit";
-   buttons[3].bounds = { 450, 380, 250, 45 };
+    buttons[2].text = "Help";
+    buttons[2].bounds = {450, 330, 250, 45};
+
+    buttons[3].text = "Exit";
+    buttons[3].bounds = {450, 380, 250, 45};
 
     Vector2 mousePosition = GetMousePosition();
 
-    for (int i = 0 ; i < 4 ; i++)
+    for (int i = 0; i < 4; i++)
     {
-        if (CheckCollisionPointRec(mousePosition, buttons[i].bounds)) 
+        if (CheckCollisionPointRec(mousePosition, buttons[i].bounds))
         {
             // Change colors on button click
-            buttons[i].buttonColor = { 0 , 0 , 0 , 110 };  // button color
-            buttons[i].color = { 234 , 237 , 240 , 255 }; // text color
+            buttons[i].buttonColor = {0, 0, 0, 110}; // button color
+            buttons[i].color = {234, 237, 240, 255}; // text color
         }
-        else 
+        else
         {
             buttons[i].color = BLACK;
-            buttons[i].buttonColor = {0 , 0 , 0 , 30};
+            buttons[i].buttonColor = {0, 0, 0, 30};
         }
     }
 
     // Draw button background
     // Draw button text
-    DrawRectangle (buttons[0].bounds.x, buttons[0].bounds.y, buttons[0].bounds.width, buttons[0].bounds.height, buttons[0].buttonColor);
-    DrawTextEx(myAsset.listFont , buttons[0].text, { buttons[0].bounds.x + 70 , buttons[0].bounds.y + 10} , 30 , 2, buttons[0].color);
+    DrawRectangle(buttons[0].bounds.x, buttons[0].bounds.y, buttons[0].bounds.width, buttons[0].bounds.height, buttons[0].buttonColor);
+    DrawTextEx(myAsset.listFont, buttons[0].text, {buttons[0].bounds.x + 70, buttons[0].bounds.y + 10}, 30, 2, buttons[0].color);
 
-    DrawRectangle (buttons[1].bounds.x, buttons[1].bounds.y, buttons[1].bounds.width, buttons[1].bounds.height, buttons[1].buttonColor);
-    DrawTextEx(myAsset.listFont , buttons[1].text, { buttons[1].bounds.x + 67 , buttons[1].bounds.y + 10} , 30 , 2, buttons[1].color);
+    DrawRectangle(buttons[1].bounds.x, buttons[1].bounds.y, buttons[1].bounds.width, buttons[1].bounds.height, buttons[1].buttonColor);
+    DrawTextEx(myAsset.listFont, buttons[1].text, {buttons[1].bounds.x + 67, buttons[1].bounds.y + 10}, 30, 2, buttons[1].color);
 
-    DrawRectangle (buttons[2].bounds.x, buttons[2].bounds.y, buttons[2].bounds.width, buttons[2].bounds.height, buttons[2].buttonColor);
-    DrawTextEx(myAsset.listFont , buttons[2].text, { buttons[2].bounds.width/2 + buttons[2].bounds.x - 25 , buttons[2].bounds.y + 10} , 30 , 2, buttons[2].color);
+    DrawRectangle(buttons[2].bounds.x, buttons[2].bounds.y, buttons[2].bounds.width, buttons[2].bounds.height, buttons[2].buttonColor);
+    DrawTextEx(myAsset.listFont, buttons[2].text, {buttons[2].bounds.width / 2 + buttons[2].bounds.x - 25, buttons[2].bounds.y + 10}, 30, 2, buttons[2].color);
 
-    DrawRectangle (buttons[3].bounds.x, buttons[3].bounds.y, buttons[3].bounds.width, buttons[3].bounds.height, buttons[3].buttonColor);
-    DrawTextEx(myAsset.listFont , buttons[3].text, { buttons[3].bounds.width/2 + buttons[3].bounds.x - 25 , buttons[3].bounds.y + 10} , 30 , 2, buttons[3].color);
+    DrawRectangle(buttons[3].bounds.x, buttons[3].bounds.y, buttons[3].bounds.width, buttons[3].bounds.height, buttons[3].buttonColor);
+    DrawTextEx(myAsset.listFont, buttons[3].text, {buttons[3].bounds.width / 2 + buttons[3].bounds.x - 25, buttons[3].bounds.y + 10}, 30, 2, buttons[3].color);
 
     startButton();
     helpButton();
@@ -1370,9 +1366,9 @@ void Control::helpButton()
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            system ("start C:/assets/help.pdf");
-        }   
-    } 
+            system("start C:/assets/help.pdf");
+        }
+    }
 }
 void Control::exitButton()
 {
@@ -1399,86 +1395,86 @@ void Control::startButton()
 void Control::askNumber()
 {
     // ClearBackground(RAYWHITE);
-    Color recColor = {170 , 170 , 170 , 170}; //Background color
+    Color recColor = {170, 170, 170, 170}; // Background color
     float roundness = 0.3f;
-    Rectangle temp = {325 , 90 , 450 , 70};
+    Rectangle temp = {325, 90, 450, 70};
 
-    DrawRectangleRounded ( temp , 0.3f , 0 , recColor );
-    DrawTextEx( myAsset.askFont , "Choose The Number Of Players :" , { 340 , 110 } , 35 , 2 , BLACK );
+    DrawRectangleRounded(temp, 0.3f, 0, recColor);
+    DrawTextEx(myAsset.askFont, "Choose The Number Of Players :", {340, 110}, 35, 2, BLACK);
 
     numButtons.reserve(4);
 
     numButtons[0].text = "3";
-    numButtons[0].bounds = { 430, 200, 100, 60 };
-    
+    numButtons[0].bounds = {430, 200, 100, 60};
+
     numButtons[1].text = "4";
-    numButtons[1].bounds = { 550, 200, 100, 60 };
- 
+    numButtons[1].bounds = {550, 200, 100, 60};
+
     numButtons[2].text = "5";
-    numButtons[2].bounds = { 430, 280, 100, 60 };
- 
+    numButtons[2].bounds = {430, 280, 100, 60};
+
     numButtons[3].text = "6";
-    numButtons[3].bounds = { 550, 280, 100, 60 };
+    numButtons[3].bounds = {550, 280, 100, 60};
 
     Vector2 mousePosition = GetMousePosition();
 
-    for (int i = 0 ; i < 4 ; i++)
+    for (int i = 0; i < 4; i++)
     {
-            if (CheckCollisionPointRec(mousePosition, numButtons[i].bounds)) 
-            {
-                // Change colors on button click
-                numButtons[i].buttonColor = { 191,155,129 ,230 };
-                numButtons[i].color = { 234 , 237 , 240 , 255 };
-            }
-            else 
-            { 
-                numButtons[i].buttonColor = { 141,108,88 ,170 };
-                numButtons[i].color = BLACK;
-            }
-    }    
+        if (CheckCollisionPointRec(mousePosition, numButtons[i].bounds))
+        {
+            // Change colors on button click
+            numButtons[i].buttonColor = {191, 155, 129, 230};
+            numButtons[i].color = {234, 237, 240, 255};
+        }
+        else
+        {
+            numButtons[i].buttonColor = {141, 108, 88, 170};
+            numButtons[i].color = BLACK;
+        }
+    }
 
-    for ( int i = 0 ; i < 4 ; i++ ) //Draw text and buttons
+    for (int i = 0; i < 4; i++) // Draw text and buttons
     {
-        DrawRectangleRounded (numButtons[i].bounds , roundness , 0 , numButtons[i].buttonColor);
-        DrawTextEx(myAsset.askFont , numButtons[i].text, { numButtons[i].bounds.x + 40 , numButtons[i].bounds.y + 10 } , 30 , 2, numButtons[i].color);
+        DrawRectangleRounded(numButtons[i].bounds, roundness, 0, numButtons[i].buttonColor);
+        DrawTextEx(myAsset.askFont, numButtons[i].text, {numButtons[i].bounds.x + 40, numButtons[i].bounds.y + 10}, 30, 2, numButtons[i].color);
     }
 
     for (int i = 0; i < 4; i++)
     {
-      if (CheckCollisionPointRec(mousePosition, numButtons[i].bounds))
-      {
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        if (CheckCollisionPointRec(mousePosition, numButtons[i].bounds))
         {
-            setPlayerNumber(i + 3);//Set the number of players
-            currentScreen = INFO; //Change the screen to the information screen
-            break;
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                setPlayerNumber(i + 3); // Set the number of players
+                currentScreen = INFO;   // Change the screen to the information screen
+                break;
+            }
         }
-      }
-    }  
+    }
 }
 void Control::drawInput()
 {
-    static int counter = 1 ; //Player number
+    static int counter = 1; // Player number
 
     if (counter <= getPlayerNumber())
     {
-        Color backColor = { 108,194,237 , 200 };
+        Color backColor = {108, 194, 237, 200};
 
-        char text[2] ; 
+        char text[2];
         text[0] = counter + '0'; // player number (Convert character to number)
-        text[1] = '\0'; //end
+        text[1] = '\0';          // end
 
-        Rectangle back = { 500 , 70 , 150 , 70 };
-        DrawRectangleRounded ( back , 0.4f , 0 , backColor);
-        DrawRectangleRoundedLines(back, 0.4f, 0, 3, { 6 , 87 , 128 , 255 }); 
-        DrawTextEx ( myAsset.inputFont , "Player" , { 525 , 90 } , 25 , 2 , { 28,52,40, 255 });
-        DrawTextEx ( myAsset.inputFont , text , { 615 , 90 } , 25 , 2 , { 28,52,40, 255 } );
+        Rectangle back = {500, 70, 150, 70};
+        DrawRectangleRounded(back, 0.4f, 0, backColor);
+        DrawRectangleRoundedLines(back, 0.4f, 0, 3, {6, 87, 128, 255});
+        DrawTextEx(myAsset.inputFont, "Player", {525, 90}, 25, 2, {28, 52, 40, 255});
+        DrawTextEx(myAsset.inputFont, text, {615, 90}, 25, 2, {28, 52, 40, 255});
 
         inputName.DrawName();
 
         inputAge.DrawAge();
-    
-        submit.bounds = { 500 , 420 , 150 , 70 };
+
+        submit.bounds = {500, 420, 150, 70};
         submit.text = "NEXT";
 
         Vector2 mousePosition = GetMousePosition();
@@ -1486,26 +1482,26 @@ void Control::drawInput()
         if (CheckCollisionPointRec(mousePosition, submit.bounds))
         {
             submit.color = WHITE;
-            submit.buttonColor = {137,162,97, 180};
+            submit.buttonColor = {137, 162, 97, 180};
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
                 if (!inputAge.isEmpty() && !inputName.isEmpty())
                 {
-                   counter++;
-                   next = true;
+                    counter++;
+                    next = true;
                 }
             }
-        } 
+        }
         else
         {
-            submit.color = { 28,52,40, 255 };
-            submit.buttonColor = { 188,206,170, 180};
+            submit.color = {28, 52, 40, 255};
+            submit.buttonColor = {188, 206, 170, 180};
         }
-        DrawRectangleRounded (submit.bounds , 0.4f , 0 , submit.buttonColor);//draw next button
-        DrawTextEx(myAsset.inputFont , submit.text, { submit.bounds.x + 45 , submit.bounds.y + 20 } , 25 , 2, submit.color);
+        DrawRectangleRounded(submit.bounds, 0.4f, 0, submit.buttonColor); // draw next button
+        DrawTextEx(myAsset.inputFont, submit.text, {submit.bounds.x + 45, submit.bounds.y + 20}, 25, 2, submit.color);
     }
-    else currentScreen = MAP; //Transfer to the game screen
-
+    else
+        currentScreen = MAP; // Transfer to the game screen
 }
 void Control::updateInput()
 {
@@ -1515,52 +1511,51 @@ void Control::updateInput()
 void Control::askMap()
 {
     Player youngest = youngestPlayer();
-    const char* playerName = youngest.getName();
+    const char *playerName = youngest.getName();
 
-   std::cout << youngest.getName() << std::endl; 
+    std::cout << youngest.getName() << std::endl;
 
-    DrawTexture(myAsset.game, 0, 0, WHITE); // background image
-    DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); //Map image
+    DrawTexture(myAsset.game, 0, 0, WHITE);                            // background image
+    DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); // Map image
 
-    TextButton goGame ;
-    goGame.bounds = { 10, 12 , 150 , 60 };
+    TextButton goGame;
+    goGame.bounds = {10, 12, 150, 60};
     goGame.text = "Back To GAME";
 
-    Vector2 mousePosition = GetMousePosition();//Save the current mouse coordinates
+    Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
 
     if (CheckCollisionPointRec(mousePosition, goGame.bounds))
     {
         goGame.color = WHITE;
-        goGame.buttonColor = { 174 , 185 , 191 , 200};
+        goGame.buttonColor = {174, 185, 191, 200};
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             currentScreen = GAME;
         }
-    } 
+    }
     else
     {
-        goGame.color = WHITE;// Change text color
-        goGame.buttonColor = { 0,61,59 , 200};// Change button color
+        goGame.color = WHITE;                  // Change text color
+        goGame.buttonColor = {0, 61, 59, 200}; // Change button color
     }
 
-    DrawRectangleRounded (goGame.bounds , 0.4f , 0 , goGame.buttonColor);
-    DrawTextEx(myAsset.listFont , goGame.text, { goGame.bounds.x + 12 , goGame.bounds.y + 20 } , 25 , 2, goGame.color);
-   
-    DrawTextEx(myAsset.askFont , playerName , {500 , 15} , 30 , 2 , BLACK); // Print the name of the player
-    DrawTextEx(myAsset.askFont , " Choose The War Place!" , {380 , 35} , 30 , 2 , BLACK);
-    DrawTextEx(myAsset.askFont , " Click On The Sign To Select  " , {380 , 580} , 30 , 2 , BLACK);
-   // selectWarPlace(players[0]);
+    DrawRectangleRounded(goGame.bounds, 0.4f, 0, goGame.buttonColor);
+    DrawTextEx(myAsset.listFont, goGame.text, {goGame.bounds.x + 12, goGame.bounds.y + 20}, 25, 2, goGame.color);
+
+    DrawTextEx(myAsset.askFont, playerName, {500, 15}, 30, 2, BLACK); // Print the name of the player
+    DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 35}, 30, 2, BLACK);
+    DrawTextEx(myAsset.askFont, " Click On The Sign To Select  ", {380, 580}, 30, 2, BLACK);
+    // selectWarPlace(players[0]);
     selectWarPlace();
 }
 
 void Control::drawSigns()
 {
-    for (int i = 0; i < getProvinceNumber(); i++ )
+    for (int i = 0; i < getProvinceNumber(); i++)
     {
         DrawCircle(signs[i].position.x, signs[i].position.y, 11, signs[i].color);
     }
-    
 }
 
 void Control::setGameBackground()
@@ -1568,80 +1563,89 @@ void Control::setGameBackground()
     DrawTexture(myAsset.table, 0, 0, WHITE);
 
     TextButton goMap;
-    goMap.bounds = { 7, 13, 60, 60 };
+    goMap.bounds = {7, 13, 60, 60};
     goMap.text = "MAP";
 
-    Vector2 position = { 239, 607 };
-    if (players.size() > 0 && players[0].getName() && strlen(players[0].getName()) > 0) {
+    Vector2 position = {239, 607};
+    if (players.size() > 0 && players[0].getName() && strlen(players[0].getName()) > 0)
+    {
         // Draw bold effect for player 0
-        DrawTextEx(myAsset.name, players[0].getName(), { position.x - 1, position.y }, 30, 2, BLACK);  // Draw shadow
-        DrawTextEx(myAsset.name, players[0].getName(), { position.x + 1, position.y }, 30, 2, BLACK);  // Draw shadow
-        DrawTextEx(myAsset.name, players[0].getName(), { position.x, position.y - 1 }, 30, 2, BLACK);  // Draw shadow
-        DrawTextEx(myAsset.name, players[0].getName(), { position.x, position.y + 1 }, 30, 2, BLACK);  // Draw shadow
+        DrawTextEx(myAsset.name, players[0].getName(), {position.x - 1, position.y}, 30, 2, BLACK); // Draw shadow
+        DrawTextEx(myAsset.name, players[0].getName(), {position.x + 1, position.y}, 30, 2, BLACK); // Draw shadow
+        DrawTextEx(myAsset.name, players[0].getName(), {position.x, position.y - 1}, 30, 2, BLACK); // Draw shadow
+        DrawTextEx(myAsset.name, players[0].getName(), {position.x, position.y + 1}, 30, 2, BLACK); // Draw shadow
         // Draw the text in the original position
-        DrawTextEx(myAsset.name, players[0].getName(), position, 30, 2, WHITE);  // Draw main text
+        DrawTextEx(myAsset.name, players[0].getName(), position, 30, 2, WHITE); // Draw main text
     }
 
-    position = { 770, 607 };
-    if (players.size() > 1 && players[1].getName() && strlen(players[1].getName()) > 0) {
+    position = {770, 607};
+    if (players.size() > 1 && players[1].getName() && strlen(players[1].getName()) > 0)
+    {
         // Draw bold effect for player 1
-        DrawTextEx(myAsset.name, players[1].getName(), { position.x - 1, position.y }, 30, 2, BLACK);  
-        DrawTextEx(myAsset.name, players[1].getName(), { position.x + 1, position.y }, 30, 2, BLACK);  
-        DrawTextEx(myAsset.name, players[1].getName(), { position.x, position.y - 1 }, 30, 2, BLACK);  
-        DrawTextEx(myAsset.name, players[1].getName(), { position.x, position.y + 1 }, 30, 2, BLACK);  
-        DrawTextEx(myAsset.name, players[1].getName(), position, 30, 2, WHITE); 
+        DrawTextEx(myAsset.name, players[1].getName(), {position.x - 1, position.y}, 30, 2, BLACK);
+        DrawTextEx(myAsset.name, players[1].getName(), {position.x + 1, position.y}, 30, 2, BLACK);
+        DrawTextEx(myAsset.name, players[1].getName(), {position.x, position.y - 1}, 30, 2, BLACK);
+        DrawTextEx(myAsset.name, players[1].getName(), {position.x, position.y + 1}, 30, 2, BLACK);
+        DrawTextEx(myAsset.name, players[1].getName(), position, 30, 2, WHITE);
     }
 
-    position = { 1045, 330 };
-    Vector2 origin = { 0, 0 };
-    float rotation = -90.0f; 
-    if (players.size() > 2 && players[2].getName() && strlen(players[2].getName()) > 0) {
+    position = {1045, 330};
+    Vector2 origin = {0, 0};
+    float rotation = -90.0f;
+    if (players.size() > 2 && players[2].getName() && strlen(players[2].getName()) > 0)
+    {
         // Draw bold effect for player 2
-        DrawTextPro(myAsset.name, players[2].getName(), { position.x - 1, position.y }, origin, rotation, 30, 2, BLACK);  
-        DrawTextPro(myAsset.name, players[2].getName(), { position.x + 1, position.y }, origin, rotation, 30, 2, BLACK);  
-        DrawTextPro(myAsset.name, players[2].getName(), { position.x, position.y - 1 }, origin, rotation, 30, 2, BLACK);  
-        DrawTextPro(myAsset.name, players[2].getName(), { position.x, position.y + 1 }, origin, rotation, 30, 2, BLACK);  
+        DrawTextPro(myAsset.name, players[2].getName(), {position.x - 1, position.y}, origin, rotation, 30, 2, BLACK);
+        DrawTextPro(myAsset.name, players[2].getName(), {position.x + 1, position.y}, origin, rotation, 30, 2, BLACK);
+        DrawTextPro(myAsset.name, players[2].getName(), {position.x, position.y - 1}, origin, rotation, 30, 2, BLACK);
+        DrawTextPro(myAsset.name, players[2].getName(), {position.x, position.y + 1}, origin, rotation, 30, 2, BLACK);
         DrawTextPro(myAsset.name, players[2].getName(), position, origin, rotation, 30, 2, WHITE);
     }
 
-    if (players.size() > 3) {
-        const char* playerName3 = players[3].getName();
-        if (playerName3 && strlen(playerName3) > 0) {
-            position = { 810, 29 };
-            origin = { 0, 0 };
-            rotation = -180.0f; 
-            DrawTextPro(myAsset.name, playerName3, { position.x - 1, position.y }, origin, rotation, 30, 2, BLACK);  
-            DrawTextPro(myAsset.name, playerName3, { position.x + 1, position.y }, origin, rotation, 30, 2, BLACK);  
-            DrawTextPro(myAsset.name, playerName3, { position.x, position.y - 1 }, origin, rotation, 30, 2, BLACK);  
-            DrawTextPro(myAsset.name, playerName3, { position.x, position.y + 1 }, origin, rotation, 30, 2, BLACK);  
+    if (players.size() > 3)
+    {
+        const char *playerName3 = players[3].getName();
+        if (playerName3 && strlen(playerName3) > 0)
+        {
+            position = {810, 29};
+            origin = {0, 0};
+            rotation = -180.0f;
+            DrawTextPro(myAsset.name, playerName3, {position.x - 1, position.y}, origin, rotation, 30, 2, BLACK);
+            DrawTextPro(myAsset.name, playerName3, {position.x + 1, position.y}, origin, rotation, 30, 2, BLACK);
+            DrawTextPro(myAsset.name, playerName3, {position.x, position.y - 1}, origin, rotation, 30, 2, BLACK);
+            DrawTextPro(myAsset.name, playerName3, {position.x, position.y + 1}, origin, rotation, 30, 2, BLACK);
             DrawTextPro(myAsset.name, playerName3, position, origin, rotation, 30, 2, WHITE);
         }
     }
 
-    if (players.size() > 4) {
-        const char* playerName4 = players[4].getName();
-        if (playerName4 && strlen(playerName4) > 0) {
-            position = { 280, 31 };
-            origin = { 0, 0 };
-            rotation = -180.0f; 
-            DrawTextPro(myAsset.name, playerName4, { position.x - 1, position.y }, origin, rotation, 30, 2, BLACK);  
-            DrawTextPro(myAsset.name, playerName4, { position.x + 1, position.y }, origin, rotation, 30, 2, BLACK);  
-            DrawTextPro(myAsset.name, playerName4, { position.x, position.y - 1 }, origin, rotation, 30, 2, BLACK);  
-            DrawTextPro(myAsset.name, playerName4, { position.x, position.y + 1 }, origin, rotation, 30, 2, BLACK);  
+    if (players.size() > 4)
+    {
+        const char *playerName4 = players[4].getName();
+        if (playerName4 && strlen(playerName4) > 0)
+        {
+            position = {280, 31};
+            origin = {0, 0};
+            rotation = -180.0f;
+            DrawTextPro(myAsset.name, playerName4, {position.x - 1, position.y}, origin, rotation, 30, 2, BLACK);
+            DrawTextPro(myAsset.name, playerName4, {position.x + 1, position.y}, origin, rotation, 30, 2, BLACK);
+            DrawTextPro(myAsset.name, playerName4, {position.x, position.y - 1}, origin, rotation, 30, 2, BLACK);
+            DrawTextPro(myAsset.name, playerName4, {position.x, position.y + 1}, origin, rotation, 30, 2, BLACK);
             DrawTextPro(myAsset.name, playerName4, position, origin, rotation, 30, 2, WHITE);
         }
     }
 
-    if (players.size() > 5) {
-        const char* playerName5 = players[5].getName();
-        if (playerName5 && strlen(playerName5) > 0) {
-            position = { 30, 280 };
-            origin = { 0, 0 };
-            rotation = 90.0f; 
-            DrawTextPro(myAsset.name, playerName5, { position.x - 1, position.y }, origin, rotation, 30, 2, BLACK);  
-            DrawTextPro(myAsset.name, playerName5, { position.x + 1, position.y }, origin, rotation, 30, 2, BLACK);  
-            DrawTextPro(myAsset.name, playerName5, { position.x, position.y - 1 }, origin, rotation, 30, 2, BLACK);  
-            DrawTextPro(myAsset.name, playerName5, { position.x, position.y + 1 }, origin, rotation, 30, 2, BLACK);  
+    if (players.size() > 5)
+    {
+        const char *playerName5 = players[5].getName();
+        if (playerName5 && strlen(playerName5) > 0)
+        {
+            position = {30, 280};
+            origin = {0, 0};
+            rotation = 90.0f;
+            DrawTextPro(myAsset.name, playerName5, {position.x - 1, position.y}, origin, rotation, 30, 2, BLACK);
+            DrawTextPro(myAsset.name, playerName5, {position.x + 1, position.y}, origin, rotation, 30, 2, BLACK);
+            DrawTextPro(myAsset.name, playerName5, {position.x, position.y - 1}, origin, rotation, 30, 2, BLACK);
+            DrawTextPro(myAsset.name, playerName5, {position.x, position.y + 1}, origin, rotation, 30, 2, BLACK);
             DrawTextPro(myAsset.name, playerName5, position, origin, rotation, 30, 2, WHITE);
         }
     }
@@ -1651,34 +1655,32 @@ void Control::setGameBackground()
     if (CheckCollisionPointRec(mousePosition, goMap.bounds))
     {
         goMap.color = WHITE;
-        goMap.buttonColor = { 255,248,158, 200};
+        goMap.buttonColor = {255, 248, 158, 200};
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             currentScreen = MAP;
         }
-    } 
+    }
     else
     {
-        goMap.color = WHITE; // Change text color
-        goMap.buttonColor = { 255, 250, 183, 170 }; // Change button color
+        goMap.color = WHITE;                      // Change text color
+        goMap.buttonColor = {255, 250, 183, 170}; // Change button color
     }
 
     DrawRectangleRounded(goMap.bounds, 0.4f, 0, goMap.buttonColor);
-    DrawTextEx(myAsset.listFont, goMap.text, { goMap.bounds.x + 12, goMap.bounds.y + 20 }, 25, 2, goMap.color);
+    DrawTextEx(myAsset.listFont, goMap.text, {goMap.bounds.x + 12, goMap.bounds.y + 20}, 25, 2, goMap.color);
 }
 
-
-
-
-void Control::DrawMousePosition() {
+void Control::DrawMousePosition()
+{
     // دریافت موقعیت موس
     Vector2 mousePosition = GetMousePosition();
-    
+
     // تبدیل موقعیت موس به رشته
     char positionText[64];
     sprintf(positionText, "Mouse X: %d, Y: %d", (int)mousePosition.x, (int)mousePosition.y);
-    
+
     // رسم موقعیت موس در گوشه بالای صفحه
     DrawText(positionText, 10, 10, 20, BLACK);
 }
