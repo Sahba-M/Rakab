@@ -51,7 +51,7 @@ class Control {
         void setWarPlace ( std::string warPlace );
         void selectMove ( Player & player,int index );
         void showPlayGround(); //Show used player cards
-        void selectWarPlace ( Player & player );
+        void selectWarPlace ();
         void setProvinceNumber ( int provinceNumber ); //Set the number of game provinces
         void guideGame(); //Show game guide
         void guideCards(); //Display guide cards
@@ -124,6 +124,7 @@ class Control {
         void drawSigns();
         void setGameBackground(); // Draw a picture on the game table
         void DrawMousePosition();
+      
 
 
 
@@ -173,6 +174,7 @@ class Control {
         InputBox inputAge { 470 , 245 , 200 , 75 };// an object from InputBox class
         TextButton submit ;//struct
         bool next = false ;
+        
 
         std::vector <TextButton> buttons ;
         std::vector <TextButton> numButtons ;

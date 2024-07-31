@@ -230,7 +230,7 @@ void Control::setWar()
         selectPeacePlace(getDeterminerPeace());
         setIfDean(false);
     }
-    selectWarPlace(getDeterminer());
+   // selectWarPlace(getDeterminer());
 
     int startIndex = findPlayerIndex(getDeterminer());
     int currentIndex = startIndex;
@@ -390,7 +390,7 @@ void Control::showPlayGround()
     }
     std::cout << "--------------------------- \n";
 }
-void Control::selectWarPlace(Player &player)
+void Control::selectWarPlace()
 {
     // bool found = true;
     // std::string chooseProvince;
@@ -1248,7 +1248,7 @@ void Control::Draw()
         drawInput();
         break;
     case MAP:
-        // askMap();
+        //askMap();
         drawSigns();
         break;
     case GAME:
@@ -1514,7 +1514,10 @@ void Control::updateInput()
 }
 void Control::askMap()
 {
-    const char* playerName = youngestPlayer().getName();
+    Player youngest = youngestPlayer();
+    const char* playerName = youngest.getName();
+
+   std::cout << youngest.getName() << std::endl; 
 
     DrawTexture(myAsset.game, 0, 0, WHITE); // background image
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); //Map image
@@ -1548,8 +1551,9 @@ void Control::askMap()
     DrawTextEx(myAsset.askFont , " Choose The War Place!" , {380 , 35} , 30 , 2 , BLACK);
     DrawTextEx(myAsset.askFont , " Click On The Sign To Select  " , {380 , 580} , 30 , 2 , BLACK);
    // selectWarPlace(players[0]);
-    selectWarPlace(youngestPlayer());
+    selectWarPlace();
 }
+
 void Control::drawSigns()
 {
     for (int i = 0; i < getProvinceNumber(); i++ )
