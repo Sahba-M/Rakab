@@ -10,6 +10,7 @@ class DeanCard : public PurpleCard
         virtual void useCard ( std::vector <Player> & players , int numPlayer ) override ; // we don't use index here
         int findMaxScore ( std::vector <Player> players ); 
         std::vector<int> findMaxPlayer ( std::vector <Player> players );
+        void draw ( int x , int y ) override ;
         
 
 
