@@ -37,7 +37,8 @@ Control::Control()
     Color color = {186, 186, 186, 120};
     // signColors.resize(15 , color);
 
-    signs = {
+    signs =
+    {
         {{234, 226}, color, "ELINIA"},
         {{344, 111}, color, "ROLLO"},
         {{455, 203}, color, "TALMONE"},
@@ -52,9 +53,17 @@ Control::Control()
         {{657, 380}, color, "DIMASE"},
         {{527, 387}, color, "OLIVADI"},
         {{492, 504}, color, "ENNA"},
-        {{502, 422}, color, "ARMENTO"}};
+        {{502, 422}, color, "ARMENTO"}
+    };
+    // players[0].setColorG(YELLOW);
+    // players[1].setColorG(RED);
+    // players[2].setColorG(PURPLE);
+    // players[3].setColorG(BLUE);
+    // players[4].setColorG(GREEN);
+    // players[5].setColorG(PINK);
 
     int threshold = 3;
+   
 }
 
 void Control::setPlayerNumber(int playerNumber)
@@ -424,24 +433,29 @@ void Control::selectWarPlace()
     // } while (!found);
     Vector2 mousePosition = GetMousePosition();
 
+    const Color GRAY_COLOR = {186, 186, 186, 120};
+
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         for (int i = 0; i < getProvinceNumber(); i++) // Repeat for each province
         {
             float distance = sqrtf(powf(mousePosition.x - signs[i].position.x, 2) + powf(mousePosition.y - signs[i].position.y, 2));
             // Calculate the distance between the mouse position and the current marker position
-            if (distance <= 11)
+            if (distance <= 11  && !isBlackCircle())
             { // Is the mouse in the circle or not?
-                setWarPlace(signs[i].name);
-                signs[i].color = BLACK;
+                if (CompareColors(signs[i].color, GRAY_COLOR))
+                {
+                    setWarPlace(signs[i].name);
+                    signs[i].color = BLACK;
+                    BeginDrawing();
+                    drawSigns();
+                    EndDrawing();
+                    sleep(2);
+                    currentScreen = GAME;
 
-                BeginDrawing();
-                drawSigns();
-                EndDrawing();
-                sleep(2);
-
-                currentScreen = GAME;
-                break;
+                    break;
+                    
+                }
             }
         }
     }
@@ -1246,6 +1260,7 @@ void Control::Draw()
         break;
     case MAP:
         // askMap();
+        // changeCircleColor();
         drawSigns();
         break;
     case GAME:
@@ -1263,6 +1278,7 @@ void Control::Update()
         break;
     case MAP:
         askMap();
+        changeCircleColor();
         break;
     }
 }
@@ -1549,7 +1565,6 @@ void Control::askMap()
     // selectWarPlace(players[0]);
     selectWarPlace();
 }
-
 void Control::drawSigns()
 {
     for (int i = 0; i < getProvinceNumber(); i++)
@@ -1557,6 +1572,7 @@ void Control::drawSigns()
         DrawCircle(signs[i].position.x, signs[i].position.y, 11, signs[i].color);
     }
 }
+
 
 void Control::setGameBackground()
 {
@@ -1670,6 +1686,60 @@ void Control::setGameBackground()
 
     DrawRectangleRounded(goMap.bounds, 0.4f, 0, goMap.buttonColor);
     DrawTextEx(myAsset.listFont, goMap.text, {goMap.bounds.x + 12, goMap.bounds.y + 20}, 25, 2, goMap.color);
+}
+
+bool Control::isBlackCircle()
+{
+    for (int i = 0; i < getProvinceNumber(); i++)
+    {
+        if (CompareColors(signs[i].color, BLACK))
+        {
+            return true; 
+        }
+    }
+        return false; 
+}
+bool  Control::CompareColors(Color a, Color b)
+{
+    return (a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a);
+}
+
+// void Control::initializePlayersColor()
+// {
+//     players[0].setColorG(YELLOW);
+//     players[1].setColorG(RED);
+//     players[2].setColorG(PURPLE);
+//     players[3].setColorG(BLUE);
+//     players[4].setColorG(GREEN);
+//     players[5].setColorG(PINK);
+    
+//}
+ void Control::changeCircleColor()
+{
+    Vector2 mousePosition = GetMousePosition(); 
+
+    for (int i = 0; i < getProvinceNumber(); i++)
+    {
+        float distance = sqrtf(powf(mousePosition.x - signs[i].position.x, 2) + powf(mousePosition.y - signs[i].position.y, 2));
+
+        if (distance <= 11 && CompareColors(signs[i].color, BLACK))
+        {  
+            // for (Player& player : players)
+            // {
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                 {
+                    signs[i].color = RED;
+                    BeginDrawing();
+                    drawSigns();
+                    EndDrawing();
+                    sleep(2);
+                    currentScreen = GAME;
+                    break; 
+                }
+           // }
+            break; 
+        }
+    }
 }
 
 void Control::DrawMousePosition()

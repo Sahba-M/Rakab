@@ -86,6 +86,8 @@ class Control {
         bool winEachWar();
         bool endGame();
         bool ifAllPass();
+        bool isBlackCircle();
+        bool CompareColors(Color a, Color b);
         int  levenshteinDistance(const std::string &s1, const std::string &s2); // Optimized function to calculate the Levenshtein distance between two strings
         int  controlAge();
         int  getPlayerNumber();
@@ -124,6 +126,10 @@ class Control {
         void drawSigns();
         void setGameBackground(); // Draw a picture on the game table
         void DrawMousePosition();
+        void initializePlayersColor();
+        void changeCircleColor();
+        bool isColorful();
+
       
 
 

@@ -3,6 +3,7 @@
 #include <memory>
 #include <typeinfo>
 #include <unistd.h>
+#include <raylib.h>
 
 #include "player.h"
 #include "card.h"
@@ -531,6 +532,14 @@ std::istream & operator>> (std::istream &input, Player &player )
     return input;
 }
 
+void Player::setColorG(Color graficColor)
+{
+    this->graficColor = graficColor;
+}
+Color Player::getColorG()
+{
+    return graficColor;
+}
 std::ostream & operator<< ( std::ostream & output , Player & player ) 
 {
     output << player.name << "\n";

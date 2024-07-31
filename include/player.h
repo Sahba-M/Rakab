@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <iostream>
+#include <raylib.h>
 #include <vector>
 #include <memory>
 #include <string>
@@ -63,6 +64,10 @@ class Player {
         bool getIfLeader();
         bool getIfHorse();
 
+        void setColorG(Color graficColor);
+        Color getColorG();
+        
+
        
         const char * getName() ;
         std::string getColor() const ;
@@ -84,5 +89,6 @@ class Player {
         bool pass = false;
         bool ifLeader = false;
         bool ifHorse = false;
+        Color graficColor;
 };
 #endif  
