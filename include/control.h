@@ -129,6 +129,8 @@ class Control {
         void initializePlayersColor();
         void changeCircleColor();
         bool isColorful();
+        void drawCards();
+
 
       
 

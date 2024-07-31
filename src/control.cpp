@@ -146,7 +146,6 @@ void Control::getInformation()
         age = atoi(inputAge.GetInput());
 
         players.push_back(Player(age, name, color)); // Fill vector of players
-        std::cout << name << "-" << age;
         inputName.setInputDefault();
         inputAge.setInputDefault();
         next = false;
@@ -155,6 +154,11 @@ void Control::getInformation()
         {
             std::cout << player.getName() << "--" << player.getAge() << "/";
         }
+    }
+
+    if ( players.size() == getPlayerNumber() )
+    {
+        setDeterminer(youngestPlayer());
     }
     // for (int i = 0; i < getPlayerNumber(); i++)
     // {
@@ -1265,6 +1269,10 @@ void Control::Draw()
         break;
     case GAME:
         setGameBackground();
+        drawCards(); 
+        // shuffleCards();
+        // distributeCards();
+
         break;
     }
 }
@@ -1526,10 +1534,10 @@ void Control::updateInput()
 }
 void Control::askMap()
 {
-    Player youngest = youngestPlayer();
-    const char *playerName = youngest.getName();
+    // Player youngest = youngestPlayer();
+    const char *playerName = getDeterminer().getName();
 
-    std::cout << youngest.getName() << std::endl;
+    std::cout << playerName << std::endl;
 
     DrawTexture(myAsset.game, 0, 0, WHITE);                            // background image
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); // Map image
@@ -1753,4 +1761,19 @@ void Control::DrawMousePosition()
 
     // رسم موقعیت موس در گوشه بالای صفحه
     DrawText(positionText, 10, 10, 20, BLACK);
+}
+
+void Control::drawCards()
+{
+    // Rectangle card = { 135 , 500 , 40 , 80 };
+    DrawRectangle (135 , 500 , 40 , 80 , BLACK);
+    DrawRectangle (135 + 20 , 500 , 40 , 80 , WHITE);
+    DrawRectangle (135 + 40 , 500 , 40 , 80 , BLACK);
+    DrawRectangle (135 + 60 , 500 , 40 , 80 , WHITE);
+    DrawRectangle (135 + 80 , 500 , 40 , 80 , BLACK);
+    DrawRectangle (135 + 100 , 500 , 40 , 80 , WHITE);
+    DrawRectangle (135 + 120 , 500 , 40 , 80 , BLACK);
+    DrawRectangle (135 + 140 , 500 , 40 , 80 , WHITE);
+    DrawRectangle (135 + 160 , 500 , 40 , 80 , BLACK);
+    DrawRectangle (135 + 180 , 500 , 40 , 80 , WHITE);
 }
