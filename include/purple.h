@@ -11,7 +11,7 @@ class PurpleCard : public Card {//The purple class is a parent class
       PurpleCard();
       PurpleCard ( std::string name );
       virtual void useCard ( std::vector <Player> & players , int ) {};//For the functions of each special card
-      virtual void draw ( int x , int y  , AssetManager & myAsset) {};
+      // virtual void draw ( int x , int y ) {};
 
 
 };

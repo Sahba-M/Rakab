@@ -53,7 +53,7 @@ int SpringCard::findMaxScore ( std::vector <Player> players )
     }
     return max ;
 }
-void SpringCard::draw ( int x , int y , AssetManager & myAsset )
-{
-    DrawTexture (myAsset.spring , x , y , BLACK);
-}
+// void SpringCard::draw ( int x , int y )
+// {
+//     DrawTexture (myAsset.spring , x , y , BLACK);
+// }

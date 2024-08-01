@@ -25,12 +25,11 @@ struct SharedPtrCompare
 };
 
 Player::Player() { scorePlayer = 0; };
-Player::Player(int age, const char* name, std::string color , AssetManager & myAsset )
+Player::Player(int age, const char* name, std::string color )
 {
     setAge(age);
     setName(name);
     setColor(color);
-    this->myAsset = myAsset;
 }
 void Player::setName(const char* name)
 {
@@ -575,12 +574,74 @@ std::ostream & operator<< ( std::ostream & output , Player & player )
     return output;
 }
 
-void Player::drawCards()
+void Player::drawCards( int x , int y , AssetManager & myAsset)
 {
+    int i = 0 ;
     for ( auto card : hand )
     {
-        int i = 0 ;
-        card->draw(135 + (i*20) , 500 , myAsset);
+        std::string name = card->getName();
+        
+        if ( name == "1" )
+        {
+            DrawTexture ( myAsset.soldier1 , x + (i*25) , y , WHITE );
+        }
+        else if ( name == "2" )
+        {
+            DrawTexture ( myAsset.soldier2 , x + (i*25) , y , WHITE );
+        }
+        else if ( name == "3" )
+        {
+            DrawTexture ( myAsset.soldier3 , x + (i*25) , y , WHITE ); 
+        } 
+        else if ( name == "4" )
+        {
+            DrawTexture ( myAsset.soldier4 , x + (i*25) , y , WHITE );
+        } 
+        else if ( name == "5" )
+        {
+            DrawTexture ( myAsset.soldier5 , x + (i*25) , y , WHITE );
+        } 
+        else if ( name == "6" )
+        {
+            DrawTexture ( myAsset.soldier6 , x + (i*25) , y , WHITE );
+        } 
+        else if ( name == "10" )
+        {
+            DrawTexture ( myAsset.soldier10 , x + (i*25) , y , WHITE );
+        } 
+        else if ( name == "spring" )
+        {
+            DrawTexture ( myAsset.spring , x + (i*25) , y , WHITE );
+        }
+        else if ( name == "winter" )
+        {
+            DrawTexture ( myAsset.winter , x + (i*25) , y , WHITE );
+        }
+        else if ( name == "leader" )
+        {
+            DrawTexture ( myAsset.leader , x + (i*25) , y , WHITE );
+        }
+        else if ( name == "princes" )
+        {
+            DrawTexture ( myAsset.princes , x + (i*25) , y , WHITE );
+        }
+        else if ( name == "dean" )
+        {
+            DrawTexture ( myAsset.dean , x + (i*25) , y , WHITE );
+        }
+        else if ( name == "drummer" )
+        {
+            DrawTexture ( myAsset.drummer , x + (i*25) , y , WHITE );
+        }
+        else if ( name == "virago" )
+        {
+            DrawTexture ( myAsset.virago , x + (i*25) , y , WHITE );
+        }
+        else if ( name == "scarecrow" )
+        {
+            DrawTexture ( myAsset.scarecrow , x + (i*25) , y , WHITE );
+        }
+
         i++;
     }
 }

@@ -147,7 +147,7 @@ void Control::getInformation()
 
 
         std::cout << " before making player " << '\n' ;
-        players.push_back(Player(age, name, color , myAsset)); // Fill vector of players
+        players.push_back(Player(age, name, color)); // Fill vector of players
         std::cout << " after making player " << '\n' ;
         inputName.setInputDefault();
         inputAge.setInputDefault();
@@ -1778,10 +1778,10 @@ void Control::drawCards()
     // Rectangle card = { 135 , 500 , 40 , 80 };
     for ( int i = 0 ; i < 10 ; i++ )
     {
-        DrawTexture ( myAsset.back , 115 + (i*25) , 500 , WHITE);
+        // DrawTexture ( myAsset.back , 115 + (i*25) , 500 , WHITE);
         DrawTexture ( myAsset.back , 645 + (i*25) , 500 , WHITE);
     }
-    // players[0].drawCards();
+    players[0].drawCards(115 , 500 , myAsset);
 
 
 }

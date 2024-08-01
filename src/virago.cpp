@@ -6,7 +6,7 @@ void ViragoCard::useCard ( std::vector <Player> & players , int numPlayer )
 {
     players[numPlayer].setScorePlayer(players[numPlayer].getScorePlayer() + 1);
 }
-void ViragoCard::draw ( int x , int y , AssetManager & myAsset )
-{
-    DrawTexture (myAsset.virago , x , y , BLACK);
-}
+// void ViragoCard::draw ( int x , int y )
+// {
+//     DrawTexture (myAsset.virago , x , y , BLACK);
+// }

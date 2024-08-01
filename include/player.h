@@ -16,7 +16,7 @@ class Player {
 
     public:
         Player();
-        Player ( int age , const char* name , std::string color , AssetManager & myAsset );
+        Player ( int age , const char* name , std::string color);
         void setName ( const char* name );
         void setAge ( int age );
         void setColor ( std::string color );
@@ -66,7 +66,7 @@ class Player {
 
         void setColorG(Color graficColor);
         Color getColorG();
-        void drawCards();
+        void drawCards( int x , int y ,  AssetManager & myAsset);
         
 
        
@@ -74,7 +74,6 @@ class Player {
         std::string getColor() const ;
         std::string getSeason();
         std::vector<std::shared_ptr<Card>> getYcards();
-        AssetManager myAsset;
         
         
 
@@ -93,5 +92,6 @@ class Player {
         bool ifLeader = false;
         bool ifHorse = false;
         Color graficColor;
+        // AssetManager myAsset;
 };
 #endif  
