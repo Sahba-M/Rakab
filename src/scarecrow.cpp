@@ -22,7 +22,7 @@ void ScarecrowCard::useThisCard ( Player & player )
         card = std::make_shared<YellowCard>(selectYcard);
     } 
 }
-void ScarecrowCard::draw ( int x , int y )
+void ScarecrowCard::draw ( int x , int y , AssetManager & myAsset )
 {
     DrawTexture (myAsset.scarecrow , x , y , BLACK);
 }

@@ -11,7 +11,7 @@ class DrummerCard:public PurpleCard
   public:
     DrummerCard();
     void useCard ( std::vector <Player> & players, int , int number ) ;
-    void draw ( int x , int y ) override ;
+    void draw ( int x , int y , AssetManager & myAsset ) override ;
 };
 
 #endif 

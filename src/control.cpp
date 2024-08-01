@@ -145,7 +145,10 @@ void Control::getInformation()
         name = inputName.GetInput();
         age = atoi(inputAge.GetInput());
 
-        players.push_back(Player(age, name, color)); // Fill vector of players
+
+        std::cout << " before making player " << '\n' ;
+        players.push_back(Player(age, name, color , myAsset)); // Fill vector of players
+        std::cout << " after making player " << '\n' ;
         inputName.setInputDefault();
         inputAge.setInputDefault();
         next = false;

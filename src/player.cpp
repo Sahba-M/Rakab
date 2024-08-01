@@ -25,11 +25,12 @@ struct SharedPtrCompare
 };
 
 Player::Player() { scorePlayer = 0; };
-Player::Player(int age, const char* name, std::string color)
+Player::Player(int age, const char* name, std::string color , AssetManager & myAsset )
 {
     setAge(age);
     setName(name);
     setColor(color);
+    this->myAsset = myAsset;
 }
 void Player::setName(const char* name)
 {
@@ -579,8 +580,7 @@ void Player::drawCards()
     for ( auto card : hand )
     {
         int i = 0 ;
-        card->draw(135 + (i*20) , 500);
+        card->draw(135 + (i*20) , 500 , myAsset);
         i++;
     }
 }
-

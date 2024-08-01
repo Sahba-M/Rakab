@@ -21,7 +21,7 @@ void WinterCard::useCard ( std::vector <Player> & players , int numPlayer ) //nu
       player.setScorePlayer(scores);
     }
 }  
-void WinterCard::draw ( int x , int y )
+void WinterCard::draw ( int x , int y , AssetManager & myAsset )
 {
     DrawTexture (myAsset.winter , x , y , BLACK);
 }

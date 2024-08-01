@@ -44,7 +44,7 @@ int DeanCard::findMaxScore ( std::vector <Player> players )
     }
     return max ;
 }
-void DeanCard::draw ( int x , int y )
+void DeanCard::draw ( int x , int y , AssetManager & myAsset )
 {
     DrawTexture (myAsset.dean , x , y , BLACK);
 }

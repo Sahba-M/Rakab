@@ -8,7 +8,7 @@ class ScarecrowCard : public PurpleCard {
     public:
         ScarecrowCard ();
         void useThisCard ( Player & player );
-        void draw ( int x , int y ) override ;
+        void draw ( int x , int y , AssetManager & myAsset ) override ;
 };
 
 #endif

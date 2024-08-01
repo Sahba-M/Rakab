@@ -4,7 +4,7 @@
 
 YellowCard::YellowCard ( std::string name ) : Card (name) {}
 
-void YellowCard::draw ( int x , int y )
+void YellowCard::draw ( int x , int y , AssetManager & myAsset )
 {
     if ( name == "1" )
     {
