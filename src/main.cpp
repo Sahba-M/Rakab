@@ -2,6 +2,7 @@
 #include <raylib.h>
 
 #include "control.h"
+#include "asset.h"
 
 int main()
 {
@@ -9,7 +10,6 @@ int main()
     int screenWidth = 1075;
     int screenHeight = 636;
     InitWindow(screenWidth, screenHeight, "Rakab Game");
-    
     Control rakab ;
     rakab.run();
     return 0;

@@ -11,3 +11,7 @@ LeaderCard::LeaderCard(){}
         player.setPass(true);
     }
  }
+ void LeaderCard::draw ( int x , int y )
+{
+    DrawTexture (myAsset.leader , x , y , BLACK);
+}

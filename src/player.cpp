@@ -574,3 +574,13 @@ std::ostream & operator<< ( std::ostream & output , Player & player )
     return output;
 }
 
+void Player::drawCards()
+{
+    for ( auto card : hand )
+    {
+        int i = 0 ;
+        card->draw(135 + (i*20) , 500);
+        i++;
+    }
+}
+

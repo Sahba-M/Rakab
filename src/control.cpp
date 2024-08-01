@@ -183,10 +183,10 @@ void Control::getInformation()
 }
 void Control::distributeCards()
 {
-    std::cin.ignore();
+    // std::cin.ignore();
     for (Player &player : players)
     {
-        std::cout << " I Want To Give The Cards To  > " << player.getName() << " <  Please Give Him/Her The System \n";
+        // std::cout << " I Want To Give The Cards To  > " << player.getName() << " <  Please Give Him/Her The System \n";
         for (int i = 0; i < player.numCardsOfPlayer(); i++)
         {
             if (!cards.empty())
@@ -195,11 +195,11 @@ void Control::distributeCards()
                 cards.pop_back();
             }
         }
-        std::cin.ignore();
-        player.showHandCards();
+        // std::cin.ignore();
+        // player.showHandCards();
 
-        std::cin.ignore();
-        system("cls");
+        // std::cin.ignore();
+        // system("cls");
     }
 }
 void Control::readProvinces()
@@ -455,7 +455,7 @@ void Control::selectWarPlace()
                     drawSigns();
                     EndDrawing();
                     sleep(2);
-                    currentScreen = GAME;
+                    currentScreen = DEAL;
 
                     break;
                     
@@ -1267,6 +1267,9 @@ void Control::Draw()
         // changeCircleColor();
         drawSigns();
         break;
+    case DEAL:
+        
+        break;
     case GAME:
         setGameBackground();
         drawCards(); 
@@ -1287,6 +1290,10 @@ void Control::Update()
     case MAP:
         askMap();
         changeCircleColor();
+        break;
+    case DEAL:
+        deal();
+        
         break;
     }
 }
@@ -1766,14 +1773,19 @@ void Control::DrawMousePosition()
 void Control::drawCards()
 {
     // Rectangle card = { 135 , 500 , 40 , 80 };
-    DrawRectangle (135 , 500 , 40 , 80 , BLACK);
-    DrawRectangle (135 + 20 , 500 , 40 , 80 , WHITE);
-    DrawRectangle (135 + 40 , 500 , 40 , 80 , BLACK);
-    DrawRectangle (135 + 60 , 500 , 40 , 80 , WHITE);
-    DrawRectangle (135 + 80 , 500 , 40 , 80 , BLACK);
-    DrawRectangle (135 + 100 , 500 , 40 , 80 , WHITE);
-    DrawRectangle (135 + 120 , 500 , 40 , 80 , BLACK);
-    DrawRectangle (135 + 140 , 500 , 40 , 80 , WHITE);
-    DrawRectangle (135 + 160 , 500 , 40 , 80 , BLACK);
-    DrawRectangle (135 + 180 , 500 , 40 , 80 , WHITE);
+    for ( int i = 0 ; i < 10 ; i++ )
+    {
+        DrawTexture ( myAsset.back , 115 + (i*25) , 500 , WHITE);
+        DrawTexture ( myAsset.back , 645 + (i*25) , 500 , WHITE);
+    }
+    // players[0].drawCards();
+
+
+}
+void Control::deal()
+{
+    setCards();
+    shuffleCards();
+    distributeCards();
+    currentScreen = GAME;
 }

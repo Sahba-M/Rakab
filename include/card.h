@@ -3,6 +3,8 @@
 
 #include <string>
 #include <memory>
+#include "raylib.h"
+#include "asset.h"
 
 
 class Card { //The card class is a parent class
@@ -18,8 +20,11 @@ class Card { //The card class is a parent class
         void setName(std::string name);
         std::string getName();
         bool operator== (const Card & other);
+        virtual void draw ( int x , int y ){};
+        AssetManager myAsset;
+
   
-    private:
+    protected:
         std::string name;
 };
 #endif 

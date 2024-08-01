@@ -31,7 +31,7 @@ struct Province {
 };
 
 
-enum GameScreen { MENU = 0 , NUMBER , INFO , MAP , GAME }; 
+enum GameScreen { MENU = 0 , NUMBER , INFO , DEAL , MAP , GAME }; 
 
 class Control {
     
@@ -130,6 +130,8 @@ class Control {
         void changeCircleColor();
         bool isColorful();
         void drawCards();
+        void deal();
+
 
 
       

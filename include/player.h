@@ -66,6 +66,7 @@ class Player {
 
         void setColorG(Color graficColor);
         Color getColorG();
+        void drawCards();
         
 
        
@@ -73,6 +74,7 @@ class Player {
         std::string getColor() const ;
         std::string getSeason();
         std::vector<std::shared_ptr<Card>> getYcards();
+        
         
 
     private:

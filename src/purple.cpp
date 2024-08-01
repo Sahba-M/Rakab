@@ -6,3 +6,4 @@ PurpleCard::PurpleCard (){}
 PurpleCard::PurpleCard ( std::string name ) : Card( name ) {}
 
 
+

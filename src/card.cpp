@@ -36,6 +36,8 @@ std::ostream & operator<< ( std::ostream & output , const Card & card )
     return output;
 }
 
+// AssetManager Card::myAsset;
+
 
 
 

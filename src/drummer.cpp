@@ -11,3 +11,7 @@ void DrummerCard::useCard ( std::vector <Player> & players , int numPlayer, int 
     int sum = players[numPlayer].getScorePlayer();
     players[numPlayer].setScorePlayer( sum * number );
 }
+void DrummerCard::draw ( int x , int y )
+{
+    DrawTexture (myAsset.drummer  , x , y , BLACK);
+}
