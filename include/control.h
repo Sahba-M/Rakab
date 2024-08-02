@@ -125,13 +125,13 @@ class Control {
         void askMap();//Draw a map image
         void drawSigns();
         void setGameBackground(); // Draw a picture on the game table
-        void DrawMousePosition();
-        void initializePlayersColor();
-        void changeCircleColor();
-        bool isColorful();
+        void initializePlayersColor(); // Initialization to each player's colors
+        void changeCircleColor(); //change sign of each player
+        bool isColorful(); //To manage the sign of war
+        void deal(); //Distribution of cards
         void drawCards();
-        void deal();
 
+        void DrawMousePosition();
 
 
       
@@ -176,8 +176,7 @@ class Control {
 
 
         // graphic data members :
-        // Font title , listFont , inputFont , askFont ;
-        // Textures MyTextures ;
+        
         GameScreen currentScreen; //enum
         AssetManager myAsset; // an object from AssetManager class
         InputBox inputName { 470 , 160 , 200 , 75 };// an object from InputBox class
@@ -190,11 +189,6 @@ class Control {
         std::vector <TextButton> numButtons ;
         std::vector <Color> signColors ;
         std::vector <Province> signs ;
-
-
-        
-
-
 
 };
 

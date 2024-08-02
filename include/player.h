@@ -63,18 +63,17 @@ class Player {
         bool isProximity();
         bool getIfLeader();
         bool getIfHorse();
-
-        void setColorG(Color graficColor);
-        Color getColorG();
-        void drawCards( int x , int y ,  AssetManager & myAsset);
-        
-
-       
-        const char * getName() ;
         std::string getColor() const ;
         std::string getSeason();
         std::vector<std::shared_ptr<Card>> getYcards();
         
+        //-----------------grafic functions---------------------------
+        const char * getName() ;
+        void setColorG(Color graficColor);
+        Color getColorG();
+        void drawCards( int x , int y ,  AssetManager & myAsset, Vector2 origin, float rotation);
+        void drawCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);
+
         
 
     private:

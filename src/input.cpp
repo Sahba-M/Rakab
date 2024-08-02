@@ -61,23 +61,6 @@ void InputBox::Update()
     }
 }
 
-// void InputBox::Draw() 
-// {
-//     float roundness = 0.4f; //for rounding rectangle corners
-
-//     Color color = { 171 , 220 , 245 , 225 };//Background color
-//     Color borderColor = { 6 , 87 , 128 , 255 }; //border color
-
-//     DrawRectangleRounded(bounds , roundness , 0 , color);
-//     // Draw text
-//     DrawTextEx( myAsset.inputFont , text , {bounds.x + 15, bounds.y + 25} , 25 , 2 , BLACK);
-//     // Draw rectangle border if active
-//     if (active) //Is it clicked or not?
-//     {
-//         Rectangle border = {bounds.x, bounds.y, bounds.width, bounds.height};
-//         DrawRectangleRoundedLines ( border , roundness , 0 , 4 , borderColor);//Only the margin
-//     }
-// }
 void InputBox::DrawName() 
 {
     float roundness = 0.4f; // for rounding rectangle corners

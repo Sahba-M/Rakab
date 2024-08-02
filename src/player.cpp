@@ -14,7 +14,6 @@
 #include "map.h"
 #include "leader.h"
 
-
 struct SharedPtrCompare
 { // To compare two shred_pointers
     template <class T, class U>
@@ -25,15 +24,15 @@ struct SharedPtrCompare
 };
 
 Player::Player() { scorePlayer = 0; };
-Player::Player(int age, const char* name, std::string color )
+Player::Player(int age, const char *name, std::string color)
 {
     setAge(age);
     setName(name);
     setColor(color);
 }
-void Player::setName(const char* name)
+void Player::setName(const char *name)
 {
-    strncpy (this->name , name , 25);
+    strncpy(this->name, name, 25); // It copies 25 characters inside name
 }
 void Player::setAge(int age)
 {
@@ -121,7 +120,7 @@ void Player::setSeason(std::string season)
 }
 void Player::setIfLeader(bool ifLeader)
 {
-    this-> ifLeader = ifLeader;
+    this->ifLeader = ifLeader;
 }
 void Player::setIfHorse(bool ifHorse)
 {
@@ -194,11 +193,11 @@ void Player::showCapturedProvinces()
     }
     std::cout << '\n';
 }
-void Player::insertBurnedCard ( std::vector<std::shared_ptr<Card>> & cards )
+void Player::insertBurnedCard(std::vector<std::shared_ptr<Card>> &cards)
 {
     cards.insert(cards.end(), burnedCards.begin(), burnedCards.end()); // for all player
 }
-void Player::insertHandCard ( std::vector<std::shared_ptr<Card>> & cards )
+void Player::insertHandCard(std::vector<std::shared_ptr<Card>> &cards)
 {
     cards.insert(cards.end(), hand.begin(), hand.end()); // for all player
 }
@@ -213,15 +212,14 @@ int Player::getScorePlayer()
 int Player::maxYcards()
 {
     std::vector<int> yellowIntegers;
-  
-        for (auto card : yellowCards)
-        {
-            yellowIntegers.push_back(stoi(card->getName()));
-        }
-        auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end()); // Find the largest element using the max_element function
-                                                                                            // To access the pointer value, not the pointer itself
-    return (*maxElement);  
-                                                               
+
+    for (auto card : yellowCards)
+    {
+        yellowIntegers.push_back(stoi(card->getName()));
+    }
+    auto maxElement = std::max_element(yellowIntegers.begin(), yellowIntegers.end()); // Find the largest element using the max_element function
+                                                                                      // To access the pointer value, not the pointer itself
+    return (*maxElement);
 }
 int Player::numCardsOfPlayer()
 {
@@ -270,15 +268,15 @@ int Player::getNumProvinces()
 }
 int Player::numberOfMaxYcards()
 {
-    int counter = 0 ;
-    for ( int i = 0 ; i < yellowCards.size(); i++ )
+    int counter = 0;
+    for (int i = 0; i < yellowCards.size(); i++)
     {
-        if ( stoi(yellowCards[i]->getName()) == maxYcards())
+        if (stoi(yellowCards[i]->getName()) == maxYcards())
         {
             counter++;
         }
     }
-    return counter ;
+    return counter;
 }
 bool Player::hasYellowGround()
 {
@@ -352,7 +350,8 @@ bool Player::hasDrummer()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("drummer");
 
-    auto elementFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
+    auto elementFound = std::find_if(usedCards.begin(), usedCards.end(), [&card](const std::shared_ptr<Card> &ptr)
+                                     { return SharedPtrCompare()(ptr, card); });
 
     if (elementFound != usedCards.end())
     {
@@ -365,7 +364,8 @@ bool Player::hasPrinces()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("princes");
 
-    auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
+    auto elemenFound = std::find_if(usedCards.begin(), usedCards.end(), [&card](const std::shared_ptr<Card> &ptr)
+                                    { return SharedPtrCompare()(ptr, card); });
 
     if (elemenFound != usedCards.end())
     {
@@ -384,7 +384,8 @@ bool Player::hasHorse()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("horse");
 
-    auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
+    auto elemenFound = std::find_if(usedCards.begin(), usedCards.end(), [&card](const std::shared_ptr<Card> &ptr)
+                                    { return SharedPtrCompare()(ptr, card); });
 
     if (elemenFound != usedCards.end())
     {
@@ -399,7 +400,8 @@ bool Player::hasVirago()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("virago");
 
-    auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
+    auto elemenFound = std::find_if(usedCards.begin(), usedCards.end(), [&card](const std::shared_ptr<Card> &ptr)
+                                    { return SharedPtrCompare()(ptr, card); });
 
     if (elemenFound != usedCards.end())
     {
@@ -414,7 +416,8 @@ bool Player::hasDean()
 {
     std::shared_ptr<Card> card = std::make_shared<PurpleCard>("dean");
 
-    auto elemenFound = std::find_if(usedCards.begin() , usedCards.end() , [ & card ]( const std::shared_ptr<Card> & ptr ){ return SharedPtrCompare()(ptr , card); });
+    auto elemenFound = std::find_if(usedCards.begin(), usedCards.end(), [&card](const std::shared_ptr<Card> &ptr)
+                                    { return SharedPtrCompare()(ptr, card); });
 
     if (elemenFound != usedCards.end())
     {
@@ -457,7 +460,7 @@ std::string Player::getSeason()
 {
     return season;
 }
-const char * Player::getName() 
+const char *Player::getName()
 {
     return name;
 }
@@ -469,10 +472,10 @@ std::vector<std::shared_ptr<Card>> Player::getYcards()
 {
     return yellowCards;
 }
-std::istream & operator>> (std::istream &input, Player &player )
+std::istream &operator>>(std::istream &input, Player &player)
 {
     std::string color;
-    char* name;
+    char *name;
 
     bool pass;
 
@@ -482,65 +485,56 @@ std::istream & operator>> (std::istream &input, Player &player )
 
     std::vector<std::shared_ptr<Card>> cards;
 
-    input >> name ;
+    input >> name;
     player.setName(name);
 
     input >> age;
     player.setAge(age);
 
     input >> color;
-    player.setColor(color); 
+    player.setColor(color);
 
     input >> size;
-    for (int i = 0; i < size ; i++)
+    for (int i = 0; i < size; i++)
     {
         input >> provinces[i];
         player.capturedProvinces[i] = provinces[i];
     }
 
     input >> size;
-    for (int i = 0; i < size ; i++)
+    for (int i = 0; i < size; i++)
     {
         input >> cards[i];
         player.hand[i] = cards[i];
     }
 
     input >> size;
-    for (int i = 0; i < size ; i++)
+    for (int i = 0; i < size; i++)
     {
         input >> cards[i];
         player.usedCards[i] = cards[i];
     }
 
     input >> size;
-    for (int i = 0; i < size ; i++)
+    for (int i = 0; i < size; i++)
     {
         input >> cards[i];
         player.burnedCards[i] = cards[i];
     }
 
     input >> size;
-    for (int i = 0; i < size ; i++)
+    for (int i = 0; i < size; i++)
     {
         input >> cards[i];
-         player.yellowCards[i] = cards[i];
+        player.yellowCards[i] = cards[i];
     }
-   
+
     input >> pass;
     player.setPass(pass);
 
     return input;
 }
-
-void Player::setColorG(Color graficColor)
-{
-    this->graficColor = graficColor;
-}
-Color Player::getColorG()
-{
-    return graficColor;
-}
-std::ostream & operator<< ( std::ostream & output , Player & player ) 
+std::ostream &operator<<(std::ostream &output, Player &player)
 {
     output << player.name << "\n";
     output << player.age << " " << player.color << "\n";
@@ -569,78 +563,118 @@ std::ostream & operator<< ( std::ostream & output , Player & player )
     {
         output << *player.yellowCards[i] << " ";
     }
-    output << '\n' << player.pass << "\n";
+    output << '\n'
+           << player.pass << "\n";
 
     return output;
 }
 
-void Player::drawCards( int x , int y , AssetManager & myAsset)
+void Player::setColorG(Color graficColor)
 {
-    int i = 0 ;
-    for ( auto card : hand )
+    this->graficColor = graficColor;
+}
+Color Player::getColorG()
+{
+    return graficColor;
+}
+
+
+void Player::drawCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
+{
+    int i = 0;
+
+    for (auto card : hand)
     {
         std::string name = card->getName();
-        
-        if ( name == "1" )
-        {
-            DrawTexture ( myAsset.soldier1 , x + (i*25) , y , WHITE );
-        }
-        else if ( name == "2" )
-        {
-            DrawTexture ( myAsset.soldier2 , x + (i*25) , y , WHITE );
-        }
-        else if ( name == "3" )
-        {
-            DrawTexture ( myAsset.soldier3 , x + (i*25) , y , WHITE ); 
-        } 
-        else if ( name == "4" )
-        {
-            DrawTexture ( myAsset.soldier4 , x + (i*25) , y , WHITE );
-        } 
-        else if ( name == "5" )
-        {
-            DrawTexture ( myAsset.soldier5 , x + (i*25) , y , WHITE );
-        } 
-        else if ( name == "6" )
-        {
-            DrawTexture ( myAsset.soldier6 , x + (i*25) , y , WHITE );
-        } 
-        else if ( name == "10" )
-        {
-            DrawTexture ( myAsset.soldier10 , x + (i*25) , y , WHITE );
-        } 
-        else if ( name == "spring" )
-        {
-            DrawTexture ( myAsset.spring , x + (i*25) , y , WHITE );
-        }
-        else if ( name == "winter" )
-        {
-            DrawTexture ( myAsset.winter , x + (i*25) , y , WHITE );
-        }
-        else if ( name == "leader" )
-        {
-            DrawTexture ( myAsset.leader , x + (i*25) , y , WHITE );
-        }
-        else if ( name == "princes" )
-        {
-            DrawTexture ( myAsset.princes , x + (i*25) , y , WHITE );
-        }
-        else if ( name == "dean" )
-        {
-            DrawTexture ( myAsset.dean , x + (i*25) , y , WHITE );
-        }
-        else if ( name == "drummer" )
-        {
-            DrawTexture ( myAsset.drummer , x + (i*25) , y , WHITE );
-        }
-        else if ( name == "virago" )
-        {
-            DrawTexture ( myAsset.virago , x + (i*25) , y , WHITE );
-        }
-        else if ( name == "scarecrow" )
-        {
-            DrawTexture ( myAsset.scarecrow , x + (i*25) , y , WHITE );
-        }
+        Texture2D texture;
+
+        if (name == "1")
+            texture = myAsset.soldier1;
+        else if (name == "2")
+            texture = myAsset.soldier2;
+        else if (name == "3")
+            texture = myAsset.soldier3;
+        else if (name == "4")
+            texture = myAsset.soldier4;
+        else if (name == "5")
+            texture = myAsset.soldier5;
+        else if (name == "6")
+            texture = myAsset.soldier6;
+        else if (name == "10")
+            texture = myAsset.soldier10;
+        else if (name == "spring")
+            texture = myAsset.spring;
+        else if (name == "winter")
+            texture = myAsset.winter;
+        else if (name == "leader")
+            texture = myAsset.leader;
+        else if (name == "princes")
+            texture = myAsset.princes;
+        else if (name == "dean")
+            texture = myAsset.dean;
+        else if (name == "drummer")
+            texture = myAsset.drummer;
+        else if (name == "virago")
+            texture = myAsset.virago;
+        else if (name == "scarecrow")
+            texture = myAsset.scarecrow;
+
+
+        Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
+        Vector2 position = {static_cast<float>(x) + static_cast<float>(i * 25), static_cast<float>(y)};
+        Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
+
+        DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
+
+        i++;
+    }
+}
+void Player::drawCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
+{
+    int i = 0;
+
+    for (auto card : hand)
+    {
+        std::string name = card->getName();
+        Texture2D texture;
+
+        if (name == "1")
+            texture = myAsset.soldier1;
+        else if (name == "2")
+            texture = myAsset.soldier2;
+        else if (name == "3")
+            texture = myAsset.soldier3;
+        else if (name == "4")
+            texture = myAsset.soldier4;
+        else if (name == "5")
+            texture = myAsset.soldier5;
+        else if (name == "6")
+            texture = myAsset.soldier6;
+        else if (name == "10")
+            texture = myAsset.soldier10;
+        else if (name == "spring")
+            texture = myAsset.spring;
+        else if (name == "winter")
+            texture = myAsset.winter;
+        else if (name == "leader")
+            texture = myAsset.leader;
+        else if (name == "princes")
+            texture = myAsset.princes;
+        else if (name == "dean")
+            texture = myAsset.dean;
+        else if (name == "drummer")
+            texture = myAsset.drummer;
+        else if (name == "virago")
+            texture = myAsset.virago;
+        else if (name == "scarecrow")
+            texture = myAsset.scarecrow;
+
+
+        Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
+        Vector2 position = {static_cast<float>(x) , static_cast<float>(y) + static_cast<float>(i * 25)};
+        Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
+
+        DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
 
         i++;
     }
