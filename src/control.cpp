@@ -1777,21 +1777,27 @@ void Control::drawCards()
 {
     
     Vector2 origin = {0, 0};
-    // for ( int i = 0 ; i < 10 ; i++ )
-    // {
-    //     // DrawTexture ( myAsset.back , 115 + (i*25) , 500 , WHITE);
-    //     DrawTexture ( myAsset.back , 645 + (i*25) , 500 , WHITE);
-    // }
 
-    players[0].drawCards(115 , 500 , myAsset, origin, 0);
-    players[1].drawCards(645 , 500 , myAsset, origin, 0);
-    players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+    players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
+    players[1].drawBackCards(645 , 500 , myAsset, origin, 0);
+    players[2].drawBackCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
     if (players.size() > 3)
-        players[3].drawCards(730 , 139 , myAsset, origin, -180);
+        players[3].drawBackCards(730 , 139 , myAsset, origin, -180);
     if (players.size() > 4)
-       players[4].drawCards(195 , 139 , myAsset, origin, -180);
+       players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
     if (players.size() > 5)
-        players[5].drawCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
+        players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
+
+
+    // players[0].drawCards(115 , 500 , myAsset, origin, 0);
+    // players[1].drawCards(645 , 500 , myAsset, origin, 0);
+    // players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+    // if (players.size() > 3)
+    //     players[3].drawCards(730 , 139 , myAsset, origin, -180);
+    // if (players.size() > 4)
+    //    players[4].drawCards(195 , 139 , myAsset, origin, -180);
+    // if (players.size() > 5)
+    //     players[5].drawCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
 
     
 

@@ -679,3 +679,39 @@ void Player::drawCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 
         i++;
     }
 }
+void Player::drawBackCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
+{
+    int i = 0;
+
+    for (auto card : hand)
+    {
+        std::string name = card->getName();
+        Texture2D texture = myAsset.back;
+
+        Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
+        Vector2 position = {static_cast<float>(x) + static_cast<float>(i * 25), static_cast<float>(y)};
+        Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
+
+        DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
+
+        i++;
+    }
+}
+void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
+{
+    int i = 0;
+
+    for (auto card : hand)
+    {
+        std::string name = card->getName();
+        Texture2D texture = myAsset.back;
+
+        Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
+        Vector2 position = {static_cast<float>(x) , static_cast<float>(y) + static_cast<float>(i * 25)};
+        Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
+
+        DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
+
+        i++;
+    }
+}

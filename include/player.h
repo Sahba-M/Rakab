@@ -72,7 +72,11 @@ class Player {
         void setColorG(Color graficColor);
         Color getColorG();
         void drawCards( int x , int y ,  AssetManager & myAsset, Vector2 origin, float rotation);
-        void drawCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);
+        void drawCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);//For players who are vertical!
+        void drawBackCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);
+        void drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);//For players who are vertical!
+
+
 
         
 
