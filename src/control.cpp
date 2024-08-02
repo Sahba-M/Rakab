@@ -1783,43 +1783,66 @@ void Control::drawCards()
     int startIndex = findPlayerIndex(getDeterminer());
     setCurrentIndex(startIndex);
 
-    int index = getCurrentIndex();
+    //int index = getCurrentIndex();
+    int index = 2;
   
     Vector2 origin = {0, 0};
 
     players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
     players[1].drawBackCards(645 , 500 , myAsset, origin, 0);
     players[2].drawBackCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-    if (players.size() > 3)
-        players[3].drawBackCards(730 , 139 , myAsset, origin, -180);
-    if (players.size() > 4)
-       players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
-    if (players.size() > 5)
-        players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
+    if (players.size() > 3) players[3].drawBackCards(730 , 139 , myAsset, origin, -180);
+    if (players.size() > 4) players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
+    if (players.size() > 5) players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
 
 
 
 
     if (index == 0)
+    {
         players[0].drawCards(115 , 500 , myAsset, origin, 0);
+        players[0].updateCards(115, 500, myAsset);
+        players[0].drawUseCards(170, 445,myAsset, origin,0);
+    }
     else if(index  == 1)
+    {
         players[1].drawCards(645 , 500 , myAsset, origin, 0);
+        players[1].updateCards(645, 500, myAsset);
+        players[1].drawUseCards(595, 445,myAsset, origin,0);
+
+    }
     else if (index  == 2)
+    {
         players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+        players[2].updateCards(937, 227, myAsset);
+        players[2].drawUseCards(992, 172,myAsset, origin,-90);
+
+    }
     if (players.size() > 3)
     {
        if(index  == 3)
+       {
             players[3].drawCards(730 , 139 , myAsset, origin, -180);
+            players[3].updateCards(730, 139, myAsset);
+           
+
+       }
     }
     if (players.size() > 4)
     {
         if(index == 4)
+        {
             players[4].drawCards(195 , 139 , myAsset, origin, -180);
+            players[4].updateCards(195, 139, myAsset);
+        }
     }
     if (players.size() > 5)
     {
         if (index  == 5)
+        {
             players[5].drawCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
+            players[5].updateCards(140, 165, myAsset);
+        }
     }
 
     
