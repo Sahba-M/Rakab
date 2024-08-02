@@ -155,7 +155,7 @@ void Control::getInformation()
 
         for (auto player : players)
         {
-            std::cout << player.getName() << "--" << player.getAge() << "/";
+            std::cout << player.getName() << "--" << player.getAge() << "/" <<"\n\n\n" << getCurrentIndex();
         }
     }
 
@@ -244,32 +244,36 @@ void Control::setWar()
     // selectWarPlace(getDeterminer());
 
     int startIndex = findPlayerIndex(getDeterminer());
-    int currentIndex = startIndex;
+    //int currentIndex = startIndex;
+    setCurrentIndex(startIndex);
+    
     system("cls");
 
     while (!endEachWar())
     {
         for (int i = 0; i < getPlayerNumber(); i++)
         {
-            showAllCaptured();
-            showPlayGround();
-            std::cout << "\n The War Is Over => " << getWarPlace() << "\n\n ";
-            selectMove(players[currentIndex], currentIndex);
-            if (players[currentIndex].getIfLeader())
+            //showAllCaptured();
+            //showPlayGround();
+            //std::cout << "\n The War Is Over => " << getWarPlace() << "\n\n ";
+            selectMove(players[getCurrentIndex()], currentIndex);
+            if (players[getCurrentIndex()].getIfLeader())
             {
                 leader.useCard(players, -1);
                 setIsLeader(true);
                 system("cls");
                 break;
             }
-            else if (players[currentIndex].getIfHorse())
+            else if (players[getCurrentIndex()].getIfHorse())
             {
                 horse.useCard(players, -1);
                 // setIsHorse(true);
                 system("cls");
                 break;
             }
-            currentIndex = (currentIndex + 1) % players.size();
+            //currentIndex = (currentIndex + 1) % players.size();
+            setCurrentIndex((getCurrentIndex()+1) % players.size());
+        
             system("cls");
 
             saveGame(); // save the game
@@ -1275,7 +1279,8 @@ void Control::Draw()
         break;
     case GAME:
         setGameBackground();
-        drawCards(); 
+        drawCards();
+       
         // shuffleCards();
         // distributeCards();
 
@@ -1775,7 +1780,11 @@ void Control::DrawMousePosition()
 
 void Control::drawCards()
 {
-    
+    int startIndex = findPlayerIndex(getDeterminer());
+    setCurrentIndex(startIndex);
+
+    int index = getCurrentIndex();
+  
     Vector2 origin = {0, 0};
 
     players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
@@ -1789,15 +1798,29 @@ void Control::drawCards()
         players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
 
 
-    // players[0].drawCards(115 , 500 , myAsset, origin, 0);
-    // players[1].drawCards(645 , 500 , myAsset, origin, 0);
-    // players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-    // if (players.size() > 3)
-    //     players[3].drawCards(730 , 139 , myAsset, origin, -180);
-    // if (players.size() > 4)
-    //    players[4].drawCards(195 , 139 , myAsset, origin, -180);
-    // if (players.size() > 5)
-    //     players[5].drawCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
+
+
+    if (index == 0)
+        players[0].drawCards(115 , 500 , myAsset, origin, 0);
+    else if(index  == 1)
+        players[1].drawCards(645 , 500 , myAsset, origin, 0);
+    else if (index  == 2)
+        players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+    if (players.size() > 3)
+    {
+       if(index  == 3)
+            players[3].drawCards(730 , 139 , myAsset, origin, -180);
+    }
+    if (players.size() > 4)
+    {
+        if(index == 4)
+            players[4].drawCards(195 , 139 , myAsset, origin, -180);
+    }
+    if (players.size() > 5)
+    {
+        if (index  == 5)
+            players[5].drawCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
+    }
 
     
 
@@ -1810,3 +1833,13 @@ void Control::deal()
     distributeCards();
     currentScreen = GAME;
 }
+
+int & Control::getCurrentIndex()
+{
+    return currentIndex;
+}
+void Control::setCurrentIndex(int currentIndex)
+{
+    this->currentIndex = currentIndex;
+}
+

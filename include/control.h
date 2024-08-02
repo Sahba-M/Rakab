@@ -131,7 +131,11 @@ class Control {
         void deal(); //Distribution of cards
         void drawCards();
 
+
         void DrawMousePosition();
+
+        void setCurrentIndex(int currentIndex);
+        int & getCurrentIndex();
 
 
       
@@ -190,6 +194,10 @@ class Control {
         std::vector <Color> signColors ;
         std::vector <Province> signs ;
 
+        int currentIndex ;
+
+
+     
 };
 
 #endif
