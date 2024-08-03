@@ -76,9 +76,11 @@ class Player {
         void drawBackCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);
         void drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);//For players who are vertical!
         void removeCardOnClick(int x, int y, AssetManager &myAsset);
-        void updateCards(int x, int y , AssetManager &myAsset);
+        void updateCards(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight);
         void drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);
         void drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);
+        void updateCardsSpecial(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight);
+
 
 
 
