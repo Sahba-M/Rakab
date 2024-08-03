@@ -818,7 +818,7 @@ void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vect
     }
 }
 
-void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
+void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
 
@@ -847,13 +847,16 @@ void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             usedCards.push_back(hand[i-1]);
             hand.erase(hand.begin() + (i - 1));
+            turn = true ;
+            std::cout << "test selsect true" << std::endl;
+
             
             break; 
         }
     }
 }
 
-void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
+void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
 
@@ -882,13 +885,16 @@ void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth,
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             usedCards.push_back(hand[i-1]);
             hand.erase(hand.begin() + (i - 1));
+            turn = true ;
+            std::cout << "test selsect true" << std::endl;
+
             
             break; 
         }
     }
 }
 
-void Player::updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
+void Player::updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
 
@@ -918,12 +924,15 @@ void Player::updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardW
            
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
+            turn = true ;
+            std::cout << "test selsect true" << std::endl;
+
             
             break; 
         }
     }
 }
-void Player::updateCardsSpecialL(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
+void Player::updateCardsSpecialL(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
 
@@ -954,6 +963,8 @@ void Player::updateCardsSpecialL(int x, int y , AssetManager &myAsset, int cardW
            
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
+            turn = true ;
+            std::cout << "test selsect true" << std::endl;
             
             
             break; 

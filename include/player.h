@@ -67,21 +67,21 @@ class Player {
         std::string getSeason();
         std::vector<std::shared_ptr<Card>> getYcards();
         
-        //-----------------grafic functions---------------------------
+        // ----------------- grafic functions ---------------------------
         const char * getName() ;
         void setColorG(Color graficColor);
         Color getColorG();
-        void drawCards( int x , int y ,  AssetManager & myAsset, Vector2 origin, float rotation);
-        void drawCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);//For players who are vertical!
-        void drawBackCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);
-        void drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);//For players who are vertical!
-        void removeCardOnClick(int x, int y, AssetManager &myAsset);
-        void updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight);
-        void drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);
-        void drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation);
-        void updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight);
-        void updateCardsSpecialL(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight);
-        void updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) ;
+        void drawCards( int x , int y ,  AssetManager & myAsset , Vector2 origin , float rotation);
+        void drawCardSpecialPlayer(int x , int y , AssetManager & myAsset , Vector2 origin , float rotation);//For players who are vertical!
+        void drawBackCards(int x , int y , AssetManager & myAsset , Vector2 origin , float rotation);
+        void drawBackCardSpecialPlayer(int x , int y , AssetManager &myAsset , Vector2 origin , float rotation);//For players who are vertical!
+        void removeCardOnClick(int x , int y , AssetManager & myAsset);
+        void updateCardsDown(int x , int y , AssetManager & myAsset , int cardWidth , int cardHeight , bool & turn);
+        void drawUseCards(int x , int y , AssetManager & myAsset , Vector2 origin, float rotation);
+        void drawUseCardSpecialPlayer(int x , int y , AssetManager & myAsset , Vector2 origin, float rotation );
+        void updateCardsSpecialR(int x , int y , AssetManager & myAsset , int cardWidth , int cardHeight , bool & turn);
+        void updateCardsSpecialL(int x , int y , AssetManager & myAsset , int cardWidth , int cardHeight , bool & turn);
+        void updateCardsTop(int x , int y , AssetManager & myAsset , int cardWidth , int cardHeight , bool & turn) ;
 
 
 

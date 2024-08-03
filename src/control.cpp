@@ -31,6 +31,9 @@
 #include "leader.h"
 #include "horse.h"
 
+
+int Control::currentIndex = 0;  
+
 Control::Control()
 {
     provinceNumber = 15;
@@ -1301,6 +1304,8 @@ void Control::Update()
         break;
     case DEAL:
         deal();
+    case GAME:
+        updateCards();
         
         break;
     }
@@ -1780,88 +1785,222 @@ void Control::DrawMousePosition()
 
 void Control::drawCards()
 {
-    int startIndex = findPlayerIndex(getDeterminer());
-    setCurrentIndex(startIndex);
-
-    //int index = getCurrentIndex();
-    int index = 5;
-  
+    // int startIndex = findPlayerIndex(getDeterminer());
+    // setCurrentIndex(startIndex);
+    int index = getCurrentIndex();
     Vector2 origin = {0, 0};
 
-    players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
-    players[1].drawBackCards(645 , 500 , myAsset, origin, 0);
-    players[2].drawBackCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-    if (players.size() > 3) players[3].drawBackCards(730 , 139 , myAsset, origin, -180);
-    if (players.size() > 4) players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
-    if (players.size() > 5) players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
-
-
-
-
-    // if (index == 0)
-    // {
-        players[0].drawCards(115 , 500 , myAsset, origin, 0);
-        players[0].updateCardsDown(115, 500, myAsset, 70, 108);
-        players[0].drawUseCards(200, 445,myAsset, origin,0);
-        players[0].drawCards(115 , 500 , myAsset, origin, 0);
-
-   // }
-    // else if(index  == 1)
-    //{
-        players[1].drawCards(645 , 500 , myAsset, origin, 0);
-        players[1].updateCardsDown(645, 500, myAsset, 70, 108);
-        players[1].drawUseCards(559, 445,myAsset, origin,0);
-        players[1].drawCards(645 , 500 , myAsset, origin, 0);
-
-
-   // }
-  //if (index  == 2)
-   // {
-        players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-        players[2].updateCardsSpecialR(937, 227, myAsset, 70, 108);
-        players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
-        players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-
-
-   // }
-    // if (players.size() > 3)
-    // {
-        
-    //    if(index  == 3)
-    //    {
-            players[3].drawCards(730 , 139 , myAsset, origin, -180);
-            players[3].updateCardsTop(730, 139, myAsset, 70, 108);
+    // players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
+    // players[1].drawBackCards(645 , 500 , myAsset, origin, 0);
+    // players[2].drawBackCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+    // if (players.size() > 3) players[3].drawBackCards(730 , 139 , myAsset, origin, -180);
+    // if (players.size() > 4) players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
+    // if (players.size() > 5) players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
+            players[0].drawUseCards(200, 445,myAsset, origin,0);
+            players[1].drawUseCards(559, 445,myAsset, origin,0);
+            players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
             players[3].drawUseCards(630, 200, myAsset, origin,-180 );
-            players[3].drawCards(730 , 139 , myAsset, origin, -180);
+            players[4].drawUseCards(270, 200, myAsset, origin,-180 );
+            players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
+
+    std::cout << "test index : " << index << "    ";
+
+    for ( int i = 0 ; i < players.size() ; i++ )
+    {
+        if (getCurrentIndex() == 0)
+        {
+            players[0].drawCards(115 , 500 , myAsset, origin, 0);
+            // players[0].updateCardsDown(115, 500, myAsset, 70, 108);
+            players[0].drawCards(115 , 500 , myAsset, origin, 0);
+            // setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
+        }
+        else
+        players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
+
+        if(getCurrentIndex()  == 1)
+        {
+            players[1].drawCards(645 , 500 , myAsset, origin, 0);
+            // players[1].updateCardsDown(645, 500, myAsset, 70, 108);
+            players[1].drawCards(645 , 500 , myAsset, origin, 0);
+        }
+        else
+        players[1].drawBackCards(645 , 500 , myAsset, origin, 0);
+
+        if (getCurrentIndex()  == 2)
+        {
+            players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+            // players[2].updateCardsSpecialR(937, 227, myAsset, 70, 108);
+            players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+        }
+        else
+        players[2].drawBackCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+
+        if (players.size() > 3)
+        {
+            if(getCurrentIndex() == 3)
+            {
+                players[3].drawCards(730 , 139 , myAsset, origin, -180);
+                // players[3].updateCardsTop(730, 139, myAsset, 70, 108);
+                players[3].drawCards(730 , 139 , myAsset, origin, -180);
+            }
+            else
+            players[3].drawBackCards(730 , 139 , myAsset, origin, -180);
+        }
+
+        if (players.size() > 4)
+        {
+            if(getCurrentIndex() == 4)
+            {
+                players[4].drawCards(195 , 139 , myAsset, origin, -180);
+                // players[4].updateCardsTop(195, 139, myAsset, 70, 108);
+                players[4].drawCards(195, 139 , myAsset, origin, -180);
+            }
+            else
+            players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
+        }
+
+        if (players.size() > 5)
+        {
+            if (getCurrentIndex() == 5)
+            {
+                players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
+                // players[5].updateCardsSpecialL (140, 165, myAsset, 108, 70);
+                players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
+            }
+            else
+            players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
+        }
+
+        // setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
+        // std::cout << "test index : " << index << "\n";
+
+
+    }
+
+
+    // int index = 5;
+  
+
+//     c
+
+
+
+
+//     // if (index == 0)
+//     // {
+//         players[0].drawCards(115 , 500 , myAsset, origin, 0);
+//         players[0].updateCardsDown(115, 500, myAsset, 70, 108);
+//         players[0].drawUseCards(200, 445,myAsset, origin,0);
+//         players[0].drawCards(115 , 500 , myAsset, origin, 0);
+
+//    // }
+//     // else if(index  == 1)
+//     //{
+//         players[1].drawCards(645 , 500 , myAsset, origin, 0);
+//         players[1].updateCardsDown(645, 500, myAsset, 70, 108);
+//         players[1].drawUseCards(559, 445,myAsset, origin,0);
+//         players[1].drawCards(645 , 500 , myAsset, origin, 0);
+
+
+//    // }
+// //   if (index  == 2)
+// //    {
+//         players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+//         players[2].updateCardsSpecialR(937, 227, myAsset, 70, 108);
+//         players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
+//         players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+
+
+// //    }
+//     // if (players.size() > 3)
+//     // {
+        
+//     //    if(index  == 3)
+//     //    {
+//             players[3].drawCards(730 , 139 , myAsset, origin, -180);
+//             players[3].updateCardsTop(730, 139, myAsset, 70, 108);
+//             players[3].drawUseCards(630, 200, myAsset, origin,-180 );
+//             players[3].drawCards(730 , 139 , myAsset, origin, -180);
 
            
 
-      // }
-   // }
-    // if (players.size() > 4)
-    // {
-    //     if(index == 4)
-    //     {
-            players[4].drawCards(195 , 139 , myAsset, origin, -180);
-            players[4].updateCardsTop(195, 139, myAsset, 70, 108);
-            players[4].drawUseCards(270, 200, myAsset, origin,-180 );
-            players[4].drawCards(195, 139 , myAsset, origin, -180);
-    //     }
-    // }
-    // if (players.size() > 5)
-    // {
-    //     if (index  == 5)
-    //     {
-            players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
-            players[5].updateCardsSpecialL (140, 165, myAsset, 108, 70);
-            players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
-            players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
-    //     }
-    // }
-
-    
+//       // }
+//    // }
+//     // if (players.size() > 4)
+//     // {
+//     //     if(index == 4)
+//     //     {
+//             players[4].drawCards(195 , 139 , myAsset, origin, -180);
+//             players[4].updateCardsTop(195, 139, myAsset, 70, 108);
+//             players[4].drawUseCards(270, 200, myAsset, origin,-180 );
+//             players[4].drawCards(195, 139 , myAsset, origin, -180);
+//     //     }
+//     // }
+//     // if (players.size() > 5)
+//     // {
+//     //     if (index  == 5)
+//     //     {
+//             players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
+//             players[5].updateCardsSpecialL (140, 165, myAsset, 108, 70);
+//             players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
+//             players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
+//     //     }
+//     // }
 
 
+
+}
+void Control::updateCards()
+{
+    Vector2 origin = {0, 0};
+    switch (getCurrentIndex())
+    {
+        case 0:
+            players[0].updateCardsDown(115, 500, myAsset, 70, 108 , cardselected);
+            // players[0].drawUseCards(200, 445,myAsset, origin,0);
+            break;
+
+        case 1:
+            players[1].updateCardsDown(645, 500, myAsset, 70, 108, cardselected);
+            // players[1].drawUseCards(559, 445,myAsset, origin,0);
+            break;
+
+        case 2:
+            players[2].updateCardsSpecialR(937, 227, myAsset, 70, 108, cardselected);
+            // players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
+            break;
+
+        case 3:
+            if ( players.size() > 3 )
+            {
+                players[3].updateCardsTop(730, 139, myAsset, 70, 108, cardselected);
+                // players[3].drawUseCards(630, 200, myAsset, origin,-180 );
+            }
+            break;
+
+        case 4:
+            if ( players.size() > 4 )
+            {
+                players[4].updateCardsTop(195, 139, myAsset, 70, 108, cardselected);
+                // players[4].drawUseCards(270, 200, myAsset, origin,-180 );
+            }
+            break;
+
+        case 5:
+            if ( players.size() > 5 )
+            {
+                players[5].updateCardsSpecialL (140, 165, myAsset, 108, 70, cardselected);
+                // players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
+            }
+            break;
+    }
+
+    if (cardselected)
+    {
+        setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
+        std::cout << "test index : " << getCurrentIndex() << "\n";
+        cardselected = false;
+    }
 }
 void Control::deal()
 {

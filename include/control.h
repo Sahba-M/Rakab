@@ -130,6 +130,8 @@ class Control {
         bool isColorful(); //To manage the sign of war
         void deal(); //Distribution of cards
         void drawCards();
+        void updateCards();
+
 
 
         void DrawMousePosition();
@@ -194,7 +196,8 @@ class Control {
         std::vector <Color> signColors ;
         std::vector <Province> signs ;
 
-        int currentIndex ;
+        bool cardselected = false;
+        static int currentIndex ;
 
 
      
