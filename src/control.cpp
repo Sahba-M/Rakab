@@ -1281,9 +1281,22 @@ void Control::Draw()
         
         break;
     case GAME:
-        setGameBackground();
-        drawCards();
-        managePassButton();
+        if (!endEachWar())
+        {
+            setGameBackground();
+            drawCards();
+            managePassButton();
+        }
+        else
+        {
+            cardAction();
+            if (winEachWar())
+            std::cout << " >>> " << winner.getName() << " <<< " << " Is The Winner Of This Round!!! \n\n ";
+        }
+
+
+
+
         break;
     }
 }
@@ -1792,7 +1805,7 @@ void Control::drawCards()
     if ( players.size() > 4 ) players[4].drawUseCards(270, 200, myAsset, origin,-180 );
     if ( players.size() > 5 ) players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
 
-    std::cout << "test index : " << index << "    ";
+    // std::cout << "test index : " << index << "    ";
 
     for ( int i = 0 ; i < players.size() ; i++ )
     {
@@ -1918,6 +1931,7 @@ void Control::deal()
     setCards();
     shuffleCards();
     distributeCards();
+    setPlayersReady();
     currentScreen = GAME;
 }
 

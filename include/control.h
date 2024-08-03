@@ -31,7 +31,7 @@ struct Province {
 };
 
 
-enum GameScreen { MENU = 0 , NUMBER , INFO , DEAL , MAP , GAME }; 
+enum GameScreen { MENU = 0 , NUMBER , INFO , DEAL , MAP , GAME , SCARECROW }; 
 
 class Control {
     

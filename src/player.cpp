@@ -927,7 +927,6 @@ void Player::updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardW
             turn = true ;
             std::cout << "test selsect true" << std::endl;
 
-            
             break; 
         }
     }
@@ -965,7 +964,6 @@ void Player::updateCardsSpecialL(int x, int y , AssetManager &myAsset, int cardW
             hand.erase(hand.begin() + (i - 1));
             turn = true ;
             std::cout << "test selsect true" << std::endl;
-            
             
             break; 
         }
