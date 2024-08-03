@@ -131,6 +131,8 @@ class Control {
         void deal(); //Distribution of cards
         void drawCards();
         void updateCards();
+        void managePassButton();
+
 
 
 
@@ -198,6 +200,7 @@ class Control {
 
         bool cardselected = false;
         static int currentIndex ;
+        TextButton passButton;
 
 
      

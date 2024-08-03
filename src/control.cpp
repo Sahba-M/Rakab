@@ -1283,6 +1283,7 @@ void Control::Draw()
     case GAME:
         setGameBackground();
         drawCards();
+        managePassButton();
        
         // shuffleCards();
         // distributeCards();
@@ -1790,18 +1791,12 @@ void Control::drawCards()
     int index = getCurrentIndex();
     Vector2 origin = {0, 0};
 
-    // players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
-    // players[1].drawBackCards(645 , 500 , myAsset, origin, 0);
-    // players[2].drawBackCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-    // if (players.size() > 3) players[3].drawBackCards(730 , 139 , myAsset, origin, -180);
-    // if (players.size() > 4) players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
-    // if (players.size() > 5) players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
-            players[0].drawUseCards(200, 445,myAsset, origin,0);
-            players[1].drawUseCards(559, 445,myAsset, origin,0);
-            players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
-            players[3].drawUseCards(630, 200, myAsset, origin,-180 );
-            players[4].drawUseCards(270, 200, myAsset, origin,-180 );
-            players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
+    players[0].drawUseCards(200, 445,myAsset, origin,0);
+    players[1].drawUseCards(559, 445,myAsset, origin,0);
+    players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
+    if ( players.size() > 3 ) players[3].drawUseCards(630, 200, myAsset, origin,-180 );
+    if ( players.size() > 4 ) players[4].drawUseCards(270, 200, myAsset, origin,-180 );
+    if ( players.size() > 5 ) players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
 
     std::cout << "test index : " << index << "    ";
 
@@ -1877,78 +1872,6 @@ void Control::drawCards()
 
     }
 
-
-    // int index = 5;
-  
-
-//     c
-
-
-
-
-//     // if (index == 0)
-//     // {
-//         players[0].drawCards(115 , 500 , myAsset, origin, 0);
-//         players[0].updateCardsDown(115, 500, myAsset, 70, 108);
-//         players[0].drawUseCards(200, 445,myAsset, origin,0);
-//         players[0].drawCards(115 , 500 , myAsset, origin, 0);
-
-//    // }
-//     // else if(index  == 1)
-//     //{
-//         players[1].drawCards(645 , 500 , myAsset, origin, 0);
-//         players[1].updateCardsDown(645, 500, myAsset, 70, 108);
-//         players[1].drawUseCards(559, 445,myAsset, origin,0);
-//         players[1].drawCards(645 , 500 , myAsset, origin, 0);
-
-
-//    // }
-// //   if (index  == 2)
-// //    {
-//         players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-//         players[2].updateCardsSpecialR(937, 227, myAsset, 70, 108);
-//         players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
-//         players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-
-
-// //    }
-//     // if (players.size() > 3)
-//     // {
-        
-//     //    if(index  == 3)
-//     //    {
-//             players[3].drawCards(730 , 139 , myAsset, origin, -180);
-//             players[3].updateCardsTop(730, 139, myAsset, 70, 108);
-//             players[3].drawUseCards(630, 200, myAsset, origin,-180 );
-//             players[3].drawCards(730 , 139 , myAsset, origin, -180);
-
-           
-
-//       // }
-//    // }
-//     // if (players.size() > 4)
-//     // {
-//     //     if(index == 4)
-//     //     {
-//             players[4].drawCards(195 , 139 , myAsset, origin, -180);
-//             players[4].updateCardsTop(195, 139, myAsset, 70, 108);
-//             players[4].drawUseCards(270, 200, myAsset, origin,-180 );
-//             players[4].drawCards(195, 139 , myAsset, origin, -180);
-//     //     }
-//     // }
-//     // if (players.size() > 5)
-//     // {
-//     //     if (index  == 5)
-//     //     {
-//             players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
-//             players[5].updateCardsSpecialL (140, 165, myAsset, 108, 70);
-//             players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
-//             players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
-//     //     }
-//     // }
-
-
-
 }
 void Control::updateCards()
 {
@@ -2019,3 +1942,23 @@ void Control::setCurrentIndex(int currentIndex)
     this->currentIndex = currentIndex;
 }
 
+void Control::managePassButton()
+{
+    passButton.text = "Pass";
+    passButton.bounds = {615 , 280 , 80 , 80};
+    DrawRectangleRounded(passButton.bounds, 0.3f, 0, passButton.buttonColor);
+    DrawTextEx(myAsset.listFont, passButton.text, {passButton.bounds.x + 10, passButton.bounds.y + 30}, 30, 2, passButton.color);
+
+    Vector2 mousePosition = GetMousePosition();
+    if (CheckCollisionPointRec(mousePosition, passButton.bounds))
+    {
+        // Change colors on button click
+        passButton.buttonColor = {122, 95, 93, 110}; // button color
+        passButton.color = {237, 233, 232, 255}; // text color
+    }
+    else
+    {
+        passButton.color = BLACK;
+        passButton.buttonColor = {212, 190, 188, 30};
+    }
+}
