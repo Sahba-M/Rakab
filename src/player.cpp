@@ -878,7 +878,7 @@ void Player::updateCardsSpecial(int x, int y , AssetManager &myAsset, int cardWi
         else if (name == "virago") texture = myAsset.virago;
         else if (name == "scarecrow") texture = myAsset.scarecrow;
 
-        Rectangle cardRect = { static_cast<float>(x), static_cast<float>(y + (i - 1) * 25), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
+        Rectangle cardRect = { static_cast<float>(x), static_cast<float>(y - 80 + (i - 1) * 25 ), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
            

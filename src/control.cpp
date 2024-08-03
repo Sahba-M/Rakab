@@ -1826,10 +1826,11 @@ void Control::drawCards()
     }
     if (players.size() > 3)
     {
+        
        if(index  == 3)
        {
             players[3].drawCards(730 , 139 , myAsset, origin, -180);
-           // players[3].updateCards(730, 139, myAsset);
+            players[3].updateCards(730, 139, myAsset, 70, 108);
            
 
        }
