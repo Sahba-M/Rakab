@@ -1784,7 +1784,7 @@ void Control::drawCards()
     setCurrentIndex(startIndex);
 
     //int index = getCurrentIndex();
-    int index = 2;
+    int index = 5;
   
     Vector2 origin = {0, 0};
 
@@ -1801,56 +1801,63 @@ void Control::drawCards()
     // if (index == 0)
     // {
         players[0].drawCards(115 , 500 , myAsset, origin, 0);
-        players[0].updateCards(115, 500, myAsset, 70, 108);
-        players[0].drawUseCards(180, 445,myAsset, origin,0);
+        players[0].updateCardsDown(115, 500, myAsset, 70, 108);
+        players[0].drawUseCards(200, 445,myAsset, origin,0);
         players[0].drawCards(115 , 500 , myAsset, origin, 0);
 
    // }
     // else if(index  == 1)
     //{
         players[1].drawCards(645 , 500 , myAsset, origin, 0);
-        players[1].updateCards(645, 500, myAsset, 70, 108);
-        players[1].drawUseCards(580, 445,myAsset, origin,0);
+        players[1].updateCardsDown(645, 500, myAsset, 70, 108);
+        players[1].drawUseCards(559, 445,myAsset, origin,0);
         players[1].drawCards(645 , 500 , myAsset, origin, 0);
 
 
    // }
-  if (index  == 2)
-    {
+  //if (index  == 2)
+   // {
         players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-        players[2].updateCardsSpecial(937, 227, myAsset, 70, 108);
+        players[2].updateCardsSpecialR(937, 227, myAsset, 70, 108);
         players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
         players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
 
 
-    }
-    if (players.size() > 3)
-    {
+   // }
+    // if (players.size() > 3)
+    // {
         
-       if(index  == 3)
-       {
+    //    if(index  == 3)
+    //    {
             players[3].drawCards(730 , 139 , myAsset, origin, -180);
-            players[3].updateCards(730, 139, myAsset, 70, 108);
+            players[3].updateCardsTop(730, 139, myAsset, 70, 108);
+            players[3].drawUseCards(630, 200, myAsset, origin,-180 );
+            players[3].drawCards(730 , 139 , myAsset, origin, -180);
+
            
 
-       }
-    }
-    if (players.size() > 4)
-    {
-        if(index == 4)
-        {
+      // }
+   // }
+    // if (players.size() > 4)
+    // {
+    //     if(index == 4)
+    //     {
             players[4].drawCards(195 , 139 , myAsset, origin, -180);
-           // players[4].updateCards(195, 139, myAsset);
-        }
-    }
-    if (players.size() > 5)
-    {
-        if (index  == 5)
-        {
-            players[5].drawCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
-           // players[5].updateCards(140, 165, myAsset);
-        }
-    }
+            players[4].updateCardsTop(195, 139, myAsset, 70, 108);
+            players[4].drawUseCards(270, 200, myAsset, origin,-180 );
+            players[4].drawCards(195, 139 , myAsset, origin, -180);
+    //     }
+    // }
+    // if (players.size() > 5)
+    // {
+    //     if (index  == 5)
+    //     {
+            players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
+            players[5].updateCardsSpecialL (140, 165, myAsset, 108, 70);
+            players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
+            players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
+    //     }
+    // }
 
     
 

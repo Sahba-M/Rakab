@@ -818,7 +818,7 @@ void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vect
     }
 }
 
-void Player::updateCards(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
+void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
     Vector2 mousePosition = GetMousePosition();
     
 
@@ -845,7 +845,6 @@ void Player::updateCards(int x, int y , AssetManager &myAsset, int cardWidth, in
         Rectangle cardRect = { static_cast<float>(x + (i - 1) * 25), static_cast<float>(y), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-           
             usedCards.push_back(hand[i-1]);
             hand.erase(hand.begin() + (i - 1));
             
@@ -854,7 +853,42 @@ void Player::updateCards(int x, int y , AssetManager &myAsset, int cardWidth, in
     }
 }
 
-void Player::updateCardsSpecial(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
+void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
+    Vector2 mousePosition = GetMousePosition();
+    
+
+    for (size_t i = hand.size(); i > 0; i--) {
+        std::string name = hand[i - 1]->getName();
+        Texture2D texture;
+
+        if (name == "1") texture = myAsset.soldier1;
+        else if (name == "2") texture = myAsset.soldier2;
+        else if (name == "3") texture = myAsset.soldier3;
+        else if (name == "4") texture = myAsset.soldier4;
+        else if (name == "5") texture = myAsset.soldier5;
+        else if (name == "6") texture = myAsset.soldier6;
+        else if (name == "10") texture = myAsset.soldier10;
+        else if (name == "spring") texture = myAsset.spring;
+        else if (name == "winter") texture = myAsset.winter;
+        else if (name == "leader") texture = myAsset.leader;
+        else if (name == "princes") texture = myAsset.princes;
+        else if (name == "dean") texture = myAsset.dean;
+        else if (name == "drummer") texture = myAsset.drummer;
+        else if (name == "virago") texture = myAsset.virago;
+        else if (name == "scarecrow") texture = myAsset.scarecrow;
+
+        Rectangle cardRect = { static_cast<float>(x - 60 + (i - 1) * 25), static_cast<float>(y - 115), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
+
+        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            usedCards.push_back(hand[i-1]);
+            hand.erase(hand.begin() + (i - 1));
+            
+            break; 
+        }
+    }
+}
+
+void Player::updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
     Vector2 mousePosition = GetMousePosition();
     
 
@@ -884,6 +918,43 @@ void Player::updateCardsSpecial(int x, int y , AssetManager &myAsset, int cardWi
            
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
+            
+            break; 
+        }
+    }
+}
+void Player::updateCardsSpecialL(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight) {
+    Vector2 mousePosition = GetMousePosition();
+    
+
+    for (size_t i = hand.size(); i > 0; i--) {
+        std::string name = hand[i - 1]->getName();
+        Texture2D texture;
+       
+
+        if (name == "1") texture = myAsset.soldier1;
+        else if (name == "2") texture = myAsset.soldier2;
+        else if (name == "3") texture = myAsset.soldier3;
+        else if (name == "4") texture = myAsset.soldier4;
+        else if (name == "5") texture = myAsset.soldier5;
+        else if (name == "6") texture = myAsset.soldier6;
+        else if (name == "10") texture = myAsset.soldier10;
+        else if (name == "spring") texture = myAsset.spring;
+        else if (name == "winter") texture = myAsset.winter;
+        else if (name == "leader") texture = myAsset.leader;
+        else if (name == "princes") texture = myAsset.princes;
+        else if (name == "dean") texture = myAsset.dean;
+        else if (name == "drummer") texture = myAsset.drummer;
+        else if (name == "virago") texture = myAsset.virago;
+        else if (name == "scarecrow") texture = myAsset.scarecrow;
+
+        Rectangle cardRect = { static_cast<float>(x - 100), static_cast<float>(y  + (i - 1) * 25 ), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
+
+        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+           
+            usedCards.push_back(hand[i - 1]);
+            hand.erase(hand.begin() + (i - 1));
+            
             
             break; 
         }
