@@ -1284,10 +1284,6 @@ void Control::Draw()
         setGameBackground();
         drawCards();
         managePassButton();
-       
-        // shuffleCards();
-        // distributeCards();
-
         break;
     }
 }
@@ -1786,8 +1782,6 @@ void Control::DrawMousePosition()
 
 void Control::drawCards()
 {
-    // int startIndex = findPlayerIndex(getDeterminer());
-    // setCurrentIndex(startIndex);
     int index = getCurrentIndex();
     Vector2 origin = {0, 0};
 
@@ -1804,18 +1798,15 @@ void Control::drawCards()
     {
         if (getCurrentIndex() == 0)
         {
+            if (!players[0].getPass())
             players[0].drawCards(115 , 500 , myAsset, origin, 0);
-            // players[0].updateCardsDown(115, 500, myAsset, 70, 108);
-            players[0].drawCards(115 , 500 , myAsset, origin, 0);
-            // setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
         }
         else
         players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
 
         if(getCurrentIndex()  == 1)
         {
-            players[1].drawCards(645 , 500 , myAsset, origin, 0);
-            // players[1].updateCardsDown(645, 500, myAsset, 70, 108);
+            if (!players[1].getPass())
             players[1].drawCards(645 , 500 , myAsset, origin, 0);
         }
         else
@@ -1823,8 +1814,7 @@ void Control::drawCards()
 
         if (getCurrentIndex()  == 2)
         {
-            players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
-            // players[2].updateCardsSpecialR(937, 227, myAsset, 70, 108);
+            if (!players[2].getPass())
             players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
         }
         else
@@ -1834,8 +1824,7 @@ void Control::drawCards()
         {
             if(getCurrentIndex() == 3)
             {
-                players[3].drawCards(730 , 139 , myAsset, origin, -180);
-                // players[3].updateCardsTop(730, 139, myAsset, 70, 108);
+                if (!players[3].getPass())
                 players[3].drawCards(730 , 139 , myAsset, origin, -180);
             }
             else
@@ -1846,9 +1835,8 @@ void Control::drawCards()
         {
             if(getCurrentIndex() == 4)
             {
+                if (!players[4].getPass())
                 players[4].drawCards(195 , 139 , myAsset, origin, -180);
-                // players[4].updateCardsTop(195, 139, myAsset, 70, 108);
-                players[4].drawCards(195, 139 , myAsset, origin, -180);
             }
             else
             players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
@@ -1858,18 +1846,12 @@ void Control::drawCards()
         {
             if (getCurrentIndex() == 5)
             {
-                players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
-                // players[5].updateCardsSpecialL (140, 165, myAsset, 108, 70);
+                if (!players[5].getPass())
                 players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
             }
             else
             players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
         }
-
-        // setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
-        // std::cout << "test index : " << index << "\n";
-
-
     }
 
 }
@@ -1879,41 +1861,47 @@ void Control::updateCards()
     switch (getCurrentIndex())
     {
         case 0:
+            if (!players[0].getPass())
             players[0].updateCardsDown(115, 500, myAsset, 70, 108 , cardselected);
-            // players[0].drawUseCards(200, 445,myAsset, origin,0);
+            else setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
             break;
 
         case 1:
+            if (!players[1].getPass())
             players[1].updateCardsDown(645, 500, myAsset, 70, 108, cardselected);
-            // players[1].drawUseCards(559, 445,myAsset, origin,0);
+            else setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
             break;
 
         case 2:
+            if (!players[2].getPass())
             players[2].updateCardsSpecialR(937, 227, myAsset, 70, 108, cardselected);
-            // players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
+            else setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
             break;
 
         case 3:
             if ( players.size() > 3 )
             {
+                if (!players[3].getPass())
                 players[3].updateCardsTop(730, 139, myAsset, 70, 108, cardselected);
-                // players[3].drawUseCards(630, 200, myAsset, origin,-180 );
+                else setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
             }
             break;
 
         case 4:
             if ( players.size() > 4 )
             {
+                if (!players[4].getPass())
                 players[4].updateCardsTop(195, 139, myAsset, 70, 108, cardselected);
-                // players[4].drawUseCards(270, 200, myAsset, origin,-180 );
+                else setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
             }
             break;
 
         case 5:
             if ( players.size() > 5 )
             {
+                if (!players[5].getPass())
                 players[5].updateCardsSpecialL (140, 165, myAsset, 108, 70, cardselected);
-                // players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
+                else setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
             }
             break;
     }
@@ -1947,18 +1935,23 @@ void Control::managePassButton()
     passButton.text = "Pass";
     passButton.bounds = {615 , 280 , 80 , 80};
     DrawRectangleRounded(passButton.bounds, 0.3f, 0, passButton.buttonColor);
-    DrawTextEx(myAsset.listFont, passButton.text, {passButton.bounds.x + 10, passButton.bounds.y + 30}, 30, 2, passButton.color);
+    DrawTextEx(myAsset.listFont, passButton.text, {passButton.bounds.x + 15, passButton.bounds.y + 30}, 30, 2, passButton.color);
 
     Vector2 mousePosition = GetMousePosition();
     if (CheckCollisionPointRec(mousePosition, passButton.bounds))
     {
         // Change colors on button click
-        passButton.buttonColor = {122, 95, 93, 110}; // button color
-        passButton.color = {237, 233, 232, 255}; // text color
+        passButton.buttonColor = {191, 99, 99, 170}; // button color
+        passButton.color = {237, 237, 237, 255}; // text color
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            players[getCurrentIndex()].setPass(true);
+            setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
+        }
     }
     else
     {
+        passButton.buttonColor = {242, 174, 174, 170};
         passButton.color = BLACK;
-        passButton.buttonColor = {212, 190, 188, 30};
     }
 }

@@ -201,6 +201,7 @@ class Control {
         bool cardselected = false;
         static int currentIndex ;
         TextButton passButton;
+        bool ifDeterminer = true;
 
 
      
