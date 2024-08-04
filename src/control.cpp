@@ -32,7 +32,7 @@
 #include "horse.h"
 
 
-int Control::currentIndex = 0;  
+int Control::currentIndex ;  
 
 Control::Control()
 {
@@ -774,7 +774,7 @@ int Control::getPlayerNumber()
 {
     return playerNumber;
 }
-int Control::findPlayerIndex(const Player &player)
+int Control::findPlayerIndex(Player & player)
 {
     for (int i = 0; i < players.size(); i++)
     {
@@ -1290,13 +1290,11 @@ void Control::Draw()
         else
         {
             cardAction();
-            if (winEachWar())
-            std::cout << " >>> " << winner.getName() << " <<< " << " Is The Winner Of This Round!!! \n\n ";
+            determineWinner();
+            
+            // if (winEachWar())
+            // std::cout << " >>> " << winner.getName() << " <<< " << " Is The Winner Of This Round!!! \n\n ";
         }
-
-
-
-
         break;
     }
 }
@@ -1932,6 +1930,8 @@ void Control::deal()
     shuffleCards();
     distributeCards();
     setPlayersReady();
+    setCurrentIndex(findPlayerIndex(getDeterminer()));
+    std::cout << "current index test : " << getCurrentIndex() << "..." << findPlayerIndex(getDeterminer()) << "\n";
     currentScreen = GAME;
 }
 
@@ -1968,4 +1968,57 @@ void Control::managePassButton()
         passButton.buttonColor = {242, 174, 174, 170};
         passButton.color = BLACK;
     }
+}
+
+void Control::determineWinner()
+{
+    Vector2 origin = {0, 0};
+
+    players[0].drawUseCards(200, 445,myAsset, origin,0);
+    players[1].drawUseCards(559, 445,myAsset, origin,0);
+    players[2].drawUseCardSpecialPlayer(885, 220,myAsset, origin,-90);
+    if ( players.size() > 3 ) players[3].drawUseCards(630, 200, myAsset, origin,-180 );
+    if ( players.size() > 4 ) players[4].drawUseCards(270, 200, myAsset, origin,-180 );
+    if ( players.size() > 5 ) players[5].drawUseCardSpecialPlayer (187, 165,myAsset, origin, 90);
+
+    players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
+    players[1].drawBackCards(645 , 500 , myAsset, origin, 0);
+    players[2].drawBackCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+    if ( players.size() > 3 ) players[3].drawBackCards(730 , 139 , myAsset, origin, -180);
+    if ( players.size() > 4 ) players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
+    if ( players.size() > 5 ) players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
+
+    if (winEachWar())
+    {
+        const char * name = winner.getName();
+        DrawTextEx ( myAsset.askFont , " Winner : " , {350,280} , 35 , 2 , BLACK );
+        DrawTextEx ( myAsset.askFont , name , {350,310} , 35 , 2 , BLACK );
+
+        auto elementFound = std::find(provinces.begin(), provinces.end(), getWarPlace());
+        if (elementFound != provinces.end())
+            provinces.erase(elementFound);
+
+        if (!changeDeterminerL())
+        {
+            if (!changeDeterminer())
+            {
+                setDeterminer(winner);
+            }
+        }
+    }
+    else 
+    {
+        DrawTextEx ( myAsset.askFont , " This War Has " , {280,280} , 30 , 2 , BLACK );
+        DrawTextEx ( myAsset.askFont , " No Winners! " , {280,310} , 30 , 2 , BLACK );
+        if (!changeDeterminerL())
+        {
+            if (!changeDeterminer())
+            {
+                setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
+            }
+        }
+    }
+
+
+
 }

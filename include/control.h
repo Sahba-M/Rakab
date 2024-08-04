@@ -91,7 +91,7 @@ class Control {
         int  levenshteinDistance(const std::string &s1, const std::string &s2); // Optimized function to calculate the Levenshtein distance between two strings
         int  controlAge();
         int  getPlayerNumber();
-        int  findPlayerIndex ( const Player & player ); //finding the index of determiner to start a new round (for clockwise movement)
+        int  findPlayerIndex ( Player & player ); //finding the index of determiner to start a new round (for clockwise movement)
         int  getProvinceNumber();
         int  findMaxVirago(); // finding the max number of virago card in playground cards
         std::string controlColors();
@@ -132,6 +132,7 @@ class Control {
         void drawCards();
         void updateCards();
         void managePassButton();
+        void determineWinner();
 
 
 
