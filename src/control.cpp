@@ -158,7 +158,7 @@ void Control::getInformation()
 
         for (auto player : players)
         {
-            std::cout << player.getName() << "--" << player.getAge() << "/" <<"\n\n\n" << getCurrentIndex();
+            std::cout << player.getName() << "--" << player.getAge() << "/" <<"\n" << getCurrentIndex() ;
         }
     }
 
@@ -189,10 +189,10 @@ void Control::getInformation()
 }
 void Control::distributeCards()
 {
-    // std::cin.ignore();
+
     for (Player &player : players)
     {
-        // std::cout << " I Want To Give The Cards To  > " << player.getName() << " <  Please Give Him/Her The System \n";
+    
         for (int i = 0; i < player.numCardsOfPlayer(); i++)
         {
             if (!cards.empty())
@@ -201,11 +201,7 @@ void Control::distributeCards()
                 cards.pop_back();
             }
         }
-        // std::cin.ignore();
-        // player.showHandCards();
-
-        // std::cin.ignore();
-        // system("cls");
+        
     }
 }
 void Control::readProvinces()
@@ -408,43 +404,7 @@ void Control::showPlayGround()
 }
 void Control::selectWarPlace()
 {
-    // bool found = true;
-    // std::string chooseProvince;
-    // do
-    // {
-    //     std::cout << "\n ";
-    //     std::cout << "---------------------------------------------------------------------------------------------------------\n ";
-    //     for (int i = 0; i < provinces.size(); i++)
-    //     {
-    //         std::cout << provinces[i] << "  ";
-    //     }
-    //     std::cout << "\n ---------------------------------------------------------------------------------------------------------\n\n\n ";
-    //     std::cout << std::endl;
-
-    //     if (found == true)
-    //         std::cout << " " << player.getName() << " Enter Your Chosen Province: ";
-    //     std::cin >> chooseProvince;
-
-    //     if ( chooseProvince == getPeacePlace())
-    //     {
-    //         std::cout << " You Can Not Choose This province ; Because It is Peace Place ." << std::endl;
-    //         found = false;
-    //     }
-    //     else
-    //     {
-    //         auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
-    //         if (elementFound != provinces.end())
-    //         {
-    //             found = true;
-    //             break;
-    //         }
-    //         else
-    //         {
-    //             std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
-    //             found = false;
-    //         }
-    //     }
-    // } while (!found);
+    
     Vector2 mousePosition = GetMousePosition();
 
     const Color GRAY_COLOR = {186, 186, 186, 120};
@@ -584,6 +544,7 @@ void Control::cardAction()
     for (int i = 0; i < getPlayerNumber(); i++) // filling up the scores related to the yellow cards
     {
         players[i].yellowInScore();
+        std::cout << "\n" << i << "=" << players[i].getScorePlayer() << "\n";
     }
     WinterCard winter;
     SpringCard spring;
@@ -592,18 +553,18 @@ void Control::cardAction()
     ViragoCard virago;
     DeanCard dean;
 
-    for (int i = 0; i < getPlayerNumber(); i++)
-    {
-        if (players[i].hasDean())
-        {
-            dean.useCard(players, i);
-            setIfDean(true);
-        }
-    }
-    if (season == "winter")
-    {
-        winter.useCard(players, -1);
-    }
+    // for (int i = 0; i < getPlayerNumber(); i++)
+    // {
+    //     if (players[i].hasDean())
+    //     {
+    //         dean.useCard(players, i);
+    //         setIfDean(true);
+    //     }
+    // }
+    // if (season == "winter")
+    // {
+    //     winter.useCard(players, -1);
+    // }
     for (int i = 0; i < getPlayerNumber(); i++)
     {
         if (players[i].hasDrummer())
@@ -612,30 +573,30 @@ void Control::cardAction()
             drummer.useCard(players, i, calcuteNumber);
         }
     }
-    if (season == "spring")
-        spring.useCard(players, -1);
-    for (int i = 0; i < getPlayerNumber(); i++)
-    {
-        if (players[i].hasPrinces())
-        {
-            for (int j = 0; j < players[i].numberOfPrinces(); j++)
-            {
-                prince.useCard(players, i);
-            }
-        }
-    }
-    for (int i = 0; i < getPlayerNumber(); i++)
-    {
-        if (players[i].hasVirago())
-        {
-            for (int j = 0; j < players[i].numberOfVirago(); j++)
-            {
-                virago.useCard(players, i);
-            }
-        }
-    }
-    findLastDean();
-    setSeason("temp");
+    // if (season == "spring")
+    //     spring.useCard(players, -1);
+    // for (int i = 0; i < getPlayerNumber(); i++)
+    // {
+    //     if (players[i].hasPrinces())
+    //     {
+    //         for (int j = 0; j < players[i].numberOfPrinces(); j++)
+    //         {
+    //             prince.useCard(players, i);
+    //         }
+    //     }
+    // }
+    // for (int i = 0; i < getPlayerNumber(); i++)
+    // {
+    //     if (players[i].hasVirago())
+    //     {
+    //         for (int j = 0; j < players[i].numberOfVirago(); j++)
+    //         {
+    //             virago.useCard(players, i);
+    //         }
+    //     }
+    // }
+    // findLastDean();
+    // setSeason("temp");
 }
 void Control::setSeason(std::string season)
 {
@@ -1805,15 +1766,15 @@ void Control::drawCards()
 
     // std::cout << "test index : " << index << "    ";
 
-    for ( int i = 0 ; i < players.size() ; i++ )
+    for ( int i = 0 ; i < getPlayerNumber() ; i++ )
     {
         if (getCurrentIndex() == 0)
         {
-            if (!players[0].getPass())
+            if ( !players[0].getPass() )
             players[0].drawCards(115 , 500 , myAsset, origin, 0);
         }
         else
-        players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
+          players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
 
         if(getCurrentIndex()  == 1)
         {
@@ -1920,7 +1881,7 @@ void Control::updateCards()
     if (cardselected)
     {
         setCurrentIndex (( getCurrentIndex() + 1 ) % players.size());
-        std::cout << "test index : " << getCurrentIndex() << "\n";
+        std::cout << "test index : " << getCurrentIndex() << std::endl;
         cardselected = false;
     }
 }
@@ -1929,7 +1890,7 @@ void Control::deal()
     setCards();
     shuffleCards();
     distributeCards();
-    setPlayersReady();
+    setPlayersReady();//This function false all passes                       
     setCurrentIndex(findPlayerIndex(getDeterminer()));
     std::cout << "current index test : " << getCurrentIndex() << "..." << findPlayerIndex(getDeterminer()) << "\n";
     currentScreen = GAME;
@@ -1943,7 +1904,6 @@ void Control::setCurrentIndex(int currentIndex)
 {
     this->currentIndex = currentIndex;
 }
-
 void Control::managePassButton()
 {
     passButton.text = "Pass";
@@ -2010,15 +1970,13 @@ void Control::determineWinner()
     {
         DrawTextEx ( myAsset.askFont , " This War Has " , {280,280} , 30 , 2 , BLACK );
         DrawTextEx ( myAsset.askFont , " No Winners! " , {280,310} , 30 , 2 , BLACK );
-        if (!changeDeterminerL())
-        {
-            if (!changeDeterminer())
-            {
-                setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
-            }
-        }
+        // if (!changeDeterminerL())
+        // {
+        //     if (!changeDeterminer())
+        //     {
+        //         setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
+        //     }
+        // }
     }
-
-
 
 }

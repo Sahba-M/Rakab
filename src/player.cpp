@@ -352,7 +352,7 @@ bool Player::hasDrummer()
 
     auto elementFound = std::find_if(usedCards.begin(), usedCards.end(), [&card](const std::shared_ptr<Card> &ptr)
                                      { return SharedPtrCompare()(ptr, card); });
-
+   
     if (elementFound != usedCards.end())
     {
         return true;
@@ -817,7 +817,6 @@ void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vect
         i++;
     }
 }
-
 void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
@@ -855,7 +854,6 @@ void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth
         }
     }
 }
-
 void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
@@ -893,7 +891,6 @@ void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth,
         }
     }
 }
-
 void Player::updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     

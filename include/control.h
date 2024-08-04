@@ -131,6 +131,7 @@ class Control {
         void deal(); //Distribution of cards
         void drawCards();
         void updateCards();
+        
         void managePassButton();
         void determineWinner();
 
