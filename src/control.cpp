@@ -563,7 +563,6 @@ void Control::cardAction()
     std::cout << "\n\nseason " << season << "\n";
     if (season == "winter")
     {
-        std::cout << "if winter \n";
         winter.useCard(players, -1);
     }
     for (int i = 0; i < getPlayerNumber(); i++)
@@ -574,8 +573,8 @@ void Control::cardAction()
             drummer.useCard(players, i, calcuteNumber);
         }
     }
-    // if (season == "spring")
-    //     spring.useCard(players, -1);
+    if (season == "spring")
+        spring.useCard(players, -1);
     for (int i = 0; i < getPlayerNumber(); i++)
     {
         if (players[i].hasPrinces())
@@ -2024,7 +2023,7 @@ void Control::determineWinner()
         //     }
         // }
     }
-
+    
     for (int i = 0; i < getPlayerNumber(); i++) // to update move vector from "pass" to "temp"
     {
         players[i].setSeason("temp");

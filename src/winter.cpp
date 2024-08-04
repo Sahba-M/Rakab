@@ -6,22 +6,22 @@
 
 void WinterCard::useCard ( std::vector <Player> & players , int numPlayer ) //numPlayer is not required here
 {
-  std::cout << "\n use card\n ";
-    int scores = 0;
-    std::vector<std::shared_ptr<Card>> Ycards;
+ 
+  int scores = 0;
+  std::vector<std::shared_ptr<Card>> Ycards;
   
-    for ( auto & player : players )
-    {
-      Ycards = player.getYcards(); //This function returns a vector of yellow cards for each player
+  for ( auto & player : players )
+  {
+    Ycards = player.getYcards(); //This function returns a vector of yellow cards for each player
 
-      for (int i = 0; i < Ycards.size(); i++)
-      {
+    for (int i = 0; i < Ycards.size(); i++)
+    {
         scores += (stoi(Ycards[i]->getName())) / 2 ;
-      }
-       
-      player.setScorePlayer(scores);
-      std::cout << "player score: "<< player.getScorePlayer() <<"\n";
     }
+       
+    player.setScorePlayer(scores);
+    scores = 0;
+  }
 }  
 // void WinterCard::draw ( int x , int y )
 // {

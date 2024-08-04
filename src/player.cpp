@@ -849,6 +849,7 @@ void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth
                 std::cout << " if  player\n\n";
                 setSeason(hand[i-1]->getName());
             }
+            std::cout << hand[i-1]->getName() << "**********\n\n";
             usedCards.push_back(hand[i-1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true ;
