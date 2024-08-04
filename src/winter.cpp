@@ -6,6 +6,7 @@
 
 void WinterCard::useCard ( std::vector <Player> & players , int numPlayer ) //numPlayer is not required here
 {
+  std::cout << "\n use card\n ";
     int scores = 0;
     std::vector<std::shared_ptr<Card>> Ycards;
   
@@ -19,6 +20,7 @@ void WinterCard::useCard ( std::vector <Player> & players , int numPlayer ) //nu
       }
        
       player.setScorePlayer(scores);
+      std::cout << "player score: "<< player.getScorePlayer() <<"\n";
     }
 }  
 // void WinterCard::draw ( int x , int y )

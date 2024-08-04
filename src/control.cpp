@@ -544,7 +544,6 @@ void Control::cardAction()
     for (int i = 0; i < getPlayerNumber(); i++) // filling up the scores related to the yellow cards
     {
         players[i].yellowInScore();
-        std::cout << "\n" << i << "=" << players[i].getScorePlayer() << "\n";
     }
     WinterCard winter;
     SpringCard spring;
@@ -561,10 +560,12 @@ void Control::cardAction()
     //         setIfDean(true);
     //     }
     // }
-    // if (season == "winter")
-    // {
-    //     winter.useCard(players, -1);
-    // }
+    std::cout << "\n\nseason " << season << "\n";
+    if (season == "winter")
+    {
+        std::cout << "if winter \n";
+        winter.useCard(players, -1);
+    }
     for (int i = 0; i < getPlayerNumber(); i++)
     {
         if (players[i].hasDrummer())
@@ -575,28 +576,33 @@ void Control::cardAction()
     }
     // if (season == "spring")
     //     spring.useCard(players, -1);
-    // for (int i = 0; i < getPlayerNumber(); i++)
-    // {
-    //     if (players[i].hasPrinces())
-    //     {
-    //         for (int j = 0; j < players[i].numberOfPrinces(); j++)
-    //         {
-    //             prince.useCard(players, i);
-    //         }
-    //     }
-    // }
-    // for (int i = 0; i < getPlayerNumber(); i++)
-    // {
-    //     if (players[i].hasVirago())
-    //     {
-    //         for (int j = 0; j < players[i].numberOfVirago(); j++)
-    //         {
-    //             virago.useCard(players, i);
-    //         }
-    //     }
-    // }
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].hasPrinces())
+        {
+            for (int j = 0; j < players[i].numberOfPrinces(); j++)
+            {
+                prince.useCard(players, i);
+            }
+        }
+    }
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].hasVirago())
+        {
+            for (int j = 0; j < players[i].numberOfVirago(); j++)
+            {
+                virago.useCard(players, i);
+            }
+        }
+    }
     // findLastDean();
     // setSeason("temp");
+     for ( auto player: players)
+     {
+        std::cout << player.getScorePlayer() << "\n";
+     }
+     
 }
 void Control::setSeason(std::string season)
 {
@@ -1766,12 +1772,22 @@ void Control::drawCards()
 
     // std::cout << "test index : " << index << "    ";
 
+
     for ( int i = 0 ; i < getPlayerNumber() ; i++ )
     {
         if (getCurrentIndex() == 0)
         {
             if ( !players[0].getPass() )
-            players[0].drawCards(115 , 500 , myAsset, origin, 0);
+            {
+                players[0].drawCards(115 , 500 , myAsset, origin, 0);
+                if (players[0].getSeason() == "winter" || players[0].getSeason() == "spring")
+                {
+                     setSeason(players[0].getSeason());
+                }
+                std::cout << "DRAW =>"<<players[0].getSeason()<<"\n";
+                
+
+            }
         }
         else
           players[0].drawBackCards(115 , 500 , myAsset, origin, 0);
@@ -1779,7 +1795,13 @@ void Control::drawCards()
         if(getCurrentIndex()  == 1)
         {
             if (!players[1].getPass())
-            players[1].drawCards(645 , 500 , myAsset, origin, 0);
+            {
+                players[1].drawCards(645 , 500 , myAsset, origin, 0);
+                if (players[1].getSeason() == "winter" || players[1].getSeason() == "spring")
+                {
+                     setSeason(players[1].getSeason());
+                }
+            }
         }
         else
         players[1].drawBackCards(645 , 500 , myAsset, origin, 0);
@@ -1787,7 +1809,13 @@ void Control::drawCards()
         if (getCurrentIndex()  == 2)
         {
             if (!players[2].getPass())
-            players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+            {
+                 players[2].drawCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
+                 if (players[2].getSeason() == "winter" || players[2].getSeason() == "spring")
+                {
+                     setSeason(players[2].getSeason());
+                }
+            }
         }
         else
         players[2].drawBackCardSpecialPlayer(937 , 227 , myAsset, origin, -90);
@@ -1797,7 +1825,13 @@ void Control::drawCards()
             if(getCurrentIndex() == 3)
             {
                 if (!players[3].getPass())
-                players[3].drawCards(730 , 139 , myAsset, origin, -180);
+                {
+                    players[3].drawCards(730 , 139 , myAsset, origin, -180);
+                    if (players[3].getSeason() == "winter" || players[3].getSeason() == "spring")
+                    {
+                        setSeason(players[3].getSeason());
+                    }
+                }
             }
             else
             players[3].drawBackCards(730 , 139 , myAsset, origin, -180);
@@ -1808,7 +1842,13 @@ void Control::drawCards()
             if(getCurrentIndex() == 4)
             {
                 if (!players[4].getPass())
-                players[4].drawCards(195 , 139 , myAsset, origin, -180);
+                {
+                    players[4].drawCards(195 , 139 , myAsset, origin, -180);
+                    if (players[4].getSeason() == "winter" || players[4].getSeason() == "spring")
+                    {
+                      setSeason(players[4].getSeason());
+                    }
+                }
             }
             else
             players[4].drawBackCards(195 , 139 , myAsset, origin, -180);
@@ -1819,7 +1859,13 @@ void Control::drawCards()
             if (getCurrentIndex() == 5)
             {
                 if (!players[5].getPass())
-                players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
+                {
+                    players[5].drawCardSpecialPlayer (140 , 165 , myAsset, origin, 90);
+                    if (players[5].getSeason() == "winter" || players[5].getSeason() == "spring")
+                    {
+                        setSeason(players[5].getSeason());
+                    }
+                }
             }
             else
             players[5].drawBackCardSpecialPlayer(140 , 165 , myAsset, origin, 90);
@@ -1977,6 +2023,11 @@ void Control::determineWinner()
         //         setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
         //     }
         // }
+    }
+
+    for (int i = 0; i < getPlayerNumber(); i++) // to update move vector from "pass" to "temp"
+    {
+        players[i].setSeason("temp");
     }
 
 }

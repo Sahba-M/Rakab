@@ -844,10 +844,15 @@ void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth
         Rectangle cardRect = { static_cast<float>(x + (i - 1) * 25), static_cast<float>(y), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+           if ( hand[i-1]->getName() == "winter")
+            {
+                std::cout << " if  player\n\n";
+                setSeason(hand[i-1]->getName());
+            }
             usedCards.push_back(hand[i-1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true ;
-            std::cout << "test selsect true" << std::endl;
+            
 
             
             break; 
@@ -881,10 +886,17 @@ void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth,
         Rectangle cardRect = { static_cast<float>(x - 60 + (i - 1) * 25), static_cast<float>(y - 115), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+
+            if ( hand[i-1]->getName() == "winter")
+            {
+                std::cout << " if  player\n\n";
+                setSeason(hand[i-1]->getName());
+            }
+           
             usedCards.push_back(hand[i-1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true ;
-            std::cout << "test selsect true" << std::endl;
+            
 
             
             break; 
@@ -918,11 +930,15 @@ void Player::updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardW
         Rectangle cardRect = { static_cast<float>(x), static_cast<float>(y - 80 + (i - 1) * 25 ), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-           
+           if ( hand[i-1]->getName() == "winter")
+            {
+                std::cout << " if  player\n\n";
+                setSeason(hand[i-1]->getName());
+            }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true ;
-            std::cout << "test selsect true" << std::endl;
+            
 
             break; 
         }
@@ -956,11 +972,15 @@ void Player::updateCardsSpecialL(int x, int y , AssetManager &myAsset, int cardW
         Rectangle cardRect = { static_cast<float>(x - 100), static_cast<float>(y  + (i - 1) * 25 ), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-           
+           if ( hand[i-1]->getName() == "winter")
+            {
+                std::cout << " if  player\n\n";
+                setSeason(hand[i-1]->getName());
+            }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true ;
-            std::cout << "test selsect true" << std::endl;
+           
             
             break; 
         }
