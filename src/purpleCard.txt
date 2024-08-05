@@ -3,7 +3,7 @@
 6 drummer
 6 dean
 3 princes
-3 winter
+15 winter
 15 spring
 3 leader
 2 horse

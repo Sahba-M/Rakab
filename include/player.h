@@ -77,10 +77,13 @@ class Player {
         void drawBackCardSpecialPlayer(int x , int y , AssetManager &myAsset , Vector2 origin , float rotation);//For players who are vertical!
         void drawUseCards(int x , int y , AssetManager & myAsset , Vector2 origin, float rotation);
         void drawUseCardSpecialPlayer(int x , int y , AssetManager & myAsset , Vector2 origin, float rotation );
-        void updateCardsSpecialR(int x , int y , AssetManager & myAsset , int cardWidth , int cardHeight , bool & turn);
-        void updateCardsSpecialL(int x , int y , AssetManager & myAsset , int cardWidth , int cardHeight , bool & turn);
-        void updateCardsTop(int x , int y , AssetManager & myAsset , int cardWidth , int cardHeight , bool & turn) ;
-        void updateCardsDown(int x , int y , AssetManager & myAsset , int cardWidth , int cardHeight , bool & turn);
+        void updateCardsSpecialR(int x , int y  , int cardWidth , int cardHeight , bool & turn);
+        void updateCardsSpecialL(int x , int y  , int cardWidth , int cardHeight , bool & turn);
+        void updateCardsTop(int x , int y  , int cardWidth , int cardHeight , bool & turn) ;
+        void updateCardsDown(int x , int y  , int cardWidth , int cardHeight , bool & turn);
+        void showSeason(Texture2D texture);
+
+
 
 
 
@@ -110,6 +113,6 @@ class Player {
         bool ifLeader = false;
         bool ifHorse = false;
         Color graficColor;
-        // AssetManager myAsset;
+        
 };
 #endif  

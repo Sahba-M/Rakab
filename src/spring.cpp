@@ -7,6 +7,7 @@
 
 void SpringCard::useCard ( std::vector <Player> & players , int numPlayer ) 
 {
+    std::cout << "use card \n\n";
     std::vector<int> indicesPlayers = findMaxPlayer ( players );
     for ( auto index : indicesPlayers )
     {
@@ -53,7 +54,3 @@ int SpringCard::findMaxScore ( std::vector <Player> players )
     }
     return max ;
 }
-// void SpringCard::draw ( int x , int y )
-// {
-//     DrawTexture (myAsset.spring , x , y , BLACK);
-// }

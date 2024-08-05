@@ -699,7 +699,6 @@ void Player::drawBackCards(int x, int y, AssetManager &myAsset, Vector2 origin, 
 }
 void Player::drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
 {
-
     int i = 0;
 
     for (auto card : usedCards)
@@ -721,10 +720,12 @@ void Player::drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, f
             texture = myAsset.soldier6;
         else if (name == "10")
             texture = myAsset.soldier10;
-        else if (name == "spring")
-            texture = myAsset.spring;
-        else if (name == "winter")
-            texture = myAsset.winter;
+        else if (name == "spring" || name == "winter")
+        {
+            showSeason(name == "spring" ? myAsset.spring : myAsset.winter);
+            i++;
+            continue; 
+        }
         else if (name == "leader")
             texture = myAsset.leader;
         else if (name == "princes")
@@ -738,6 +739,7 @@ void Player::drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, f
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
 
+        if (!texture.id) continue; // Ensure texture is valid
 
         Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
         Vector2 position = {static_cast<float>(x) + static_cast<float>(i * 25) , static_cast<float>(y)};
@@ -747,10 +749,11 @@ void Player::drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, f
 
         i++;
     }
-
 }
+
 void Player::drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
 {
+  
     int i = 0;
 
     for (auto card : usedCards)
@@ -772,12 +775,26 @@ void Player::drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vecto
             texture = myAsset.soldier6;
         else if (name == "10")
             texture = myAsset.soldier10;
-        else if (name == "spring")
-            texture = myAsset.spring;
-        else if (name == "winter")
-            texture = myAsset.winter;
+        // else if (name == "spring" )
+        // {
+        //     showSeason(myAsset.spring);
+        //     i++;
+        //     continue;
+        // }
+        // else if (name == "winter")
+        // {
+        //     showSeason(myAsset.winter);
+        //     i++;
+        //     continue;
+        // }
+        else if (name == "spring" || name == "winter")
+        {
+            showSeason(name == "spring" ? myAsset.spring : myAsset.winter);
+            i++;
+            continue; 
+        }
         else if (name == "leader")
-            texture = myAsset.leader;
+            texture = myAsset.leader;    
         else if (name == "princes")
             texture = myAsset.princes;
         else if (name == "dean")
@@ -788,6 +805,8 @@ void Player::drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vecto
             texture = myAsset.virago;
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
+
+        if (!texture.id) continue; 
 
 
         Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
@@ -798,6 +817,7 @@ void Player::drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vecto
 
         i++;
     }
+   
 }
 void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
 {
@@ -817,39 +837,27 @@ void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vect
         i++;
     }
 }
-void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
+void Player::updateCardsDown(int x, int y , int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
 
     for (size_t i = hand.size(); i > 0; i--) {
         std::string name = hand[i - 1]->getName();
-        Texture2D texture;
+       
 
-        if (name == "1") texture = myAsset.soldier1;
-        else if (name == "2") texture = myAsset.soldier2;
-        else if (name == "3") texture = myAsset.soldier3;
-        else if (name == "4") texture = myAsset.soldier4;
-        else if (name == "5") texture = myAsset.soldier5;
-        else if (name == "6") texture = myAsset.soldier6;
-        else if (name == "10") texture = myAsset.soldier10;
-        else if (name == "spring") texture = myAsset.spring;
-        else if (name == "winter") texture = myAsset.winter;
-        else if (name == "leader") texture = myAsset.leader;
-        else if (name == "princes") texture = myAsset.princes;
-        else if (name == "dean") texture = myAsset.dean;
-        else if (name == "drummer") texture = myAsset.drummer;
-        else if (name == "virago") texture = myAsset.virago;
-        else if (name == "scarecrow") texture = myAsset.scarecrow;
-
-        Rectangle cardRect = { static_cast<float>(x + (i - 1) * 25), static_cast<float>(y), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
+         Rectangle cardRect = { static_cast<float>(x + (i - 1) * 25), static_cast<float>(y), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+
            if ( hand[i-1]->getName() == "winter")
             {
-                std::cout << " if  player\n\n";
                 setSeason(hand[i-1]->getName());
             }
-            std::cout << hand[i-1]->getName() << "**********\n\n";
+            else if (hand[i-1]->getName() == "spring")
+            {
+                setSeason(hand[i-1]->getName());
+            }
+
             usedCards.push_back(hand[i-1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true ;
@@ -860,29 +868,13 @@ void Player::updateCardsDown(int x, int y , AssetManager &myAsset, int cardWidth
         }
     }
 }
-void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
+void Player::updateCardsTop(int x, int y , int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
 
     for (size_t i = hand.size(); i > 0; i--) {
         std::string name = hand[i - 1]->getName();
-        Texture2D texture;
-
-        if (name == "1") texture = myAsset.soldier1;
-        else if (name == "2") texture = myAsset.soldier2;
-        else if (name == "3") texture = myAsset.soldier3;
-        else if (name == "4") texture = myAsset.soldier4;
-        else if (name == "5") texture = myAsset.soldier5;
-        else if (name == "6") texture = myAsset.soldier6;
-        else if (name == "10") texture = myAsset.soldier10;
-        else if (name == "spring") texture = myAsset.spring;
-        else if (name == "winter") texture = myAsset.winter;
-        else if (name == "leader") texture = myAsset.leader;
-        else if (name == "princes") texture = myAsset.princes;
-        else if (name == "dean") texture = myAsset.dean;
-        else if (name == "drummer") texture = myAsset.drummer;
-        else if (name == "virago") texture = myAsset.virago;
-        else if (name == "scarecrow") texture = myAsset.scarecrow;
+        
 
         Rectangle cardRect = { static_cast<float>(x - 60 + (i - 1) * 25), static_cast<float>(y - 115), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
@@ -890,10 +882,13 @@ void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth,
 
             if ( hand[i-1]->getName() == "winter")
             {
-                std::cout << " if  player\n\n";
                 setSeason(hand[i-1]->getName());
             }
-           
+            else if (hand[i-1]->getName() == "spring")
+            {
+                setSeason(hand[i-1]->getName());
+            }
+
             usedCards.push_back(hand[i-1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true ;
@@ -904,36 +899,23 @@ void Player::updateCardsTop(int x, int y , AssetManager &myAsset, int cardWidth,
         }
     }
 }
-void Player::updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
+void Player::updateCardsSpecialR(int x, int y , int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
 
     for (size_t i = hand.size(); i > 0; i--) {
         std::string name = hand[i - 1]->getName();
-        Texture2D texture;
-
-        if (name == "1") texture = myAsset.soldier1;
-        else if (name == "2") texture = myAsset.soldier2;
-        else if (name == "3") texture = myAsset.soldier3;
-        else if (name == "4") texture = myAsset.soldier4;
-        else if (name == "5") texture = myAsset.soldier5;
-        else if (name == "6") texture = myAsset.soldier6;
-        else if (name == "10") texture = myAsset.soldier10;
-        else if (name == "spring") texture = myAsset.spring;
-        else if (name == "winter") texture = myAsset.winter;
-        else if (name == "leader") texture = myAsset.leader;
-        else if (name == "princes") texture = myAsset.princes;
-        else if (name == "dean") texture = myAsset.dean;
-        else if (name == "drummer") texture = myAsset.drummer;
-        else if (name == "virago") texture = myAsset.virago;
-        else if (name == "scarecrow") texture = myAsset.scarecrow;
+        
 
         Rectangle cardRect = { static_cast<float>(x), static_cast<float>(y - 80 + (i - 1) * 25 ), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
            if ( hand[i-1]->getName() == "winter")
             {
-                std::cout << " if  player\n\n";
+                setSeason(hand[i-1]->getName());
+            }
+            else if (hand[i-1]->getName() == "spring")
+            {
                 setSeason(hand[i-1]->getName());
             }
             usedCards.push_back(hand[i - 1]);
@@ -945,37 +927,22 @@ void Player::updateCardsSpecialR(int x, int y , AssetManager &myAsset, int cardW
         }
     }
 }
-void Player::updateCardsSpecialL(int x, int y , AssetManager &myAsset, int cardWidth, int cardHeight , bool & turn) {
+void Player::updateCardsSpecialL(int x, int y , int cardWidth, int cardHeight , bool & turn) {
     Vector2 mousePosition = GetMousePosition();
     
 
     for (size_t i = hand.size(); i > 0; i--) {
         std::string name = hand[i - 1]->getName();
-        Texture2D texture;
-       
-
-        if (name == "1") texture = myAsset.soldier1;
-        else if (name == "2") texture = myAsset.soldier2;
-        else if (name == "3") texture = myAsset.soldier3;
-        else if (name == "4") texture = myAsset.soldier4;
-        else if (name == "5") texture = myAsset.soldier5;
-        else if (name == "6") texture = myAsset.soldier6;
-        else if (name == "10") texture = myAsset.soldier10;
-        else if (name == "spring") texture = myAsset.spring;
-        else if (name == "winter") texture = myAsset.winter;
-        else if (name == "leader") texture = myAsset.leader;
-        else if (name == "princes") texture = myAsset.princes;
-        else if (name == "dean") texture = myAsset.dean;
-        else if (name == "drummer") texture = myAsset.drummer;
-        else if (name == "virago") texture = myAsset.virago;
-        else if (name == "scarecrow") texture = myAsset.scarecrow;
-
+        
         Rectangle cardRect = { static_cast<float>(x - 100), static_cast<float>(y  + (i - 1) * 25 ), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
         if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
            if ( hand[i-1]->getName() == "winter")
             {
-                std::cout << " if  player\n\n";
+                setSeason(hand[i-1]->getName());
+            }
+            else if (hand[i-1]->getName() == "spring")
+            {
                 setSeason(hand[i-1]->getName());
             }
             usedCards.push_back(hand[i - 1]);
@@ -986,6 +953,13 @@ void Player::updateCardsSpecialL(int x, int y , AssetManager &myAsset, int cardW
             break; 
         }
     }
+}
+void Player::showSeason(Texture2D texture)
+{
+    Vector2 position = {498, 261};
+    Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
+    
+    DrawTexture(texture, position.x, position.y, WHITE);
 }
 
 
