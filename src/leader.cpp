@@ -6,6 +6,7 @@
 LeaderCard::LeaderCard(){}
  void LeaderCard::useCard ( std::vector <Player> & players , int numPlayer )
  {
+    std::cout << "use card\n\n";
     for(auto &player : players)
     {
         player.setPass(true);

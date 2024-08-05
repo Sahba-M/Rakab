@@ -254,6 +254,7 @@ void Control::setWar()
             selectMove(players[getCurrentIndex()], currentIndex);
             if (players[getCurrentIndex()].getIfLeader())
             {
+                
                 leader.useCard(players, -1);
                 setIsLeader(true);
                 system("cls");
@@ -1757,6 +1758,7 @@ void Control::drawCards()
 {
     int index = getCurrentIndex();
     Vector2 origin = {0, 0};
+    LeaderCard leader;
 
     players[0].drawUseCards(200, 445, myAsset, origin, 0);
     players[1].drawUseCards(559, 445, myAsset, origin, 0);
@@ -1776,6 +1778,7 @@ void Control::drawCards()
         {
             if (!players[0].getPass())
             {
+                
                 players[0].drawCards(115, 500, myAsset, origin, 0);
                 if (players[0].getSeason() == "winter")
                 {
@@ -1785,7 +1788,13 @@ void Control::drawCards()
                 {
                     setSeason(players[0].getSeason());
                 }
-                std::cout << "DRAW =>" << players[0].getSeason() << "\n";
+                // else if(players[0].getIfLeader())
+                // {
+                    
+                //     leader.useCard(players, 0);
+                    
+                // }
+                
             }
         }
         else
@@ -1804,6 +1813,11 @@ void Control::drawCards()
                 {
                     setSeason(players[1].getSeason());
                 }
+                // else if(players[1].getIfLeader())
+                // {
+                //      leader.useCard(players, 0);
+
+                // }
             }
         }
         else
@@ -1894,11 +1908,20 @@ void Control::drawCards()
 void Control::updateCards()
 {
     Vector2 origin = {0, 0};
+    LeaderCard leader;
     switch (getCurrentIndex())
     {
     case 0:
         if (!players[0].getPass())
-            players[0].updateCardsDown(115, 500, 70, 108, cardselected);
+        {
+            if(players[0].getIfLeader())
+            {
+                leader.useCard(players, 0);  
+                return;    
+            }
+            else
+               players[0].updateCardsDown(115, 500, 70, 108, cardselected);
+        }
         else
             setCurrentIndex((getCurrentIndex() + 1) % players.size());
         break;

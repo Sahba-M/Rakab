@@ -352,7 +352,7 @@ bool Player::hasDrummer()
 
     auto elementFound = std::find_if(usedCards.begin(), usedCards.end(), [&card](const std::shared_ptr<Card> &ptr)
                                      { return SharedPtrCompare()(ptr, card); });
-   
+
     if (elementFound != usedCards.end())
     {
         return true;
@@ -452,7 +452,7 @@ bool Player::isProximity()
     }
     return false;
 }
-bool Player::getIfLeader()
+bool &Player::getIfLeader()
 {
     return ifLeader;
 }
@@ -578,7 +578,6 @@ Color Player::getColorG()
     return graficColor;
 }
 
-
 void Player::drawCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
 {
     int i = 0;
@@ -618,7 +617,6 @@ void Player::drawCards(int x, int y, AssetManager &myAsset, Vector2 origin, floa
             texture = myAsset.virago;
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
-
 
         Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
         Vector2 position = {static_cast<float>(x) + static_cast<float>(i * 25), static_cast<float>(y)};
@@ -669,9 +667,8 @@ void Player::drawCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
 
-
         Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
-        Vector2 position = {static_cast<float>(x) , static_cast<float>(y) + static_cast<float>(i * 25)};
+        Vector2 position = {static_cast<float>(x), static_cast<float>(y) + static_cast<float>(i * 25)};
         Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
 
         DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
@@ -724,7 +721,7 @@ void Player::drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, f
         {
             showSeason(name == "spring" ? myAsset.spring : myAsset.winter);
             i++;
-            continue; 
+            continue;
         }
         else if (name == "leader")
             texture = myAsset.leader;
@@ -739,10 +736,11 @@ void Player::drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, f
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
 
-        if (!texture.id) continue; // Ensure texture is valid
+        if (!texture.id)
+            continue; // Ensure texture is valid
 
         Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
-        Vector2 position = {static_cast<float>(x) + static_cast<float>(i * 25) , static_cast<float>(y)};
+        Vector2 position = {static_cast<float>(x) + static_cast<float>(i * 25), static_cast<float>(y)};
         Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
 
         DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
@@ -750,10 +748,8 @@ void Player::drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, f
         i++;
     }
 }
-
 void Player::drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
 {
-  
     int i = 0;
 
     for (auto card : usedCards)
@@ -791,10 +787,10 @@ void Player::drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vecto
         {
             showSeason(name == "spring" ? myAsset.spring : myAsset.winter);
             i++;
-            continue; 
+            continue;
         }
         else if (name == "leader")
-            texture = myAsset.leader;    
+            texture = myAsset.leader;
         else if (name == "princes")
             texture = myAsset.princes;
         else if (name == "dean")
@@ -806,18 +802,17 @@ void Player::drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vecto
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
 
-        if (!texture.id) continue; 
-
+        if (!texture.id)
+            continue;
 
         Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
-        Vector2 position = {static_cast<float>(x) , static_cast<float>(y) + static_cast<float>(i * 25)};
+        Vector2 position = {static_cast<float>(x), static_cast<float>(y) + static_cast<float>(i * 25)};
         Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
 
         DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
 
         i++;
     }
-   
 }
 void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
 {
@@ -829,7 +824,7 @@ void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vect
         Texture2D texture = myAsset.back;
 
         Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
-        Vector2 position = {static_cast<float>(x) , static_cast<float>(y) + static_cast<float>(i * 25)};
+        Vector2 position = {static_cast<float>(x), static_cast<float>(y) + static_cast<float>(i * 25)};
         Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
 
         DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
@@ -837,120 +832,121 @@ void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vect
         i++;
     }
 }
-void Player::updateCardsDown(int x, int y , int cardWidth, int cardHeight , bool & turn) {
+void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &turn)
+{
     Vector2 mousePosition = GetMousePosition();
-    
-
-    for (size_t i = hand.size(); i > 0; i--) {
+    for (size_t i = hand.size(); i > 0; i--)
+    {
         std::string name = hand[i - 1]->getName();
-       
 
-         Rectangle cardRect = { static_cast<float>(x + (i - 1) * 25), static_cast<float>(y), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
+        Rectangle cardRect = {static_cast<float>(x + (i - 1) * 25), static_cast<float>(y), static_cast<float>(cardWidth), static_cast<float>(cardHeight)};
 
-        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
 
-           if ( hand[i-1]->getName() == "winter")
+            if (hand[i - 1]->getName() == "winter")
             {
-                setSeason(hand[i-1]->getName());
+                setSeason(hand[i - 1]->getName());
             }
-            else if (hand[i-1]->getName() == "spring")
+            else if (hand[i - 1]->getName() == "spring")
             {
-                setSeason(hand[i-1]->getName());
+                setSeason(hand[i - 1]->getName());
             }
-
-            usedCards.push_back(hand[i-1]);
-            hand.erase(hand.begin() + (i - 1));
-            turn = true ;
-            
-
-            
-            break; 
-        }
-    }
-}
-void Player::updateCardsTop(int x, int y , int cardWidth, int cardHeight , bool & turn) {
-    Vector2 mousePosition = GetMousePosition();
-    
-
-    for (size_t i = hand.size(); i > 0; i--) {
-        std::string name = hand[i - 1]->getName();
-        
-
-        Rectangle cardRect = { static_cast<float>(x - 60 + (i - 1) * 25), static_cast<float>(y - 115), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
-
-        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
-            if ( hand[i-1]->getName() == "winter")
+            else if(hand[i - 1]->getName() == "leader")
             {
-                setSeason(hand[i-1]->getName());
-            }
-            else if (hand[i-1]->getName() == "spring")
-            {
-                setSeason(hand[i-1]->getName());
-            }
-
-            usedCards.push_back(hand[i-1]);
-            hand.erase(hand.begin() + (i - 1));
-            turn = true ;
-            
-
-            
-            break; 
-        }
-    }
-}
-void Player::updateCardsSpecialR(int x, int y , int cardWidth, int cardHeight , bool & turn) {
-    Vector2 mousePosition = GetMousePosition();
-    
-
-    for (size_t i = hand.size(); i > 0; i--) {
-        std::string name = hand[i - 1]->getName();
-        
-
-        Rectangle cardRect = { static_cast<float>(x), static_cast<float>(y - 80 + (i - 1) * 25 ), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
-
-        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-           if ( hand[i-1]->getName() == "winter")
-            {
-                setSeason(hand[i-1]->getName());
-            }
-            else if (hand[i-1]->getName() == "spring")
-            {
-                setSeason(hand[i-1]->getName());
+                setIfLeader(true);
             }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
-            turn = true ;
-            
+            turn = true;
 
-            break; 
+            break;
         }
     }
 }
-void Player::updateCardsSpecialL(int x, int y , int cardWidth, int cardHeight , bool & turn) {
+void Player::updateCardsTop(int x, int y, int cardWidth, int cardHeight, bool &turn)
+{
     Vector2 mousePosition = GetMousePosition();
-    
 
-    for (size_t i = hand.size(); i > 0; i--) {
+    for (size_t i = hand.size(); i > 0; i--)
+    {
         std::string name = hand[i - 1]->getName();
-        
-        Rectangle cardRect = { static_cast<float>(x - 100), static_cast<float>(y  + (i - 1) * 25 ), static_cast<float>(cardWidth), static_cast<float>(cardHeight) };
 
-        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-           if ( hand[i-1]->getName() == "winter")
+        Rectangle cardRect = {static_cast<float>(x - 60 + (i - 1) * 25), static_cast<float>(y - 115), static_cast<float>(cardWidth), static_cast<float>(cardHeight)};
+
+        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+
+            if (hand[i - 1]->getName() == "winter")
             {
-                setSeason(hand[i-1]->getName());
+                setSeason(hand[i - 1]->getName());
             }
-            else if (hand[i-1]->getName() == "spring")
+            else if (hand[i - 1]->getName() == "spring")
             {
-                setSeason(hand[i-1]->getName());
+                setSeason(hand[i - 1]->getName());
+            }
+
+            usedCards.push_back(hand[i - 1]);
+            hand.erase(hand.begin() + (i - 1));
+            turn = true;
+
+            break;
+        }
+    }
+}
+void Player::updateCardsSpecialR(int x, int y, int cardWidth, int cardHeight, bool &turn)
+{
+    Vector2 mousePosition = GetMousePosition();
+
+    for (size_t i = hand.size(); i > 0; i--)
+    {
+        std::string name = hand[i - 1]->getName();
+
+        Rectangle cardRect = {static_cast<float>(x), static_cast<float>(y - 80 + (i - 1) * 25), static_cast<float>(cardWidth), static_cast<float>(cardHeight)};
+
+        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            if (hand[i - 1]->getName() == "winter")
+            {
+                setSeason(hand[i - 1]->getName());
+            }
+            else if (hand[i - 1]->getName() == "spring")
+            {
+                setSeason(hand[i - 1]->getName());
             }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
-            turn = true ;
-           
-            
-            break; 
+            turn = true;
+
+            break;
+        }
+    }
+}
+void Player::updateCardsSpecialL(int x, int y, int cardWidth, int cardHeight, bool &turn)
+{
+    Vector2 mousePosition = GetMousePosition();
+
+    for (size_t i = hand.size(); i > 0; i--)
+    {
+        std::string name = hand[i - 1]->getName();
+
+        Rectangle cardRect = {static_cast<float>(x - 100), static_cast<float>(y + (i - 1) * 25), static_cast<float>(cardWidth), static_cast<float>(cardHeight)};
+
+        if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            if (hand[i - 1]->getName() == "winter")
+            {
+                setSeason(hand[i - 1]->getName());
+            }
+            else if (hand[i - 1]->getName() == "spring")
+            {
+                setSeason(hand[i - 1]->getName());
+            }
+            usedCards.push_back(hand[i - 1]);
+            hand.erase(hand.begin() + (i - 1));
+            turn = true;
+
+            break;
         }
     }
 }
@@ -958,22 +954,6 @@ void Player::showSeason(Texture2D texture)
 {
     Vector2 position = {498, 261};
     Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
-    
+
     DrawTexture(texture, position.x, position.y, WHITE);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

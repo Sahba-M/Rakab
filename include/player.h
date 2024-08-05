@@ -61,7 +61,7 @@ class Player {
         bool hasPurpleCard(); //Having purple cards in the player's hand
         bool ifBurn(); //Does the player want to burn her hand if she doesn't have yellow cards?
         bool isProximity();
-        bool getIfLeader();
+        bool& getIfLeader();
         bool getIfHorse();
         std::string getColor() const ;
         std::string getSeason();
