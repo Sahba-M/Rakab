@@ -15,6 +15,7 @@
 #include <unordered_map>
 #include <climits>
 #include <math.h>
+#include <string.h>
 
 #include "control.h"
 #include "card.h"
@@ -581,6 +582,7 @@ void Control::cardAction()
     // setSeason("temp");
     for (auto player : players)
     {
+        // std::cout << "pass" << std::boolalpha << player.getPass();
         std::cout << player.getScorePlayer() << "\n";
     }
 }
@@ -590,10 +592,11 @@ void Control::setSeason(std::string season)
 }
 void Control::setPlayersReady()
 {
-    for (auto &player : players)
+    for (auto & player : players)
     {
         player.setPass(false);
     }
+    std::cout << "test ready";
 }
 void Control::run()
 {
@@ -725,9 +728,13 @@ int Control::getPlayerNumber()
 }
 int Control::findPlayerIndex(Player &player)
 {
+    std::string playerName , temp ;
+    playerName = player.getName();
     for (int i = 0; i < players.size(); i++)
     {
-        if (players[i].getName() == player.getName())
+        temp = players[i].getName();
+        // std::cout << players[i].getName() << "--" << player.getName() << std::endl;
+        if (playerName == temp)
         {
             return i;
         }
@@ -998,7 +1005,7 @@ std::string Control::controlColors()
     } while (!found);
     return chooseColor;
 }
-std::string Control::getWarPlace()
+std::string Control::getWarPlace() const
 {
     return warPlace;
 }
@@ -1239,7 +1246,6 @@ void Control::Draw()
         else
         {
             cardAction();
-            // determineWinner();
             currentScreen = WINNER;
         }
         break;
@@ -1564,6 +1570,11 @@ void Control::setGameBackground()
 {
     DrawTexture(myAsset.table, 0, 0, WHITE);
 
+    char place[20] ;
+    std::string temp = getWarPlace();
+    strcpy(place, temp.c_str());
+    DrawTextEx(myAsset.askFont , place , {490,30} , 30 , 2 , BLACK);
+
     TextButton help;
     help.bounds = {7, 13, 60, 60};
     help.text = "?";
@@ -1657,7 +1668,7 @@ void Control::setGameBackground()
     if (CheckCollisionPointRec(mousePosition, help.bounds))
     {
         help.color = WHITE;
-        help.buttonColor = {255, 248, 158, 200};
+        help.buttonColor = {31, 102, 110, 200};
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
@@ -1666,12 +1677,12 @@ void Control::setGameBackground()
     }
     else
     {
-        help.color = WHITE;                      // Change text color
-        help.buttonColor = {255, 250, 183, 170}; // Change button color
+        help.color = BLACK;                      // Change text color
+        help.buttonColor = {95, 175, 184, 200}; // Change button color
     }
 
     DrawRectangleRounded(help.bounds, 0.4f, 0, help.buttonColor);
-    DrawTextEx(myAsset.listFont, help.text, {help.bounds.x + 20, help.bounds.y + 18}, 35, 2, help.color);
+    DrawTextEx(myAsset.listFont, help.text, {help.bounds.x + 22, help.bounds.y + 18}, 35, 2, help.color);
 }
 
 bool Control::isBlackCircle()
@@ -1760,8 +1771,8 @@ void Control::drawCards()
 
     // std::cout << "test index : " << index << "    ";
 
-    for (int i = 0; i < getPlayerNumber(); i++)
-    {
+    // for (int i = 0; i < getPlayerNumber(); i++)
+    // {
         if (getCurrentIndex() == 0)
         {
             if (!players[0].getPass() && end == false)
@@ -1775,16 +1786,7 @@ void Control::drawCards()
                 else if (players[0].getSeason() == "spring")
                 {
                     setSeason(players[0].getSeason());
-                }
-                else if (players[0].getIfLeader())
-                {
-                    
-                    leader.useCard(players, 0);
-                    std::cout << "test leader" << std::endl;
-                    end = true ;
-                    
-                }
-                
+                } 
             }
         }
         else
@@ -1803,11 +1805,7 @@ void Control::drawCards()
                 {
                     setSeason(players[1].getSeason());
                 }
-                else if (players[1].getIfLeader())
-                {
-                    leader.useCard(players, 0);
-                    end = true ;
-                }
+                
             }
         }
         else
@@ -1825,12 +1823,7 @@ void Control::drawCards()
                 else if (players[2].getSeason() == "spring")
                 {
                     setSeason(players[2].getSeason());
-                }
-                else if (players[2].getIfLeader())
-                {
-                    leader.useCard(players, 0);
-                    end = true ;
-                }
+                }  
             }
         }
         else
@@ -1850,12 +1843,7 @@ void Control::drawCards()
                     else if (players[3].getSeason() == "spring")
                     {
                         setSeason(players[3].getSeason());
-                    }
-                    else if (players[3].getIfLeader())
-                    {
-                        leader.useCard(players, 0);
-                        end = true ;
-                    }
+                    }    
                 }
             }
             else
@@ -1876,12 +1864,7 @@ void Control::drawCards()
                     else if (players[4].getSeason() == "spring")
                     {
                         setSeason(players[4].getSeason());
-                    }
-                    else if (players[4].getIfLeader())
-                    {
-                        leader.useCard(players, 0);
-                        end = true ;
-                    }
+                    }  
                 }
             }
             else
@@ -1903,17 +1886,11 @@ void Control::drawCards()
                     {
                         setSeason(players[5].getSeason());
                     }
-                    else if (players[5].getIfLeader())
-                    {
-                        leader.useCard(players, 0);
-                        end = true ;
-                    }
                 }
             }
             else
                 players[5].drawBackCardSpecialPlayer(140, 165, myAsset, origin, 90);
         }
-    }
 }
 void Control::updateCards()
 {
@@ -1924,13 +1901,16 @@ void Control::updateCards()
     case 0:
         if (!players[0].getPass())
         {
-            if(players[0].getIfLeader())
+            players[0].updateCardsDown(115, 500, 70, 108, cardselected);
+            playerCard.push_back(players[0]);
+
+            if (players[0].getIfLeader())
             {
-                leader.useCard(players, 0);  
-                return;    
+                leader.useCard(players, 0);
+                setIsLeader(true);
+                // players[0].drawUseCards(200, 445, myAsset, origin, 0);
+                // players[0].drawBackCards(115, 500, myAsset, origin, 0);
             }
-            else
-               players[0].updateCardsDown(115, 500, 70, 108, cardselected);
         }
         else
             setCurrentIndex((getCurrentIndex() + 1) % players.size());
@@ -1938,14 +1918,33 @@ void Control::updateCards()
 
     case 1:
         if (!players[1].getPass())
+        {
             players[1].updateCardsDown(645, 500,70, 108, cardselected);
+            playerCard.push_back(players[1]);
+
+            if (players[1].getIfLeader())
+            {
+                leader.useCard(players, 0);
+                setIsLeader(true);
+            }
+        }
         else
             setCurrentIndex((getCurrentIndex() + 1) % players.size());
         break;
 
     case 2:
         if (!players[2].getPass())
+        {
             players[2].updateCardsSpecialR(937, 227, 70, 108, cardselected);
+            playerCard.push_back(players[2]);
+
+
+            if (players[2].getIfLeader())
+            {
+                leader.useCard(players, 0);
+                setIsLeader(true);
+            }
+        }
         else
             setCurrentIndex((getCurrentIndex() + 1) % players.size());
         break;
@@ -1954,7 +1953,16 @@ void Control::updateCards()
         if (players.size() > 3)
         {
             if (!players[3].getPass())
+            {
                 players[3].updateCardsTop(730, 139,  70, 108, cardselected);
+                playerCard.push_back(players[3]);
+
+                if (players[3].getIfLeader())
+                {
+                    leader.useCard(players, 0);
+                    setIsLeader(true);
+                }
+            }  
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
         }
@@ -1964,7 +1972,17 @@ void Control::updateCards()
         if (players.size() > 4)
         {
             if (!players[4].getPass())
+            {
                 players[4].updateCardsTop(195, 139,  70, 108, cardselected);
+                playerCard.push_back(players[4]);
+
+
+                if (players[4].getIfLeader())
+                {
+                    leader.useCard(players, 0);
+                    setIsLeader(true);
+                }
+            }
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
         }
@@ -1974,7 +1992,17 @@ void Control::updateCards()
         if (players.size() > 5)
         {
             if (!players[5].getPass())
+            {
                 players[5].updateCardsSpecialL(140, 165,  108, 70, cardselected);
+                playerCard.push_back(players[5]);
+
+
+                if (players[5].getIfLeader())
+                {
+                    leader.useCard(players, 0);
+                    setIsLeader(true);
+                }
+            }
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
         }
@@ -1999,6 +2027,10 @@ void Control::deal()
         ifDeal = false;
     }
     setPlayersReady(); // This function false all passes
+
+    for ( auto player : players )
+    std::cout << " test pass " << std::boolalpha << player.getPass() << " - ";
+
     setCurrentIndex(findPlayerIndex(getDeterminer()));
     std::cout << "current index test : " << getCurrentIndex() << "..." << findPlayerIndex(getDeterminer()) << "\n";
     currentScreen = GAME;
@@ -2040,10 +2072,13 @@ void Control::managePassButton()
 
 void Control::determineWinner()
 {
+    // std::cout << " test winner" << std::endl;
     DrawTexture(myAsset.winner, 0, 0, WHITE);
+    // std::cout << " test after back" << std::endl;
 
     if (winEachWar())
     {
+        // std::cout << " test if start";
         const char *name = winner.getName();
         DrawTextEx(myAsset.askFont, " Winner : ", {400, 175}, 90, 2, WHITE);
         DrawTextEx(myAsset.askFont, name, {400, 260}, 90, 2, WHITE);
@@ -2067,13 +2102,13 @@ void Control::determineWinner()
     {
         DrawTextEx(myAsset.askFont, " This War Has No Winners! ", {200, 280}, 70, 2, WHITE);
         DrawTextEx(myAsset.askFont, " - CLICK TO SKIP - ", {455, 375}, 25, 2, WHITE);
-        // if (!changeDeterminerL())
-        // {
-        //     if (!changeDeterminer())
-        //     {
-        //         setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
-        //     }
-        // }
+        if (!changeDeterminerL())
+        {
+            if (!changeDeterminer())
+            {
+                setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
+            }
+        }
         signs[provinceIndex].color = {186, 186, 186, 120};
 
     }

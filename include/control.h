@@ -95,7 +95,7 @@ class Control {
         int  getProvinceNumber();
         int  findMaxVirago(); // finding the max number of virago card in playground cards
         std::string controlColors();
-        std::string getWarPlace();
+        std::string getWarPlace() const;
         std::string getPeacePlace();
         std::string findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold);
         std::string getSeason();

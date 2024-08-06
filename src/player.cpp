@@ -955,6 +955,7 @@ void Player::updateCardsSpecialL(int x, int y, int cardWidth, int cardHeight, bo
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
+            
 
             break;
         }
