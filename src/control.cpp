@@ -57,12 +57,6 @@ Control::Control()
             {{527, 387}, color, "OLIVADI"},
             {{492, 504}, color, "ENNA"},
             {{502, 422}, color, "ARMENTO"}};
-    // players[0].setColorG(YELLOW);
-    // players[1].setColorG(RED);
-    // players[2].setColorG(PURPLE);
-    // players[3].setColorG(BLUE);
-    // players[4].setColorG(GREEN);
-    // players[5].setColorG(PINK);
 
     int threshold = 3;
 }
@@ -71,19 +65,19 @@ void Control::setPlayerNumber(int playerNumber)
 {
     this->playerNumber = playerNumber;
 }
-void Control::controlNumber()
-{
-    int counter = 0;
-    std::cout << " Enter Number Of Your Player : ";
-    std::cin >> counter;
-    while (counter < 3 || counter > 6)
-    {
-        system("cls");
-        std::cout << " Enter Number Of Your Player : ( ERROR: Please Enter number between 3_6 ) : ";
-        std::cin >> counter;
-    }
-    setPlayerNumber(counter);
-}
+// void Control::controlNumber()
+// {
+//     int counter = 0;
+//     std::cout << " Enter Number Of Your Player : ";
+//     std::cin >> counter;
+//     while (counter < 3 || counter > 6)
+//     {
+//         system("cls");
+//         std::cout << " Enter Number Of Your Player : ( ERROR: Please Enter number between 3_6 ) : ";
+//         std::cin >> counter;
+//     }
+//     setPlayerNumber(counter);
+// }
 void Control::setCards()
 {
     std::ifstream cardInput;
@@ -127,14 +121,14 @@ void Control::shuffleCards()
     std::mt19937 generator(randomDevice()); // random number generator (seed)
     std::shuffle(cards.begin(), cards.end(), generator);
 }
-void Control::showColors()
-{
-    std::cout << "\n ";
-    for (int i = 0; i < colors.size(); i++)
-    {
-        // std::cout << colors[i] << " ~ ";
-    }
-}
+// void Control::showColors()
+// {
+//     std::cout << "\n ";
+//     for (int i = 0; i < colors.size(); i++)
+//     {
+//         // std::cout << colors[i] << " ~ ";
+//     }
+// }
 void Control::getInformation()
 {
     int age;
@@ -183,32 +177,32 @@ void Control::distributeCards()
         }
     }
 }
-void Control::readProvinces()
-{
-    std::string province, ignore;
-    std::ifstream inputProvinces;
-    setProvinceNumber(provinceNumber);
+// void Control::readProvinces()
+// {
+//     std::string province, ignore;
+//     std::ifstream inputProvinces;
+//     setProvinceNumber(provinceNumber);
 
-    inputProvinces.open("../src/map.txt");
-    if (!inputProvinces.is_open())
-    {
-        std::cerr << " Can Not Open File... " << std::endl;
-    }
-    for (int i = 0; i < getProvinceNumber(); i++)
-    {
-        inputProvinces >> ignore;
-        inputProvinces >> province;
-        provinces.push_back(province);
-    }
-    inputProvinces.close();
-}
-void Control::showUncaptured()
-{
-    for (int i = 0; i < provinces.size(); i++)
-    {
-        std::cout << provinces[i] << "  ";
-    }
-}
+//     inputProvinces.open("../src/map.txt");
+//     if (!inputProvinces.is_open())
+//     {
+//         std::cerr << " Can Not Open File... " << std::endl;
+//     }
+//     for (int i = 0; i < getProvinceNumber(); i++)
+//     {
+//         inputProvinces >> ignore;
+//         inputProvinces >> province;
+//         provinces.push_back(province);
+//     }
+//     inputProvinces.close();
+// }
+// void Control::showUncaptured()
+// {
+//     for (int i = 0; i < provinces.size(); i++)
+//     {
+//         std::cout << provinces[i] << "  ";
+//     }
+// }
 void Control::setWar()
 {
     LeaderCard leader;
@@ -344,20 +338,20 @@ void Control::selectMove(Player &player, int index)
             std::cin >> selection;
             if (selection == 1)
             {
-                guideGame();
+                // guideGame();
                 choice = getch();
                 system("cls");
-                showAllCaptured();
-                showPlayGround();
+                // showAllCaptured();
+                // showPlayGround();
                 selectMove(player, index);
             }
             else if (selection == 2)
             {
-                guideCards();
+                // guideCards();
                 choice = getch();
                 system("cls");
-                showAllCaptured();
-                showPlayGround();
+                // showAllCaptured();
+                // showPlayGround();
                 selectMove(player, index);
             }
         }
@@ -373,15 +367,15 @@ void Control::selectMove(Player &player, int index)
         player.setPass(true);
     }
 }
-void Control::showPlayGround()
-{
-    std::cout << "--------------------------- \n";
-    for (int i = 0; i < players.size(); i++)
-    {
-        players[i].showUsedCards();
-    }
-    std::cout << "--------------------------- \n";
-}
+// void Control::showPlayGround()
+// {
+//     std::cout << "--------------------------- \n";
+//     for (int i = 0; i < players.size(); i++)
+//     {
+//         players[i].showUsedCards();
+//     }
+//     std::cout << "--------------------------- \n";
+// }
 void Control::selectWarPlace()
 {
 
@@ -463,61 +457,61 @@ void Control::setProvinceNumber(int provinceNumber)
 {
     this->provinceNumber = provinceNumber;
 }
-void Control::guideGame()
-{
-    std::ifstream inputGuide;
-    std::string explanation;
-    inputGuide.open("../src/guide.txt");
-    if (!inputGuide.is_open())
-    {
-        std::cerr << " Can Not Open File... " << std::endl;
-    }
-    system("cls");
-    std::cout << " ------------------------------------------------- \n"
-              << std::setw(13) << " << HELP PAGE >> \n\n";
-    while (std::getline(inputGuide, explanation))
-    {
-        std::cout << explanation << std::endl;
-    }
-    std::cout << " \n\n ------------------------------------------------- \n";
-    inputGuide.close();
-}
-void Control::guideCards()
-{
-    std::ifstream inputGuides;
-    std::string cardName, cardDescription, requestedCard;
-    std::unordered_map<std::string, std::string> card;
-    inputGuides.open("../src/cardGuide.txt");
-    if (!inputGuides.is_open())
-    {
-        std::cerr << " Can Not Open File... \n"
-                  << std::endl;
-    }
-    while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
-    {
-        card[cardName] = cardDescription;
-    }
-    inputGuides.close();
-    showPurpleCard();
-    std::cout << "\n Please Enter The Name Of The Card You Want: ";
-    std::cin >> requestedCard;
-    while (card.find(requestedCard) == card.end())
-    {
-        std::cout << "\n Please Enter Again: ";
-        std::cin >> requestedCard;
-    }
-    std::cout << "\n ------> " << card[requestedCard] << " <------ " << std::endl;
-}
-void Control::showPurpleCard()
-{
-    std::vector<std::string> purpleCards = {"Scarecrow", "Drummer", "Princes", "Winter", "Spring"};
-    std::cout << "\n ------------------------------------------- \n ";
-    for (auto card : purpleCards)
-    {
-        std::cout << card << "  ";
-    }
-    std::cout << "\n ------------------------------------------- \n\n ";
-}
+// void Control::guideGame()
+// {
+//     std::ifstream inputGuide;
+//     std::string explanation;
+//     inputGuide.open("../src/guide.txt");
+//     if (!inputGuide.is_open())
+//     {
+//         std::cerr << " Can Not Open File... " << std::endl;
+//     }
+//     system("cls");
+//     std::cout << " ------------------------------------------------- \n"
+//               << std::setw(13) << " << HELP PAGE >> \n\n";
+//     while (std::getline(inputGuide, explanation))
+//     {
+//         std::cout << explanation << std::endl;
+//     }
+//     std::cout << " \n\n ------------------------------------------------- \n";
+//     inputGuide.close();
+// }
+// void Control::guideCards()
+// {
+//     std::ifstream inputGuides;
+//     std::string cardName, cardDescription, requestedCard;
+//     std::unordered_map<std::string, std::string> card;
+//     inputGuides.open("../src/cardGuide.txt");
+//     if (!inputGuides.is_open())
+//     {
+//         std::cerr << " Can Not Open File... \n"
+//                   << std::endl;
+//     }
+//     while (inputGuides >> cardName >> std::ws && std::getline(inputGuides, cardDescription))
+//     {
+//         card[cardName] = cardDescription;
+//     }
+//     inputGuides.close();
+//     showPurpleCard();
+//     std::cout << "\n Please Enter The Name Of The Card You Want: ";
+//     std::cin >> requestedCard;
+//     while (card.find(requestedCard) == card.end())
+//     {
+//         std::cout << "\n Please Enter Again: ";
+//         std::cin >> requestedCard;
+//     }
+//     std::cout << "\n ------> " << card[requestedCard] << " <------ " << std::endl;
+// }
+// void Control::showPurpleCard()
+// {
+//     std::vector<std::string> purpleCards = {"Scarecrow", "Drummer", "Princes", "Winter", "Spring"};
+//     std::cout << "\n ------------------------------------------- \n ";
+//     for (auto card : purpleCards)
+//     {
+//         std::cout << card << "  ";
+//     }
+//     std::cout << "\n ------------------------------------------- \n\n ";
+// }
 void Control::cardAction()
 {
     // The priority of the cards is: dean - winter - drummer - spring - princes , virago
@@ -628,7 +622,6 @@ void Control::burnCards()
         std::cout << "test burn" << std::endl;
         player.burnCardsPlayer();
         player.insertBurnedCard(allBurnedCards); // for all player
-        // allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end()); // for all player
     }
 }
 void Control::chargeCards()
@@ -656,16 +649,16 @@ void Control::chargeCards()
         std::cout << "test charge" << std::endl;
     }
 }
-void Control::showAllCaptured()
-{
-    std::cout << " The Captured Provinces Is : \n";
-    std::cout << "\n";
-    for (int i = 0; i < getPlayerNumber(); i++)
-    {
-        players[i].showCapturedProvinces();
-    }
-    std::cout << "\n\n";
-}
+// void Control::showAllCaptured()
+// {
+//     std::cout << " The Captured Provinces Is : \n";
+//     std::cout << "\n";
+//     for (int i = 0; i < getPlayerNumber(); i++)
+//     {
+//         players[i].showCapturedProvinces();
+//     }
+//     std::cout << "\n\n";
+// }
 void Control::askBurn()
 {
     for (auto &player : players)
@@ -745,19 +738,19 @@ int Control::getProvinceNumber()
 {
     return provinceNumber;
 }
-int Control::controlAge()
-{
-    int chooseAge;
-    bool res = false;
-    while (!res)
-    {
-        std::cout << " Enter Your Valid Age : ";
-        std::cin >> chooseAge;
-        if (chooseAge > 0)
-            res = true;
-    }
-    return chooseAge;
-}
+// int Control::controlAge()
+// {
+//     int chooseAge;
+//     bool res = false;
+//     while (!res)
+//     {
+//         std::cout << " Enter Your Valid Age : ";
+//         std::cin >> chooseAge;
+//         if (chooseAge > 0)
+//             res = true;
+//     }
+//     return chooseAge;
+// }
 int Control::levenshteinDistance(const std::string &s1, const std::string &s2)
 {
     int m = s1.size();
@@ -978,33 +971,33 @@ void Control::findLastDean()
     }
     setDeterminerPeace(player);
 }
-std::string Control::controlColors()
-{
-    bool found = true;
-    std::string chooseColor;
-    do
-    {
-        showColors();
-        if (found == true)
-            std::cout << std::endl
-                      << " Enter Your Chosen Color: ";
+// std::string Control::controlColors()
+// {
+//     bool found = true;
+//     std::string chooseColor;
+//     do
+//     {
+//         // showColors();
+//         if (found == true)
+//             std::cout << std::endl
+//                       << " Enter Your Chosen Color: ";
 
-        std::cin >> chooseColor;
-        // auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
-        // if (elementFound != colors.end())
-        // {
-        //     colors.erase(elementFound);
-        //     found = true;
-        //     break;
-        // }
-        // else
-        {
-            std::cout << " \n ERROR: Please Enter Your Color Again : " << std::endl;
-            found = false;
-        }
-    } while (!found);
-    return chooseColor;
-}
+//         std::cin >> chooseColor;
+//         // auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
+//         // if (elementFound != colors.end())
+//         // {
+//         //     colors.erase(elementFound);
+//         //     found = true;
+//         //     break;
+//         // }
+//         // else
+//         {
+//             std::cout << " \n ERROR: Please Enter Your Color Again : " << std::endl;
+//             found = false;
+//         }
+//     } while (!found);
+//     return chooseColor;
+// }
 std::string Control::getWarPlace() const
 {
     return warPlace;
@@ -1190,10 +1183,6 @@ void Control::loadGame()
 void Control::startGame()
 {
     currentScreen = MENU;
-    // int screenWidth = 1075;
-    // int screenHeight = 636;
-    // InitWindow(screenWidth, screenHeight, "Rakab Game");
-    // uploadThings();
     SetTargetFPS(60);
 
     while (!WindowShouldClose())
@@ -1229,8 +1218,6 @@ void Control::Draw()
         drawInput();
         break;
     case MAP:
-        // askMap();
-        // changeCircleColor();
         drawSigns();
         break;
     case DEAL:
@@ -1519,38 +1506,10 @@ void Control::updateInput()
 }
 void Control::askMap()
 {
-    // Player youngest = youngestPlayer();
     const char *playerName = getDeterminer().getName();
-
-    // std::cout << playerName << std::endl;
 
     DrawTexture(myAsset.game, 0, 0, WHITE);                            // background image
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); // Map image
-
-    // TextButton goGame;
-    // goGame.bounds = {10, 12, 150, 60};
-    // goGame.text = "Back To GAME";
-
-    // Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
-
-    // if (CheckCollisionPointRec(mousePosition, goGame.bounds))
-    // {
-    //     goGame.color = WHITE;
-    //     goGame.buttonColor = {174, 185, 191, 200};
-
-    //     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-    //     {
-    //         currentScreen = GAME;
-    //     }
-    // }
-    // else
-    // {
-    //     goGame.color = WHITE;                  // Change text color
-    //     goGame.buttonColor = {0, 61, 59, 200}; // Change button color
-    // }
-
-    // DrawRectangleRounded(goGame.bounds, 0.4f, 0, goGame.buttonColor);
-    // DrawTextEx(myAsset.listFont, goGame.text, {goGame.bounds.x + 12, goGame.bounds.y + 20}, 25, 2, goGame.color);
 
     DrawTextEx(myAsset.askFont, playerName, {500, 15}, 30, 2, BLACK); // Print the name of the player
     DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 35}, 30, 2, BLACK);
@@ -1701,16 +1660,6 @@ bool Control::CompareColors(Color a, Color b)
     return (a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a);
 }
 
-// void Control::initializePlayersColor()
-// {
-//     players[0].setColorG(YELLOW);
-//     players[1].setColorG(RED);
-//     players[2].setColorG(PURPLE);
-//     players[3].setColorG(BLUE);
-//     players[4].setColorG(GREEN);
-//     players[5].setColorG(PINK);
-
-//}
 void Control::changeCircleColor()
 {
     Vector2 mousePosition = GetMousePosition();
@@ -1937,8 +1886,7 @@ void Control::updateCards()
         {
             players[2].updateCardsSpecialR(937, 227, 70, 108, cardselected);
             playerCard.push_back(players[2]);
-
-
+   
             if (players[2].getIfLeader())
             {
                 leader.useCard(players, 0);
@@ -1976,7 +1924,6 @@ void Control::updateCards()
                 players[4].updateCardsTop(195, 139,  70, 108, cardselected);
                 playerCard.push_back(players[4]);
 
-
                 if (players[4].getIfLeader())
                 {
                     leader.useCard(players, 0);
@@ -1995,7 +1942,6 @@ void Control::updateCards()
             {
                 players[5].updateCardsSpecialL(140, 165,  108, 70, cardselected);
                 playerCard.push_back(players[5]);
-
 
                 if (players[5].getIfLeader())
                 {

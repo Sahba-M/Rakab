@@ -39,25 +39,25 @@ class Control {
         Control(); 
         void setCards(); //Filling vector cards
         void setPlayerNumber ( int playerNumber );
-        void controlNumber(); //Players should be between 3 and 6
+        // void controlNumber(); //Players should be between 3 and 6
         void shuffleCards();
         void getInformation();
-        void showColors();
+        // void showColors();
         void distributeCards();
-        void readProvinces(); //Filling the provinces vector
-        void showUncaptured(); //Showing provinces that have not been captured at all
+        // void readProvinces(); //Filling the provinces vector
+        // void showUncaptured(); //Showing provinces that have not been captured at all
         void setWar();
         void setPeace( std::string peacePlace );
         void setWarPlace ( std::string warPlace );
         void selectMove ( Player & player,int index );
-        void showPlayGround(); //Show used player cards
+        // void showPlayGround(); //Show used player cards
         void selectWarPlace ();
         void setProvinceNumber ( int provinceNumber ); //Set the number of game provinces
-        void guideGame(); //Show game guide
-        void guideCards(); //Display guide cards
+        // void guideGame(); //Show game guide
+        // void guideCards(); //Display guide cards
         void cardAction(); //calculate scores and special cards operation
         void setSeason ( std::string season );
-        void showPurpleCard();
+        // void showPurpleCard();
         void run();
         void setDeterminer ( Player & Determiner);
         void setDeterminerPeace ( Player & Determiner);
@@ -65,7 +65,7 @@ class Control {
         void burnCards(); //fill the allBurnedCards vector
         void chargeCards();
         void selectPeacePlace(Player &player);
-        void showAllCaptured();
+        // void showAllCaptured();
         void askBurn(); //to burn hand cards of the player who has not got yellow cards
         void findLastDean(); //Find the last player who played dean
         void setIfDean( bool ifDean );
@@ -89,12 +89,12 @@ class Control {
         bool isBlackCircle();
         bool CompareColors(Color a, Color b);
         int  levenshteinDistance(const std::string &s1, const std::string &s2); // Optimized function to calculate the Levenshtein distance between two strings
-        int  controlAge();
+        // int  controlAge();
         int  getPlayerNumber();
         int  findPlayerIndex ( Player & player ); //finding the index of determiner to start a new round (for clockwise movement)
         int  getProvinceNumber();
         int  findMaxVirago(); // finding the max number of virago card in playground cards
-        std::string controlColors();
+        // std::string controlColors();
         std::string getWarPlace() const;
         std::string getPeacePlace();
         std::string findClosestMatch(const std::string &input, const std::vector<std::string> &cards, int threshold);
