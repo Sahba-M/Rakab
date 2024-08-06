@@ -581,6 +581,7 @@ Color Player::getColorG()
 void Player::drawCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
 {
     int i = 0;
+    // std::cout << "test size : " << hand.size();
 
     for (auto card : hand)
     {
@@ -617,6 +618,8 @@ void Player::drawCards(int x, int y, AssetManager &myAsset, Vector2 origin, floa
             texture = myAsset.virago;
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
+        else if ( name == "horse" )
+            texture = myAsset.horse;
 
         Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
         Vector2 position = {static_cast<float>(x) + static_cast<float>(i * 25), static_cast<float>(y)};
@@ -624,6 +627,7 @@ void Player::drawCards(int x, int y, AssetManager &myAsset, Vector2 origin, floa
 
         DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
 
+        // std::cout << "test number cards" << i << std::endl;
         i++;
     }
 }
@@ -666,6 +670,8 @@ void Player::drawCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 
             texture = myAsset.virago;
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
+        else if ( name == "horse" )
+            texture = myAsset.horse;
 
         Rectangle sourceRec = {0.0f, 0.0f, (float)texture.width, (float)texture.height};
         Vector2 position = {static_cast<float>(x), static_cast<float>(y) + static_cast<float>(i * 25)};
@@ -735,6 +741,8 @@ void Player::drawUseCards(int x, int y, AssetManager &myAsset, Vector2 origin, f
             texture = myAsset.virago;
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
+        else if ( name == "horse" )
+            texture = myAsset.horse;
 
         if (!texture.id)
             continue; // Ensure texture is valid
@@ -801,6 +809,8 @@ void Player::drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vecto
             texture = myAsset.virago;
         else if (name == "scarecrow")
             texture = myAsset.scarecrow;
+        else if ( name == "horse" )
+            texture = myAsset.horse;
 
         if (!texture.id)
             continue;

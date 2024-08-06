@@ -205,6 +205,7 @@ class Control {
         static int currentIndex ;
         TextButton passButton;
         bool ifDeterminer = true;
+        bool ifDeal = true;
 
 
      

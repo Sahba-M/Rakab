@@ -28,7 +28,8 @@ struct AssetManager { //To load the data
            drummer ,
             leader ,
          scarecrow ,
-              dean ;
+              dean ,
+             horse ;
                
     Font title ,
       listFont ,

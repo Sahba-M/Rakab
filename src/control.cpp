@@ -620,8 +620,9 @@ void Control::run()
 }
 void Control::burnCards()
 {
-    for (auto &player : players)
+    for (auto & player : players)
     {
+        std::cout << "test burn" << std::endl;
         player.burnCardsPlayer();
         player.insertBurnedCard(allBurnedCards); // for all player
         // allBurnedCards.insert(allBurnedCards.end(), player.getBurnedCards().begin(), player.getBurnedCards().end()); // for all player
@@ -649,6 +650,7 @@ void Control::chargeCards()
         cards.insert(cards.end(), allBurnedCards.begin(), allBurnedCards.end());
         shuffleCards();
         distributeCards();
+        std::cout << "test charge" << std::endl;
     }
 }
 void Control::showAllCaptured()
@@ -725,7 +727,7 @@ int Control::findPlayerIndex(Player &player)
 {
     for (int i = 0; i < players.size(); i++)
     {
-        // if (players[i].getName() == player.getName())
+        if (players[i].getName() == player.getName())
         {
             return i;
         }
@@ -1514,35 +1516,35 @@ void Control::askMap()
     // Player youngest = youngestPlayer();
     const char *playerName = getDeterminer().getName();
 
-    std::cout << playerName << std::endl;
+    // std::cout << playerName << std::endl;
 
     DrawTexture(myAsset.game, 0, 0, WHITE);                            // background image
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); // Map image
 
-    TextButton goGame;
-    goGame.bounds = {10, 12, 150, 60};
-    goGame.text = "Back To GAME";
+    // TextButton goGame;
+    // goGame.bounds = {10, 12, 150, 60};
+    // goGame.text = "Back To GAME";
 
-    Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
+    // Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
 
-    if (CheckCollisionPointRec(mousePosition, goGame.bounds))
-    {
-        goGame.color = WHITE;
-        goGame.buttonColor = {174, 185, 191, 200};
+    // if (CheckCollisionPointRec(mousePosition, goGame.bounds))
+    // {
+    //     goGame.color = WHITE;
+    //     goGame.buttonColor = {174, 185, 191, 200};
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            currentScreen = GAME;
-        }
-    }
-    else
-    {
-        goGame.color = WHITE;                  // Change text color
-        goGame.buttonColor = {0, 61, 59, 200}; // Change button color
-    }
+    //     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    //     {
+    //         currentScreen = GAME;
+    //     }
+    // }
+    // else
+    // {
+    //     goGame.color = WHITE;                  // Change text color
+    //     goGame.buttonColor = {0, 61, 59, 200}; // Change button color
+    // }
 
-    DrawRectangleRounded(goGame.bounds, 0.4f, 0, goGame.buttonColor);
-    DrawTextEx(myAsset.listFont, goGame.text, {goGame.bounds.x + 12, goGame.bounds.y + 20}, 25, 2, goGame.color);
+    // DrawRectangleRounded(goGame.bounds, 0.4f, 0, goGame.buttonColor);
+    // DrawTextEx(myAsset.listFont, goGame.text, {goGame.bounds.x + 12, goGame.bounds.y + 20}, 25, 2, goGame.color);
 
     DrawTextEx(myAsset.askFont, playerName, {500, 15}, 30, 2, BLACK); // Print the name of the player
     DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 35}, 30, 2, BLACK);
@@ -1562,9 +1564,9 @@ void Control::setGameBackground()
 {
     DrawTexture(myAsset.table, 0, 0, WHITE);
 
-    TextButton goMap;
-    goMap.bounds = {7, 13, 60, 60};
-    goMap.text = "MAP";
+    TextButton help;
+    help.bounds = {7, 13, 60, 60};
+    help.text = "?";
 
     Vector2 position = {239, 607};
     if (players.size() > 0 && players[0].getName() && strlen(players[0].getName()) > 0)
@@ -1652,24 +1654,24 @@ void Control::setGameBackground()
 
     Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
 
-    if (CheckCollisionPointRec(mousePosition, goMap.bounds))
+    if (CheckCollisionPointRec(mousePosition, help.bounds))
     {
-        goMap.color = WHITE;
-        goMap.buttonColor = {255, 248, 158, 200};
+        help.color = WHITE;
+        help.buttonColor = {255, 248, 158, 200};
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            currentScreen = MAP;
+            system("start C:/assets/help.pdf");
         }
     }
     else
     {
-        goMap.color = WHITE;                      // Change text color
-        goMap.buttonColor = {255, 250, 183, 170}; // Change button color
+        help.color = WHITE;                      // Change text color
+        help.buttonColor = {255, 250, 183, 170}; // Change button color
     }
 
-    DrawRectangleRounded(goMap.bounds, 0.4f, 0, goMap.buttonColor);
-    DrawTextEx(myAsset.listFont, goMap.text, {goMap.bounds.x + 12, goMap.bounds.y + 20}, 25, 2, goMap.color);
+    DrawRectangleRounded(help.bounds, 0.4f, 0, help.buttonColor);
+    DrawTextEx(myAsset.listFont, help.text, {help.bounds.x + 20, help.bounds.y + 18}, 35, 2, help.color);
 }
 
 bool Control::isBlackCircle()
@@ -1988,9 +1990,14 @@ void Control::updateCards()
 }
 void Control::deal()
 {
-    setCards();
-    shuffleCards();
-    distributeCards();
+    if ( ifDeal )
+    {
+        std::cout << "test deal" << std::endl;
+        setCards();
+        shuffleCards();
+        distributeCards();
+        ifDeal = false;
+    }
     setPlayersReady(); // This function false all passes
     setCurrentIndex(findPlayerIndex(getDeterminer()));
     std::cout << "current index test : " << getCurrentIndex() << "..." << findPlayerIndex(getDeterminer()) << "\n";
@@ -2054,6 +2061,7 @@ void Control::determineWinner()
                 setDeterminer(winner);
             }
         }
+        signs[provinceIndex].color = winner.getColor();
     }
     else
     {
@@ -2066,6 +2074,8 @@ void Control::determineWinner()
         //         setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
         //     }
         // }
+        signs[provinceIndex].color = {186, 186, 186, 120};
+
     }
 
     for (int i = 0; i < getPlayerNumber(); i++) // to update move vector from "pass" to "temp"
@@ -2075,9 +2085,8 @@ void Control::determineWinner()
     
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
-        currentScreen = MAP;
-        signs[provinceIndex].color = winner.getColor();
         burnCards();
         chargeCards();
+        currentScreen = MAP;
     }
 }

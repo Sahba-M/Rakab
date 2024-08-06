@@ -31,6 +31,7 @@ AssetManager::AssetManager()
     princes = LoadTexture("C:/assets/Shah_Dokht.png");
     dean = LoadTexture("C:/assets/Rish_Sefid.png");
     leader = LoadTexture("C:/assets/Parcham_Dar.png");
+    horse = LoadTexture("C:/assets/rakhsh.png");
     
 }
 
