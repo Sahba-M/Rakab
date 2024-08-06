@@ -131,7 +131,7 @@ void Control::showColors()
     std::cout << "\n ";
     for (int i = 0; i < colors.size(); i++)
     {
-        std::cout << colors[i] << " ~ ";
+        // std::cout << colors[i] << " ~ ";
     }
 }
 void Control::getInformation()
@@ -981,14 +981,14 @@ std::string Control::controlColors()
                       << " Enter Your Chosen Color: ";
 
         std::cin >> chooseColor;
-        auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
-        if (elementFound != colors.end())
-        {
-            colors.erase(elementFound);
-            found = true;
-            break;
-        }
-        else
+        // auto elementFound = std::find(colors.begin(), colors.end(), chooseColor);
+        // if (elementFound != colors.end())
+        // {
+        //     colors.erase(elementFound);
+        //     found = true;
+        //     break;
+        // }
+        // else
         {
             std::cout << " \n ERROR: Please Enter Your Color Again : " << std::endl;
             found = false;
@@ -1259,6 +1259,7 @@ void Control::Update()
         changeCircleColor();
         break;
     case DEAL:
+       
         deal();
     case GAME:
         updateCards();
@@ -2075,6 +2076,8 @@ void Control::determineWinner()
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         currentScreen = MAP;
-        
+        signs[provinceIndex].color = winner.getColor();
+        burnCards();
+        chargeCards();
     }
 }

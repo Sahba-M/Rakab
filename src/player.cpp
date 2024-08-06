@@ -24,7 +24,7 @@ struct SharedPtrCompare
 };
 
 Player::Player() { scorePlayer = 0; };
-Player::Player(int age, const char *name, std::string color)
+Player::Player(int age, const char *name, Color color)
 {
     setAge(age);
     setName(name);
@@ -38,7 +38,7 @@ void Player::setAge(int age)
 {
     this->age = age;
 }
-void Player::setColor(std::string color)
+void Player::setColor(Color color)
 {
     this->color = color;
 }
@@ -464,7 +464,7 @@ const char *Player::getName()
 {
     return name;
 }
-std::string Player::getColor() const
+Color Player::getColor() const
 {
     return color;
 }
@@ -474,7 +474,7 @@ std::vector<std::shared_ptr<Card>> Player::getYcards()
 }
 std::istream &operator>>(std::istream &input, Player &player)
 {
-    std::string color;
+    // std::string color;
     char *name;
 
     bool pass;
@@ -491,8 +491,8 @@ std::istream &operator>>(std::istream &input, Player &player)
     input >> age;
     player.setAge(age);
 
-    input >> color;
-    player.setColor(color);
+    // input >> color;
+    // player.setColor(color);
 
     input >> size;
     for (int i = 0; i < size; i++)
@@ -537,7 +537,7 @@ std::istream &operator>>(std::istream &input, Player &player)
 std::ostream &operator<<(std::ostream &output, Player &player)
 {
     output << player.name << "\n";
-    output << player.age << " " << player.color << "\n";
+    // output << player.age << " " << player.color << "\n";
     output << player.capturedProvinces.size() << "\n";
     for (int i = 0; i < player.capturedProvinces.size(); i++)
     {

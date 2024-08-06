@@ -16,10 +16,10 @@ class Player {
 
     public:
         Player();
-        Player ( int age , const char* name , std::string color);
+        Player ( int age , const char* name , Color color);
         void setName ( const char* name );
         void setAge ( int age );
-        void setColor ( std::string color );
+        void setColor ( Color color );
         void setSeason ( std::string season ); //To control spring and winter
         void setPass( bool pass ); //Player passing control
         void setScorePlayer ( int scorePlayer );
@@ -63,7 +63,7 @@ class Player {
         bool isProximity();
         bool& getIfLeader();
         bool getIfHorse();
-        std::string getColor() const ;
+        Color getColor() const ;
         std::string getSeason();
         std::vector<std::shared_ptr<Card>> getYcards();
         
@@ -101,7 +101,7 @@ class Player {
     private:
         std::string season;
         char name[256] ;
-        std::string color ;
+        Color color ;
         std::vector<std::shared_ptr<Card>> hand ; //cards in hand
         std::vector<std::shared_ptr<Card>> usedCards ; //Cards on the floor
         std::vector<std::shared_ptr<Card>> yellowCards; //Yellow cards for each player

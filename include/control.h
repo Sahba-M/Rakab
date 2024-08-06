@@ -162,7 +162,7 @@ class Control {
         std::vector<std::shared_ptr<Card>> cards; //A vector of all cards
         std::vector<std::shared_ptr<Card>> allBurnedCards;
         std::vector<std::string> provinces;
-        std::vector<std::string> colors = { "YELLOW", "RED" , "PURPLE" , "BLUE" , "GREEN" , "PINK"};
+        std::vector<Color> colors = { YELLOW, RED , PURPLE , BLUE , GREEN , PINK};
         std::vector<std::string> cardsAndOrdersNames = {"drummer", "princes", "scarecrow", "spring", "winter", "help", "card", "pass"};
         std::vector<std::string> move; // for save move choices of players
         std::vector<Player> players;
