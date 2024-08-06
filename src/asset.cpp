@@ -14,6 +14,7 @@ AssetManager::AssetManager()
     game = LoadTexture("C:/assets/backGame.png");
     map = LoadTexture("C:/assets/Map.png");
     table = LoadTexture("C:/assets/table.png");
+    winner = LoadTexture("C:/assets/winner.png");
     soldier1 = LoadTexture("C:/assets/soldier1.png");
     soldier2 = LoadTexture("C:/assets/soldier2.png");
     soldier3 = LoadTexture("C:/assets/soldier3.png");

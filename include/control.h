@@ -31,7 +31,7 @@ struct Province {
 };
 
 
-enum GameScreen { MENU = 0 , NUMBER , INFO , DEAL , MAP , GAME , SCARECROW }; 
+enum GameScreen { MENU = 0 , NUMBER , INFO , DEAL , MAP , GAME , WINNER }; 
 
 class Control {
     
@@ -131,9 +131,9 @@ class Control {
         void deal(); //Distribution of cards
         void drawCards();
         void updateCards();
-        
         void managePassButton();
         void determineWinner();
+
 
 
 
@@ -162,7 +162,7 @@ class Control {
         std::vector<std::shared_ptr<Card>> cards; //A vector of all cards
         std::vector<std::shared_ptr<Card>> allBurnedCards;
         std::vector<std::string> provinces;
-        std::vector<std::string> colors = {"RED", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
+        std::vector<std::string> colors = { "YELLOW", "RED" , "PURPLE" , "BLUE" , "GREEN" , "PINK"};
         std::vector<std::string> cardsAndOrdersNames = {"drummer", "princes", "scarecrow", "spring", "winter", "help", "card", "pass"};
         std::vector<std::string> move; // for save move choices of players
         std::vector<Player> players;
@@ -199,6 +199,7 @@ class Control {
         std::vector <TextButton> numButtons ;
         std::vector <Color> signColors ;
         std::vector <Province> signs ;
+        int provinceIndex;
 
         bool cardselected = false;
         static int currentIndex ;

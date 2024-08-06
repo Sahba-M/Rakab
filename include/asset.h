@@ -12,6 +12,7 @@ struct AssetManager { //To load the data
               game ,
                map ,
              table ,
+            winner ,
           soldier1 ,
           soldier2 ,
           soldier3 ,
