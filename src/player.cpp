@@ -779,18 +779,6 @@ void Player::drawUseCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vecto
             texture = myAsset.soldier6;
         else if (name == "10")
             texture = myAsset.soldier10;
-        // else if (name == "spring" )
-        // {
-        //     showSeason(myAsset.spring);
-        //     i++;
-        //     continue;
-        // }
-        // else if (name == "winter")
-        // {
-        //     showSeason(myAsset.winter);
-        //     i++;
-        //     continue;
-        // }
         else if (name == "spring" || name == "winter")
         {
             showSeason(name == "spring" ? myAsset.spring : myAsset.winter);
@@ -895,6 +883,10 @@ void Player::updateCardsTop(int x, int y, int cardWidth, int cardHeight, bool &t
             {
                 setSeason(hand[i - 1]->getName());
             }
+            else if (hand[i - 1]->getName() == "leader")
+            {
+                setIfLeader(true);
+            }
 
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
@@ -924,6 +916,10 @@ void Player::updateCardsSpecialR(int x, int y, int cardWidth, int cardHeight, bo
             {
                 setSeason(hand[i - 1]->getName());
             }
+            else if(hand[i - 1]->getName() == "leader")
+            {
+                setIfLeader(true);
+            }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
@@ -951,6 +947,10 @@ void Player::updateCardsSpecialL(int x, int y, int cardWidth, int cardHeight, bo
             else if (hand[i - 1]->getName() == "spring")
             {
                 setSeason(hand[i - 1]->getName());
+            }
+            else if(hand[i - 1]->getName() == "leader")
+            {
+                setIfLeader(true);
             }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
