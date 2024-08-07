@@ -387,6 +387,7 @@ void Control::selectWarPlace()
             }
         }
     }
+   
 }
 void Control::selectPeacePlace()
 {
@@ -428,13 +429,15 @@ void Control::selectPeacePlace()
 
     //     setPeace(chooseProvince);
     // }
-
+    std::cout << "function dean\n\n";
     Vector2 mousePosition = GetMousePosition();
 
     const Color GRAY_COLOR = {186, 186, 186, 120};
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
+         std::cout << "if1 function dean\n\n";
+
         for (int i = 0; i < getProvinceNumber(); i++) // Repeat for each province
         {
             float distance = sqrtf(powf(mousePosition.x - signs[i].position.x, 2) + powf(mousePosition.y - signs[i].position.y, 2));
@@ -443,6 +446,8 @@ void Control::selectPeacePlace()
             { // Is the mouse in the circle or not?
                 if (CompareColors(signs[i].color, GRAY_COLOR))
                 {
+                    std::cout << "if2 function dean\n\n";
+
                     setPeace(signs[i].name);
                     signs[i].color = WHITE;
                     provinceIndex = i;
@@ -480,14 +485,14 @@ void Control::cardAction()
     ViragoCard virago;
     DeanCard dean;
 
-    // for (int i = 0; i < getPlayerNumber(); i++)
-    // {
-    //     if (players[i].hasDean())
-    //     {
-    //         dean.useCard(players, i);
-    //         setIfDean(true);
-    //     }
-    // }
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].hasDean())
+        {
+            dean.useCard(players, i);
+            setIfDean(true);
+        }
+    }
     if (season == "winter")
     {
         winter.useCard(players, -1);
@@ -637,8 +642,12 @@ bool Control::changeDeterminer()
 }
 bool Control::changeDeterminerL()
 {
+    std::cout << "*******" << getIsLeader() <<"********\n";
+    std::cout << "function\n\n";
     if (getIsLeader())
     {
+        std::cout << "if function\n\n";
+
         setIsLeader(false);
         setDeterminer(playerCard[playerCard.size() - 2]);
 
@@ -939,7 +948,7 @@ void Control::setIsLeader(bool isLeader)
 {
     this->isLeader = isLeader;
 }
-bool Control::getIsLeader()
+bool &Control::getIsLeader()
 {
     return isLeader;
 }
@@ -1139,9 +1148,9 @@ void Control::Draw()
             currentScreen = WINNER;
         }
         break;
-    case WINNER:
-        determineWinner();
-        break;
+     case WINNER:
+         determineWinner();
+         break;
     }
 }
 void Control::Update()
@@ -1163,6 +1172,7 @@ void Control::Update()
         updateCards();
 
         break;
+    
     }
 }
 void Control::setMenuBackground()
@@ -1413,12 +1423,20 @@ void Control::askMap()
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); // Map image
     DrawTextEx(myAsset.askFont, playerName, {500, 15}, 30, 2, BLACK); // Print the name of the player
 
-    // DrawTextEx(myAsset.askFont, " Choose The Peace Place!", {380, 35}, 30, 2, BLACK);
-    // selectPeacePlace();
-   
 
-    DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 35}, 30, 2, BLACK);
+    if (getIfDean())
+    {
+        std::cout << "if dean\n\n";
+        DrawTextEx(myAsset.askFont, " Choose The Peace Place!", {380, 35}, 30, 2, BLACK);
+        selectPeacePlace();
+        setIfDean(false);
+    }
+
+
+    DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 610}, 30, 2, BLACK);
     selectWarPlace();
+
+   
 }
 
 
@@ -1781,18 +1799,18 @@ void Control::updateCards()
                 players[0].recognizeYellow();
 
                 std::vector<std::shared_ptr<Card>> cards = players[0].getYcards();
-                // if (cards.size() != 0)
-                // {
-                //     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
-                // }
-                if(cards.size() == 0 && players[0].getUsedCards().size() > 0)
-                {
-                    cardselected = true;
-                }
-                else if(cards.size() != 0)
+                if (cards.size() != 0)
                 {
                     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
                 }
+                // if(cards.size() == 0 && players[0].getUsedCards().size() > 0)
+                // {
+                //     cardselected = true;
+                // }
+                // else if(cards.size() != 0)
+                // {
+                //     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
+                // }
                 
                
             }
@@ -1967,6 +1985,7 @@ void Control::updateCards()
         std::cout << "test index : " << getCurrentIndex() << std::endl;
         cardselected = false;
     }
+    
 }
 void Control::deal()
 {
@@ -2027,7 +2046,7 @@ void Control::determineWinner()
     // std::cout << " test winner" << std::endl;
     DrawTexture(myAsset.winner, 0, 0, WHITE);
     // std::cout << " test after back" << std::endl;
-
+   
     if (winEachWar())
     {
         // std::cout << " test if start";

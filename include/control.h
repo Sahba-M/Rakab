@@ -77,7 +77,7 @@ class Control {
         void saveGame();
         void loadGame();
         bool getIsHorse();
-        bool getIsLeader();
+        bool &getIsLeader();
         bool changeDeterminerL(); 
         bool getIfDean(); 
         bool changeDeterminer(); 
