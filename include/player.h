@@ -95,6 +95,10 @@ class Player {
         
         void setIfSscarecrow(bool ifScarecrow);
         bool getIfScarecrow();
+        std::vector<std::shared_ptr<Card>> getUsedCards()
+        {
+            return usedCards;
+        }
 
 
 

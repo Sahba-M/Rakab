@@ -64,7 +64,7 @@ class Control {
         void setPlayersReady(); //change to false variable of pass after each round (for all players)
         void burnCards(); //fill the allBurnedCards vector
         void chargeCards();
-        void selectPeacePlace(Player &player);
+        void selectPeacePlace();
         // void showAllCaptured();
         void askBurn(); //to burn hand cards of the player who has not got yellow cards
         void findLastDean(); //Find the last player who played dean
@@ -142,6 +142,8 @@ class Control {
 
         void setCurrentIndex(int currentIndex);
         int & getCurrentIndex();
+        bool isWhiteCircle();
+
        
 
 
@@ -208,6 +210,7 @@ class Control {
         TextButton passButton;
         bool ifDeterminer = true;
         bool ifDeal = true;
+       
 
 
      

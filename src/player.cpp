@@ -146,6 +146,7 @@ void Player::recognizeYellow()
         if (std::dynamic_pointer_cast<YellowCard>(usedCard))
         {
             yellowCards.push_back(usedCard);
+            std::cout << name <<"---";
         }
     }
 }
@@ -879,8 +880,8 @@ void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &
                     setIfSscarecrow(true);
                     usedCards.push_back(hand[i - 1]);
                     hand.erase(hand.begin() + (i - 1));
+                    
                     turn = false;
-
                     return;
                 }
                 usedCards.push_back(hand[i - 1]);

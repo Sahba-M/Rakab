@@ -191,7 +191,7 @@ void Control::setWar()
 
     if (getIfDean())
     {
-        selectPeacePlace(getDeterminerPeace());
+        selectPeacePlace();
         setIfDean(false);
     }
     // selectWarPlace(getDeterminer());
@@ -359,7 +359,6 @@ void Control::selectMove(Player &player, int index)
 // }
 void Control::selectWarPlace()
 {
-
     Vector2 mousePosition = GetMousePosition();
 
     const Color GRAY_COLOR = {186, 186, 186, 120};
@@ -389,45 +388,74 @@ void Control::selectWarPlace()
         }
     }
 }
-void Control::selectPeacePlace(Player &player)
+void Control::selectPeacePlace()
 {
-    bool found = true;
-    std::string chooseProvince, response = "null";
+    // bool found = true;
+    // std::string chooseProvince, response = "null";
 
-    std::cout << "\n ";
-    std::cout << "---------------------------------------------------------------------------------------------------------\n ";
-    for (int i = 0; i < provinces.size(); i++)
-    {
-        std::cout << provinces[i] << "  ";
-    }
-    std::cout << "\n ---------------------------------------------------------------------------------------------------------\n\n\n ";
-    std::cout << std::endl;
-    std::cout << " " << player.getName() << " Do You Want To Determine The Peace Place? (Y/N) ";
-    std::cin >> response;
+    // std::cout << "\n ";
+    // std::cout << "---------------------------------------------------------------------------------------------------------\n ";
+    // for (int i = 0; i < provinces.size(); i++)
+    // {
+    //     std::cout << provinces[i] << "  ";
+    // }
+    // std::cout << "\n ---------------------------------------------------------------------------------------------------------\n\n\n ";
+    // std::cout << std::endl;
+    // std::cout << " " << player.getName() << " Do You Want To Determine The Peace Place? (Y/N) ";
+    // std::cin >> response;
 
-    if (response == "Y")
+    // if (response == "Y")
+    // {
+    //     do
+    //     {
+    //         if (found == true)
+    //         {
+    //             std::cout << " Enter Your Choosen Province : ";
+    //             std::cin >> chooseProvince;
+    //         }
+    //         auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
+    //         if (elementFound != provinces.end())
+    //         {
+    //             found = true;
+    //             break;
+    //         }
+    //         else
+    //         {
+    //             std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
+    //             found = false;
+    //         }
+    //     } while (!found);
+
+    //     setPeace(chooseProvince);
+    // }
+
+    Vector2 mousePosition = GetMousePosition();
+
+    const Color GRAY_COLOR = {186, 186, 186, 120};
+
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
-        do
+        for (int i = 0; i < getProvinceNumber(); i++) // Repeat for each province
         {
-            if (found == true)
-            {
-                std::cout << " Enter Your Choosen Province : ";
-                std::cin >> chooseProvince;
-            }
-            auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
-            if (elementFound != provinces.end())
-            {
-                found = true;
-                break;
-            }
-            else
-            {
-                std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
-                found = false;
-            }
-        } while (!found);
+            float distance = sqrtf(powf(mousePosition.x - signs[i].position.x, 2) + powf(mousePosition.y - signs[i].position.y, 2));
+            // Calculate the distance between the mouse position and the current marker position
+            if (distance <= 11 && !isWhiteCircle())
+            { // Is the mouse in the circle or not?
+                if (CompareColors(signs[i].color, GRAY_COLOR))
+                {
+                    setPeace(signs[i].name);
+                    signs[i].color = WHITE;
+                    provinceIndex = i;
+                    BeginDrawing();
+                    drawSigns();
+                    EndDrawing();
+                    sleep(2);
+                    currentScreen = DEAL;
 
-        setPeace(chooseProvince);
+                    break;
+                }
+            }
+        }
     }
 }
 void Control::setWarPlace(std::string warPlace)
@@ -487,16 +515,16 @@ void Control::cardAction()
             }
         }
     }
-    // for (int i = 0; i < getPlayerNumber(); i++)
-    // {
-    //     if (players[i].hasVirago())
-    //     {
-    //         for (int j = 0; j < players[i].numberOfVirago(); j++)
-    //         {
-    //             virago.useCard(players, i);
-    //         }
-    //     }
-    // }
+    for (int i = 0; i < getPlayerNumber(); i++)
+    {
+        if (players[i].hasVirago())
+        {
+            for (int j = 0; j < players[i].numberOfVirago(); j++)
+            {
+                virago.useCard(players, i);
+            }
+        }
+    }
     // findLastDean();
     // setSeason("temp");
     for (auto player : players)
@@ -1383,13 +1411,17 @@ void Control::askMap()
 
     DrawTexture(myAsset.game, 0, 0, WHITE);                            // background image
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); // Map image
-
     DrawTextEx(myAsset.askFont, playerName, {500, 15}, 30, 2, BLACK); // Print the name of the player
+
+    // DrawTextEx(myAsset.askFont, " Choose The Peace Place!", {380, 35}, 30, 2, BLACK);
+    // selectPeacePlace();
+   
+
     DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 35}, 30, 2, BLACK);
-    DrawTextEx(myAsset.askFont, " Click On The Sign To Select  ", {380, 580}, 30, 2, BLACK);
-    // selectWarPlace(players[0]);
     selectWarPlace();
 }
+
+
 void Control::drawSigns()
 {
     for (int i = 0; i < getProvinceNumber(); i++)
@@ -1528,6 +1560,18 @@ bool Control::isBlackCircle()
     }
     return false;
 }
+bool Control::isWhiteCircle()
+{
+    for (int i = 0; i < getProvinceNumber(); i++)
+    {
+        if (CompareColors(signs[i].color, WHITE))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Control::CompareColors(Color a, Color b)
 {
     return (a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a);
@@ -1737,10 +1781,20 @@ void Control::updateCards()
                 players[0].recognizeYellow();
 
                 std::vector<std::shared_ptr<Card>> cards = players[0].getYcards();
-                if (cards.size() != 0)
+                // if (cards.size() != 0)
+                // {
+                //     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
+                // }
+                if(cards.size() == 0 && players[0].getUsedCards().size() > 0)
+                {
+                    cardselected = true;
+                }
+                else if(cards.size() != 0)
                 {
                     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
                 }
+                
+               
             }
         }
         else
