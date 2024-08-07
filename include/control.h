@@ -183,7 +183,6 @@ class Control {
         Player winner; // for winner of each round
         Player DeterminerOfWar; //Determining the location of the battle
         Player DeterminerOfPeace; //Determining the location of the peace place
-        std::vector<Player> playerCard;
 
         std::vector<std::string> files; //files list
 

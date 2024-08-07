@@ -304,7 +304,6 @@ void Control::selectMove(Player &player, int index)
             player.showHandCards();
             player.recognizeYellow(); // update yellowCard vector
             player.selectCard();
-            playerCard.push_back(player);
 
             if ((player.getSeason() == "winter" || player.getSeason() == "spring")) // the season set here
                 setSeason(player.getSeason());
@@ -659,17 +658,8 @@ bool Control::changeDeterminerL()
         //     playerCard[i] = players[i].getPlayersCard();
         // }
       
-        setDeterminer(playerCard[playerCard.size() - 4]);
+        setDeterminer(players[(getCurrentIndex() - 2) % players.size()]);
         
-        
-
-       // std::cout << playerCard[playerCard.size() - 2].getName() << "\n";
-
-       for(int i = 0; i < playerCard.size(); i++)
-       {
-        std::cout << i << "****" << playerCard[i].getName() << "\n";
-       }
-
         for (auto &player : players)
         {
             player.setPass(false);
@@ -2005,7 +1995,7 @@ void Control::updateCards()
         std::cout << "test index : " << getCurrentIndex() << std::endl;
         cardselected = false;
     }
-    playerCard.push_back(players[getCurrentIndex()]);
+    // playerCard.push_back(players[getCurrentIndex()]);
 }
 void Control::deal()
 {

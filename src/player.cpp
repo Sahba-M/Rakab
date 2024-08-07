@@ -882,14 +882,12 @@ void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &
                     hand.erase(hand.begin() + (i - 1));
                     
                     turn = false;
-                    playersCard.push_back(*this);
                     return;
                 }
                 usedCards.push_back(hand[i - 1]);
                 hand.erase(hand.begin() + (i - 1));
                 turn = true;
 
-                playersCard.push_back(*this);
 
                 return;
             }
@@ -951,18 +949,12 @@ void Player::updateCardsTop(int x, int y, int cardWidth, int cardHeight, bool &t
                 hand.erase(hand.begin() + (i - 1));
                 turn = false;
 
-                playersCard.push_back(*this);
-
-
                 return;
             }
 
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
-
-            playersCard.push_back(*this);
-
 
             return;
         }
@@ -1021,16 +1013,11 @@ void Player::updateCardsSpecialR(int x, int y, int cardWidth, int cardHeight, bo
                 hand.erase(hand.begin() + (i - 1));
                 turn = false;
 
-                playersCard.push_back(*this);
-
-
                 return;
             }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
-
-            playersCard.push_back(*this);
 
             return;
         }
@@ -1089,15 +1076,11 @@ void Player::updateCardsSpecialL(int x, int y, int cardWidth, int cardHeight, bo
                 hand.erase(hand.begin() + (i - 1));
                 turn = false;
 
-                playersCard.push_back(*this);
-
                 return;
             }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
-
-            playersCard.push_back(*this);
 
             return;
         }
@@ -1140,8 +1123,3 @@ std::vector<std::shared_ptr<Card>> Player::getUsedCards()
 {
             return usedCards;
 }
- std::vector<Player> Player::getPlayersCard()
- {
-        return playersCard;
- }
-
