@@ -1718,6 +1718,7 @@ void Control::updateCards()
 {
     Vector2 origin = {0, 0};
     LeaderCard leader;
+    HorserCard horse;
     switch (getCurrentIndex())
     {
     case 0:
@@ -1730,8 +1731,11 @@ void Control::updateCards()
             {
                 leader.useCard(players, 0);
                 setIsLeader(true);
-                // players[0].drawUseCards(200, 445, myAsset, origin, 0);
-                // players[0].drawBackCards(115, 500, myAsset, origin, 0);
+            }
+            else if (players[0].getIfHorse())
+            {
+                horse.useCard(players, 0);
+                setIsHorse(true);
             }
         }
         else
@@ -1749,6 +1753,11 @@ void Control::updateCards()
                 leader.useCard(players, 0);
                 setIsLeader(true);
             }
+            else if (players[1].getIfHorse())
+            {
+                horse.useCard(players, 0);
+                setIsHorse(true);
+            }
         }
         else
             setCurrentIndex((getCurrentIndex() + 1) % players.size());
@@ -1764,6 +1773,11 @@ void Control::updateCards()
             {
                 leader.useCard(players, 0);
                 setIsLeader(true);
+            }
+            else if (players[2].getIfHorse())
+            {
+                horse.useCard(players, 0);
+                setIsHorse(true);
             }
         }
         else
@@ -1783,6 +1797,11 @@ void Control::updateCards()
                     leader.useCard(players, 0);
                     setIsLeader(true);
                 }
+                else if (players[3].getIfHorse())
+            {
+                horse.useCard(players, 0);
+                setIsHorse(true);
+            }
             }  
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
@@ -1802,6 +1821,11 @@ void Control::updateCards()
                     leader.useCard(players, 0);
                     setIsLeader(true);
                 }
+                else if (players[4].getIfHorse())
+            {
+                horse.useCard(players, 0);
+                setIsHorse(true);
+            }
             }
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
@@ -1821,6 +1845,11 @@ void Control::updateCards()
                     leader.useCard(players, 0);
                     setIsLeader(true);
                 }
+                else if (players[5].getIfHorse())
+            {
+                horse.useCard(players, 0);
+                setIsHorse(true);
+            }
             }
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
@@ -1908,26 +1937,26 @@ void Control::determineWinner()
         if (elementFound != provinces.end())
             provinces.erase(elementFound);
 
-        // if (!changeDeterminerL())
-        // {
-        //     if (!changeDeterminer())
-        //     {
-        //         setDeterminer(winner);
-        //     }
-        // }
+        if (!changeDeterminerL())
+        {
+            if (!changeDeterminer())
+            {
+                setDeterminer(winner);
+            }
+        }
         signs[provinceIndex].color = winner.getColor();
     }
     else
     {
         DrawTextEx(myAsset.askFont, " This War Has No Winners! ", {200, 280}, 70, 2, WHITE);
         DrawTextEx(myAsset.askFont, " - CLICK TO SKIP - ", {455, 375}, 25, 2, WHITE);
-        // if (!changeDeterminerL())
-        // {
-        //     if (!changeDeterminer())
-        //     {
-        //         setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
-        //     }
-        // }
+        if (!changeDeterminerL())
+        {
+            if (!changeDeterminer())
+            {
+                setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
+            }
+        }
         signs[provinceIndex].color = {186, 186, 186, 120};
 
     }

@@ -854,6 +854,10 @@ void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &
             {
                 setIfLeader(true);
             }
+            else if(hand[i - 1]->getName() == "horse")
+            {
+                setIfHorse(true);
+            }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
@@ -886,6 +890,10 @@ void Player::updateCardsTop(int x, int y, int cardWidth, int cardHeight, bool &t
             else if (hand[i - 1]->getName() == "leader")
             {
                 setIfLeader(true);
+            }
+            else if(hand[i - 1]->getName() == "horse")
+            {
+                setIfHorse(true);
             }
 
             usedCards.push_back(hand[i - 1]);
@@ -920,6 +928,10 @@ void Player::updateCardsSpecialR(int x, int y, int cardWidth, int cardHeight, bo
             {
                 setIfLeader(true);
             }
+            else if(hand[i - 1]->getName() == "horse")
+            {
+                setIfHorse(true);
+            }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
@@ -951,6 +963,10 @@ void Player::updateCardsSpecialL(int x, int y, int cardWidth, int cardHeight, bo
             else if(hand[i - 1]->getName() == "leader")
             {
                 setIfLeader(true);
+            }
+            else if(hand[i - 1]->getName() == "horse")
+            {
+                setIfHorse(true);
             }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
