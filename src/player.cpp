@@ -857,7 +857,6 @@ void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &
 
             if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
-                 std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
                 
                 if (hand[i - 1]->getName() == "winter")
                 {
@@ -896,6 +895,7 @@ void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &
 }
 void Player::updateYellowDown(int x, int y, int cardWidth, int cardHeight, bool &turn)
 {
+    std::cout << "test in function " << std::endl;
     Vector2 mousePosition = GetMousePosition();
     for (int i = usedCards.size(); i > 0; i--)
     {
@@ -907,9 +907,11 @@ void Player::updateYellowDown(int x, int y, int cardWidth, int cardHeight, bool 
             hand.push_back(usedCards[i - 1]);
             usedCards.erase(usedCards.begin() + (i - 1));
             turn = true;
+            setIfSscarecrow(false);
             break;
         }
     }
+    // setIfSscarecrow(false);
      
 }
 
@@ -973,6 +975,7 @@ void Player::updateYellowTop(int x, int y, int cardWidth, int cardHeight, bool &
             hand.push_back(usedCards[i - 1]);
             usedCards.erase(usedCards.begin() + (i - 1));
             turn = true;
+            setIfSscarecrow(false);
             break;
         }
     }
@@ -1036,6 +1039,7 @@ void Player::updateYellowSpecialR(int x, int y, int cardWidth, int cardHeight, b
             hand.push_back(usedCards[i - 1]);
             usedCards.erase(usedCards.begin() + (i - 1));
             turn = true;
+            setIfSscarecrow(false);
             break;
         }
     }
@@ -1099,6 +1103,7 @@ void Player::updateYellowSpecialL(int x, int y, int cardWidth, int cardHeight, b
             hand.push_back(usedCards[i - 1]);
             usedCards.erase(usedCards.begin() + (i - 1));
             turn = true;
+            setIfSscarecrow(false);
             break;
         }
     }

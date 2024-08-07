@@ -1664,7 +1664,7 @@ void Control::drawCards()
 
     if (getCurrentIndex() == 0)
     {
-        if (!players[0].getPass() && end == false)
+        if (!players[0].getPass())
         {
 
             players[0].drawCards(115, 500, myAsset, origin, 0);
@@ -1683,7 +1683,7 @@ void Control::drawCards()
 
     if (getCurrentIndex() == 1)
     {
-        if (!players[1].getPass() && end == false)
+        if (!players[1].getPass())
         {
             players[1].drawCards(645, 500, myAsset, origin, 0);
             if (players[1].getSeason() == "winter")
@@ -1701,7 +1701,7 @@ void Control::drawCards()
 
     if (getCurrentIndex() == 2)
     {
-        if (!players[2].getPass() && end == false)
+        if (!players[2].getPass())
         {
             players[2].drawCardSpecialPlayer(937, 227, myAsset, origin, -90);
             if (players[2].getSeason() == "winter")
@@ -1721,7 +1721,7 @@ void Control::drawCards()
     {
         if (getCurrentIndex() == 3)
         {
-            if (!players[3].getPass() && end == false)
+            if (!players[3].getPass())
             {
                 players[3].drawCards(730, 139, myAsset, origin, -180);
                 if (players[3].getSeason() == "winter")
@@ -1742,7 +1742,7 @@ void Control::drawCards()
     {
         if (getCurrentIndex() == 4)
         {
-            if (!players[4].getPass() && end == false)
+            if (!players[4].getPass())
             {
                 players[4].drawCards(195, 139, myAsset, origin, -180);
                 if (players[4].getSeason() == "winter")
@@ -1763,7 +1763,7 @@ void Control::drawCards()
     {
         if (getCurrentIndex() == 5)
         {
-            if (!players[5].getPass() && end == false)
+            if (!players[5].getPass())
             {
                 players[5].drawCardSpecialPlayer(140, 165, myAsset, origin, 90);
                 if (players[5].getSeason() == "winter")
@@ -1807,11 +1807,20 @@ void Control::updateCards()
             {
                 players[0].recognizeYellow();
 
-                std::vector<std::shared_ptr<Card>> cards = players[0].getYcards();
-                if (cards.size() != 0)
+                std::vector<std::shared_ptr<Card>> Ycards = players[0].getYcards();
+
+                std::cout << "test" << Ycards.size() << std::endl;
+                if (Ycards.size() != 0)
                 {
                     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
                 }
+                else 
+                {
+                    setCurrentIndex((getCurrentIndex() + 1) % players.size());
+                    players[0].setIfSscarecrow(false); 
+                }
+
+
 
                 // if(cards.size() == 0 && players[0].getUsedCards().size() > 0)
                 // {
@@ -1821,7 +1830,6 @@ void Control::updateCards()
                 // {
                 //     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
                 // }
-                
                
             }
         }
@@ -1853,6 +1861,11 @@ void Control::updateCards()
                 {
                     players[1].updateYellowDown(559, 445, 70, 108, cardselected);
                 }
+                else 
+                {
+                    setCurrentIndex((getCurrentIndex() + 1) % players.size());
+                    players[1].setIfSscarecrow(false); 
+                }
             }
         }
         else
@@ -1882,6 +1895,11 @@ void Control::updateCards()
                 if (cards.size() != 0)
                 {
                     players[2].updateYellowSpecialR(885, 220, 70, 108, cardselected);
+                }
+                else 
+                {
+                    setCurrentIndex((getCurrentIndex() + 1) % players.size());
+                    players[2].setIfSscarecrow(false); 
                 }
             }
         }
@@ -1915,6 +1933,13 @@ void Control::updateCards()
                     {
                         players[3].updateYellowTop(630, 200, 70, 108, cardselected);
                     }
+                    else 
+                    {
+                        setCurrentIndex((getCurrentIndex() + 1) % players.size());
+                        players[3].setIfSscarecrow(false); 
+                    }
+                    
+                     
                 }
             }
             else
@@ -1948,6 +1973,11 @@ void Control::updateCards()
                     {
                         players[4].updateYellowTop(270, 200, 70, 108, cardselected);
                     }
+                    else 
+                    {
+                        setCurrentIndex((getCurrentIndex() + 1) % players.size());
+                        players[4].setIfSscarecrow(false); 
+                    }
                 }
             }
             else
@@ -1980,6 +2010,11 @@ void Control::updateCards()
                     if (cards.size() != 0)
                     {
                         players[5].updateYellowSpecialL(187, 165, 70, 108, cardselected);
+                    }
+                    else 
+                    {
+                        setCurrentIndex((getCurrentIndex() + 1) % players.size());
+                        players[5].setIfSscarecrow(false); 
                     }
                 }
             }
