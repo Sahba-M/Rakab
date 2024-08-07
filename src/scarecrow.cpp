@@ -21,6 +21,7 @@ void ScarecrowCard::useThisCard ( Player & player )
         std::cin >> selectYcard;
         card = std::make_shared<YellowCard>(selectYcard);
     } 
+    
 }
 // void ScarecrowCard::draw ( int x , int y )
 // {

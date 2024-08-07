@@ -114,7 +114,7 @@ void Control::getInformation()
 {
     int age;
     char *name;
-    static int index = 0 ;
+    static int index = 0;
 
     if (next)
     {
@@ -131,7 +131,8 @@ void Control::getInformation()
 
         for (auto player : players)
         {
-            std::cout << player.getName() << "--" << player.getAge() << "/" << "\n" << getCurrentIndex();
+            std::cout << player.getName() << "--" << player.getAge() << "/" << "\n"
+                      << getCurrentIndex();
         }
         index++;
     }
@@ -140,7 +141,6 @@ void Control::getInformation()
     {
         setDeterminer(youngestPlayer());
     }
-   
 }
 void Control::distributeCards()
 {
@@ -212,7 +212,7 @@ void Control::setWar()
             selectMove(players[getCurrentIndex()], currentIndex);
             if (players[getCurrentIndex()].getIfLeader())
             {
-                
+
                 leader.useCard(players, -1);
                 setIsLeader(true);
                 system("cls");
@@ -376,7 +376,7 @@ void Control::selectWarPlace()
                 {
                     setWarPlace(signs[i].name);
                     signs[i].color = BLACK;
-                    provinceIndex = i ;
+                    provinceIndex = i;
                     BeginDrawing();
                     drawSigns();
                     EndDrawing();
@@ -472,7 +472,7 @@ void Control::cardAction()
             drummer.useCard(players, i, calcuteNumber);
         }
     }
-    
+
     if (season == "spring")
     {
         spring.useCard(players, -1);
@@ -511,7 +511,7 @@ void Control::setSeason(std::string season)
 }
 void Control::setPlayersReady()
 {
-    for (auto & player : players)
+    for (auto &player : players)
     {
         player.setPass(false);
     }
@@ -542,7 +542,7 @@ void Control::run()
 }
 void Control::burnCards()
 {
-    for (auto & player : players)
+    for (auto &player : players)
     {
         std::cout << "test burn" << std::endl;
         player.burnCardsPlayer();
@@ -636,7 +636,7 @@ int Control::getPlayerNumber()
 }
 int Control::findPlayerIndex(Player &player)
 {
-    std::string playerName , temp ;
+    std::string playerName, temp;
     playerName = player.getName();
     for (int i = 0; i < players.size(); i++)
     {
@@ -1129,7 +1129,7 @@ void Control::Update()
         changeCircleColor();
         break;
     case DEAL:
-       
+
         deal();
     case GAME:
         updateCards();
@@ -1402,10 +1402,10 @@ void Control::setGameBackground()
 {
     DrawTexture(myAsset.table, 0, 0, WHITE);
 
-    char place[20] ;
+    char place[20];
     std::string temp = getWarPlace();
     strcpy(place, temp.c_str());
-    DrawTextEx(myAsset.askFont , place , {490,30} , 30 , 2 , BLACK);
+    DrawTextEx(myAsset.askFont, place, {490, 30}, 30, 2, BLACK);
 
     TextButton help;
     help.bounds = {7, 13, 60, 60};
@@ -1509,7 +1509,7 @@ void Control::setGameBackground()
     }
     else
     {
-        help.color = BLACK;                      // Change text color
+        help.color = BLACK;                     // Change text color
         help.buttonColor = {95, 175, 184, 200}; // Change button color
     }
 
@@ -1579,7 +1579,7 @@ void Control::drawCards()
     int index = getCurrentIndex();
     Vector2 origin = {0, 0};
     LeaderCard leader;
-    bool end = false ;
+    bool end = false;
 
     players[0].drawUseCards(200, 445, myAsset, origin, 0);
     players[1].drawUseCards(559, 445, myAsset, origin, 0);
@@ -1591,134 +1591,130 @@ void Control::drawCards()
     if (players.size() > 5)
         players[5].drawUseCardSpecialPlayer(187, 165, myAsset, origin, 90);
 
-    // std::cout << "test index : " << index << "    ";
-
-    // for (int i = 0; i < getPlayerNumber(); i++)
-    // {
-        if (getCurrentIndex() == 0)
+    if (getCurrentIndex() == 0)
+    {
+        if (!players[0].getPass() && end == false)
         {
-            if (!players[0].getPass() && end == false)
+
+            players[0].drawCards(115, 500, myAsset, origin, 0);
+            if (players[0].getSeason() == "winter")
             {
-                
-                players[0].drawCards(115, 500, myAsset, origin, 0);
-                if (players[0].getSeason() == "winter")
+                setSeason(players[0].getSeason());
+            }
+            else if (players[0].getSeason() == "spring")
+            {
+                setSeason(players[0].getSeason());
+            }
+        }
+    }
+    else
+        players[0].drawBackCards(115, 500, myAsset, origin, 0);
+
+    if (getCurrentIndex() == 1)
+    {
+        if (!players[1].getPass() && end == false)
+        {
+            players[1].drawCards(645, 500, myAsset, origin, 0);
+            if (players[1].getSeason() == "winter")
+            {
+                setSeason(players[1].getSeason());
+            }
+            else if (players[1].getSeason() == "spring")
+            {
+                setSeason(players[1].getSeason());
+            }
+        }
+    }
+    else
+        players[1].drawBackCards(645, 500, myAsset, origin, 0);
+
+    if (getCurrentIndex() == 2)
+    {
+        if (!players[2].getPass() && end == false)
+        {
+            players[2].drawCardSpecialPlayer(937, 227, myAsset, origin, -90);
+            if (players[2].getSeason() == "winter")
+            {
+                setSeason(players[2].getSeason());
+            }
+            else if (players[2].getSeason() == "spring")
+            {
+                setSeason(players[2].getSeason());
+            }
+        }
+    }
+    else
+        players[2].drawBackCardSpecialPlayer(937, 227, myAsset, origin, -90);
+
+    if (players.size() > 3)
+    {
+        if (getCurrentIndex() == 3)
+        {
+            if (!players[3].getPass() && end == false)
+            {
+                players[3].drawCards(730, 139, myAsset, origin, -180);
+                if (players[3].getSeason() == "winter")
                 {
-                    setSeason(players[0].getSeason());
+                    setSeason(players[3].getSeason());
                 }
-                else if (players[0].getSeason() == "spring")
+                else if (players[3].getSeason() == "spring")
                 {
-                    setSeason(players[0].getSeason());
-                } 
+                    setSeason(players[3].getSeason());
+                }
             }
         }
         else
-            players[0].drawBackCards(115, 500, myAsset, origin, 0);
+            players[3].drawBackCards(730, 139, myAsset, origin, -180);
+    }
 
-        if (getCurrentIndex() == 1)
+    if (players.size() > 4)
+    {
+        if (getCurrentIndex() == 4)
         {
-            if (!players[1].getPass() && end == false)
+            if (!players[4].getPass() && end == false)
             {
-                players[1].drawCards(645, 500, myAsset, origin, 0);
-                if (players[1].getSeason() == "winter")
+                players[4].drawCards(195, 139, myAsset, origin, -180);
+                if (players[4].getSeason() == "winter")
                 {
-                    setSeason(players[1].getSeason());
+                    setSeason(players[4].getSeason());
                 }
-                else if (players[1].getSeason() == "spring")
+                else if (players[4].getSeason() == "spring")
                 {
-                    setSeason(players[1].getSeason());
+                    setSeason(players[4].getSeason());
                 }
-                
             }
         }
         else
-            players[1].drawBackCards(645, 500, myAsset, origin, 0);
+            players[4].drawBackCards(195, 139, myAsset, origin, -180);
+    }
 
-        if (getCurrentIndex() == 2)
+    if (players.size() > 5)
+    {
+        if (getCurrentIndex() == 5)
         {
-            if (!players[2].getPass() && end == false)
+            if (!players[5].getPass() && end == false)
             {
-                players[2].drawCardSpecialPlayer(937, 227, myAsset, origin, -90);
-                if (players[2].getSeason() == "winter")
+                players[5].drawCardSpecialPlayer(140, 165, myAsset, origin, 90);
+                if (players[5].getSeason() == "winter")
                 {
-                    setSeason(players[2].getSeason());
+                    setSeason(players[5].getSeason());
                 }
-                else if (players[2].getSeason() == "spring")
+                else if (players[5].getSeason() == "spring")
                 {
-                    setSeason(players[2].getSeason());
-                }  
+                    setSeason(players[5].getSeason());
+                }
             }
         }
         else
-            players[2].drawBackCardSpecialPlayer(937, 227, myAsset, origin, -90);
-
-        if (players.size() > 3)
-        {
-            if (getCurrentIndex() == 3)
-            {
-                if (!players[3].getPass() && end == false)
-                {
-                    players[3].drawCards(730, 139, myAsset, origin, -180);
-                    if (players[3].getSeason() == "winter")
-                    {
-                        setSeason(players[3].getSeason());
-                    }
-                    else if (players[3].getSeason() == "spring")
-                    {
-                        setSeason(players[3].getSeason());
-                    }    
-                }
-            }
-            else
-                players[3].drawBackCards(730, 139, myAsset, origin, -180);
-        }
-
-        if (players.size() > 4)
-        {
-            if (getCurrentIndex() == 4)
-            {
-                if (!players[4].getPass() && end == false)
-                {
-                    players[4].drawCards(195, 139, myAsset, origin, -180);
-                    if (players[4].getSeason() == "winter")
-                    {
-                        setSeason(players[4].getSeason());
-                    }
-                    else if (players[4].getSeason() == "spring")
-                    {
-                        setSeason(players[4].getSeason());
-                    }  
-                }
-            }
-            else
-                players[4].drawBackCards(195, 139, myAsset, origin, -180);
-        }
-
-        if (players.size() > 5)
-        {
-            if (getCurrentIndex() == 5)
-            {
-                if (!players[5].getPass() && end == false)
-                {
-                    players[5].drawCardSpecialPlayer(140, 165, myAsset, origin, 90);
-                    if (players[5].getSeason() == "winter")
-                    {
-                        setSeason(players[5].getSeason());
-                    }
-                    else if (players[5].getSeason() == "spring")
-                    {
-                        setSeason(players[5].getSeason());
-                    }
-                }
-            }
-            else
-                players[5].drawBackCardSpecialPlayer(140, 165, myAsset, origin, 90);
-        }
+            players[5].drawBackCardSpecialPlayer(140, 165, myAsset, origin, 90);
+    }
 }
 void Control::updateCards()
 {
     Vector2 origin = {0, 0};
     LeaderCard leader;
     HorserCard horse;
+
     switch (getCurrentIndex())
     {
     case 0:
@@ -1735,7 +1731,16 @@ void Control::updateCards()
             else if (players[0].getIfHorse())
             {
                 horse.useCard(players, 0);
-                setIsHorse(true);
+            }
+            else if (players[0].getIfScarecrow())
+            {
+                players[0].recognizeYellow();
+
+                std::vector<std::shared_ptr<Card>> cards = players[0].getYcards();
+                if (cards.size() != 0)
+                {
+                    players[0].updateYellowDown(200, 445, 70, 108, cardselected);
+                }
             }
         }
         else
@@ -1745,7 +1750,7 @@ void Control::updateCards()
     case 1:
         if (!players[1].getPass())
         {
-            players[1].updateCardsDown(645, 500,70, 108, cardselected);
+            players[1].updateCardsDown(645, 500, 70, 108, cardselected);
             playerCard.push_back(players[1]);
 
             if (players[1].getIfLeader())
@@ -1756,7 +1761,16 @@ void Control::updateCards()
             else if (players[1].getIfHorse())
             {
                 horse.useCard(players, 0);
-                setIsHorse(true);
+            }
+            else if (players[1].getIfScarecrow())
+            {
+                players[1].recognizeYellow();
+
+                std::vector<std::shared_ptr<Card>> cards = players[1].getYcards();
+                if (cards.size() != 0)
+                {
+                    players[1].updateYellowDown(559, 445, 70, 108, cardselected);
+                }
             }
         }
         else
@@ -1768,7 +1782,7 @@ void Control::updateCards()
         {
             players[2].updateCardsSpecialR(937, 227, 70, 108, cardselected);
             playerCard.push_back(players[2]);
-   
+
             if (players[2].getIfLeader())
             {
                 leader.useCard(players, 0);
@@ -1777,7 +1791,16 @@ void Control::updateCards()
             else if (players[2].getIfHorse())
             {
                 horse.useCard(players, 0);
-                setIsHorse(true);
+            }
+            else if (players[2].getIfScarecrow())
+            {
+                players[2].recognizeYellow();
+
+                std::vector<std::shared_ptr<Card>> cards = players[2].getYcards();
+                if (cards.size() != 0)
+                {
+                    players[2].updateYellowSpecialR(885, 220, 70, 108, cardselected);
+                }
             }
         }
         else
@@ -1789,7 +1812,7 @@ void Control::updateCards()
         {
             if (!players[3].getPass())
             {
-                players[3].updateCardsTop(730, 139,  70, 108, cardselected);
+                players[3].updateCardsTop(730, 139, 70, 108, cardselected);
                 playerCard.push_back(players[3]);
 
                 if (players[3].getIfLeader())
@@ -1798,11 +1821,20 @@ void Control::updateCards()
                     setIsLeader(true);
                 }
                 else if (players[3].getIfHorse())
-            {
-                horse.useCard(players, 0);
-                setIsHorse(true);
+                {
+                    horse.useCard(players, 0);
+                }
+                else if (players[3].getIfScarecrow())
+                {
+                    players[3].recognizeYellow();
+
+                    std::vector<std::shared_ptr<Card>> cards = players[3].getYcards();
+                    if (cards.size() != 0)
+                    {
+                        players[3].updateYellowTop(630, 200, 70, 108, cardselected);
+                    }
+                }
             }
-            }  
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
         }
@@ -1813,7 +1845,7 @@ void Control::updateCards()
         {
             if (!players[4].getPass())
             {
-                players[4].updateCardsTop(195, 139,  70, 108, cardselected);
+                players[4].updateCardsTop(195, 139, 70, 108, cardselected);
                 playerCard.push_back(players[4]);
 
                 if (players[4].getIfLeader())
@@ -1822,10 +1854,19 @@ void Control::updateCards()
                     setIsLeader(true);
                 }
                 else if (players[4].getIfHorse())
-            {
-                horse.useCard(players, 0);
-                setIsHorse(true);
-            }
+                {
+                    horse.useCard(players, 0);
+                }
+                else if (players[4].getIfScarecrow())
+                {
+                    players[4].recognizeYellow();
+
+                    std::vector<std::shared_ptr<Card>> cards = players[4].getYcards();
+                    if (cards.size() != 0)
+                    {
+                        players[4].updateYellowTop(270, 200, 70, 108, cardselected);
+                    }
+                }
             }
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
@@ -1837,7 +1878,7 @@ void Control::updateCards()
         {
             if (!players[5].getPass())
             {
-                players[5].updateCardsSpecialL(140, 165,  108, 70, cardselected);
+                players[5].updateCardsSpecialL(140, 165, 108, 70, cardselected);
                 playerCard.push_back(players[5]);
 
                 if (players[5].getIfLeader())
@@ -1846,10 +1887,19 @@ void Control::updateCards()
                     setIsLeader(true);
                 }
                 else if (players[5].getIfHorse())
-            {
-                horse.useCard(players, 0);
-                setIsHorse(true);
-            }
+                {
+                    horse.useCard(players, 0);
+                }
+                else if (players[5].getIfScarecrow())
+                {
+                    players[5].recognizeYellow();
+
+                    std::vector<std::shared_ptr<Card>> cards = players[5].getYcards();
+                    if (cards.size() != 0)
+                    {
+                        players[5].updateYellowSpecialL(187, 165, 70, 108, cardselected);
+                    }
+                }
             }
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
@@ -1866,7 +1916,7 @@ void Control::updateCards()
 }
 void Control::deal()
 {
-    if ( ifDeal )
+    if (ifDeal)
     {
         std::cout << "test deal" << std::endl;
         setCards();
@@ -1876,8 +1926,8 @@ void Control::deal()
     }
     setPlayersReady(); // This function false all passes
 
-    for ( auto player : players )
-    std::cout << " test pass " << std::boolalpha << player.getPass() << " - ";
+    for (auto player : players)
+        std::cout << " test pass " << std::boolalpha << player.getPass() << " - ";
 
     setCurrentIndex(findPlayerIndex(getDeterminer()));
     std::cout << "current index test : " << getCurrentIndex() << "..." << findPlayerIndex(getDeterminer()) << "\n";
@@ -1932,7 +1982,6 @@ void Control::determineWinner()
         DrawTextEx(myAsset.askFont, name, {400, 260}, 90, 2, WHITE);
         DrawTextEx(myAsset.askFont, " - CLICK TO SKIP - ", {420, 370}, 25, 2, WHITE);
 
-
         auto elementFound = std::find(provinces.begin(), provinces.end(), getWarPlace());
         if (elementFound != provinces.end())
             provinces.erase(elementFound);
@@ -1958,14 +2007,13 @@ void Control::determineWinner()
             }
         }
         signs[provinceIndex].color = {186, 186, 186, 120};
-
     }
 
     for (int i = 0; i < getPlayerNumber(); i++) // to update move vector from "pass" to "temp"
     {
         players[i].setSeason("temp");
     }
-    
+
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         burnCards();

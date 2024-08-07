@@ -81,8 +81,20 @@ class Player {
         void updateCardsSpecialL(int x , int y  , int cardWidth , int cardHeight , bool & turn);
         void updateCardsTop(int x , int y  , int cardWidth , int cardHeight , bool & turn) ;
         void updateCardsDown(int x , int y  , int cardWidth , int cardHeight , bool & turn);
+
+        void updateYellowDown(int x, int y, int cardWidth, int cardHeight, bool &turn);
+        void updateYellowTop(int x, int y, int cardWidth, int cardHeight,  bool &turn);
+        void updateYellowSpecialR(int x, int y, int cardWidth, int cardHeight,  bool &turn);
+        void updateYellowSpecialL(int x, int y, int cardWidth, int cardHeight,  bool &turn);
+
+
+
+
         void showSeason(Texture2D texture);
 
+        
+        void setIfSscarecrow(bool ifScarecrow);
+        bool getIfScarecrow();
 
 
 
@@ -112,6 +124,8 @@ class Player {
         bool pass = false;
         bool ifLeader = false;
         bool ifHorse = false;
+        bool ifScarecrow = false;
+        bool select = false;
         Color graficColor;
         
 };

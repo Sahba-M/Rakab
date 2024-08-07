@@ -142,6 +142,7 @@ class Control {
 
         void setCurrentIndex(int currentIndex);
         int & getCurrentIndex();
+       
 
 
       
@@ -173,6 +174,7 @@ class Control {
         bool ifDean = false;
         bool isLeader = false;
         bool isHorse = false;
+       
         std::string warPlace = "null";
         std::string peacePlace = "null";
         std::string season = "null";
