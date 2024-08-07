@@ -642,14 +642,33 @@ bool Control::changeDeterminer()
 }
 bool Control::changeDeterminerL()
 {
-    std::cout << "*******" << getIsLeader() <<"********\n";
     std::cout << "function\n\n";
+    std::cout << "*******" << getIsLeader() <<"********\n";
     if (getIsLeader())
     {
         std::cout << "if function\n\n";
 
-        setIsLeader(false);
-        setDeterminer(playerCard[playerCard.size() - 2]);
+       // setIsLeader(false);
+        // setDeterminer(playerCard[playerCard.size()-2]);
+        // for(int i = 0; i < playerCard.size(); i++)
+        // {
+        //     std::cout << i << ":" << playerCard[i] << "\n";
+        // }
+        // for(int i = 0; i < players.size(); i++)
+        // {
+        //     playerCard[i] = players[i].getPlayersCard();
+        // }
+      
+        setDeterminer(playerCard[playerCard.size() - 4]);
+        
+        
+
+       // std::cout << playerCard[playerCard.size() - 2].getName() << "\n";
+
+       for(int i = 0; i < playerCard.size(); i++)
+       {
+        std::cout << i << "****" << playerCard[i].getName() << "\n";
+       }
 
         for (auto &player : players)
         {
@@ -1783,7 +1802,7 @@ void Control::updateCards()
         if (!players[0].getPass())
         {
             players[0].updateCardsDown(115, 500, 70, 108, cardselected);
-            playerCard.push_back(players[0]);
+           // playerCard.push_back(players[0]);
 
             if (players[0].getIfLeader())
             {
@@ -1803,6 +1822,7 @@ void Control::updateCards()
                 {
                     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
                 }
+
                 // if(cards.size() == 0 && players[0].getUsedCards().size() > 0)
                 // {
                 //     cardselected = true;
@@ -1823,7 +1843,7 @@ void Control::updateCards()
         if (!players[1].getPass())
         {
             players[1].updateCardsDown(645, 500, 70, 108, cardselected);
-            playerCard.push_back(players[1]);
+         //   playerCard.push_back(players[1]);
 
             if (players[1].getIfLeader())
             {
@@ -1853,7 +1873,7 @@ void Control::updateCards()
         if (!players[2].getPass())
         {
             players[2].updateCardsSpecialR(937, 227, 70, 108, cardselected);
-            playerCard.push_back(players[2]);
+           // playerCard.push_back(players[2]);
 
             if (players[2].getIfLeader())
             {
@@ -1885,7 +1905,7 @@ void Control::updateCards()
             if (!players[3].getPass())
             {
                 players[3].updateCardsTop(730, 139, 70, 108, cardselected);
-                playerCard.push_back(players[3]);
+              //  playerCard.push_back(players[3]);
 
                 if (players[3].getIfLeader())
                 {
@@ -1918,7 +1938,7 @@ void Control::updateCards()
             if (!players[4].getPass())
             {
                 players[4].updateCardsTop(195, 139, 70, 108, cardselected);
-                playerCard.push_back(players[4]);
+                //playerCard.push_back(players[4]);
 
                 if (players[4].getIfLeader())
                 {
@@ -1951,7 +1971,7 @@ void Control::updateCards()
             if (!players[5].getPass())
             {
                 players[5].updateCardsSpecialL(140, 165, 108, 70, cardselected);
-                playerCard.push_back(players[5]);
+               // playerCard.push_back(players[5]);
 
                 if (players[5].getIfLeader())
                 {
@@ -1985,7 +2005,7 @@ void Control::updateCards()
         std::cout << "test index : " << getCurrentIndex() << std::endl;
         cardselected = false;
     }
-    
+    playerCard.push_back(players[getCurrentIndex()]);
 }
 void Control::deal()
 {

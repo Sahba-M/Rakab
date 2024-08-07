@@ -95,12 +95,10 @@ class Player {
         
         void setIfSscarecrow(bool ifScarecrow);
         bool getIfScarecrow();
-        std::vector<std::shared_ptr<Card>> getUsedCards()
-        {
-            return usedCards;
-        }
-
-
+        std::vector<std::shared_ptr<Card>> getUsedCards();
+        
+ std::vector<Player> getPlayersCard();
+            
 
 
 
@@ -123,6 +121,8 @@ class Player {
         std::vector<std::shared_ptr<Card>> yellowCards; //Yellow cards for each player
         std::vector<std::shared_ptr<Card>> burnedCards; //Burned player cards
         std::vector<std::string> capturedProvinces; //The player's captured provinces
+        std::vector<Player> playersCard; //The player's captured provinces
+
         int age ;
         int scorePlayer;
         bool pass = false;

@@ -848,7 +848,6 @@ void Player::drawBackCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vect
 }
 void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &turn)
 {
-     
         Vector2 mousePosition = GetMousePosition();
         for (size_t i = hand.size(); i > 0; i--)
         {
@@ -858,7 +857,8 @@ void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &
 
             if (CheckCollisionPointRec(mousePosition, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
-
+                 std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+                
                 if (hand[i - 1]->getName() == "winter")
                 {
                     setSeason(hand[i - 1]->getName());
@@ -882,11 +882,14 @@ void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &
                     hand.erase(hand.begin() + (i - 1));
                     
                     turn = false;
+                    playersCard.push_back(*this);
                     return;
                 }
                 usedCards.push_back(hand[i - 1]);
                 hand.erase(hand.begin() + (i - 1));
                 turn = true;
+
+                playersCard.push_back(*this);
 
                 return;
             }
@@ -948,6 +951,9 @@ void Player::updateCardsTop(int x, int y, int cardWidth, int cardHeight, bool &t
                 hand.erase(hand.begin() + (i - 1));
                 turn = false;
 
+                playersCard.push_back(*this);
+
+
                 return;
             }
 
@@ -955,7 +961,10 @@ void Player::updateCardsTop(int x, int y, int cardWidth, int cardHeight, bool &t
             hand.erase(hand.begin() + (i - 1));
             turn = true;
 
-            break;
+            playersCard.push_back(*this);
+
+
+            return;
         }
     }
 }
@@ -1012,13 +1021,18 @@ void Player::updateCardsSpecialR(int x, int y, int cardWidth, int cardHeight, bo
                 hand.erase(hand.begin() + (i - 1));
                 turn = false;
 
+                playersCard.push_back(*this);
+
+
                 return;
             }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
 
-            break;
+            playersCard.push_back(*this);
+
+            return;
         }
     }
 }
@@ -1075,13 +1089,17 @@ void Player::updateCardsSpecialL(int x, int y, int cardWidth, int cardHeight, bo
                 hand.erase(hand.begin() + (i - 1));
                 turn = false;
 
+                playersCard.push_back(*this);
+
                 return;
             }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
 
-            break;
+            playersCard.push_back(*this);
+
+            return;
         }
     }
 }
@@ -1118,3 +1136,12 @@ bool Player::getIfScarecrow()
 {
     return ifScarecrow;
 }
+std::vector<std::shared_ptr<Card>> Player::getUsedCards()
+{
+            return usedCards;
+}
+ std::vector<Player> Player::getPlayersCard()
+ {
+        return playersCard;
+ }
+
