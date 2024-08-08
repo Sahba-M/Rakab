@@ -14,6 +14,7 @@
 #include "map.h"
 #include "leader.h"
 
+
 struct SharedPtrCompare
 { // To compare two shred_pointers
     template <class T, class U>
@@ -312,23 +313,71 @@ bool Player::hasPurpleCard()
     }
     return false;
 }
-bool Player::ifBurn()
+int Player::ifBurn(AssetManager &myAsset)
 {
-    char response;
+    
     if (!hasYellowCard() && hasPurpleCard())
     {
-        std::cout << "\n\n " << getName() << " You Have No Yellow Card!!! ";
-        std::cout << "\n Do You Want To Burn Your Cards? (Y/N) ";
-        std::cin >> response;
+
+       DrawTexture(myAsset.winner, 0, 0, WHITE);
+
+       DrawTextEx(myAsset.askFont, getName(), {420, 350}, 25, 2, WHITE);
+       DrawTextEx(myAsset.askFont, " DO YOU WANT TO BURN YOUR CARDS ? ", {420, 370}, 25, 2, WHITE);
+
+       Button yesButton;
+       Button noButton;
+
+       yesButton.buttonColor = {81, 204, 65, 255};
+       noButton.buttonColor = {196, 69, 84, 255};
+
+       yesButton.text = "YES";
+       yesButton.bounds = {500, 420, 70, 70};
+       DrawRectangleRounded(yesButton.bounds, 0.3f, 0, yesButton.buttonColor);
+       DrawTextEx(myAsset.listFont, yesButton.text, {yesButton.bounds.x + 30, yesButton.bounds.y + 30}, 30, 2, yesButton.color);
+
+     
+       noButton.text = "NO";
+       noButton.bounds = {600, 420, 70, 70};
+       DrawRectangleRounded(noButton.bounds, 0.3f, 0, noButton.buttonColor);
+       DrawTextEx(myAsset.listFont, noButton.text, {noButton.bounds.x + 30, noButton.bounds.y + 30}, 30, 2, noButton.color);
+
+
+       Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
+
+        if (CheckCollisionPointRec(mousePosition, yesButton.bounds))
+        {
+            yesButton.color = WHITE;
+            yesButton.buttonColor = {35, 122, 23, 255};
+
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+               return 1;
+            }
+        }
+        else
+        {
+            yesButton.color = BLACK ; // Change text color
+            yesButton.buttonColor = {81, 204, 65, 255}; // Change butto
+        }
+
+        mousePosition = GetMousePosition();
+        if (CheckCollisionPointRec(mousePosition, noButton.bounds))
+        {
+            noButton.color = WHITE;
+            noButton.buttonColor = {138, 18, 32, 255};
+
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            noButton.color = BLACK; // Change text color
+            noButton.buttonColor = {196, 69, 84, 255}; // Change butto
+        }
     }
-    if (response == 'Y')
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return -1;
 }
 bool Player::isFind(std::shared_ptr<Card> Ycard)
 {

@@ -31,7 +31,7 @@ struct Province {
 };
 
 
-enum GameScreen { MENU = 0 , NUMBER , INFO , DEAL , MAP , GAME , WINNER }; 
+enum GameScreen { MENU = 0 , NUMBER , INFO , DEAL , MAP , GAME , WINNER, ASKBURN }; 
 
 class Control {
     
@@ -144,7 +144,8 @@ class Control {
         int & getCurrentIndex();
         bool isWhiteCircle();
 
-       
+         bool checkAllBurn();
+        
 
 
       

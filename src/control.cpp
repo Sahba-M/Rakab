@@ -585,11 +585,10 @@ void Control::askBurn()
 {
     for (auto &player : players)
     {
-        if (player.ifBurn())
+        if (player.ifBurn(myAsset) == 1)
         {
             player.burnHand();
         }
-        system("cls");
     }
 }
 void Control::setPeace(std::string peacePlace)
@@ -1129,7 +1128,13 @@ void Control::Draw()
             currentScreen = WINNER;
         }
         break;
-     case WINNER:
+    case ASKBURN:
+        if (!checkAllBurn())
+            askBurn();
+        else
+           currentScreen = MAP;
+        break;
+    case WINNER:
          determineWinner();
          break;
     }
@@ -2041,11 +2046,7 @@ void Control::deal()
     }
     setPlayersReady(); // This function false all passes
 
-    for (auto player : players)
-        std::cout << " test pass " << std::boolalpha << player.getPass() << " - ";
-
     setCurrentIndex(findPlayerIndex(getDeterminer()));
-    std::cout << "current index test : " << getCurrentIndex() << "..." << findPlayerIndex(getDeterminer()) << "\n";
     currentScreen = GAME;
 }
 
@@ -2136,6 +2137,20 @@ void Control::determineWinner()
     {
         burnCards();
         chargeCards();
-        currentScreen = MAP;
+        
+        currentScreen = ASKBURN;
     }
+}
+
+bool Control::checkAllBurn()
+{
+    for (int  i = 0; i < getPlayerNumber(); i++)
+    {
+       if(!players[i].hasYellowCard() && players[i].hasPurpleCard())
+       {
+          return false;
+       }
+    }
+    return true;
+    
 }

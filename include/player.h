@@ -9,6 +9,14 @@
 
 #include "card.h"
 
+
+struct Button { //To draw a button
+    const char* text;
+    Rectangle bounds;
+    Color color = BLACK;
+    Color buttonColor = {0 , 0 , 0 , 30};
+};
+
 class Player {
 
     friend std::istream & operator>> (std::istream &input , Player &player );
@@ -59,7 +67,7 @@ class Player {
         bool hasYellowGround();
         bool hasYellowCard(); //Having yellow cards in the player's hand
         bool hasPurpleCard(); //Having purple cards in the player's hand
-        bool ifBurn(); //Does the player want to burn her hand if she doesn't have yellow cards?
+        int ifBurn(AssetManager &myAsset); //Does the player want to burn her hand if she doesn't have yellow cards?
         bool isProximity();
         bool& getIfLeader();
         bool getIfHorse();
