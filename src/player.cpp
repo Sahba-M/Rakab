@@ -58,6 +58,7 @@ void Player::showHandCards()
 void Player::addProvinces(std::string province)
 {
     capturedProvinces.push_back(province);
+    std::cout << "test province : " << province << std::endl;
 }
 void Player::selectCard()
 {
@@ -952,7 +953,7 @@ void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &
 }
 void Player::updateYellowDown(int x, int y, int cardWidth, int cardHeight, bool &turn)
 {
-    std::cout << "test in function " << std::endl;
+    // std::cout << "test in function " << std::endl;
     Vector2 mousePosition = GetMousePosition();
     for (int i = usedCards.size(); i > 0; i--)
     {

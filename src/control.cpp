@@ -549,7 +549,7 @@ void Control::run()
 }
 void Control::burnCards()
 {
-    for (auto &player : players)
+    for (auto & player : players)
     {
         std::cout << "test burn" << std::endl;
         player.burnCardsPlayer();
@@ -569,7 +569,7 @@ void Control::chargeCards()
     if (counter == 0 || counter == 1)
     {
         burnCards();
-        for (auto &player : players)
+        for (auto & player : players)
         {
             player.burnHand();
             player.insertHandCard(allBurnedCards);
@@ -584,20 +584,25 @@ void Control::chargeCards()
 void Control::askBurn( int number )
 {
     static int index = number ;
+    // std::cout << "index: ->" << index;
     Player player = noYellowPlayers[index]; 
 
-        if (player.ifBurn(myAsset) == 1)
-        {
-            players[findPlayerIndex(player)].burnHand();
-            player.insertHandCard(allBurnedCards);
-            index++;
-        }
-        else if (player.ifBurn(myAsset) == 0)
-        {
-            index++;
-            if (index == noYellowPlayers.size())
-            currentScreen = MAP;
-        }
+    if (player.ifBurn(myAsset) == 1)
+    {
+        // std::cout << "if1 askburn" << std::endl;
+        players[findPlayerIndex(player)].burnHand();
+        player.insertHandCard(allBurnedCards);
+        index++;
+        if (index == noYellowPlayers.size())
+        currentScreen = MAP;
+    }
+    else if (player.ifBurn(myAsset) == 0)
+    {
+        // std::cout << "if2 askburn" << std::endl; 
+        index++;
+        if (index == noYellowPlayers.size())
+        currentScreen = MAP;
+    }
 }
 void Control::setPeace(std::string peacePlace)
 {
@@ -793,7 +798,7 @@ bool Control::winEachWar()
         {
             winnerIndex = i;
             winner = players[i];
-            players[i].addProvinces(warPlace);
+            // players[i].addProvinces(warPlace);
             updateHorsePlayers();
             return true;
         }
@@ -816,7 +821,7 @@ bool Control::winEachWar()
     if (winPlayers.size() == 1)
     {
         winner = winPlayers[0];
-        players[winnerIndex].addProvinces(warPlace);
+        // players[winnerIndex].addProvinces(warPlace);
         return true;
     }
     else
@@ -1102,6 +1107,7 @@ int Control::getCurrentScreen()
 }
 void Control::Draw()
 {
+    static bool flag = true;
     switch (currentScreen)
     {
     case MENU:
@@ -1133,13 +1139,13 @@ void Control::Draw()
         else
         {
             cardAction();
+            flag = true ;
             currentScreen = WINNER;
         }
         break;
     case ASKBURN:
         if (!checkAllBurn())
         {
-            static bool flag = true;
             int index ;
             if (flag)
             {
@@ -1149,12 +1155,11 @@ void Control::Draw()
             }
             askBurn(index);
         }
-        else
-           currentScreen = MAP;
+        else currentScreen = MAP;
         break;
     case WINNER:
-         determineWinner();
-         break;
+        determineWinner();
+        break;
     }
 }
 void Control::Update()
@@ -1170,7 +1175,6 @@ void Control::Update()
         changeCircleColor();
         break;
     case DEAL:
-
         deal();
     case GAME:
         updateCards();
@@ -2077,7 +2081,7 @@ void Control::deal()
         ifDeal = false;
     }
     setPlayersReady(); // This function false all passes
-
+    chargeCards();
     setCurrentIndex(findPlayerIndex(getDeterminer()));
     currentScreen = GAME;
 }
@@ -2118,13 +2122,12 @@ void Control::managePassButton()
 
 void Control::determineWinner()
 {
-    // std::cout << " test winner" << std::endl;
+    bool hasWinner ;
     DrawTexture(myAsset.winner, 0, 0, WHITE);
-    // std::cout << " test after back" << std::endl;
    
     if (winEachWar())
     {
-        // std::cout << " test if start";
+        hasWinner = true ;
         const char *name = winner.getName();
         DrawTextEx(myAsset.askFont, " Winner : ", {400, 175}, 90, 2, WHITE);
         DrawTextEx(myAsset.askFont, name, {400, 260}, 90, 2, WHITE);
@@ -2145,6 +2148,7 @@ void Control::determineWinner()
     }
     else
     {
+        hasWinner = false ;
         std::cout << "before saying" << std::endl;
         DrawTextEx(myAsset.askFont, " This War Has No Winners! ", {200, 280}, 70, 2, WHITE);
         DrawTextEx(myAsset.askFont, " - CLICK TO SKIP - ", {455, 375}, 25, 2, WHITE);
@@ -2167,9 +2171,9 @@ void Control::determineWinner()
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
-        burnCards();
-        chargeCards();
-        
+        burnCards();   
+        if (hasWinner)
+        players[findPlayerIndex(winner)].addProvinces(signs[provinceIndex].name);  
         currentScreen = ASKBURN;
     }
 }
@@ -2189,6 +2193,7 @@ bool Control::checkAllBurn()
 
 void Control::playersNotYellow()
 {
+    // noYellowPlayers.resize(0);
     for ( auto player : players )
     {
         if(!player.hasYellowCard() && player.hasPurpleCard())
