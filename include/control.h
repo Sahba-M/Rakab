@@ -66,7 +66,7 @@ class Control {
         void chargeCards();
         void selectPeacePlace();
         // void showAllCaptured();
-        void askBurn(); //to burn hand cards of the player who has not got yellow cards
+        void askBurn( int number ); //to burn hand cards of the player who has not got yellow cards
         void findLastDean(); //Find the last player who played dean
         void setIfDean( bool ifDean );
         void setIsLeader(bool isLeader);
@@ -213,6 +213,7 @@ class Control {
         TextButton passButton;
         bool ifDeterminer = true;
         bool ifDeal = true;
+
        
 
 

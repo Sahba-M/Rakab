@@ -581,9 +581,9 @@ void Control::chargeCards()
         std::cout << "test charge" << std::endl;
     }
 }
-void Control::askBurn()
+void Control::askBurn( int number )
 {
-    static int index = 0 ;
+    static int index = number ;
     Player player = noYellowPlayers[index]; 
 
         if (player.ifBurn(myAsset) == 1)
@@ -1140,12 +1140,14 @@ void Control::Draw()
         if (!checkAllBurn())
         {
             static bool flag = true;
+            int index ;
             if (flag)
             {
                 playersNotYellow();
+                index = 0 ;
                 flag = false;
             }
-            askBurn();
+            askBurn(index);
         }
         else
            currentScreen = MAP;
@@ -1783,6 +1785,9 @@ void Control::updateCards()
     switch (getCurrentIndex())
     {
     case 0:
+        if (players[0].getHandSize() == 0)
+            players[0].setPass(true);
+
         if (!players[0].getPass())
         {
             players[0].updateCardsDown(115, 500, 70, 108, cardselected);
@@ -1826,6 +1831,9 @@ void Control::updateCards()
         break;
 
     case 1:
+        if (players[1].getHandSize() == 0)
+                players[1].setPass(true);
+
         if (!players[1].getPass())
         {
             players[1].updateCardsDown(645, 500, 70, 108, cardselected);
@@ -1867,6 +1875,9 @@ void Control::updateCards()
         break;
 
     case 2:
+        if (players[2].getHandSize() == 0)
+                players[2].setPass(true);
+
         if (!players[2].getPass())
         {
             players[2].updateCardsSpecialR(937, 227, 70, 108, cardselected);
@@ -1909,6 +1920,9 @@ void Control::updateCards()
     case 3:
         if (players.size() > 3)
         {
+            if (players[3].getHandSize() == 0)
+            players[4].setPass(true);
+
             if (!players[3].getPass())
             {
                 players[3].updateCardsTop(730, 139, 70, 108, cardselected);
@@ -1953,6 +1967,9 @@ void Control::updateCards()
     case 4:
         if (players.size() > 4)
         {
+            if (players[4].getHandSize() == 0)
+            players[4].setPass(true);
+
             if (!players[4].getPass())
             {
                 players[4].updateCardsTop(195, 139, 70, 108, cardselected);
@@ -1997,6 +2014,9 @@ void Control::updateCards()
     case 5:
         if (players.size() > 5)
         {
+            if (players[5].getHandSize() == 0)
+            players[5].setPass(true);
+
             if (!players[5].getPass())
             {
                 players[5].updateCardsSpecialL(140, 165, 108, 70, cardselected);
