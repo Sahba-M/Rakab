@@ -106,6 +106,8 @@ class Player {
         void setIfDean( bool ifDean );
         bool getIfDean();
         std::vector<std::shared_ptr<Card>> getUsedCards();
+        bool operator== (const Player & other);
+
         
             
 

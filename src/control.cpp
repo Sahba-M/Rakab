@@ -583,13 +583,21 @@ void Control::chargeCards()
 }
 void Control::askBurn()
 {
-    for (auto &player : players)
-    {
+    static int index = 0 ;
+    Player player = noYellowPlayers[index]; 
+
         if (player.ifBurn(myAsset) == 1)
         {
-            player.burnHand();
+            players[findPlayerIndex(player)].burnHand();
+            player.insertHandCard(allBurnedCards);
+            index++;
         }
-    }
+        else if (player.ifBurn(myAsset) == 0)
+        {
+            index++;
+            if (index == noYellowPlayers.size())
+            currentScreen = MAP;
+        }
 }
 void Control::setPeace(std::string peacePlace)
 {
@@ -1130,7 +1138,15 @@ void Control::Draw()
         break;
     case ASKBURN:
         if (!checkAllBurn())
+        {
+            static bool flag = true;
+            if (flag)
+            {
+                playersNotYellow();
+                flag = false;
+            }
             askBurn();
+        }
         else
            currentScreen = MAP;
         break;
@@ -1412,18 +1428,14 @@ void Control::askMap()
 
     if (getIfDean())
     {
-        // std::cout << "if dean\n\n";
         DrawTextEx(myAsset.askFont, playerNameP, {500, 15}, 30, 2, BLACK); // Print the name of the player
         DrawTextEx(myAsset.askFont, " Choose The Peace Place!", {380, 35}, 30, 2, BLACK);
         selectPeacePlace();
-        // std::cout << players[getCurrentIndex()-1].getName();
-        // setDeterminerPeace(players[getCurrentIndex()-1]);
-        // setIfDean(false);
     }
     else
     {
         DrawTextEx(myAsset.askFont, playerNameW, {500, 15}, 30, 2, BLACK); // Print the name of the player
-        DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 610}, 30, 2, BLACK);
+        DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 590}, 30, 2, BLACK);
         selectWarPlace();
     }
 
@@ -2153,4 +2165,15 @@ bool Control::checkAllBurn()
     }
     return true;
     
+}
+
+void Control::playersNotYellow()
+{
+    for ( auto player : players )
+    {
+        if(!player.hasYellowCard() && player.hasPurpleCard())
+        {
+            noYellowPlayers.push_back(player);
+        }
+    }
 }

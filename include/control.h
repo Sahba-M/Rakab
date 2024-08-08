@@ -144,7 +144,9 @@ class Control {
         int & getCurrentIndex();
         bool isWhiteCircle();
 
-         bool checkAllBurn();
+        bool checkAllBurn();
+        void playersNotYellow();
+
         
 
 
@@ -203,6 +205,7 @@ class Control {
         std::vector <TextButton> numButtons ;
         std::vector <Color> signColors ;
         std::vector <Province> signs ;
+        std::vector <Player> noYellowPlayers ;
         int provinceIndex;
 
         bool cardselected = false;

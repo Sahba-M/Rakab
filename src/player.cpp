@@ -184,7 +184,9 @@ void Player::burnCardsPlayer()
 void Player::burnHand()
 {
     burnedCards.insert(burnedCards.end(), hand.begin(), hand.end());
+    std::cout << "burn hand\n";
     hand.resize(0); // Remove hand cards
+    std::cout << "size hand:" << hand.size() << std::endl;
 }
 void Player::showCapturedProvinces()
 {
@@ -320,26 +322,22 @@ int Player::ifBurn(AssetManager &myAsset)
     {
 
        DrawTexture(myAsset.winner, 0, 0, WHITE);
+    //    std::cout << "test after back\n";
 
-       DrawTextEx(myAsset.askFont, getName(), {420, 350}, 25, 2, WHITE);
-       DrawTextEx(myAsset.askFont, " DO YOU WANT TO BURN YOUR CARDS ? ", {420, 370}, 25, 2, WHITE);
+       DrawTextEx(myAsset.askFont, getName(), {512, 164}, 50, 2, WHITE);
+       DrawTextEx(myAsset.askFont, " DO YOU WANT TO BURN YOUR CARDS ? ", {220, 250}, 50, 2, WHITE);
+    //    std::cout << "test after ask\n";
 
        Button yesButton;
        Button noButton;
 
-       yesButton.buttonColor = {81, 204, 65, 255};
-       noButton.buttonColor = {196, 69, 84, 255};
+    //    yesButton.buttonColor = {81, 204, 65, 255};
+    //    noButton.buttonColor = {196, 69, 84, 255};
 
        yesButton.text = "YES";
-       yesButton.bounds = {500, 420, 70, 70};
-       DrawRectangleRounded(yesButton.bounds, 0.3f, 0, yesButton.buttonColor);
-       DrawTextEx(myAsset.listFont, yesButton.text, {yesButton.bounds.x + 30, yesButton.bounds.y + 30}, 30, 2, yesButton.color);
-
-     
+       yesButton.bounds = {440, 360, 70, 70};
        noButton.text = "NO";
-       noButton.bounds = {600, 420, 70, 70};
-       DrawRectangleRounded(noButton.bounds, 0.3f, 0, noButton.buttonColor);
-       DrawTextEx(myAsset.listFont, noButton.text, {noButton.bounds.x + 30, noButton.bounds.y + 30}, 30, 2, noButton.color);
+       noButton.bounds = {550, 360, 70, 70};
 
 
        Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
@@ -376,6 +374,13 @@ int Player::ifBurn(AssetManager &myAsset)
             noButton.color = BLACK; // Change text color
             noButton.buttonColor = {196, 69, 84, 255}; // Change butto
         }
+
+       DrawRectangleRounded(yesButton.bounds, 0.3f, 0, yesButton.buttonColor);
+       DrawTextEx(myAsset.listFont, yesButton.text, {yesButton.bounds.x + 15, yesButton.bounds.y + 25}, 30, 2, yesButton.color);
+
+       DrawRectangleRounded(noButton.bounds, 0.3f, 0, noButton.buttonColor);
+       DrawTextEx(myAsset.listFont, noButton.text, {noButton.bounds.x + 20, noButton.bounds.y + 25}, 30, 2, noButton.color);
+
     }
     return -1;
 }
@@ -735,7 +740,6 @@ void Player::drawCardSpecialPlayer(int x, int y, AssetManager &myAsset, Vector2 
 void Player::drawBackCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
 {
     int i = 0;
-
     for (auto card : hand)
     {
         std::string name = card->getName();
@@ -1200,4 +1204,8 @@ void Player::setIfDean( bool ifDean )
 bool Player::getIfDean()
 {
     return ifDean;
+}
+bool Player::operator== (const Player & other)
+{
+    return this->name == other.name;
 }
