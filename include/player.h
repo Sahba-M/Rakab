@@ -95,6 +95,8 @@ class Player {
         
         void setIfSscarecrow(bool ifScarecrow);
         bool getIfScarecrow();
+        void setIfDean( bool ifDean );
+        bool getIfDean();
         std::vector<std::shared_ptr<Card>> getUsedCards();
         
             
@@ -127,6 +129,7 @@ class Player {
         bool ifLeader = false;
         bool ifHorse = false;
         bool ifScarecrow = false;
+        bool ifDean = false;
         bool select = false;
         Color graficColor;
         

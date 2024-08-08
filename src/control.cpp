@@ -279,6 +279,7 @@ void Control::setDeterminer(Player &Determiner)
 void Control::setDeterminerPeace(Player &Determiner)
 {
     DeterminerOfPeace = Determiner;
+    std::cout << "test set determinner" << std::endl;
 }
 void Control::selectMove(Player &player, int index)
 {
@@ -390,52 +391,24 @@ void Control::selectWarPlace()
 }
 void Control::selectPeacePlace()
 {
-    // bool found = true;
-    // std::string chooseProvince, response = "null";
-
-    // std::cout << "\n ";
-    // std::cout << "---------------------------------------------------------------------------------------------------------\n ";
-    // for (int i = 0; i < provinces.size(); i++)
-    // {
-    //     std::cout << provinces[i] << "  ";
-    // }
-    // std::cout << "\n ---------------------------------------------------------------------------------------------------------\n\n\n ";
-    // std::cout << std::endl;
-    // std::cout << " " << player.getName() << " Do You Want To Determine The Peace Place? (Y/N) ";
-    // std::cin >> response;
-
-    // if (response == "Y")
-    // {
-    //     do
-    //     {
-    //         if (found == true)
-    //         {
-    //             std::cout << " Enter Your Choosen Province : ";
-    //             std::cin >> chooseProvince;
-    //         }
-    //         auto elementFound = std::find(provinces.begin(), provinces.end(), chooseProvince);
-    //         if (elementFound != provinces.end())
-    //         {
-    //             found = true;
-    //             break;
-    //         }
-    //         else
-    //         {
-    //             std::cout << " \n ERROR: Please Enter Your Province Again : " << std::endl;
-    //             found = false;
-    //         }
-    //     } while (!found);
-
-    //     setPeace(chooseProvince);
-    // }
-    std::cout << "function dean\n\n";
+   
+    // std::cout << "function dean\n\n";
     Vector2 mousePosition = GetMousePosition();
 
     const Color GRAY_COLOR = {186, 186, 186, 120};
 
+    for (int i = 0 ; i < getProvinceNumber() ; i++)
+    {
+        if (CompareColors(signs[i].color, WHITE))
+        {
+            signs[i].color = GRAY_COLOR;
+            break;
+        }
+    }
+
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
-         std::cout << "if1 function dean\n\n";
+        // std::cout << "if1 function dean\n\n";
 
         for (int i = 0; i < getProvinceNumber(); i++) // Repeat for each province
         {
@@ -445,7 +418,6 @@ void Control::selectPeacePlace()
             { // Is the mouse in the circle or not?
                 if (CompareColors(signs[i].color, GRAY_COLOR))
                 {
-                    std::cout << "if2 function dean\n\n";
 
                     setPeace(signs[i].name);
                     signs[i].color = WHITE;
@@ -454,7 +426,7 @@ void Control::selectPeacePlace()
                     drawSigns();
                     EndDrawing();
                     sleep(2);
-                    currentScreen = DEAL;
+                    setIfDean(false);
 
                     break;
                 }
@@ -488,8 +460,11 @@ void Control::cardAction()
     {
         if (players[i].hasDean())
         {
+            // setDeterminerPeace(players[i]);
+            // std::cout << players[i].getName() << "***";
             dean.useCard(players, i);
             setIfDean(true);
+            break;
         }
     }
     if (season == "winter")
@@ -641,11 +616,8 @@ bool Control::changeDeterminer()
 }
 bool Control::changeDeterminerL()
 {
-    std::cout << "function\n\n";
-    std::cout << "*******" << getIsLeader() <<"********\n";
     if (getIsLeader())
     {
-        std::cout << "if function\n\n";
 
        // setIsLeader(false);
         // setDeterminer(playerCard[playerCard.size()-2]);
@@ -1426,24 +1398,29 @@ void Control::updateInput()
 }
 void Control::askMap()
 {
-    const char *playerName = getDeterminer().getName();
+    const char *playerNameW = getDeterminer().getName();
+    const char *playerNameP = getDeterminerPeace().getName();
 
     DrawTexture(myAsset.game, 0, 0, WHITE);                            // background image
     DrawTextureEx(myAsset.map, (Vector2){200, 75}, 0.0f, 0.5f, WHITE); // Map image
-    DrawTextEx(myAsset.askFont, playerName, {500, 15}, 30, 2, BLACK); // Print the name of the player
 
 
     if (getIfDean())
     {
-        std::cout << "if dean\n\n";
+        // std::cout << "if dean\n\n";
+        DrawTextEx(myAsset.askFont, playerNameP, {500, 15}, 30, 2, BLACK); // Print the name of the player
         DrawTextEx(myAsset.askFont, " Choose The Peace Place!", {380, 35}, 30, 2, BLACK);
         selectPeacePlace();
-        setIfDean(false);
+        // std::cout << players[getCurrentIndex()-1].getName();
+        // setDeterminerPeace(players[getCurrentIndex()-1]);
+        // setIfDean(false);
     }
-
-
-    DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 610}, 30, 2, BLACK);
-    selectWarPlace();
+    else
+    {
+        DrawTextEx(myAsset.askFont, playerNameW, {500, 15}, 30, 2, BLACK); // Print the name of the player
+        DrawTextEx(myAsset.askFont, " Choose The War Place!", {380, 610}, 30, 2, BLACK);
+        selectWarPlace();
+    }
 
    
 }
@@ -1819,18 +1796,12 @@ void Control::updateCards()
                     setCurrentIndex((getCurrentIndex() + 1) % players.size());
                     players[0].setIfSscarecrow(false); 
                 }
+            }
+            else if (players[0].getIfDean())
+            {
+                setDeterminerPeace(players[0]);
+                players[0].setIfDean(false);
 
-
-
-                // if(cards.size() == 0 && players[0].getUsedCards().size() > 0)
-                // {
-                //     cardselected = true;
-                // }
-                // else if(cards.size() != 0)
-                // {
-                //     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
-                // }
-               
             }
         }
         else
@@ -1867,6 +1838,12 @@ void Control::updateCards()
                     players[1].setIfSscarecrow(false); 
                 }
             }
+            else if (players[1].getIfDean())
+            {
+                setDeterminerPeace(players[1]);
+                players[1].setIfDean(false);
+
+            }
         }
         else
             setCurrentIndex((getCurrentIndex() + 1) % players.size());
@@ -1901,6 +1878,11 @@ void Control::updateCards()
                     setCurrentIndex((getCurrentIndex() + 1) % players.size());
                     players[2].setIfSscarecrow(false); 
                 }
+            }
+            else if (players[2].getIfDean())
+            {
+                setDeterminerPeace(players[2]);
+                players[2].setIfDean(false);
             }
         }
         else
@@ -1938,8 +1920,12 @@ void Control::updateCards()
                         setCurrentIndex((getCurrentIndex() + 1) % players.size());
                         players[3].setIfSscarecrow(false); 
                     }
-                    
-                     
+                }
+                else if (players[3].getIfDean())
+                {
+                    setDeterminerPeace(players[3]);
+                    players[3].setIfDean(false);
+
                 }
             }
             else
@@ -1979,6 +1965,12 @@ void Control::updateCards()
                         players[4].setIfSscarecrow(false); 
                     }
                 }
+                else if (players[4].getIfDean())
+                {
+                    setDeterminerPeace(players[4]);
+                    players[4].setIfDean(false);
+
+                }
             }
             else
                 setCurrentIndex((getCurrentIndex() + 1) % players.size());
@@ -2016,6 +2008,11 @@ void Control::updateCards()
                         setCurrentIndex((getCurrentIndex() + 1) % players.size());
                         players[5].setIfSscarecrow(false); 
                     }
+                }
+                else if (players[5].getIfDean())
+                {
+                    setDeterminerPeace(players[5]);
+                    players[5].setIfDean(false);
                 }
             }
             else
@@ -2115,13 +2112,16 @@ void Control::determineWinner()
     }
     else
     {
+        std::cout << "before saying" << std::endl;
         DrawTextEx(myAsset.askFont, " This War Has No Winners! ", {200, 280}, 70, 2, WHITE);
         DrawTextEx(myAsset.askFont, " - CLICK TO SKIP - ", {455, 375}, 25, 2, WHITE);
         if (!changeDeterminerL())
         {
+            std::cout << "test change leader" << std::endl;
             if (!changeDeterminer())
             {
-                setDeterminer(players[playersIndices.back()]); // set the last player who pass the game
+                std::cout << "test change v" << std::endl;
+                setDeterminer(players[getCurrentIndex()-2]); // set the last player who pass the game
             }
         }
         signs[provinceIndex].color = {186, 186, 186, 120};

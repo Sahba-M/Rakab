@@ -1,7 +1,7 @@
 16 scarecrow
 12 virago
 6 drummer
-10 dean
+6 dean
 3 princes
 3 winter
 3 spring

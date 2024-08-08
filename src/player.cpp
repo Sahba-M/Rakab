@@ -883,6 +883,10 @@ void Player::updateCardsDown(int x, int y, int cardWidth, int cardHeight, bool &
                     turn = false;
                     return;
                 }
+                else if (hand[i - 1]->getName() == "dean")
+                {
+                    setIfDean(true);
+                }
                 usedCards.push_back(hand[i - 1]);
                 hand.erase(hand.begin() + (i - 1));
                 turn = true;
@@ -953,6 +957,10 @@ void Player::updateCardsTop(int x, int y, int cardWidth, int cardHeight, bool &t
 
                 return;
             }
+            else if (hand[i - 1]->getName() == "dean")
+            {
+                setIfDean(true);
+            }
 
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
@@ -1018,6 +1026,10 @@ void Player::updateCardsSpecialR(int x, int y, int cardWidth, int cardHeight, bo
 
                 return;
             }
+            else if (hand[i - 1]->getName() == "dean")
+            {
+                setIfDean(true);
+            }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
@@ -1082,6 +1094,10 @@ void Player::updateCardsSpecialL(int x, int y, int cardWidth, int cardHeight, bo
 
                 return;
             }
+            else if (hand[i - 1]->getName() == "dean")
+            {
+                setIfDean(true);
+            }
             usedCards.push_back(hand[i - 1]);
             hand.erase(hand.begin() + (i - 1));
             turn = true;
@@ -1127,4 +1143,12 @@ bool Player::getIfScarecrow()
 std::vector<std::shared_ptr<Card>> Player::getUsedCards()
 {
             return usedCards;
+}
+void Player::setIfDean( bool ifDean )
+{
+    this->ifDean = ifDean;
+}
+bool Player::getIfDean()
+{
+    return ifDean;
 }
