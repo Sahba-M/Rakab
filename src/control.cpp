@@ -734,19 +734,17 @@ bool Control::winGame(Player player)
 }
 void Control::showEnd()
 {
-    DrawTexture(myAsset.winner, 0, 0, WHITE);
-    DrawTextEx(myAsset.askFont, " - CLICK TO SKIP - ", {455, 375}, 25, 2, WHITE);
+    DrawTexture(myAsset.end, 0, 0, WHITE);
+    DrawTextEx(myAsset.askFont, " - CLICK TO EXIT - ", {450, 600}, 25, 2, WHITE);
     if( winnerPlayers.size() == 1)
     {
-        DrawTextEx(myAsset.askFont, winnerPlayers[0].getName(), {512, 164}, 50, 2, WHITE);
-        DrawTextEx(myAsset.askFont, " WINNER... ", {220, 250}, 50, 2, WHITE);
+        DrawTextEx(myAsset.askFont, winnerPlayers[0].getName(), {505, 435}, 50, 2, WHITE);
     }
     else
     {
-        DrawTextEx(myAsset.askFont, " WINNERS : ", {220, 250}, 50, 2, WHITE);
         for(int i = 0; i < winnerPlayers.size(); i++)
         {
-            DrawTextEx(myAsset.askFont, winnerPlayers[i].getName(), {512, (float)( 164 + (i * 50))}, 50, 2, WHITE);
+            DrawTextEx(myAsset.askFont, winnerPlayers[i].getName(), {505, (float)( 435 + (i * 50))}, 50, 2, WHITE);
         }
     }
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
