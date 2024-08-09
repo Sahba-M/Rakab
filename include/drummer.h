@@ -5,13 +5,11 @@
 
 #include "purple.h"
 
-
 class DrummerCard:public PurpleCard
 {
   public:
     DrummerCard();
-    void useCard ( std::vector <Player> & players, int numPlayer , double number ) ;
-    // void draw ( int x , int y ) override ;
+    void useCard ( std::vector <Player> & players, int numPlayer , double number );
+   
 };
-
 #endif 

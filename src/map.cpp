@@ -1,7 +1,5 @@
 #include "map.h"
 
-
-
 void Map::readMatrix ()
 {
     std::ifstream input ("../src/matrix.txt") ; 
@@ -33,8 +31,8 @@ void Map::readUnorderedMap ()
     if (!input.is_open()) 
         std::cerr << " Unable to open file !" << std::endl ;
         
-    std::string key ;//The names of the provinces
-    int value ;//Number of provinces
+    std::string key ; // The names of the provinces
+    int value ; // Number of provinces
     while (!input.eof())
     {
         if ( input >> value >> key )
@@ -46,22 +44,11 @@ void Map::readUnorderedMap ()
 }
 bool Map::checkAdjacent ( const std::string & p1 , const std::string & p2 )
 {
-    std::cout << "checkAdjacent\n";
     int index1 = provinceMap[p1];
     int index2 = provinceMap[p2];
 
-    std::cout << index1 <<" --- " <<index2 <<"\n";
-    std::cout << p1 <<" --- " << p2 <<"\n" << adjacencyMatrix[index1][index2] <<"+++++++++++\n";
-
     if (adjacencyMatrix[index1][index2] == 1)
-    {
-        std::cout << " if/ true checkAdjacent\n";
         return true;
-
-    }
     else  
-    {
-        std::cout << " if/ false checkAdjacent\n";
-        return false;
-    }  
+        return false;  
 }

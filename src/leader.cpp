@@ -4,15 +4,10 @@
 #include "player.h"
 
 LeaderCard::LeaderCard(){}
- void LeaderCard::useCard ( std::vector <Player> & players , int numPlayer )
- {
-    std::cout << "use card\n\n";
-    for(auto &player : players)
+void LeaderCard::useCard ( std::vector <Player> & players , int numPlayer )
+{
+    for(auto & player : players)
     {
         player.setPass(true);
     }
- }
-//  void LeaderCard::draw ( int x , int y )
-// {
-//     DrawTexture (myAsset.leader , x , y , BLACK);
-// }
+}

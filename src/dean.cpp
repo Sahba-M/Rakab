@@ -1,7 +1,6 @@
 #include "player.h"
 #include "dean.h"
 
-
 DeanCard::DeanCard(){}
 
 void DeanCard::useCard ( std::vector <Player> & players , int numPlayer )
@@ -44,7 +43,4 @@ int DeanCard::findMaxScore ( std::vector <Player> players )
     }
     return max ;
 }
-// void DeanCard::draw ( int x , int y )
-// {
-//     DrawTexture (myAsset.dean , x , y , BLACK);
-// }
+

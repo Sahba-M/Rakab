@@ -23,8 +23,8 @@ bool  Card::operator== (const Card & other)
     return this->name == other.name;
 }
 
-
-std::istream & operator>> (std::istream & input , std::shared_ptr<Card> & card) {
+std::istream & operator>> (std::istream & input , std::shared_ptr<Card> & card)
+{
     std::string name;
     input >> name; 
     card = std::make_shared<Card>(name);
@@ -36,7 +36,6 @@ std::ostream & operator<< ( std::ostream & output , const Card & card )
     return output;
 }
 
-// AssetManager Card::myAsset;
 
 
 
