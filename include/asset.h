@@ -3,9 +3,10 @@
 
 #include "raylib.h"
 
-struct AssetManager { //To load the data
-    AssetManager();
-    ~AssetManager();
+struct AssetManager { // to load the datas
+
+    AssetManager(); // to load pictures
+    ~AssetManager(); // to unload pictures
 
     Texture2D menu ,
               info ,

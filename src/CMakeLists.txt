@@ -8,7 +8,6 @@ set(PROJECT_SOURCES
     leader.cpp 
     princes.cpp 
     virago.cpp 
-    scarecrow.cpp
     drummer.cpp 
     dean.cpp
     winter.cpp 

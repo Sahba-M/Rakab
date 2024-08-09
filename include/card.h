@@ -12,18 +12,15 @@ class Card { //The card class is a parent class
      friend std::istream & operator>> ( std::istream & input , std::shared_ptr<Card> & card );
      friend std::ostream & operator<< ( std::ostream & output , const Card & card );
 
-   
     public:
+
         Card ( std::string name );
         Card();
         virtual ~Card();
         void setName(std::string name);
         std::string getName();
-        bool operator== (const Card & other);
-        // virtual void draw ( int x , int y ){};
-        // AssetManager myAsset;
+        bool operator== (const Card & other); // overload operator==
 
-  
     protected:
         std::string name;
 };
