@@ -158,25 +158,25 @@ void Control::distributeCards()
         }
     }
 }
-// void Control::readProvinces()
-// {
-//     std::string province, ignore;
-//     std::ifstream inputProvinces;
-//     setProvinceNumber(provinceNumber);
+void Control::readProvinces()
+{
+    std::string province, ignore;
+    std::ifstream inputProvinces;
+    setProvinceNumber(provinceNumber);
 
-//     inputProvinces.open("../src/map.txt");
-//     if (!inputProvinces.is_open())
-//     {
-//         std::cerr << " Can Not Open File... " << std::endl;
-//     }
-//     for (int i = 0; i < getProvinceNumber(); i++)
-//     {
-//         inputProvinces >> ignore;
-//         inputProvinces >> province;
-//         provinces.push_back(province);
-//     }
-//     inputProvinces.close();
-// }
+    inputProvinces.open("../src/map.txt");
+    if (!inputProvinces.is_open())
+    {
+        std::cerr << " Can Not Open File... " << std::endl;
+    }
+    for (int i = 0; i < getProvinceNumber(); i++)
+    {
+        inputProvinces >> ignore;
+        inputProvinces >> province;
+        provinces.push_back(province);
+    }
+    inputProvinces.close();
+}
 // void Control::showUncaptured()
 // {
 //     for (int i = 0; i < provinces.size(); i++)
@@ -526,9 +526,8 @@ void Control::setPlayersReady()
 }
 void Control::run()
 {
-    // Map map;
-    // map.readMatrix();
-    // map.readUnorderedMap();
+   
+   
     // setCards();
     // shuffleCards();
     // controlNumber();
@@ -544,8 +543,11 @@ void Control::run()
     //     burnCards();
     //     chargeCards();
     // }
-
+    
     startGame();
+    
+  
+    
 }
 void Control::burnCards()
 {
@@ -630,17 +632,6 @@ bool Control::changeDeterminerL()
 {
     if (getIsLeader())
     {
-
-       // setIsLeader(false);
-        // setDeterminer(playerCard[playerCard.size()-2]);
-        // for(int i = 0; i < playerCard.size(); i++)
-        // {
-        //     std::cout << i << ":" << playerCard[i] << "\n";
-        // }
-        // for(int i = 0; i < players.size(); i++)
-        // {
-        //     playerCard[i] = players[i].getPlayersCard();
-        // }
       
         setDeterminer(players[(getCurrentIndex() - 2) % players.size()]);
         
@@ -725,41 +716,82 @@ int Control::findMaxVirago()
 }
 bool Control::endGame()
 {
-    std::vector<Player> gamePlayers;
+   // std::vector<Player> gamePlayers;
+   
+    std::cout << "\nend game\n";
     if (provinces.size() == 0)
     {
-        std::vector<Player> tempPlayer = maxProvinces();
-        for (int i = 0; i < tempPlayer.size(); i++)
-        {
-            std::cout << "  { " << tempPlayer[i].getName() << " } " << " IS WINER :) \n ";
-        }
-        return true;
+
+       // std::vector<Player> tempPlayer = maxProvinces();
+       winnerPlayers = maxProvinces();
+        // for (int i = 0; i < tempPlayer.size(); i++)
+        // {
+        //     DrawTexture(myAsset.winner, 0, 0, WHITE);
+        //     DrawTextEx(myAsset.askFont, tempPlayer[i].getName(), {512, 164}, 50, 2, WHITE);
+        //     DrawTextEx(myAsset.askFont, " WINNER... ", {220, 250}, 50, 2, WHITE);
+        // }
+       std::cout << "before true \n";
+       return true;
     }
     for (auto &player : players)
     {
         if (winGame(player))
         {
-            gamePlayers.push_back(player);
+            std::cout << "if end game \n";
+
+            winnerPlayers.push_back(player);
         }
     }
-    system("cls");
-    for (int i = 0; i < gamePlayers.size(); i++)
+    // system("cls");
+    // for (int i = 0; i < gamePlayers.size(); i++)
+    // {
+    //     DrawTexture(myAsset.winner, 0, 0, WHITE);
+    //     DrawTextEx(myAsset.askFont, gamePlayers[i].getName(), {512, 164}, 50, 2, WHITE);
+    //     DrawTextEx(myAsset.askFont, " WINNER... ", {220, 250}, 50, 2, WHITE);
+    // }
+    if ( winnerPlayers.size() != 0)
     {
-        std::cout << " _ { " << gamePlayers[i].getName() << " } " << " IS WINER ... \n ";
-    }
-    if (gamePlayers.size() != 0) // to check we have winner or not
+        std::cout << "if2 true \n";
+
         return true;
+    } // to check we have winner or not
     else
+    {
+        std::cout << "false***** \n";
         return false;
+    }
 }
 bool Control::winGame(Player player)
 {
-    if (player.isProximity() || player.getNumProvinces() == 5)
+    if (player.isProximity(map) || player.getNumProvinces() == 5)
     {
         return true;
     }
     return false;
 }
+void Control::showEnd()
+{
+    DrawTexture(myAsset.winner, 0, 0, WHITE);
+    DrawTextEx(myAsset.askFont, " - CLICK TO SKIP - ", {455, 375}, 25, 2, WHITE);
+    if( winnerPlayers.size() == 1)
+    {
+        DrawTextEx(myAsset.askFont, winnerPlayers[0].getName(), {512, 164}, 50, 2, WHITE);
+        DrawTextEx(myAsset.askFont, " WINNER... ", {220, 250}, 50, 2, WHITE);
+    }
+    else
+    {
+        DrawTextEx(myAsset.askFont, " WINNERS : ", {220, 250}, 50, 2, WHITE);
+        for(int i = 0; i < winnerPlayers.size(); i++)
+        {
+            DrawTextEx(myAsset.askFont, winnerPlayers[i].getName(), {512, (float)( 164 + (i * 50))}, 50, 2, WHITE);
+        }
+    }
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+         CloseWindow();
+   
+
+}
+
 bool Control::endEachWar()
 {
     bool flag = false;
@@ -1124,24 +1156,30 @@ void Control::Draw()
         drawInput();
         break;
     case MAP:
-        drawSigns();
+    
+         drawSigns();
         break;
     case DEAL:
 
         break;
     case GAME:
-        if (!endEachWar())
-        {
-            setGameBackground();
-            drawCards();
-            managePassButton();
-        }
-        else
-        {
-            cardAction();
-            flag = true ;
-            currentScreen = WINNER;
-        }
+        // if( !endGame() )
+        // {
+            if (!endEachWar())
+            {
+                setGameBackground();
+                drawCards();
+                managePassButton();
+            }
+            else
+            {
+                cardAction();
+                flag = true ;
+                currentScreen = WINNER;
+            }
+        // }
+        // else
+        //     currentScreen = END;
         break;
     case ASKBURN:
         if (!checkAllBurn())
@@ -1160,6 +1198,10 @@ void Control::Draw()
     case WINNER:
         determineWinner();
         break;
+
+    case END:
+        showEnd();
+        break;
     }
 }
 void Control::Update()
@@ -1171,8 +1213,13 @@ void Control::Update()
         getInformation();
         break;
     case MAP:
-        askMap();
-        changeCircleColor();
+    if( !endGame() )
+        {
+            askMap();
+            changeCircleColor();
+        }
+        else
+            currentScreen = END;
         break;
     case DEAL:
         deal();
@@ -1298,11 +1345,15 @@ void Control::exitButton()
 }
 void Control::startButton()
 {
+  
     Vector2 mousePosition = GetMousePosition();
     if (CheckCollisionPointRec(mousePosition, buttons[0].bounds))
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
+            readProvinces();
+            map.readMatrix();
+            map.readUnorderedMap();
             currentScreen = NUMBER;
         }
     }
@@ -1614,19 +1665,19 @@ void Control::changeCircleColor()
 
         if (distance <= 11 && CompareColors(signs[i].color, BLACK))
         {
-            // for (Player& player : players)
-            // {
-            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            for (Player& player : players)
             {
-                signs[i].color = RED;
-                BeginDrawing();
-                drawSigns();
-                EndDrawing();
-                sleep(2);
-                currentScreen = GAME;
-                break;
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                {
+                    
+                    BeginDrawing();
+                    drawSigns();
+                    EndDrawing();
+                    sleep(2);
+                    currentScreen = GAME;
+                    break;
+                }
             }
-            // }
             break;
         }
     }

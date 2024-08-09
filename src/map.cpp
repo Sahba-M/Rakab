@@ -12,7 +12,7 @@ void Map::readMatrix ()
     while (!input.eof()) 
     {
         std::vector <int> row ;
-        for ( int i = 0 ; i < 14 ; i++ ) 
+        for ( int i = 0 ; i < 15 ; i++ ) 
         {
             if ( input >> number )   
             {
@@ -46,10 +46,22 @@ void Map::readUnorderedMap ()
 }
 bool Map::checkAdjacent ( const std::string & p1 , const std::string & p2 )
 {
+    std::cout << "checkAdjacent\n";
     int index1 = provinceMap[p1];
     int index2 = provinceMap[p2];
+
+    std::cout << index1 <<" --- " <<index2 <<"\n";
+    std::cout << p1 <<" --- " << p2 <<"\n" << adjacencyMatrix[index1][index2] <<"+++++++++++\n";
+
     if (adjacencyMatrix[index1][index2] == 1)
+    {
+        std::cout << " if/ true checkAdjacent\n";
         return true;
-    else    
+
+    }
+    else  
+    {
+        std::cout << " if/ false checkAdjacent\n";
         return false;
+    }  
 }

@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 
+#include "map.h"
 #include "card.h"
 
 
@@ -68,7 +69,7 @@ class Player {
         bool hasYellowCard(); //Having yellow cards in the player's hand
         bool hasPurpleCard(); //Having purple cards in the player's hand
         int ifBurn(AssetManager &myAsset); //Does the player want to burn her hand if she doesn't have yellow cards?
-        bool isProximity();
+        bool isProximity(Map &map);
         bool& getIfLeader();
         bool getIfHorse();
         Color getColor() const ;

@@ -488,9 +488,10 @@ bool Player::getPass()
 {
     return pass;
 }
-bool Player::isProximity()
+bool Player::isProximity(Map &map)
 {
-    Map map;
+    std::cout << "is proximity\n";
+   
     int CapturedProvinces = 0;
     for (int i = 0; i < getNumProvinces(); i++)
     {
@@ -498,6 +499,7 @@ bool Player::isProximity()
         {
             if (map.checkAdjacent(capturedProvinces[i], capturedProvinces[j])) // Proximity detection
             {
+                std::cout << "if proximity\n";
                 CapturedProvinces++;
             }
         }

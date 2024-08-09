@@ -8,6 +8,8 @@
 #include "player.h"
 #include "raylib.h"
 #include "input.h"
+#include "map.h"
+
 
 
 struct TextButton { //To draw a button
@@ -146,6 +148,8 @@ class Control {
 
         bool checkAllBurn();
         void playersNotYellow();
+        void showEnd();
+        void readProvinces();
 
         
 
@@ -206,6 +210,9 @@ class Control {
         std::vector <Color> signColors ;
         std::vector <Province> signs ;
         std::vector <Player> noYellowPlayers ;
+        std::vector <Player> winnerPlayers ;
+
+
         int provinceIndex;
 
         bool cardselected = false;
@@ -213,6 +220,7 @@ class Control {
         TextButton passButton;
         bool ifDeterminer = true;
         bool ifDeal = true;
+        Map map;
 
        
 
