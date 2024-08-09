@@ -626,21 +626,9 @@ std::ostream &operator<<(std::ostream &output, Player &player)
 
     return output;
 }
-
-void Player::setColorG(Color graficColor)
-{
-    this->graficColor = graficColor;
-}
-Color Player::getColorG()
-{
-    return graficColor;
-}
-
 void Player::drawCards(int x, int y, AssetManager &myAsset, Vector2 origin, float rotation)
 {
     int i = 0;
-    // std::cout << "test size : " << hand.size();
-
     for (auto card : hand)
     {
         std::string name = card->getName();
@@ -684,8 +672,6 @@ void Player::drawCards(int x, int y, AssetManager &myAsset, Vector2 origin, floa
         Rectangle destRec = {position.x, position.y, (float)texture.width, (float)texture.height};
 
         DrawTexturePro(texture, sourceRec, destRec, origin, rotation, WHITE);
-
-        // std::cout << "test number cards" << i << std::endl;
         i++;
     }
 }

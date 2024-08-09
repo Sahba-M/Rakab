@@ -142,6 +142,7 @@ class Player {
         bool ifScarecrow = false;
         bool ifDean = false;
         bool select = false;
+      
         Color graficColor;
         
 };

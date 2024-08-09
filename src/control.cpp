@@ -526,28 +526,7 @@ void Control::setPlayersReady()
 }
 void Control::run()
 {
-   
-   
-    // setCards();
-    // shuffleCards();
-    // controlNumber();
-    // getInformation();
-    // distributeCards();
-    // readProvinces();
-    // setDeterminer(youngestPlayer());
-    // while (!endGame())
-    // {
-    //     setPlayersReady();
-    //     setWar();
-    //     askBurn();
-    //     burnCards();
-    //     chargeCards();
-    // }
-    
-    startGame();
-    
-  
-    
+    startGame();  
 }
 void Control::burnCards()
 {
@@ -716,20 +695,15 @@ int Control::findMaxVirago()
 }
 bool Control::endGame()
 {
-   // std::vector<Player> gamePlayers;
+ 
    
-    std::cout << "\nend game\n";
+    
     if (provinces.size() == 0)
     {
 
-       // std::vector<Player> tempPlayer = maxProvinces();
+      
        winnerPlayers = maxProvinces();
-        // for (int i = 0; i < tempPlayer.size(); i++)
-        // {
-        //     DrawTexture(myAsset.winner, 0, 0, WHITE);
-        //     DrawTextEx(myAsset.askFont, tempPlayer[i].getName(), {512, 164}, 50, 2, WHITE);
-        //     DrawTextEx(myAsset.askFont, " WINNER... ", {220, 250}, 50, 2, WHITE);
-        // }
+        
        std::cout << "before true \n";
        return true;
     }
@@ -737,27 +711,16 @@ bool Control::endGame()
     {
         if (winGame(player))
         {
-            std::cout << "if end game \n";
-
             winnerPlayers.push_back(player);
         }
     }
-    // system("cls");
-    // for (int i = 0; i < gamePlayers.size(); i++)
-    // {
-    //     DrawTexture(myAsset.winner, 0, 0, WHITE);
-    //     DrawTextEx(myAsset.askFont, gamePlayers[i].getName(), {512, 164}, 50, 2, WHITE);
-    //     DrawTextEx(myAsset.askFont, " WINNER... ", {220, 250}, 50, 2, WHITE);
-    // }
+   
     if ( winnerPlayers.size() != 0)
     {
-        std::cout << "if2 true \n";
-
         return true;
     } // to check we have winner or not
     else
     {
-        std::cout << "false***** \n";
         return false;
     }
 }
@@ -1845,7 +1808,8 @@ void Control::updateCards()
 
         if (!players[0].getPass())
         {
-            players[0].updateCardsDown(115, 500, 70, 108, cardselected);
+                players[0].updateCardsDown(115, 500, 70, 108, cardselected);
+
            // playerCard.push_back(players[0]);
 
             if (players[0].getIfLeader())
@@ -1859,11 +1823,11 @@ void Control::updateCards()
             }
             else if (players[0].getIfScarecrow())
             {
-                players[0].recognizeYellow();
+              
+               players[0].recognizeYellow();
 
                 std::vector<std::shared_ptr<Card>> Ycards = players[0].getYcards();
 
-                std::cout << "test" << Ycards.size() << std::endl;
                 if (Ycards.size() != 0)
                 {
                     players[0].updateYellowDown(200, 445, 70, 108, cardselected);
