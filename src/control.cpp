@@ -320,7 +320,6 @@ void Control::setPlayersReady()
     {
         player.setPass(false);
     }
-    std::cout << "test ready";
 }
 void Control::burnCards()
 {
@@ -642,32 +641,20 @@ void Control::saveGame()
     }
 
     outputData << playerNumber << "\n";
-    // outputData << "\n--------\n";
-
     outputData << currentScreen << "\n";
-    // outputData << "\n--------\n";
-
     outputData << getCurrentIndex() << "\n";
-    // outputData << "\n--------\n";
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
         outputData << players[i];
     }
-    // outputData << "\n--------\n";
 
-    // for ( int i = 0 ; i < 15 ; i++ )
-    // {
-    //     // outputData << 
-    //     int r = static_cast<int>(signs[i].color).R ;
-    // }
-
-    // outputData << provinces.size() << std::endl;
-    // for (const auto & province : provinces)
-    // {
-    //     outputData << province << " ";
-    // }
-    // outputData << '\n';
+    outputData << provinces.size() << std::endl;
+    for (const auto & province : provinces)
+    {
+        outputData << province << " ";
+    }
+    outputData << '\n';
 
     outputData << cards.size() << std::endl;
     for (const auto & card : cards)
@@ -675,30 +662,19 @@ void Control::saveGame()
         outputData << *card << " ";
     }
     outputData << '\n';
-    // outputData << "\n--------\n";
 
     outputData << allBurnedCards.size() << std::endl;
     for (const auto & card : allBurnedCards)
     {
         outputData << *card << " ";
     }
-    // outputData << "\n--------\n";
     outputData << '\n';
     outputData << warPlace << std::endl;
-    // outputData << "\n--------\n";
     outputData << peacePlace << std::endl;
-    // outputData << "\n--------\n";
     outputData << season << std::endl;
-    // outputData << "\n--------\n";
-    
     outputData << winner << std::endl;
-    // outputData << "\n--------\n";
-    
     outputData << DeterminerOfPeace << std::endl;
-    // outputData << "\n--------\n";
-    
     outputData << DeterminerOfWar << std::endl;
-    // outputData << "\n--------\n";
 
     outputData.close();
 }
@@ -723,39 +699,32 @@ void Control::loadGame()
     inputData >> numberOfPlayer;
     setPlayerNumber(numberOfPlayer);
     players.resize(numberOfPlayer);
-    std::cout << "numberOfPlayers: " << numberOfPlayer << std::endl;
 
     inputData >> state ;
     currentScreen = readState(state);
-    std::cout << "current:" << currentScreen <<std::endl;
     
     inputData >> index ;
     setCurrentIndex(index);
-    std::cout << "index:" << index << std::endl;
 
     for ( int i = 0 ; i < getPlayerNumber(); i++ )
     inputData >> players[i];
-    std::cout << "players\n";
 
-    // inputData >> size ;
-    // provinces.resize(size);
-    // for ( int i = 0 ; i < size ; i++ )
-    // {
-    //     inputData >> provinces[i];
-    // }
+    inputData >> size ;
+    provinces.resize(size);
+    for ( int i = 0 ; i < size ; i++ )
+    {
+        inputData >> provinces[i];
+    }
     
 
     inputData >> size;
-    std::cout << "size:" << size << std::endl;
     cards.resize(size);
     tempCards.resize(size);
     for (int i = 0; i < size; i++)
     {
-        std::cout << "in card for";
         inputData >> tempCards[i];
         cards[i] = tempCards[i];
     }
-    std::cout << "cards1\n"; 
 
     inputData >> size;
     allBurnedCards.resize(size);
@@ -765,39 +734,38 @@ void Control::loadGame()
         inputData >> tempCards[i];
         allBurnedCards[i] = tempCards[i];
     }
-    std::cout << "cards2\n"; 
     inputData >> place;
     setWarPlace(place);
-    std::cout << "warPlace\n"; 
 
     inputData >> place;
     setPeace(place);
-    std::cout << "peaceplace\n";
 
     inputData >> season;
     setSeason(season);
-    std::cout << "season\n";
 
     inputData >> tempPlayer;
     if (winner.getName() != "NULL")
     {
-        std::cout << "winner\n";
         winner = tempPlayer;
     }
     
     inputData >> tempPlayer;
     if (DeterminerOfPeace.getName() != "NULL")
     {
-        std::cout << "Dpeace\n";
         setDeterminer(tempPlayer);
     }
 
     inputData >> tempPlayer;
     if (DeterminerOfWar.getName() != "NULL")
     {
-        std::cout << "Dwar\n";
         setDeterminerPeace(tempPlayer);
     }
+
+    for ( int i = 0 ; i < players.size(); i++ )
+    {
+        players[i].setColor(colors[i]);
+    }
+
 
     for ( auto player : players )
     {
@@ -806,13 +774,14 @@ void Control::loadGame()
             for ( int i = 0 ; i < 15 ; i++ )
             {
                 if ( signs[i].name == province )
-                signs[i].color = player.getColor();
+                {
+                    signs[i].color = player.getColor();
+                }
             }
         }
     }
 
-
-    std::cout << "end loading ...";
+    ifDeal = false;
 }
 
 // -- graphic functions --
@@ -907,7 +876,7 @@ void Control::Update()
         getInformation();
         break;
     case MAP:
-    if( !endGame() )
+        if ( !endGame() )
         {
             askMap();
             changeCircleColor();
@@ -1868,6 +1837,9 @@ void Control::loadButton()
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
+            readProvinces();
+            map.readMatrix();
+            map.readUnorderedMap();
             loadGame();
             SetTargetFPS(60);
 

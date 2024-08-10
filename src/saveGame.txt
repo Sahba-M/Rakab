@@ -1,51 +1,53 @@
 3
 5
-2
+1
 SAHBA
+12
+1
+MORINA 7
+scarecrow 1 scarecrow horse 2 drummer dean 0
 3
+virago 10 4 1
+4 
 0
-7
-spring virago 2 scarecrow dean virago leader 3
-6 10 4 0
-0
-
-0
-HOS
+FERY
+22
 2
+BORGE LIA 8
+virago 5 scarecrow scarecrow scarecrow drummer 2 scarecrow 0
+2
+10 10 1
+10 
 0
-6
-3 5 leader drummer 3 leader 4
-1 4 2 3 0
+DER
+22
 0
+9
+drummer 6 6 5 1 scarecrow dean 2 horse 0
+1
+3 0
 
 0
-DAS
-4
-0
-7
-6 scarecrow 1 scarecrow winter princes drummer 3
-10 virago 3 0
-0
-
-0
+12
+BELLA CALINE PLADACI ATELA DIMASE ROLLO TALMONE ARMENTO ENNA OLIVADI ELINIA PARMA 
 84
-spring 5 virago dean scarecrow 1 winter winter 10 2 scarecrow 5 1 dean 5 scarecrow 3 1 5 scarecrow virago scarecrow virago 1 horse 2 drummer virago 6 4 2 3 virago scarecrow dean scarecrow 6 4 10 scarecrow 10 2 virago 5 6 2 scarecrow virago 5 virago spring 6 10 4 scarecrow 6 horse 5 dean horse 4 3 horse scarecrow 3 princes 1 virago 1 dean 1 4 scarecrow 10 2 10 4 princes 1 drummer scarecrow 6 drummer drummer 
-0
-
-PLADACI
+3 5 1 virago 4 2 1 spring 6 scarecrow virago winter leader dean 1 1 6 leader 2 scarecrow 3 drummer scarecrow 5 virago 3 drummer virago 6 virago scarecrow 10 virago 1 scarecrow 4 leader horse 3 scarecrow virago dean virago 4 5 2 5 scarecrow virago winter 10 10 2 winter 1 6 1 10 dean scarecrow spring princes 3 3 princes 4 princes 4 10 virago 5 dean scarecrow horse 4 3 spring 4 6 1 2 6 drummer 5 
+13
+virago 10 3 virago 10 10 3 virago 10 4 10 10 3 
+DIMASE
 null
 null
+FERY
+22
+1
+BORGE 8
+virago 5 scarecrow scarecrow scarecrow drummer 2 scarecrow 1
+10 1
+10 1
+10 
+1
+
 NULL
-160
-0
-0
-0
-0
-0
-
-0
-
-NULL
 0
 0
 0
@@ -55,13 +57,13 @@ NULL
 
 0
 
-HOS
-2
-0
-0
-0
-0
-0
-
-0
+FERY
+22
+1
+BORGE 8
+virago 5 scarecrow scarecrow scarecrow drummer 2 scarecrow 1
+10 1
+10 1
+10 
+1
 

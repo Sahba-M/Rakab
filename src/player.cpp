@@ -906,44 +906,36 @@ Color Player::getColor() const
     return color;
 }
 
-std::istream &operator>>(std::istream & input, Player & player)
+std::istream & operator>>(std::istream & input, Player & player)
 {
-    std::string temp;
     char name[30];
     bool pass;
     int age, size;
-    std::vector<std::string> provinces;
+    std::string province;
     std::vector<std::shared_ptr<Card>> cards;
 
-    std::getline(input , temp);
-    strcpy(name, temp.c_str());
+    input >> name ;
     player.setName(name);
-    std::cout << "test name " << std::endl;
-
 
     input >> age;
     player.setAge(age);
 
     input >> size;
+    player.capturedProvinces.resize(size); 
     for (int i = 0; i < size; i++)
     {
-        input >> provinces[i];
-        player.capturedProvinces[i] = provinces[i];
+        input >> province;
+        player.capturedProvinces[i] = province;
     }
-    std::cout << "test province " << std::endl;
 
     input >> size;
     cards.resize(size);
     player.hand.resize(size);
     for (int i = 0; i < size; i++)
     {
-        // std::cout << "in hand for";
         input >> cards[i];
-        // std::cout << "after read";
         player.hand[i] = cards[i];
-        std::cout << cards[i]->getName() << " - ";
     }
-    std::cout << "test hand " << std::endl;
 
     input >> size;
     cards.resize(size);
@@ -952,9 +944,7 @@ std::istream &operator>>(std::istream & input, Player & player)
     {
         input >> cards[i];
         player.usedCards[i] = cards[i];
-        std::cout << cards[i]->getName() << " - ";
     }
-    std::cout << "test used " << std::endl;
 
     input >> size;
     cards.resize(size);
@@ -963,9 +953,7 @@ std::istream &operator>>(std::istream & input, Player & player)
     {
         input >> cards[i];
         player.burnedCards[i] = cards[i];
-        std::cout << cards[i]->getName() << " - ";
     }
-    std::cout << "test burn " << std::endl;
 
     input >> size;
     cards.resize(size);
@@ -974,17 +962,14 @@ std::istream &operator>>(std::istream & input, Player & player)
     {
         input >> cards[i];
         player.yellowCards[i] = cards[i];
-        std::cout << cards[i]->getName() << " - ";
     }
-    std::cout << "test yellow " << std::endl;
 
     input >> pass;
     player.setPass(pass);
-    std::cout << "test pass " << std::boolalpha << pass << std::endl;
 
     return input;
 }
-std::ostream &operator<<(std::ostream & output, Player & player)
+std::ostream & operator<<(std::ostream & output, Player & player)
 {
     output << player.name << "\n";
     output << player.age << "\n";

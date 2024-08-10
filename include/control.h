@@ -19,13 +19,6 @@ struct TextButton // to draw a button
     Color color = BLACK;
     Color buttonColor = {0 , 0 , 0 , 30};
 };
-struct Textures // for images
-{ 
-    Texture2D menu ,
-              info ,
-              game ,
-               map ;
-};
 struct Province // for save information of provinces
 {
     Vector2 position;
