@@ -5,5 +5,5 @@
 3 princes
 3 winter
 3 spring
-15 leader
+3 leader
 2 horse

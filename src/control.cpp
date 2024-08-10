@@ -1920,6 +1920,7 @@ GameScreen Control::readState( int number )
         return END;
         break;
     }
+    return MENU;
 }
 
 Color Province::getColor()
