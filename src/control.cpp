@@ -309,6 +309,7 @@ void Control::cardAction()
             }
         }
     }
+
 }
 void Control::setSeason(std::string season)
 {
@@ -398,7 +399,7 @@ bool Control::changeDeterminerL()
 {
     if (getIsLeader())
     {
-        setDeterminer(players[(getCurrentIndex() - 2) % players.size()]);
+        setDeterminer(players[(getCurrentIndex() - 3) % players.size()]);
         
         for (auto &player : players)
         {
@@ -823,9 +824,6 @@ void Control::Draw()
 
         case MAP:
             drawSigns();
-            break;
-
-        case DEAL:
             break;
 
         case GAME:
@@ -1326,7 +1324,6 @@ void Control::drawCards()
     int index = getCurrentIndex();
     Vector2 origin = {0, 0};
     LeaderCard leader;
-    bool end = false;
 
     players[0].drawUseCards(200, 445, myAsset, origin, 0);
     players[1].drawUseCards(559, 445, myAsset, origin, 0);
@@ -1808,7 +1805,7 @@ void Control::determineWinner()
         signs[provinceIndex].color = {186, 186, 186, 120};
     }
 
-    for (int i = 0; i < getPlayerNumber(); i++) // to update move vector from "pass" to "temp"
+    for (int i = 0; i < getPlayerNumber(); i++) // to update season to "temp"
     {
         players[i].setSeason("temp");
     }
