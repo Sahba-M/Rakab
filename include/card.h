@@ -9,9 +9,9 @@
 
 class Card { //The card class is a parent class
 
-     friend std::istream & operator>> ( std::istream & input , std::shared_ptr<Card> & card );
-     friend std::ostream & operator<< ( std::ostream & output , const Card & card );
-
+    friend std::istream & operator>> ( std::istream & input , std::shared_ptr<Card> & card );
+    friend std::ostream & operator<< ( std::ostream & output , const Card & card );
+    
     public:
 
         Card ( std::string name );

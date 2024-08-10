@@ -31,6 +31,8 @@ struct Province // for save information of provinces
     Vector2 position;
     Color color;
     std::string name;
+
+    Color getColor();
 };
 
 enum GameScreen { MENU = 0 , NUMBER , INFO , DEAL , MAP , GAME , WINNER , ASKBURN , END }; // manage game
@@ -103,6 +105,7 @@ class Control
         void helpButton(); // To click on the help button
         void exitButton(); // To click on the exit button
         void startButton(); // To click on the start button
+        void loadButton(); // To click on the load button
         void askNumber(); //Select the number of players
         void drawInput(); //To manage user inputs
         void updateInput(); //Getting and updating information
@@ -122,6 +125,7 @@ class Control
         bool isBlackCircle();
         bool CompareColors(Color a, Color b);
         int  getCurrentScreen();   
+        GameScreen readState( int number ); // to read the current screen
     
     private:
         std::vector<std::shared_ptr<Card>> cards; //A vector of all cards

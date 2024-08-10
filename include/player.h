@@ -82,6 +82,7 @@ class Player
         std::string getSeason();
         std::vector<std::shared_ptr<Card>> getYcards();
         std::vector<std::shared_ptr<Card>> getUsedCards();
+        std::vector<std::string> getCaptured();
 
         
         // ----------------- grafic functions ---------------------------

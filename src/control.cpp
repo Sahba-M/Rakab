@@ -57,6 +57,10 @@ Control::Control()
             {{492, 504}, color, "ENNA"},
             {{502, 422}, color, "ARMENTO"}
         };
+
+    winner.setName("NULL");
+    DeterminerOfWar.setName("NULL"); 
+    DeterminerOfPeace.setName("NULL");
 }
 
 void Control::setPlayerNumber(int playerNumber)
@@ -638,44 +642,63 @@ void Control::saveGame()
     }
 
     outputData << playerNumber << "\n";
+    // outputData << "\n--------\n";
+
+    outputData << currentScreen << "\n";
+    // outputData << "\n--------\n";
+
+    outputData << getCurrentIndex() << "\n";
+    // outputData << "\n--------\n";
 
     for (int i = 0; i < getPlayerNumber(); i++)
     {
         outputData << players[i];
     }
+    // outputData << "\n--------\n";
 
-    outputData << provinces.size() << std::endl;
-    for (const auto &province : provinces)
-    {
-        outputData << province << " ";
-    }
-    outputData << '\n';
-
-    outputData << cards.size() << std::endl;
-    for (const auto &card : cards)
-    {
-        outputData << *card << " ";
-    }
-    outputData << '\n';
-
-    outputData << allBurnedCards.size() << std::endl;
-    for (const auto &card : allBurnedCards)
-    {
-        outputData << *card << " ";
-    }
-    outputData << '\n';
-
-    // for (int i = 0; i < getPlayerNumber(); i++)
+    // for ( int i = 0 ; i < 15 ; i++ )
     // {
-    //     outputData << move[i] << " ";
+    //     // outputData << 
+    //     int r = static_cast<int>(signs[i].color).R ;
     // }
 
+    // outputData << provinces.size() << std::endl;
+    // for (const auto & province : provinces)
+    // {
+    //     outputData << province << " ";
+    // }
+    // outputData << '\n';
+
+    outputData << cards.size() << std::endl;
+    for (const auto & card : cards)
+    {
+        outputData << *card << " ";
+    }
+    outputData << '\n';
+    // outputData << "\n--------\n";
+
+    outputData << allBurnedCards.size() << std::endl;
+    for (const auto & card : allBurnedCards)
+    {
+        outputData << *card << " ";
+    }
+    // outputData << "\n--------\n";
+    outputData << '\n';
     outputData << warPlace << std::endl;
+    // outputData << "\n--------\n";
     outputData << peacePlace << std::endl;
+    // outputData << "\n--------\n";
     outputData << season << std::endl;
+    // outputData << "\n--------\n";
+    
     outputData << winner << std::endl;
+    // outputData << "\n--------\n";
+    
     outputData << DeterminerOfPeace << std::endl;
+    // outputData << "\n--------\n";
+    
     outputData << DeterminerOfWar << std::endl;
+    // outputData << "\n--------\n";
 
     outputData.close();
 }
@@ -689,60 +712,107 @@ void Control::loadGame()
         std::cerr << " Can Not Open File... \n";
     }
 
-    int numberOfPlayer, size;
+    int numberOfPlayer, size, index, state;
 
-    std::string place, season;
+    std::string place, season, playerName;
 
     Player tempPlayer;
 
-    std::vector<std::string> provinces;
-    std::vector<std::string> move;
-
-    std::vector<std::shared_ptr<Card>> cards;
+    std::vector<std::shared_ptr<Card>> tempCards;
 
     inputData >> numberOfPlayer;
     setPlayerNumber(numberOfPlayer);
+    players.resize(numberOfPlayer);
+    std::cout << "numberOfPlayers: " << numberOfPlayer << std::endl;
+
+    inputData >> state ;
+    currentScreen = readState(state);
+    std::cout << "current:" << currentScreen <<std::endl;
+    
+    inputData >> index ;
+    setCurrentIndex(index);
+    std::cout << "index:" << index << std::endl;
+
+    for ( int i = 0 ; i < getPlayerNumber(); i++ )
+    inputData >> players[i];
+    std::cout << "players\n";
+
+    // inputData >> size ;
+    // provinces.resize(size);
+    // for ( int i = 0 ; i < size ; i++ )
+    // {
+    //     inputData >> provinces[i];
+    // }
+    
 
     inputData >> size;
+    std::cout << "size:" << size << std::endl;
+    cards.resize(size);
+    tempCards.resize(size);
     for (int i = 0; i < size; i++)
     {
-        inputData >> provinces[i];
-        this->provinces[i] = provinces[i];
+        std::cout << "in card for";
+        inputData >> tempCards[i];
+        cards[i] = tempCards[i];
     }
+    std::cout << "cards1\n"; 
+
     inputData >> size;
+    allBurnedCards.resize(size);
+    tempCards.resize(size);
     for (int i = 0; i < size; i++)
     {
-        inputData >> cards[i];
-        this->cards[i] = cards[i];
+        inputData >> tempCards[i];
+        allBurnedCards[i] = tempCards[i];
     }
-    inputData >> size;
-    for (int i = 0; i < size; i++)
-    {
-        inputData >> cards[i];
-        this->allBurnedCards[i] = cards[i];
-    }
-    // for (int i = 0; i < getPlayerNumber(); i++)
-    // {
-    //     inputData >> move[i];
-    //     this->move[i] = move[i];
-    // }
+    std::cout << "cards2\n"; 
     inputData >> place;
     setWarPlace(place);
+    std::cout << "warPlace\n"; 
 
     inputData >> place;
     setPeace(place);
+    std::cout << "peaceplace\n";
 
     inputData >> season;
     setSeason(season);
+    std::cout << "season\n";
 
     inputData >> tempPlayer;
-    winner = tempPlayer;
+    if (winner.getName() != "NULL")
+    {
+        std::cout << "winner\n";
+        winner = tempPlayer;
+    }
+    
+    inputData >> tempPlayer;
+    if (DeterminerOfPeace.getName() != "NULL")
+    {
+        std::cout << "Dpeace\n";
+        setDeterminer(tempPlayer);
+    }
 
     inputData >> tempPlayer;
-    setDeterminer(tempPlayer);
+    if (DeterminerOfWar.getName() != "NULL")
+    {
+        std::cout << "Dwar\n";
+        setDeterminerPeace(tempPlayer);
+    }
 
-    inputData >> tempPlayer;
-    setDeterminerPeace(tempPlayer);
+    for ( auto player : players )
+    {
+        for ( auto & province : player.getCaptured() )
+        {
+            for ( int i = 0 ; i < 15 ; i++ )
+            {
+                if ( signs[i].name == province )
+                signs[i].color = player.getColor();
+            }
+        }
+    }
+
+
+    std::cout << "end loading ...";
 }
 
 // -- graphic functions --
@@ -766,61 +836,66 @@ void Control::Draw()
     static bool flag = true;
     switch (currentScreen)
     {
-    case MENU:
-        setMenuBackground();
-        setTitle();
-        setMenuList();
-        break;
-    case NUMBER:
-        setAskBackground();
-        askNumber();
-        break;
-    case INFO:
-        setAskBackground();
-        drawInput();
-        break;
-    case MAP:
-    
-         drawSigns();
-        break;
-    case DEAL:
+        case MENU:
+            setMenuBackground();
+            setTitle();
+            setMenuList();
+            break;
+            
+        case NUMBER:
+            setAskBackground();
+            askNumber();
+            break;
 
-        break;
-    case GAME:
-            if (!endEachWar())
-            {
-                setGameBackground();
-                drawCards();
-                managePassButton();
-            }
-            else
-            {
-                cardAction();
-                flag = true ;
-                currentScreen = WINNER;
-            }
-        break;
-    case ASKBURN:
-        if (!checkAllBurn())
-        {
-            int index ;
-            if (flag)
-            {
-                playersNotYellow();
-                index = 0 ;
-                flag = false;
-            }
-            askBurn(index);
-        }
-        else currentScreen = MAP;
-        break;
-    case WINNER:
-        determineWinner();
-        break;
+        case INFO:
+            setAskBackground();
+            drawInput();
+            break;
 
-    case END:
-        showEnd();
-        break;
+        case MAP:
+            drawSigns();
+            break;
+
+        case DEAL:
+            break;
+
+        case GAME:
+                if (!endEachWar())
+                {
+                    setGameBackground();
+                    drawCards();
+                    managePassButton();
+                }
+                else
+                {
+                    cardAction();
+                    flag = true ;
+                    currentScreen = WINNER;
+                }
+            break;
+
+        case ASKBURN:
+            if (!checkAllBurn())
+            {
+                int index ;
+                if (flag)
+                {
+                    playersNotYellow();
+                    index = 0 ;
+                    flag = false;
+                }
+                askBurn(index);
+            }
+            else currentScreen = MAP;
+            break;
+
+        case WINNER:
+            determineWinner();
+            break;
+
+        case END:
+            showEnd();
+            break;
     }
 }
 void Control::Update()
@@ -932,6 +1007,7 @@ void Control::setMenuList()
     DrawTextEx(myAsset.listFont, buttons[3].text, {buttons[3].bounds.width / 2 + buttons[3].bounds.x - 25, buttons[3].bounds.y + 10}, 30, 2, buttons[3].color);
 
     startButton();
+    loadButton();
     helpButton();
     exitButton();
 }
@@ -1127,6 +1203,10 @@ void Control::setGameBackground()
     help.bounds = {7, 13, 60, 60};
     help.text = "?";
 
+    TextButton save;
+    save.bounds = {990, 13, 70, 60};
+    save.text = "SAVE";
+
     Vector2 position = {239, 607};
     if (players.size() > 0 && players[0].getName() && strlen(players[0].getName()) > 0)
     {
@@ -1212,7 +1292,6 @@ void Control::setGameBackground()
     }
 
     Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
-
     if (CheckCollisionPointRec(mousePosition, help.bounds))
     {
         help.color = WHITE;
@@ -1226,9 +1305,25 @@ void Control::setGameBackground()
         help.color = BLACK;                     // Change text color
         help.buttonColor = {95, 175, 184, 200}; // Change button color
     }
-
     DrawRectangleRounded(help.bounds, 0.4f, 0, help.buttonColor);
     DrawTextEx(myAsset.listFont, help.text, {help.bounds.x + 22, help.bounds.y + 18}, 35, 2, help.color);
+
+    mousePosition = GetMousePosition(); // Save the current mouse coordinates
+    if (CheckCollisionPointRec(mousePosition, save.bounds))
+    {
+        save.color = WHITE;
+        save.buttonColor = {31, 102, 110, 200};
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            saveGame();
+    }
+    else
+    {
+        save.color = BLACK;                     // Change text color
+        save.buttonColor = {95, 175, 184, 200}; // Change button color
+    }
+    DrawRectangleRounded(save.bounds, 0.4f, 0, save.buttonColor);
+    DrawTextEx(myAsset.listFont, save.text, {save.bounds.x + 14, save.bounds.y + 18}, 25, 2, save.color);
 }
 void Control::changeCircleColor()
 {
@@ -1766,6 +1861,27 @@ void Control::playersNotYellow()
         
     }
 }
+void Control::loadButton()
+{
+    Vector2 mousePosition = GetMousePosition();
+    if (CheckCollisionPointRec(mousePosition, buttons[1].bounds))
+    {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            loadGame();
+            SetTargetFPS(60);
+
+            while (!WindowShouldClose())
+            {
+                Update();
+                BeginDrawing();
+                Draw();
+                EndDrawing();
+            }
+            CloseWindow();
+        }
+    }
+}
 bool Control::checkAllBurn()
 {
     for (int  i = 0; i < getPlayerNumber(); i++)
@@ -1801,4 +1917,43 @@ bool Control::CompareColors(Color a, Color b)
 int Control::getCurrentScreen()
 {
     return currentScreen;
+}
+
+GameScreen Control::readState( int number )
+{
+    switch (number)
+    {
+        case 0:
+        return MENU;
+        break;
+        case 1:
+        return NUMBER;
+        break;
+        case 2:
+        return INFO;
+        break;
+        case 3:
+        return DEAL;
+        break;
+        case 4:
+        return MAP;
+        break;
+        case 5:
+        return GAME;
+        break;
+        case 6:
+        return WINNER;
+        break;
+        case 7:
+        return ASKBURN;
+        break;
+        case 8:
+        return END;
+        break;
+    }
+}
+
+Color Province::getColor()
+{
+    return color;
 }
