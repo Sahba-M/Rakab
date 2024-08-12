@@ -363,7 +363,7 @@ void Control::askBurn( int number )
         players[findPlayerIndex(player)].burnHand();
         player.insertHandCard(allBurnedCards);
         index++;
-        if (index == noYellowPlayers.size())
+        if (index == noYellowPlayers.size()) // if only one player had this condition
         currentScreen = MAP;
     }
     else if (player.ifBurn(myAsset) == 0)
@@ -471,27 +471,9 @@ bool Control::endGame()
 }
 bool Control::winGame(Player player)
 {
-    if (player.isProximity(map) || player.getNumProvinces() == 5)
+    if ( player.isProximity(map) || player.getNumProvinces() == 5)
         return true;
     return false;
-}
-void Control::showEnd()
-{
-    DrawTexture(myAsset.end, 0, 0, WHITE);
-    DrawTextEx(myAsset.askFont, " - CLICK TO EXIT - ", {450, 600}, 25, 2, WHITE);
-    if( winnerPlayers.size() == 1)
-    {
-        DrawTextEx(myAsset.askFont, winnerPlayers[0].getName(), {505, 435}, 50, 2, WHITE);
-    }
-    else
-    {
-        for(int i = 0; i < winnerPlayers.size(); i++)
-        {
-            DrawTextEx(myAsset.askFont, winnerPlayers[i].getName(), {505, (float)( 435 + (i * 50))}, 50, 2, WHITE);
-        }
-    }
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-          CloseWindow();
 }
 bool Control::endEachWar()
 {
@@ -510,13 +492,11 @@ bool Control::endEachWar()
 }
 bool Control::winEachWar()
 {
-    int winnerIndex;
-
+   
     for (int i = 0; i < players.size(); i++)
     {
         if (players[i].hasHorse())
         {
-            winnerIndex = i;
             winner = players[i];
             updateHorsePlayers();
             return true;
@@ -526,12 +506,12 @@ bool Control::winEachWar()
     std::vector<Player> winPlayers;
     for (auto player : players)
         max = player.getScorePlayer() > max ? player.getScorePlayer() : max;
+
     for (int j = 0; j < getPlayerNumber(); j++)
     {
         if (max == players[j].getScorePlayer())
         {
             winPlayers.push_back(players[j]);
-            winnerIndex = j;
         }
     }
     if (winPlayers.size() == 1)
@@ -787,6 +767,24 @@ void Control::loadGame()
 
 // -- graphic functions --
 
+void Control::showEnd()
+{
+    DrawTexture(myAsset.end, 0, 0, WHITE);
+    DrawTextEx(myAsset.askFont, " - CLICK TO EXIT - ", {450, 600}, 25, 2, WHITE);
+    if( winnerPlayers.size() == 1)
+    {
+        DrawTextEx(myAsset.askFont, winnerPlayers[0].getName(), {505, 435}, 50, 2, WHITE);
+    }
+    else
+    {
+        for(int i = 0; i < winnerPlayers.size(); i++)
+        {
+            DrawTextEx(myAsset.askFont, winnerPlayers[i].getName(), {505, (float)( 435 + (i * 50))}, 50, 2, WHITE);
+        }
+    }
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+          CloseWindow();
+}
 void Control::startGame()
 {
     currentScreen = MENU;
@@ -794,7 +792,7 @@ void Control::startGame()
 
     while (!WindowShouldClose())
     {
-        Update();
+        Update(); // Processes game inputs
         BeginDrawing();
         Draw();
         EndDrawing();
@@ -1041,7 +1039,7 @@ void Control::askNumber()
 
     for (int i = 0; i < 4; i++)
     {
-        if (CheckCollisionPointRec(mousePosition, numButtons[i].bounds))
+        if (CheckCollisionPointRec(mousePosition, numButtons[i].bounds)) // haver
         {
             // Change colors on button click
             numButtons[i].buttonColor = {191, 155, 129, 230};
@@ -1081,7 +1079,7 @@ void Control::drawInput()
     {
         Color backColor = {108, 194, 237, 200};
 
-        char text[2];
+        char text[2]; // player number
         text[0] = counter + '0'; // player number (Convert character to number)
         text[1] = '\0';          // end
 
@@ -1259,7 +1257,7 @@ void Control::setGameBackground()
     }
 
     Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
-    if (CheckCollisionPointRec(mousePosition, help.bounds))
+    if (CheckCollisionPointRec(mousePosition, help.bounds)) // haver
     {
         help.color = WHITE;
         help.buttonColor = {31, 102, 110, 200};
@@ -1339,7 +1337,6 @@ void Control::drawCards()
     {
         if (!players[0].getPass())
         {
-
             players[0].drawCards(115, 500, myAsset, origin, 0);
             if (players[0].getSeason() == "winter")
             {
@@ -1856,7 +1853,7 @@ bool Control::checkAllBurn()
     for (int  i = 0; i < getPlayerNumber(); i++)
     {
        if(!players[i].hasYellowCard() && players[i].hasPurpleCard())
-          return false;
+            return false;
     }
     return true;
 }
@@ -1923,7 +1920,3 @@ GameScreen Control::readState( int number )
     return MENU;
 }
 
-Color Province::getColor()
-{
-    return color;
-}

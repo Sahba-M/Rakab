@@ -61,8 +61,8 @@ void InputBox::DrawName()
     
     DrawRectangleRounded(bounds, roundness, 0, color);
 
-    // Draw text or hint
-    if (text[0]== '\0')
+    
+    if (text[0]== '\0') // Draw text or hint
     {
         DrawTextEx(myAsset.inputFont, "Name...", {bounds.x + 15, bounds.y + 25}, 25, 2,{124,135,145,255});
     }

@@ -704,7 +704,7 @@ int Player::ifBurn(AssetManager &myAsset)
 
        Vector2 mousePosition = GetMousePosition(); // Save the current mouse coordinates
 
-        if (CheckCollisionPointRec(mousePosition, yesButton.bounds))
+        if (CheckCollisionPointRec(mousePosition, yesButton.bounds)) // haver
         {
             yesButton.color = WHITE;
             yesButton.buttonColor = {35, 122, 23, 255};

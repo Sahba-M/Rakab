@@ -19,6 +19,7 @@ class Card { //The card class is a parent class
         virtual ~Card();
         void setName(std::string name);
         std::string getName();
+        
         bool operator== (const Card & other); // overload operator==
 
     protected:

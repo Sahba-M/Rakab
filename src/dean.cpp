@@ -16,7 +16,6 @@ std::vector<int> DeanCard::findMaxPlayer ( std::vector <Player> players )
     std::vector <int> indices ;
     int max = findMaxScore (players);
 
-   
     for ( int i = 0 ; i < players.size() ; i++ )
     {
         if ( players[i].hasYellowGround() )
@@ -37,7 +36,6 @@ int DeanCard::findMaxScore ( std::vector <Player> players )
     {
         if ( players[i].hasYellowGround() )
         {
-            std::cout << players[i].getName() << std::endl;
              max = players[i].maxYcards() > max ? players[i].maxYcards() : max ;  
         }
     }

@@ -24,8 +24,6 @@ struct Province // for save information of provinces
     Vector2 position;
     Color color;
     std::string name;
-
-    Color getColor();
 };
 
 enum GameScreen { MENU = 0 , NUMBER , INFO , DEAL , MAP , GAME , WINNER , ASKBURN , END }; // manage game
@@ -125,7 +123,6 @@ class Control
         std::vector<std::shared_ptr<Card>> allBurnedCards;
         std::vector<std::string> provinces;
         std::vector<Color> colors = { YELLOW , RED , PURPLE , BLUE , GREEN , PINK };
-        std::vector<std::string> cardsAndOrdersNames = { "drummer", "princes", "scarecrow", "spring", "winter", "help", "card", "pass" };
         std::vector<std::string> files; //files list
         std::vector<Player> players;
         std::vector<int> playersIndices; // for saving indexes of players who pass
